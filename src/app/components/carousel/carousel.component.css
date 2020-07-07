@@ -1,0 +1,15 @@
+.carousel .carousel-indicators > li {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 3px;
+  margin-left: 3px;
+  cursor: pointer;
+  background-color: #a3a3a3;
+  opacity: .5;
+}
+.carousel .carousel-indicators > li.active {
+  background-color: #373E48;
+}

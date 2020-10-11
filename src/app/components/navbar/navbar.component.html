@@ -1,36 +1,100 @@
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="mb-1 navbar navbar-expand-lg navbar-light">
   <div class="container">
-    <a class="navbar-brand" href="#"><strong>MDB</strong></a>
+    <a class="navbar-brand" href="#">
+      <img src="./assets/img/aBidMore-Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      aBidMore
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
       aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-symbol"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-7" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Dropdown </a>
-          <div class="dropdown-menu dropdown-pink" aria-labelledby="navbarDropdownMenuLink-7">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+          <form class="d-flex dropdown">
+            <!-- Search-Input -->
+            <input id="search-input" data-toggle="dropdown" class="form-control search-input" type="text"
+              placeholder="ค้นหา...">
+            <div class="input-group-addon search-symbol">
+              <span class="fa fa-search search-symbol2"></span>
+            </div>
+            <!-- Dropdown-Menu -->
+            <div class="dropdown-menu dropdown-menu-right p-3" style="width: 100%;">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+              </div>
+            </div>
+          </form>
         </li>
       </ul>
       <form class="form-inline">
         <div class="md-form my-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <!-- RIGHT -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-7" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Dropdown </a>
+              <div class="dropdown-menu dropdown-pink" aria-labelledby="navbarDropdownMenuLink-7">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
         </div>
       </form>
     </div>
   </div>
 </nav>
+
+
+<!-- Search D -->
+<!-- <div class="input-group">
+    <input class="form-control" type="text" placeholder="Search" aria-label="ค้นหา..." style="padding-left: 20px; border-radius: 40px;" id="mysearch">
+    <div class="input-group-addon" style="margin-left: -40px; z-index: 3; border-radius: 40px; background-color: transparent; border:none;">
+      <span class="fa fa-search search-symbol2"></span>
+    </div>
+  </div> -->
+
+<!-- Search Dropdown -->
+<!-- <form class="form-inline d-flex dropdown">
+    <input class="form-control form-control-sm" type="text" placeholder="Search" id="menu1" data-toggle="dropdown">
+    <button class="btn btn-outline-success btn-sm" type="submit">Go</button>
+
+    <div class="dropdown-menu dropdown-menu-right p-3">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+  </form> -->
+
+<!-- <div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+    <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+  </div>
+  <div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
+    <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+  </div> -->

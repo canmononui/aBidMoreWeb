@@ -1,69 +1,38 @@
-.img-card-auto-win {
-  background-color: #fff;
-  border: 3px solid #F0F0F0; 
-  border-radius: 0px 15px 15px 0px; 
+/* Modal */
+.modal.fade .modal-bottom {
+  -webkit-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
 }
 
-.img-card-time {
-  background-color: #fff;
-  border: 3px solid #F0F0F0; 
-  border-radius: 15px 0px 0px 15px; 
-}
-
-.btn-circle {
-  color: #fff;
-  background-color: #767676;
-  border-color: #767676;
-  opacity: 60%;
-  width: 40px;
-  height: 40px;
-  /* padding: 6px 0px; */
-  padding: 6px 9px 8px 9px;
-  border-radius: 25px;
-  text-align: center;
-  font-size: 12px;
-  line-height: 1.42857;
-}
-
-
-/* TEST */
-/* .card-stats .card-header .card-header-icon, .card-stats .card-header .card-header-text {
-  text-align: right;
-}
-
-.card-icon, .card-text {
-  border-radius: 3px;
-  background-color: #999;
-  padding: 15px;
-  margin-top: -20px;
-  margin-left: -40px;
-  margin-right: 15px;
-  float: left;
-} */
-
-/* .price {
-  font-weight: 600;
-  color: #212529;
-} */
-
-.float-right {
-  float: right !important;
-}
-
-.rating-stars {
-  display: inline-block;
-  vertical-align: middle;
-  /* list-style: none; */
-  margin: 0;
+.modal .modal-bottom {
+  margin:0;
+  margin-top:auto;
   padding: 0;
-  /* position: relative; */
-  /* white-space: nowrap; */
-  /* clear: both; */
+  position:absolute;
+  bottom:0;
+  top:auto;
+  left:auto;
+  right:0;
+  height:calc(55% + 160px); /* default height:45% its just for demo*/
 }
-
-.rating-stars li {
-  display: block;
-  text-overflow: clip;
-  white-space: nowrap;
-  z-index: 1;
+.modal .modal-bottom>.modal-content{
+  height:100%;
+  border-color: #fff;
+  border-radius:0;
+  margin:0;
 }
+.modal-bottom .modal-body
+{
+  height: calc(100% - 140px);overflow-y:auto;
+}
+@media (min-width: 1px){
+  .modal-bottom {max-width: 100%;width:100%;}
+}
+/*Custume scroll bar*/
+.modal-bottom ::-webkit-scrollbar {width:8px}
+.modal-bottom ::-webkit-scrollbar-button {width:8px;height:5px}
+.modal-bottom ::-webkit-scrollbar-thumb:hover {background: #ccc}
+.modal-bottom ::-webkit-scrollbar-thumb {	background:#f1f1f1;border: thin solid white;border-radius: 10px}
+.modal-bottom ::-webkit-scrollbar-track {background: #fff;border:thin solid white}   
+/* MODAL END */

@@ -16,4 +16,28 @@ export class ProductDescriptionComponent implements OnInit {
 
   }
 
+  test() {
+    console.log("Test");
+  }
+
+  heart() {
+    console.log("heart");
+  }
+
+  dot() {
+    console.log("dot");
+  }
+
+  left() {
+    console.log("<-");
+  }
+
+  right() {
+    console.log("->");
+  }
+
+  pic() {
+    console.log("pic");
+  }
+
 }

@@ -1,34 +1,187 @@
 <nav class="mb-1 navbar navbar-expand-lg navbar-light">
   <div class="container">
     <a class="navbar-brand" href="#">
-      <img src="./assets/img/aBidMore-Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      <img src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.png" width="30" height="30" class="d-inline-block align-top" alt="">
       aBidMore
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
       aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-symbol"></span>
+      <!-- <span class="navbar-toggler-symbol"></span> -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <form class="d-flex dropdown">
+      <ul class="navbar-nav ml-auto mr-auto">
+        <li class="nav-item d-flex">
+          <form class="d-flex dropdown input-width">
             <!-- Search-Input -->
-            <input id="search-input" data-toggle="dropdown" class="form-control search-input" type="text"
+            <input id="search-input" data-toggle="dropdown" class="form-control search-input" style="box-shadow: none;" type="text"
               placeholder="ค้นหา...">
             <div class="input-group-addon search-symbol">
               <span class="fa fa-search search-symbol2"></span>
             </div>
             <!-- Dropdown-Menu -->
-            <div class="dropdown-menu dropdown-menu-right p-3" style="width: 100%;">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+            <div class="dropdown-menu dropdown-menu-width p-3" style="border-radius: 15px;">
+              <div class="card border-0">
+                <div class="card-body p-0">
+
+                  <div class="row">
+                    <div class="col">
+                      <p class="mb-0" style="font-size: 0.8rem; color: #A4A4A4;">ประวัติ</p>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="nav-link p-0" style="text-decoration: none; cursor: pointer;">
+                        <p class="mb-0 text-right" style="font-size: 0.8rem; color: #A4A4A4;">ลบ</p>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="mt-2 ml-2">
+                    <p class="mb-0">กางเกงขาสั้น</p>
+                    <p class="mb-0">รองเท้าหนัง</p>
+                    <p class="mb-0">iPhone XS</p>
+                    <p class="mb-0">นาฬิกาข้อมือสายเหล็ก</p>
+                    <p class="mb-0">รองเท้าแตะสีสัน</p>
+                  </div>
+
+                  <p class="mt-2 mb-0" style="font-size: 0.8rem; color: #A4A4A4;">หมวดหมู่</p>
+                  <!-- ROW 1 -->
+                  <div class="row ml-0 mr-0">
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/men-shirt-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">เสื้อผ้าชาย</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/men-shoes-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">รองเท้าชาย</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/dress-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">เสื้อผ้าหญิง</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/high-heels-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">รองเท้าหญิง</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/cosmetics-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">ความงาม</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/bag-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">กระเป๋า</p>
+                      </a>
+                    </div>
+                    <!-- ROW 1 -->
+                    <!-- ROW 2 -->
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/accessories-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">เครื่องประดับ</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/sofa-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">เครื่องใช้ในบ้าน</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/phone-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">มือถือ</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/game-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">เกม</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/camera-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">กล้อง</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/sport-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">กีฬา</p>
+                      </a>
+                    </div>
+                    <!-- ROW 2 -->
+                    <!-- ROW 3 -->
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/computer-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">คอมพิวเตอร์</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/food-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">อาหาร</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/Washing-machine-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">เครื่องใช้ไฟฟ้า</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/car-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">ยานยนต์</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/HandGroup-icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">บริจาค</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/voucher icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">voucher</p>
+                      </a>
+                    </div>
+                    <!-- ROW 2 -->
+                    <!-- ROW 3 -->
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/fetish icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">เครื่องราง</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/collectibles icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">ของสะสม</p>
+                      </a>
+                    </div>
+                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/Other icon.png">
+                        <p class="mb-0" style="font-size: 0.8rem;">อื่นๆ</p>
+                      </a>
+                    </div>
+                    <!-- ROW 3 -->
+                    </div>
+
                 </div>
+                
               </div>
             </div>
           </form>
@@ -38,22 +191,155 @@
         <div class="md-form my-0">
           <!-- RIGHT -->
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item d-flex">
+              <a href="#" class="nav-link" style="text-decoration: none; cursor: pointer;">
+                <img style="width: 25px;" src="./assets/img/auction-black-icon.png">
+                <p class="nav-item-text mb-0 pl-2">ร่วมประมูล</p>
+              </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+            <li class="nav-item d-flex">
+              <a href="#" class="nav-link" style="text-decoration: none; cursor: pointer;">
+                <img style="width: 25px;" src="./assets/img/noti-chat-icon-bg-gray.png">
+                <span class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: 1px 7px; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                  8
+                </span>
+                <p class="nav-item-text mb-0 pl-2">ข้อความ</p>
+              </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Profile</a>
+            
+            <li class="nav-item d-flex dropdown">
+              <a class="nav-link" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" style="text-decoration: none; cursor: pointer;">
+                <img style="width: 25px;" src="./assets/img/noti-icon.png">
+                <span class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: 1px 7px; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                  9
+                </span>
+                <p class="nav-item-text mb-0 pl-2">การแจ้งเตือน</p>
+              </a>
+              <div class="dropdown-menu p-3" style=" border-radius: 15px;">
+                <div class="row">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/noti-noti-icon.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="mb-0">การแจ้งเตือน</p>
+                  </div>
+                </div>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;">
+
+                </div>
+                <div class="row">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/noti-pro-icon.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="mb-0">โปรโมชั่น</p>
+                  </div>
+                </div>
+              </div>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-7" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Dropdown </a>
-              <div class="dropdown-menu dropdown-pink" aria-labelledby="navbarDropdownMenuLink-7">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+            <li class="nav-item d-flex">
+              <a href="#" class="nav-link" style="text-decoration: none; cursor: pointer;">
+                <img style="width: 25px;" src="./assets/img/Cart-icon.png">
+                <p class="nav-item-text mb-0 pl-2">รอยืนยันชำระเงิน</p>
+              </a>
+            </li>
+            <li class="nav-item d-flex">
+              <a href="#" class="nav-link" style="text-decoration: none; cursor: pointer;">
+                <img style="width: 25px;" src="./assets/img/wallet-icon.png">
+                <p class="nav-item-text mb-0 pl-2">การเงิน</p>
+              </a>
+            </li>
+
+            <li class="nav-item d-flex dropdown">
+              <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none; cursor: pointer;">
+                <img class="rounded-circle" style="width: 25px;" src="./assets/img/business-man.png">
+                <p class="nav-item-text mb-0 pl-2">บัญชีผู้ใช้</p>
+              </a>
+              <div class="dropdown-menu dropdown-menu-profile-width dropdown-menu-right p-3" style="border-radius: 15px;">
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/profile-dropdown/list-icon.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">การซื้อของฉัน</p>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/profile-dropdown/store-icon-color.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">กำลังติดตาม</p>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/profile-dropdown/heart_vector_color.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">ที่ฉันถูกใจ</p>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/profile-dropdown/Share-Friend-color-2-icon.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">ชวนเพื่อน</p>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/profile-dropdown/coins_color_2.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">สะสมเหรียญ
+                      <i class="fa fa-play-circle" aria-hidden="true"></i>
+                    </p>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/profile-dropdown/setting-icon.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">ตั้งค่าบัญชี</p>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/profile-dropdown/HelpCenter.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">ศูนย์ช่วยเหลือ</p>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px; border-radius: 5px;" src="./assets/img/profile-dropdown/language-icon.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">ภาษา</p>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                  <div class="col-auto pr-2">
+                    <img style="width: 25px;" src="./assets/img/profile-dropdown/seller-icon.png">
+                  </div>
+                  <div class="col pl-0 align-self-center">
+                    <p class="text-dark mb-0">สนใจขายสินค้า</p>
+                  </div>
+                </a>
+
               </div>
             </li>
           </ul>
@@ -64,37 +350,13 @@
 </nav>
 
 
-<!-- Search D -->
-<!-- <div class="input-group">
-    <input class="form-control" type="text" placeholder="Search" aria-label="ค้นหา..." style="padding-left: 20px; border-radius: 40px;" id="mysearch">
-    <div class="input-group-addon" style="margin-left: -40px; z-index: 3; border-radius: 40px; background-color: transparent; border:none;">
-      <span class="fa fa-search search-symbol2"></span>
-    </div>
-  </div> -->
 
-<!-- Search Dropdown -->
-<!-- <form class="form-inline d-flex dropdown">
-    <input class="form-control form-control-sm" type="text" placeholder="Search" id="menu1" data-toggle="dropdown">
-    <button class="btn btn-outline-success btn-sm" type="submit">Go</button>
-
-    <div class="dropdown-menu dropdown-menu-right p-3">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-    </div>
-  </form> -->
 
 <!-- <div class="custom-control custom-switch">
-    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-    <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-  </div>
-  <div class="custom-control custom-switch">
-    <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
-    <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
-  </div> -->
+  <input type="checkbox" class="custom-control-input" id="customSwitch1">
+  <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+</div>
+<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
+  <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+</div> -->

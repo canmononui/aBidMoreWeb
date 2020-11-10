@@ -19,11 +19,59 @@
   </div>
 </div> -->
 
+
 <div class="container-sm">
   <div class="card-collection-show">
     <div class="row">
-      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-left-img">
-        <img class="card-img-top img-border-radius" src="./assets/img/bag.png">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-6 col-left-img">
+        <div class="product-top">
+          <img (click)="pic()" data-toggle="modal" data-target="#ModalPopupImg" class="product-top-img" src="./assets/img/bag.png" style="cursor: pointer;">
+          <!-- Start -->
+          <div class="icon-start">
+            <div class="row m-0">
+              <div class="col-auto col-icon-p">
+                <button (click)="heart()" type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;">
+                  <i class="fa fa-heart"></i>
+                </button>
+              </div>
+              <div class="col-auto col-icon-p">
+                <button type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;">
+                  <i class="fa fa-share-alt"></i>
+                </button>
+              </div>
+              <div class="col-auto col-icon-p">
+                <button type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;">
+                  <i class="fa fa-ellipsis-h"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Middle Left -->
+          <div class="icon-middle-left">
+            <button type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;"
+              (click)="left()">
+              <img style="width: 20px;" src="./assets/img/arrow/white-l.png">
+            </button>
+          </div>
+          <!-- Middle Right -->
+          <div class="icon-middle-right">
+            <button type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;"
+              (click)="right()">
+              <img style="width: 20px;" src="./assets/img/arrow/white-r.png">
+            </button>
+          </div>
+          <!-- End -->
+          <div class="icon-end">
+            <div (click)="dot()" class="mb-0 text-white text-center">
+              <i class="fa fa-circle dot-active"></i>
+              <i class="fa fa-circle dot"></i>
+              <i class="fa fa-circle dot"></i>
+              <i class="fa fa-circle dot"></i>
+              <i class="fa fa-circle dot"></i>
+            </div>
+          </div>
+        </div>
+
         <div class="row row-img-show">
           <div class="col pr-0">
             <img class="card-img-top img-border-radius" src="./assets/img/bag.png">
@@ -43,11 +91,12 @@
         </div>
       </div>
 
-      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-right-des">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-6 col-right-des">
         <div class="card" style="border: 3px solid #E7EDF4; border-radius: 10px;">
 
           <div class="row ml-0 mr-0">
-            <div class="col" style="padding-top: 15px; padding-bottom: 15px; border-right: 0.5px solid #E7EDF4; border-bottom: 0.5px solid #E7EDF4;">
+            <div class="col"
+              style="padding-top: 15px; padding-bottom: 15px; border-right: 0.5px solid #E7EDF4; border-bottom: 0.5px solid #E7EDF4;">
 
               <div style="display:flex; align-items:center;">
                 <div class="row">
@@ -61,10 +110,9 @@
                 </div>
               </div>
 
-
               <!-- TEST -->
               <!-- You can now use it in app.component.html -->
-                <!-- <circle-progress
+              <!-- <circle-progress
                   [percent]="85"
                   [radius]="100"
                   [outerStrokeWidth]="6"
@@ -78,20 +126,20 @@
               <!-- TEST -->
 
             </div>
-            
+
             <div class="col" style="padding-top: 15px; border-bottom: 0.5px solid #E7EDF4;">
-            <div class="mt-set-price d-flex justify-content-center align-items-center">
-              <a href="#">
-                <i class="fa fa-minus-circle fa-2x" style="color: #F35F30;" aria-hidden="true"></i>
-              </a>
-              <p class="mb-0 ml-3 mr-3 font-weight-bold" style="display: inline;">฿7,500</p>
-              <a href="#">
-                <i class="fa fa-plus-circle fa-2x" style="color: #F35F30;" aria-hidden="true"></i>
-              </a>
-            </div>
-            <div style="position: absolute; bottom: 0; right: 0;">
-              <p class="mr-1 mb-1 p-text-des">เครดิตคงเหลือ 10,000</p>
-            </div>
+              <div class="mt-set-price d-flex justify-content-center align-items-center">
+                <a href="#">
+                  <i class="fa fa-minus-circle fa-2x" style="color: #F35F30;" aria-hidden="true"></i>
+                </a>
+                <p class="mb-0 ml-3 mr-3 font-weight-bold" style="display: inline;">฿7,500</p>
+                <a href="#">
+                  <i class="fa fa-plus-circle fa-2x" style="color: #F35F30;" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div style="position: absolute; bottom: 0; right: 0;">
+                <p class="mr-1 mb-1 p-text-des">เครดิตคงเหลือ 10,000</p>
+              </div>
             </div>
           </div>
           <div class="row ml-0 mr-0">
@@ -115,7 +163,8 @@
               </div>
 
               <div class="ml-1 mb-1" style="position: absolute; bottom: 0; left: 0;">
-                <a class="text-dark p-text-des" style="text-decoration: none; cursor: pointer;" data-toggle="modal" data-target="#modalAutoWin">
+                <a class="text-dark p-text-des" style="text-decoration: none; cursor: pointer;" data-toggle="modal"
+                  data-target="#modalAutoWin">
                   <i class="fa fa-question-circle mr-1" aria-hidden="true"></i>รายละเอียด
                 </a>
               </div>
@@ -136,24 +185,27 @@
                   </div>
                   <div class="col pl-0 pr-0 align-self-center">
                     <!-- <p class="mb-0 font-weight-bold p-text-set-price">กำหนดราคา</p> -->
-                    <a class="text-dark mb-0 font-weight-bold p-text-set-price" style="text-decoration: none; cursor: pointer;" data-toggle="modal" data-target="#modalAutoBidSetPrice">
-                        กำหนดราคา
+                    <a class="text-dark mb-0 font-weight-bold p-text-set-price"
+                      style="text-decoration: none; cursor: pointer;" data-toggle="modal"
+                      data-target="#modalAutoBidSetPrice">
+                      กำหนดราคา
                     </a>
                   </div>
                 </div>
               </div>
 
               <div class="ml-1 mb-1" style="position: absolute; bottom: 0; left: 0;">
-                <a class="text-dark p-text-des" style="text-decoration: none; cursor: pointer;" data-toggle="modal" data-target="#modalAutoBid">
+                <a class="text-dark p-text-des" style="text-decoration: none; cursor: pointer;" data-toggle="modal"
+                  data-target="#modalAutoBid">
                   <i class="fa fa-question-circle mr-1" aria-hidden="true"></i>รายละเอียด
                 </a>
               </div>
 
               <div class="mr-1 mb-1 p-text-des" style="position: absolute; bottom: 0; right: 0;">
                 <img class="card-img-top img-border-radius img-coins-color" src="./assets/img/coins_color_2-1.png">
-                  x 127
+                x 127
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -167,53 +219,54 @@
             </div>
             <div class="col-4 text-right">
               <div class="text-dark mt-2" style="line-height: 1;">
-                <a style="text-decoration: none; cursor: pointer;" data-toggle="modal" data-target="#modalHistory">เพิ่มเติม</a>
+                <a style="text-decoration: none; cursor: pointer;" data-toggle="modal"
+                  data-target="#modalHistory">เพิ่มเติม</a>
               </div>
             </div>
           </div>
           <!-- THIS TABLE WHEN PHONE HIDE -->
           <table class="table table-borderless mt-2 mb-0">
-          <thead>
-            <tr>
-              <th class="text-center p-text-history p-0" scope="col">ชื่อผู้ใช้</th>
-              <th class="text-center p-text-history p-0" scope="col">ราคา</th>
-              <th class="text-center p-text-history p-0" scope="col">วันที่</th>
-              <th class="text-center p-text-history p-0" scope="col">เวลา</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-              <td class="p-text-history pt-0 pb-0">฿7,000</td>
-              <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-              <td class="p-text-history pt-0 pb-0">12:05:00</td>
-            </tr>
-            <tr>
-              <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-              <td class="p-text-history pt-0 pb-0">฿7,000</td>
-              <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-              <td class="p-text-history pt-0 pb-0">12:05:00</td>
-            </tr>
-            <tr>
-              <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-              <td class="p-text-history pt-0 pb-0">฿7,000</td>
-              <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-              <td class="p-text-history pt-0 pb-0">12:05:00</td>
-            </tr>
-            <tr>
-              <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-              <td class="p-text-history pt-0 pb-0">฿7,000</td>
-              <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-              <td class="p-text-history pt-0 pb-0">12:05:00</td>
-            </tr>
-            <tr>
-              <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-              <td class="p-text-history pt-0 pb-0">฿7,000</td>
-              <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-              <td class="p-text-history pt-0 pb-0">12:05:00</td>
-            </tr>
-          </tbody>
-        </table>
+            <thead>
+              <tr>
+                <th class="text-center p-text-history p-0" scope="col">ชื่อผู้ใช้</th>
+                <th class="text-center p-text-history p-0" scope="col">ราคา</th>
+                <th class="text-center p-text-history p-0" scope="col">วันที่</th>
+                <th class="text-center p-text-history p-0" scope="col">เวลา</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
+                <td class="p-text-history pt-0 pb-0">฿7,000</td>
+                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
+                <td class="p-text-history pt-0 pb-0">12:05:00</td>
+              </tr>
+              <tr>
+                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
+                <td class="p-text-history pt-0 pb-0">฿7,000</td>
+                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
+                <td class="p-text-history pt-0 pb-0">12:05:00</td>
+              </tr>
+              <tr>
+                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
+                <td class="p-text-history pt-0 pb-0">฿7,000</td>
+                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
+                <td class="p-text-history pt-0 pb-0">12:05:00</td>
+              </tr>
+              <tr>
+                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
+                <td class="p-text-history pt-0 pb-0">฿7,000</td>
+                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
+                <td class="p-text-history pt-0 pb-0">12:05:00</td>
+              </tr>
+              <tr>
+                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
+                <td class="p-text-history pt-0 pb-0">฿7,000</td>
+                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
+                <td class="p-text-history pt-0 pb-0">12:05:00</td>
+              </tr>
+            </tbody>
+          </table>
 
         </div>
 
@@ -294,29 +347,31 @@
   <div class="card-collection">
 
 
-      <div class="row justify-content-between">
-        <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 pr-0 align-self-center">
-          <div class="row">
-            <div class="col-auto">
-              <img class="img-fluid rounded-circle img-store" src="./assets/img/store-band-name.png">
-            </div>
-            <div class="col-auto pl-0 align-self-center">
-              <h5 class="mb-0">STORE NAME</h5>
-              <i class="fa fa-users mr-2"></i>1.7k
-              <i class="fa fa-star ml-3 mr-2" style="color: #FFA101;"></i>4.0
-            </div>
+    <div class="row justify-content-between">
+      <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 pr-0 align-self-center">
+        <div class="row">
+          <div class="col-auto">
+            <img class="img-fluid rounded-circle img-store" src="./assets/img/store-band-name.png">
+          </div>
+          <div class="col-auto pl-0 align-self-center">
+            <h5 class="mb-0">STORE NAME</h5>
+            <i class="fa fa-users mr-2"></i>1.7k
+            <i class="fa fa-star ml-3 mr-2" style="color: #FFA101;"></i>4.0
           </div>
         </div>
-  
-        <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 pl-0">
-          <button type="button" class="btn button-store-color text-white" style="width: 100%;">
-            <i class="fa fa-users mr-2"></i>ติดตาม
-          </button><br />
-          <button type="button" class="btn button-store mt-2 text-dark" style="width: 100%;">
-            <i class="fa fa-users mr-2"></i>ข้อความ
-          </button>
-        </div>
       </div>
+
+      <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 pl-0">
+        <button type="button" class="btn button-store-color text-white" style="width: 100%;">
+          <img class="mr-1" style="margin-top: -5px; width: 20px;" src="./assets/img/store-icon-white.png">
+          ติดตาม
+        </button><br />
+        <button type="button" class="btn button-store mt-2 text-dark" style="width: 100%;">
+          <img class="mr-1" style="margin-top: -5px; width: 20px;" src="./assets/img/noti-chat-icon.png">
+          ข้อความ
+        </button>
+      </div>
+    </div>
 
   </div>
 
@@ -331,171 +386,275 @@
           <div class="text-dark mt-2" style="line-height: 1;">เพิ่มเติม</div>
         </a>
       </div>
-    </div> 
+    </div>
 
     <div class="row">
-      <div class="col-6 col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 mt-2 p-1-1">
-        <!-- <div style="background-color: blueviolet;"> -->
-          <!-- <div class="col-2 p-1" style="min-width: 273px;"> -->
-            <div class="card card-border-3">
-              <div class="card" style="border: none;">
-                <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <div class="row">
-                    <div class="col-6 pr-1">
-                      <div class="img-card-auto-win">
-                        <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;" src="./assets/img/auto-win-text-icon.png">
-                        <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-                      </div>
-                    </div>
-                    <div class="col-6 pl-1">
-                      <div class="img-card-time text-right">
-                        <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                        <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;" src="./assets/img/Clock.png">
-                      </div>
-                    </div>
+      <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-1">
+        <div class="card card-border-3">
+          <div class="card" style="border: none;">
+            <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
+            <div class="card-img-overlay d-flex flex-column justify-content-end">
+              <div class="row">
+                <div class="col-6 pr-1">
+                  <div class="img-card-auto-win">
+                    <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
+                      src="./assets/img/auto-win-text-icon.png">
+                    <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
+                  </div>
+                </div>
+                <div class="col-6 pl-1">
+                  <div class="img-card-time text-right">
+                    <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
+                    <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
+                      src="./assets/img/Clock.png">
                   </div>
                 </div>
               </div>
-    
-              <div class="card-body card-body-padding">
-                <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-                <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-                <ul class="rating-stars">
-                  <li>
-                    <i class="fa fa-star" style="color: #FFA101;"></i>
-                    <i class="fa fa-star" style="color: #FFA101;"></i>
-                    <i class="fa fa-star" style="color: #FFA101;"></i>
-                    <i class="fa fa-star-o" style="color: #FFA101;"></i>
-                    <i class="fa fa-star-o" style="color: #FFA101;"></i> 
-                  </li>
-                </ul>
-                <var class="float-right">
-                  <i class="fa fa-heart" style="color: #FE5721"></i>
-                </var>
-              </div>
-
             </div>
-          <!-- </div> -->
-        <!-- </div> -->
-      </div>
-      <div class="col-6 col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 mt-2 p-1-2">
-        <div style="background-color: cadetblue;">
-          2222
+          </div>
+
+          <div class="card-body card-body-padding">
+            <h5 class="card-title ">Herschel Supply Retreat Backpack...</h5>
+            <p class="card-text ">กระเป๋ารุ่นยอดนิยมของ...</p>
+            <ul class="rating-stars">
+              <li>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+              </li>
+            </ul>
+            <var class="float-right">
+              <i class="fa fa-heart" style="color: #FE5721"></i>
+            </var>
+          </div>
         </div>
       </div>
-      <div class="col-6 col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 mt-2 p-2-1">
-        <div style="background-color: chocolate;">
-          3333
+      <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-2">
+        <div class="card card-border-3">
+          <div class="card" style="border: none;">
+            <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
+            <div class="card-img-overlay d-flex flex-column justify-content-end">
+              <div class="row">
+                <div class="col-6 pr-1">
+                  <div class="img-card-auto-win">
+                    <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
+                      src="./assets/img/auto-win-text-icon.png">
+                    <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
+                  </div>
+                </div>
+                <div class="col-6 pl-1">
+                  <div class="img-card-time text-right">
+                    <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
+                    <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
+                      src="./assets/img/Clock.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body card-body-padding">
+            <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
+            <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
+            <ul class="rating-stars">
+              <li>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+              </li>
+            </ul>
+            <var class="float-right">
+              <i class="fa fa-heart" style="color: #FE5721"></i>
+            </var>
+          </div>
         </div>
       </div>
-      <div class="col-6 col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 mt-2 p-2-2">
-        <div style="background-color: darkgreen;">
-          4444
+      <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-1">
+        <div class="card card-border-3">
+          <div class="card" style="border: none;">
+            <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
+            <div class="card-img-overlay d-flex flex-column justify-content-end">
+              <div class="row">
+                <div class="col-6 pr-1">
+                  <div class="img-card-auto-win">
+                    <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
+                      src="./assets/img/auto-win-text-icon.png">
+                    <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
+                  </div>
+                </div>
+                <div class="col-6 pl-1">
+                  <div class="img-card-time text-right">
+                    <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
+                    <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
+                      src="./assets/img/Clock.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body card-body-padding">
+            <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
+            <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
+            <ul class="rating-stars">
+              <li>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+              </li>
+            </ul>
+            <var class="float-right">
+              <i class="fa fa-heart" style="color: #FE5721"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-2">
+        <div class="card card-border-3">
+          <div class="card" style="border: none;">
+            <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
+            <div class="card-img-overlay d-flex flex-column justify-content-end">
+              <div class="row">
+                <div class="col-6 pr-1">
+                  <div class="img-card-auto-win">
+                    <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
+                      src="./assets/img/auto-win-text-icon.png">
+                    <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
+                  </div>
+                </div>
+                <div class="col-6 pl-1">
+                  <div class="img-card-time text-right">
+                    <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
+                    <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
+                      src="./assets/img/Clock.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body card-body-padding">
+            <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
+            <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
+            <ul class="rating-stars">
+              <li>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star" style="color: #FFA101;"></i>
+                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+              </li>
+            </ul>
+            <var class="float-right">
+              <i class="fa fa-heart" style="color: #FE5721"></i>
+            </var>
+          </div>
         </div>
       </div>
     </div>
 
 
   </div>
-  
 
 
-
-
-<!-- Button Modal -->
-  <div class="container">
+  <!-- Button Modal Popup -->
+  <!-- <div class="container">
     <div class="row">
       <div class="col">
-          <div class=" m-4 p-2 bg-faded">
-             <p class="p-3" style="background-color:#fff">
-                 <button class="btn btn-primary" data-toggle="modal" data-target="#ModalAddCenter">Launch Demo</button>
-              </p>
-              Just add class <code>.modal-bottom</code> to  <span class="text-success"><div class="modal-dialog <code>modal-bottom</code>">...</div></span>
-          </div>
+        <div class=" m-4 p-2 bg-faded">
+          <p class="p-3" style="background-color:#fff">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#ModalAddCenter">Launch Demo</button>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-<!-- Button Modal -->
+  </div> -->
+  <!-- Button Modal Popup -->
 
-  
-<!-- Modal History -->
-<div class="modal fade" id="modalHistory" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-  <div class="modal-dialog modal-bottom">
-    <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+  <!-- Modal History -->
+  <div class="modal fade" id="modalHistory" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
 
-      <div class="row">
-        <!-- <div class="col-auto">
+        <div class="row">
+          <!-- <div class="col-auto">
           <a href="#" class="" style="text-decoration: none; cursor: pointer; color: #FE5721;">
             ยกเลิก
           </a>
         </div> -->
-        <div class="col text-center">
-          <p>ประวัติการประมูล</p>
+          <div class="col text-center">
+            <p>ประวัติการประมูล</p>
+          </div>
+          <div class="col-auto">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
         </div>
-        <div class="col-auto">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-      </div>
 
-      <div class="modal-body p-0 align-self-center modal-table-width">
-        <table class="table table-borderless mt-2 mb-0">
-          <thead>
-            <tr>
-              <th class="text-center p-text-history p-0" scope="col">ชื่อผู้ใช้</th>
-              <th class="text-center p-text-history p-0" scope="col">ราคา</th>
-              <th class="text-center p-text-history p-0" scope="col">วันที่</th>
-              <th class="text-center p-text-history p-0" scope="col">เวลา</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-              <td class="text-center p-text-history p-0">฿7,000</td>
-              <td class="text-center p-text-history p-0">2020/04/04</td>
-              <td class="text-center p-text-history p-0">12:05:00</td>
-            </tr>
-            <tr>
-              <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-              <td class="text-center p-text-history p-0">฿7,000</td>
-              <td class="text-center p-text-history p-0">2020/04/04</td>
-              <td class="text-center p-text-history p-0">12:05:00</td>
-            </tr>
-            <tr>
-              <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-              <td class="text-center p-text-history p-0">฿7,000</td>
-              <td class="text-center p-text-history p-0">2020/04/04</td>
-              <td class="text-center p-text-history p-0">12:05:00</td>
-            </tr>
-            <tr>
-              <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-              <td class="text-center p-text-history p-0">฿7,000</td>
-              <td class="text-center p-text-history p-0">2020/04/04</td>
-              <td class="text-center p-text-history p-0">12:05:00</td>
-            </tr>
-            <tr>
-              <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-              <td class="text-center p-text-history p-0">฿7,000</td>
-              <td class="text-center p-text-history p-0">2020/04/04</td>
-              <td class="text-center p-text-history p-0">12:05:00</td>
-            </tr>
-          </tbody>
-        </table>
-          
+        <div class="modal-body p-0 align-self-center modal-table-width">
+          <table class="table table-borderless mt-2 mb-0">
+            <thead>
+              <tr>
+                <th class="text-center p-text-history p-0" scope="col">ชื่อผู้ใช้</th>
+                <th class="text-center p-text-history p-0" scope="col">ราคา</th>
+                <th class="text-center p-text-history p-0" scope="col">วันที่</th>
+                <th class="text-center p-text-history p-0" scope="col">เวลา</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
+                <td class="text-center p-text-history p-0">฿7,000</td>
+                <td class="text-center p-text-history p-0">2020/04/04</td>
+                <td class="text-center p-text-history p-0">12:05:00</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
+                <td class="text-center p-text-history p-0">฿7,000</td>
+                <td class="text-center p-text-history p-0">2020/04/04</td>
+                <td class="text-center p-text-history p-0">12:05:00</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
+                <td class="text-center p-text-history p-0">฿7,000</td>
+                <td class="text-center p-text-history p-0">2020/04/04</td>
+                <td class="text-center p-text-history p-0">12:05:00</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
+                <td class="text-center p-text-history p-0">฿7,000</td>
+                <td class="text-center p-text-history p-0">2020/04/04</td>
+                <td class="text-center p-text-history p-0">12:05:00</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
+                <td class="text-center p-text-history p-0">฿7,000</td>
+                <td class="text-center p-text-history p-0">2020/04/04</td>
+                <td class="text-center p-text-history p-0">12:05:00</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Modal History -->
+  <!-- Modal History -->
 
-
-<!-- Modal Auto Win -->
-<div class="modal fade" id="modalAutoWin" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+  <!-- Modal Auto Win -->
+  <div class="modal fade" id="modalAutoWin" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-bottom">
       <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-  
+
         <div class="row">
           <div class="col text-center">
             <p>Auto Win</p>
@@ -506,13 +665,16 @@
             </button>
           </div>
         </div>
-  
+
         <div class="modal-body p-0">
           <p>ตัวช่วยการประมูล</p>
-          <p class="pl-1 mb-1">• เมื่อคุณเพิ่มสินค้าชิ้นนี้ลงในรถเข็นด้วยวิธีการ Auto Win สินค้านี้จะยังไม่จบการประมูล</p>
-          <p class="pl-1 mb-1">• เมื่อคุณชำระเงินสำหรับสินค้านี้เรียบร้อย คุณจะเป็นผู้ชนะการประมูล การประมูลจะจบลงและสินค้าชิ้นนี้จะเป็นของคุณ</p>
+          <p class="pl-1 mb-1">• เมื่อคุณเพิ่มสินค้าชิ้นนี้ลงในรถเข็นด้วยวิธีการ Auto Win สินค้านี้จะยังไม่จบการประมูล
+          </p>
+          <p class="pl-1 mb-1">• เมื่อคุณชำระเงินสำหรับสินค้านี้เรียบร้อย คุณจะเป็นผู้ชนะการประมูล
+            การประมูลจะจบลงและสินค้าชิ้นนี้จะเป็นของคุณ</p>
           <p class="pl-1 mb-1">• ระบบจะทำการประมูลสู้อัตโนมัติหากคุณไม่ใช่ผู้ชนะการประมูลสินค้าชิ้นนี้</p>
-          <p class="pl-1 mb-1">• หากคุณไม่ทำการชำระเงินสำหรับสินค้านี้ที่เพิ่มลงในรถเข็นด้วยวิธีการ Auto Win และมีผู้ชนะการประมูลการประมูลจบลงก่อนที่คุณจะทำการชำระเงินสินค้าชิ้นนี้จะตกเป็นของผู้ชนะการประมูลทันที</p>
+          <p class="pl-1 mb-1">• หากคุณไม่ทำการชำระเงินสำหรับสินค้านี้ที่เพิ่มลงในรถเข็นด้วยวิธีการ Auto Win
+            และมีผู้ชนะการประมูลการประมูลจบลงก่อนที่คุณจะทำการชำระเงินสินค้าชิ้นนี้จะตกเป็นของผู้ชนะการประมูลทันที</p>
         </div>
 
       </div>
@@ -520,12 +682,12 @@
   </div>
   <!-- Modal Auto Win -->
 
-
   <!-- Modal Auto Bid -->
-  <div class="modal fade" id="modalAutoBid" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+  <div class="modal fade" id="modalAutoBid" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-bottom">
       <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-  
+
         <div class="row">
           <div class="col text-center">
             <p>Auto Bid</p>
@@ -536,7 +698,7 @@
             </button>
           </div>
         </div>
-  
+
         <div class="modal-body p-0">
           <div class="row">
             <div class="col text-right">
@@ -555,9 +717,11 @@
 
           <p>ตัวช่วยการประมูล</p>
           <p class="pl-1 mb-1">• Auto Bid เป็นตัวช่วยคุณสำหรับใช้ในการประมูล</p>
-          <p class="pl-1 mb-1">• คุณสามารถตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้และจะถูกการันตีเครดิตตามราคาที่คุณตั้ง</p>
+          <p class="pl-1 mb-1">•
+            คุณสามารถตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้และจะถูกการันตีเครดิตตามราคาที่คุณตั้ง</p>
           <p class="pl-1 mb-1">• ระบบจะทำการประมูลสู้อัตโนมัติหากคุณไม่ใช่ผู้ชนะการประมูลสินค้าชิ้นนี้</p>
-          <p class="pl-1 mb-1">• การตั้งราคาเพื่อเปิดใช้งาน Auto Bid จำนวน 1 ครั้ง จะถูกหักเหรียญจำนวน 1 เหรียญโดยคุณสามารถเก็บสะสมเหรียญจาก</p>
+          <p class="pl-1 mb-1">• การตั้งราคาเพื่อเปิดใช้งาน Auto Bid จำนวน 1 ครั้ง จะถูกหักเหรียญจำนวน 1
+            เหรียญโดยคุณสามารถเก็บสะสมเหรียญจาก</p>
           <p class="pl-4 mb-1 font-weight-bold" style="color: #FE5721;">• การเติมเงินเพื่อรับเครดิตการประมูล</p>
           <p class="pl-4 mb-1 font-weight-bold" style="color: #FE5721;">• การดูวิดีโอโฆษณา</p>
           <p class="pl-1 mb-1">• คุณสามารถกดยกเลิก Auto Bid ได้ทุกเมื่อ</p>
@@ -569,10 +733,11 @@
   <!-- Modal Auto Bid -->
 
   <!-- Modal Auto Bid Set Price -->
-  <div class="modal fade" id="modalAutoBidSetPrice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+  <div class="modal fade" id="modalAutoBidSetPrice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-bottom">
       <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-  
+
         <div class="row">
           <div class="col-auto">
             <a href="#" class="" style="text-decoration: none; cursor: pointer; color: #FE5721;">
@@ -590,45 +755,58 @@
         </div>
 
         <p class="mt-3">ตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้</p>
-
         <div class="modal-body p-0 align-self-center modal-input-width">
           <div class="input-style">
             <p class="mb-0" style="font-size: 17px;">เครดิต</p>
-            <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;" id="auto-bid-set-price" placeholder="ราคา">
+            <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;"
+              id="auto-bid-set-price" placeholder="ราคา">
           </div>
         </div>
 
       </div>
     </div>
   </div>
-
   <!-- Modal Auto Bid Set Price -->
 
-
-  <!-- Modal -->
-  <div class="modal fade" id="ModalAddCenter" role="dialog"  aria-hidden="true">
+  <!-- Modal Popup -->
+  <!-- <div class="modal fade" id="ModalAddCenter" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
-            
         <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
-        
         <h5 class="font-weight-bold text-center mt-5">ต้องการบันทึกข้อมูล</h5>
         <p class="text-center">คุณต้องการตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้ที่ 10,000 บาท</p>
 
         <div class="mt-4">
           <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
-            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary" style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;" data-dismiss="modal">ยืนยัน</button>
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal">ยืนยัน</button>
           </div>
           <div class="mt-2">
             <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
               <p class="text-center">ยกเลิก</p>
             </a>
           </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
 
+  <!-- Modal Popup Img -->
+  <div class="modal fade" id="ModalPopupImg" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="product-top">
+        <img (click)="pic()" data-toggle="modal" data-target="#ModalPopupImg" class="product-top-img" src="./assets/img/bag.png" style="cursor: pointer;">
+        <!-- Start -->
+        <div class="icon-start">
+          <button data-dismiss="modal" aria-label="Close" type="button" class="btn btn-circle" style="background-color: #585858; color: #FFF;">
+            <i class="fa fa-times"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
+  <!-- End Modal Popup Img -->
 
 
 </div>

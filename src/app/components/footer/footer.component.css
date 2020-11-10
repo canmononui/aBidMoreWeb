@@ -1,0 +1,20 @@
+.text-help-center {
+  font-size: 0.8rem;
+  text-decoration: none; 
+  cursor: pointer;
+}
+
+.col-contact-p {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  .footer-display {
+    display: none;
+  }
+}
+

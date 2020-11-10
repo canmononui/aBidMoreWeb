@@ -1,5 +1,5 @@
 .search-input {
-  padding-left: 20px; 
+  /* padding-left: 20px;  */
   border-radius: 40px;
 }
 
@@ -36,3 +36,85 @@
   text-align: center;
   white-space: nowrap;
 }
+
+.input-width {
+  width: 500px;
+}
+
+.dropdown-menu-width {
+  width: 500px;
+}
+
+.nav-item-text {
+  display: none;
+}
+
+.dropdown-menu-profile-width {
+  width: 170px;
+}
+
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .input-width {
+    width: 100%;
+  }
+
+  .dropdown-menu-width {
+    width: 100%;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+  }
+
+  .nav-item-text {
+    display: inline;
+  }
+
+  .dropdown-menu-right {
+    left: 0;
+    right: auto;
+  }
+
+  /* .dropdown-menu-profile-width {
+    width: 100%;
+  } */
+
+}
+/* Medium devices (tablets, 768px and up) */
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 576px) {
+  .input-width {
+    width: 100%;
+  }
+
+  .dropdown-menu-width {
+    width: 100%;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+  }
+
+  .nav-item-text {
+    display: inline;
+  }
+
+  .dropdown-menu-right {
+    left: 0;
+    right: auto;
+  }
+
+  /* .dropdown-menu-profile-width {
+    width: 100%;
+  } */
+}
+/* Small devices (landscape phones, 576px and up) */

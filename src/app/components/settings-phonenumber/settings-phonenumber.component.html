@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="card card-radius">
+    <div class="card-tab card-tab-radius">
+      <p class="text-white text-center mb-0">แก้ไขหมายเลขโทรศัพท์</p>
+    </div>
+
+    <div class="card-body">
+      <!-- Input Phone Number -->
+      <div class="input-style">
+        <p class="mb-0" style="font-size: 17px;">หมายเลขโทรศัพท์</p>
+        <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;" id="name"
+          placeholder="********15">
+      </div>
+      <!-- Button OTP -->
+      <button type="button" class="btn btn-mt" data-toggle="modal" data-target="#ModalOTPCenter"
+        style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
+        ขอ OTP
+      </button>
+      <!-- Modal Popup From Input OTP -->
+      <div class="modal fade" id="ModalOTPCenter" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content modal-p" style="border-radius: 1rem;">
+            <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+            <!-- Text Noti -->
+            <div *ngIf="showMsgNewPhone">
+              <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+              <p class="text-center">หมายเลขโทรศัพท์เปลี่ยนแปลงเรียบร้อย</p>
+            </div>
+
+            <div *ngIf="showInputOTP">
+            <div class="card card-border-3 mt-4">
+              <div class="card-body">
+                <p class="mb-0 text-right otp-text">รหัสอ้างอิง QPRK</p>
+
+                <div class="row otp-row-m">
+                  <!-- OTP 1 -->
+                  <div class="col-3 otp-col-p">
+                    <div class="input-otp-style">
+                      <input class="form-control border-0 p-0 text-center"
+                        style="box-shadow: none; background-color: #F2F6FA;" placeholder="8">
+                    </div>
+                  </div>
+                  <!-- OTP 2 -->
+                  <div class="col-3 otp-col-p">
+                    <div class="input-otp-style">
+                      <input class="form-control border-0 p-0 text-center"
+                        style="box-shadow: none; background-color: #F2F6FA;" placeholder="8">
+                    </div>
+                  </div>
+                  <!-- OTP 3 -->
+                  <div class="col-3 otp-col-p">
+                    <div class="input-otp-style">
+                      <input class="form-control border-0 p-0 text-center"
+                        style="box-shadow: none; background-color: #F2F6FA;" placeholder="8">
+                    </div>
+                  </div>
+                  <!-- OTP 4 -->
+                  <div class="col-3 otp-col-p">
+                    <div class="input-otp-style">
+                      <input class="form-control border-0 p-0 text-center"
+                        style="box-shadow: none; background-color: #F2F6FA;" placeholder="8">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <a href="#" class="card-link text-left otp-text" style="color: #FE5721;" data-dismiss="modal">เปลี่ยนหมายเลขโทรศัพท์</a>
+                  </div>
+                  <div class="col-6 text-right">
+                    <a href="#" class="card-link otp-text" style="color: #FE5721;">ขอรหัสใหม่อีกครั้ง</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div class="mt-4">
+              <div *ngIf="showBtnSubmit">
+                <button type="button" class="btn btn-primary"
+                style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+                (click)="submitChangePhone()">
+                ยืนยัน
+              </button>
+              </div>
+              <div *ngIf="showBtnModal">
+                <button type="button" class="btn btn-primary"
+                style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;" 
+                data-dismiss="modal">
+                ตกลง
+              </button>
+              </div>
+              <div class="mt-2" *ngIf="showInputOTP">
+                <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+                  <p class="text-center">ยกเลิก</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Card Body -->
+  </div>
+</div>
+<!-- End Container -->

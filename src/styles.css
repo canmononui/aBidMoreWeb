@@ -5,6 +5,19 @@
 /* @import "~font-awesome/css/font-awesome.css"; */
 
 
-body{
+body {
   font-family: 'Kanit', sans-serif;
  }
+
+.body-color {
+  background-color: #F5F5F5;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  .body-color {
+    background-color: #383D47;
+    /* background-color: #FFF; */
+
+  }
+}

@@ -1,0 +1,457 @@
+<div class="container">
+  <div class="card card-radius">
+    <div class="card-tab card-tab-radius">
+      <div class="row m-0">
+        <div class="col pr-0 align-self-center">
+          <p class="text-white text-center mb-0">ที่อยู่ของฉัน</p>
+        </div>
+        <div class="col-auto p-0">
+          <a href="#" class="card-link add-text" style="color: #FE5721;" data-toggle="modal"
+            data-target="#modalNewAddress">เพิ่มที่อยู่</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <!-- List 1 -->
+      <div class="card-list card-padding" style="cursor: pointer;" data-toggle="modal" data-target="#modalEditAddress">
+        <a class="text-add">1. บ้าน</a>
+        <a class="text-add ml-1" style="color: #FE5721;">(ค่าเริ่มต้น)</a>
+        <p class="text-add mb-0">• นายสุทัศน์ สุขจิต</p>
+        <p class="text-add mb-0">• 167 ซอย25 กองรักษาการณ์ ถนนสุขุมวิท ตำบลปากน้ำ อำเภอเมือง จังหวัดสมุทรปราการ 10270
+        </p>
+        <p class="text-add mb-0">• 0649355415</p>
+      </div>
+      <!-- List 2 -->
+      <div class="card-list card-padding">
+        <a class="text-add">2. ที่ทำงาน</a>
+        <!-- <a class="text-add ml-1" style="color: #FE5721;">(ค่าเริ่มต้น)</a> -->
+        <p class="text-add mb-0">• นายสุทัศน์ สุขจิต</p>
+        <p class="text-add mb-0">• 167 ซอย25 กองรักษาการณ์ ถนนสุขุมวิท ตำบลปากน้ำ อำเภอเมือง จังหวัดสมุทรปราการ 10270
+        </p>
+        <p class="text-add mb-0">• 0649355415</p>
+      </div>
+      <!-- List 2 -->
+      <div class="card-list card-padding">
+        <a class="text-add">3. ร้าน</a>
+        <!-- <a class="text-add ml-1" style="color: #FE5721;">(ค่าเริ่มต้น)</a> -->
+        <p class="text-add mb-0">• นายสุทัศน์ สุขจิต</p>
+        <p class="text-add mb-0">• 167 ซอย25 กองรักษาการณ์ ถนนสุขุมวิท ตำบลปากน้ำ อำเภอเมือง จังหวัดสมุทรปราการ 10270
+        </p>
+        <p class="text-add mb-0">• 0649355415</p>
+      </div>
+
+
+      <!-- Modal New Address -->
+      <div class="modal fade" id="modalNewAddress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-bottom">
+          <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+
+            <div class="row">
+              <div class="col text-center">
+                <p>เพิ่มที่อยู่ใหม่</p>
+              </div>
+              <div class="col-auto">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="modal-body p-0">
+              <!-- Row 1 -->
+              <div class="row ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ชื่อ</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ชื่อจริง">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">นามสกุล</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="นามสกุล">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 2 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">หมายเลขโทรศัพท์</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="phone" placeholder="XXXXXXXXXX">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 3 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ชื่อสถานที่</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="phone"
+                      placeholder="ตัวอย่าง บ้าน คอนโด ที่ทำงาน">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 4 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ประเทศ</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="phone" placeholder="ตัวเลือก">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 5 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">บ้านเลขที่</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ข้อความ">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">หมู่ที่</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 6 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">หมู่บ้าน/อาคาร/ชั้น</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ข้อความ">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ตรอก/ซอย</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 7 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ถนน</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 8 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ตำบล/แขวง</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ข้อความ">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">อำเภอ/เขต</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 9 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">จังหวัด</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ข้อความ">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">รหัสไปรษณีย์</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 10 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">อื่นๆ</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- CheckBox -->
+              <div class="row mt-4 ml-0 mr-0">
+                <div class="col-auto col-r-add pl-0">
+                  <div class="checkbox checkbox-circle">
+                    <input id="checkbox7" class="styled" type="checkbox">
+                    <label for="checkbox7"></label>
+                  </div>
+                </div>
+                <div class="col pr-0">
+                  <p class="mb-0">เลือกเป็นที่อยู่หลัก</p>
+                </div>
+              </div>
+              <!-- Button Submit -->
+              <button type="button" class="btn mt-2"
+                style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
+                บันทึก
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal New Address -->
+
+      <!-- Modal Edit Address -->
+      <div class="modal fade" id="modalEditAddress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-bottom">
+          <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+
+            <div class="row">
+              <div class="col text-center">
+                <p>แก้ไขที่อยู่</p>
+              </div>
+              <div class="col-auto">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="modal-body p-0">
+              <!-- Row 1 -->
+              <div class="row ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ชื่อ</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ชื่อจริง">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">นามสกุล</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="นามสกุล">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 2 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">หมายเลขโทรศัพท์</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="phone" placeholder="XXXXXXXXXX">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 3 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ชื่อสถานที่</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="phone"
+                      placeholder="ตัวอย่าง บ้าน คอนโด ที่ทำงาน">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 4 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ประเทศ</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="phone" placeholder="ตัวเลือก">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 5 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">บ้านเลขที่</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ข้อความ">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">หมู่ที่</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 6 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">หมู่บ้าน/อาคาร/ชั้น</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ข้อความ">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ตรอก/ซอย</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 7 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ถนน</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 8 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">ตำบล/แขวง</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ข้อความ">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">อำเภอ/เขต</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 9 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">จังหวัด</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="name" placeholder="ข้อความ">
+                  </div>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">รหัสไปรษณีย์</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- Row 10 -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col pl-0 pr-0">
+                  <div class="input-style">
+                    <p class="mb-0 text-input">อื่นๆ</p>
+                    <input class="form-control border-0 p-0 text-placeholder"
+                      style="box-shadow: none; background-color: #F2F6FA;" id="lastname" placeholder="ข้อความ">
+                  </div>
+                </div>
+              </div>
+              <!-- CheckBox -->
+              <div class="row mt-4 ml-0 mr-0">
+                <div class="col-auto col-r-add pl-0">
+                  <div class="checkbox checkbox-circle">
+                    <input id="checkbox7" class="styled" type="checkbox">
+                    <label for="checkbox7"></label>
+                  </div>
+                </div>
+                <div class="col pr-0">
+                  <p class="mb-0">เลือกเป็นที่อยู่หลัก</p>
+                </div>
+              </div>
+              <!-- Button Submit -->
+              <div class="row mt-2 ml-0 mr-0">
+                <div class="col col-r-add pl-0">
+                  <button type="button" class="btn"
+                    style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #383D47;"
+                    data-toggle="modal" data-target="#ModalSubmitCenter">
+                    ลบที่อยู่
+                  </button>
+                </div>
+                <div class="col col-l-add pr-0">
+                  <button type="button" class="btn"
+                    style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
+                    บันทึก
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Edit Address -->
+
+      <!-- Modal Popup Submit Center -->
+      <div class="modal fade" id="ModalSubmitCenter" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content modal-p" style="border-radius: 1rem;">
+            <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+            <!-- Text Noti -->
+            <div>
+              <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+              <!-- Popup 1 -->
+              <!-- <div *ngIf="showMsgAlert"> -->
+              <div>
+                <p class="text-center">ต้องการลบที่อยู่นี้</p>
+              </div>
+              <!-- Popup 2 -->
+              <!-- <div *ngIf="showMsgNewMail">
+              <div>
+                <p class="mb-0 text-center">ได้ทำการส่ง email ยืนยันไปยัง</p>
+                <p class="mb-0 text-center">newemail.gmail.com</p>
+                <p class="mb-0 text-center">แล้วกรุณาทำการยืนยัน</p>
+              </div> -->
+            </div>
+
+            <div class="mt-4">
+              <!-- <div *ngIf="showBtnModal"> -->
+              <div>
+                <button type="button" class="btn btn-primary"
+                  style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+                  data-dismiss="modal">
+                  ตกลง
+                </button>
+              </div>
+              <div class="mt-2">
+                <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+                  <p class="text-center">ยกเลิก</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Popup Submit Center -->
+
+    </div>
+    <!-- Card Body -->
+  </div>
+
+</div>
+<!-- End Container -->

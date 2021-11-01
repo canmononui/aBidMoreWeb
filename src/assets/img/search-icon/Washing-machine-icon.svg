@@ -1,0 +1,85 @@
+<svg id="ตัวเครื่อง" xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f4f4f4;
+      }
+
+      .cls-2 {
+        fill: #55504d;
+      }
+
+      .cls-13, .cls-14, .cls-2, .cls-3, .cls-4, .cls-6 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill: #d9d9d9;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: #585857;
+      }
+
+      .cls-6, .cls-8 {
+        fill: #78cfe2;
+      }
+
+      .cls-7 {
+        fill: #ff5822;
+      }
+
+      .cls-9 {
+        fill: #d8d8d8;
+      }
+
+      .cls-10, .cls-13 {
+        fill: #b3b3b3;
+      }
+
+      .cls-11 {
+        fill: #2aa737;
+      }
+
+      .cls-12 {
+        fill: #343434;
+      }
+
+      .cls-14 {
+        fill: #e6e6e6;
+      }
+    </style>
+  </defs>
+  <ellipse class="cls-1" cx="499.5" cy="500" rx="500" ry="500"/>
+  <path id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-2" d="M289,198.777H711.953a25,25,0,0,1,25,25V793.024a25,25,0,0,1-25,25H289a25,25,0,0,1-25-25V223.777A25,25,0,0,1,289,198.777Z"/>
+  <path id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-3" d="M285,194.777H707.952a25,25,0,0,1,25,25V789.024a25,25,0,0,1-25,25H285a25,25,0,0,1-25-25V219.777A25,25,0,0,1,285,194.777Z"/>
+  <path class="cls-4" d="M260,313.094H733V216s-3.819-21.469-23-21.469H285S260,195.673,260,219v94.094Z"/>
+  <circle class="cls-1" cx="496.469" cy="508.406" r="144"/>
+  <circle id="Ellipse_3_copy" data-name="Ellipse 3 copy" class="cls-5" cx="496.469" cy="508.406" r="113.344"/>
+  <path class="cls-6" d="M384,520s0.963,57.189,59,89c0,0,44.57,24.762,94,6,0,0,40.184-14.289,57-50l-8-50-10-4s-19.556,6.176-33-8c0,0-14.834-10.4-25-5,0,0-5.539-2.56-34,17,0,0-18.271,15-46,0C438,515,409.909,490.109,384,520Z"/>
+  <ellipse class="cls-1" cx="600.156" cy="508.046" rx="32.094" ry="63.984"/>
+  <circle class="cls-7" cx="615" cy="469" r="5"/>
+  <circle class="cls-8" cx="419" cy="480" r="16"/>
+  <circle id="Ellipse_6_copy" data-name="Ellipse 6 copy" class="cls-8" cx="535.86" cy="458.86" r="17.86"/>
+  <circle id="Ellipse_6_copy_2" data-name="Ellipse 6 copy 2" class="cls-8" cx="488.047" cy="477.719" r="11.422"/>
+  <path id="Ellipse_6_copy_3" data-name="Ellipse 6 copy 3" class="cls-6" d="M471.247,439.9a4.629,4.629,0,1,1-4.622,4.629A4.626,4.626,0,0,1,471.247,439.9Z"/>
+  <path id="Ellipse_6_copy_4" data-name="Ellipse 6 copy 4" class="cls-6" d="M510.247,422.9a4.629,4.629,0,1,1-4.622,4.629A4.626,4.626,0,0,1,510.247,422.9Z"/>
+  <path id="Ellipse_6_copy_5" data-name="Ellipse 6 copy 5" class="cls-6" d="M447.247,467.9a4.629,4.629,0,1,1-4.622,4.629A4.626,4.626,0,0,1,447.247,467.9Z"/>
+  <path id="Ellipse_6_copy_6" data-name="Ellipse 6 copy 6" class="cls-6" d="M442.247,439.9a4.629,4.629,0,1,1-4.622,4.629A4.626,4.626,0,0,1,442.247,439.9Z"/>
+  <rect class="cls-9" x="450" y="228" width="112" height="9"/>
+  <rect id="Rectangle_2_copy" data-name="Rectangle 2 copy" class="cls-9" x="450" y="249" width="112" height="9"/>
+  <rect id="Rectangle_2_copy_2" data-name="Rectangle 2 copy 2" class="cls-9" x="450" y="270" width="112" height="9"/>
+  <rect class="cls-9" x="292" y="250.5" width="93" height="23.5"/>
+  <rect id="Rectangle_3_copy" data-name="Rectangle 3 copy" class="cls-10" x="292" y="232" width="93" height="18.5"/>
+  <circle class="cls-11" cx="686" cy="254" r="7"/>
+  <circle class="cls-10" cx="624.125" cy="255.125" r="30.125"/>
+  <circle class="cls-12" cx="623" cy="219" r="3"/>
+  <circle id="Ellipse_9_copy" data-name="Ellipse 9 copy" class="cls-12" cx="658" cy="244" r="3"/>
+  <path id="Ellipse_9_copy_2" data-name="Ellipse 9 copy 2" class="cls-13" d="M650.882,229.237A1.882,1.882,0,1,1,649,231.118,1.881,1.881,0,0,1,650.882,229.237Z"/>
+  <path id="Ellipse_9_copy_3" data-name="Ellipse 9 copy 3" class="cls-13" d="M638.882,221.237A1.882,1.882,0,1,1,637,223.118,1.881,1.881,0,0,1,638.882,221.237Z"/>
+  <path class="cls-14" d="M405.018,194.53h2.964V313.08h-2.964V194.53Z"/>
+</svg>

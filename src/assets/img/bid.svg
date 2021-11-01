@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f4f4f4;
+      }
+
+      .cls-2, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="719.25" y1="636.875" x2="719.25" y2="471.781" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f26e24"/>
+      <stop offset="1" stop-color="#fe9900"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="500.5" y1="918" x2="500.5" y2="471" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e52e04"/>
+      <stop offset="1" stop-color="#fe5722"/>
+    </linearGradient>
+  </defs>
+  <circle class="cls-1" cx="500" cy="500" r="500"/>
+  <path class="cls-2" d="M500.5,565.311S738.32,374.071,938,538.479l-20.438,37.054-139.234,61.33-145.62-5.111-91.971-29.387Z"/>
+  <path class="cls-3" d="M63,533.368S106.142,899.753,500.5,917.96c0,0,360.766,10.492,437.5-380.759,0,0-191.206,174.629-437.5,20.444C500.5,557.645,258.536,380.043,63,533.368Z"/>
+</svg>

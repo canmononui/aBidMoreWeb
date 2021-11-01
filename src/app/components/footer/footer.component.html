@@ -1,36 +1,37 @@
-<div class="footer-display" style="background-color: #1F242A;">
+<div class="footer-display padding-mobile" style="background-color: #1F242A;">
   <div class="container pb-5">
     <div class="row">
-      <div class="col col-md-6 col-lg-3 mt-5">
-        <p class="mb-2 text-white">ศูนย์ช่วยเหลือ</p>
-        <a href="#" class="text-white text-help-center">
-          เครดิตประมูลของ aBidMore คืออะไร?</a><br>
-        <a href="#" class="text-white text-help-center">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-5">
+        <p class="mb-2 text-white router" [routerLink]="['/help-center-list']">ศูนย์ช่วยเหลือ</p>
+        <a [routerLink]="['/help-center-detail/creditBid']" class="text-white text-help-center">
+          เครดิตประมูลของ A Bid More คืออะไร?</a><br>
+        <a [routerLink]="['/help-center-detail/bidding']" class="text-white text-help-center">
           การร่วมประมูลทำได้อย่างไร</a><br>
-        <a href="#" class="text-white text-help-center">
+        <a [routerLink]="['/help-center-detail/autoWin']" class="text-white text-help-center">
           Auto Win คืออะไร?</a><br>
-        <a href="#" class="text-white text-help-center">
+        <a [routerLink]="['/help-center-detail/autoBid']" class="text-white text-help-center">
           Auto Bid คืออะไร?</a><br>
-        <a href="#" class="text-white text-help-center">
+        <a [routerLink]="['/help-center-detail/depositCredit']" class="text-white text-help-center">
           การเติมเครดิตทำได้อย่างไร?</a><br>
-        <a href="#" class="text-white text-help-center">
-          การคืนเงินของ aBidMore ใช้เวลาเท่าไหร่?</a><br>
-        <a href="#" class="text-white text-help-center">
+        <a [routerLink]="['/help-center-detail/refund']" class="text-white text-help-center">
+          การคืนเงินของ A Bid More ใช้เวลาเท่าไหร่?</a><br>
+        <a [routerLink]="['/help-center-detail/transportDay']" class="text-white text-help-center">
           ผู้ให้บริการขนส่งมีระยะเวลาขนส่งกี่วัน?</a><br>
-        <a href="#" class="text-white text-help-center">
+        <a [routerLink]="['/help-center-detail/transportTracking']" class="text-white text-help-center">
           ฉันสามารถติดตามสถานะการจัดส่งได้อย่างไร?</a><br>
-        <a href="#" class="text-white text-help-center">
-          การการันตีสินค้าโดย aBidMore คืออะไร?</a><br>
-        <a href="#" class="text-white text-help-center">
+        <a [routerLink]="['/help-center-detail/guarantee']" class="text-white text-help-center">
+          การการันตีสินค้าโดย A Bid More คืออะไร?</a><br>
+        <a [routerLink]="['/help-center-detail/coin']" class="text-white text-help-center">
           การสะสมเหรียญทำได้อย่างไร?</a><br>
-        <a href="#" class="text-white text-help-center">
+        <a [routerLink]="['/help-center-detail/rejectProduct']" class="text-white text-help-center">
           ฉันสามารถปฏิเสธสินค้าได้อย่างไร?</a><br>
-        <a href="#" class="text-white text-help-center">
-          การเริ่มขายสินค้าใน aBidMore</a><br>
+        <a [routerLink]="['/help-center-detail/registerMerchant']" class="text-white text-help-center">
+          การเริ่มขายสินค้าใน A Bid More</a><br>
       </div>
-      <div class="col col-md-6 col-lg-3 mt-5">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-5">
+        <!-- PAYMENT -->
         <p class="mb-0 text-white">วิธีการชำระเงิน</p>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-auto pr-0" style="display:flex; align-items:center;">
             <img class="" style="height: 20px;" src="./assets/img/footer/pay-method/CASH-ON-DELIVERY.png">
           </div>
@@ -40,71 +41,204 @@
           <div class="col-auto pl-1" style="display:flex; align-items:center;">
             <img class="" style="height: 25px;" src="./assets/img/footer/pay-method/master-card-icon.png">
           </div>
-        </div>
-        <p class="mt-3 mb-2 text-white">Internet Banking</p>
-        <div class="row">
-          <div class="col-auto pr-1" style="display:flex; align-items:center;">
-            <img class="" style="height: 27px;" src="./assets/img/footer/net-bank-icon/krungsri-icon.png">
+        </div> -->
+        <!-- E-WALLET -->
+        <p class="mt-3 mb-0 text-white">e-Wallet</p>
+        <div class="row" style="margin-left: -4px; margin-right: -4px;">
+          <div class="col-auto mt-2 align-items-center" style="padding-left: 4px; padding-right: 4px;">
+            <img class="" style="height: 45px;" src="./assets/img/footer/footer-svg-payment/qr-icon.png">
           </div>
-          <div class="col-auto p-0" style="display:flex; align-items:center;">
-            <img class="" style="height: 27px;" src="./assets/img/footer/net-bank-icon/BKK-bank-icon.png">
+          <!-- <div class="col-auto mt-2 align-items-center" style="padding-left: 4px; padding-right: 4px;">
+            <img class="" style="height: 45px;" src="./assets/img/footer/footer-svg-payment/alipay.svg">
+          </div> -->
+          <div class="col-auto mt-2 align-items-center" style="padding-left: 4px; padding-right: 4px;">
+            <img class="" style="height: 45px;" src="./assets/img/footer/footer-svg-payment/wechat-pay-logo-icon.svg">
           </div>
-          <div class="col-auto p-0" style="display:flex; align-items:center;">
-            <img class="" style="margin-left: 5px; height: 27px;"
-              src="./assets/img/footer/net-bank-icon/krung-thai-icon.png">
-          </div>
-          <div class="col-auto p-0" style="display:flex; align-items:center;">
-            <img class="" style="margin-left: 5px; height: 27px;"
-              src="./assets/img/footer/net-bank-icon/scb-icon.png">
-          </div>
-          <div class="col-auto pl-1" style="display:flex; align-items:center;">
-            <img class="" style="height: 27px;" src="./assets/img/footer/net-bank-icon/truemoney-icon.png">
+          <div class="col-auto  pl-1" style="display:flex; align-items:center;">
+            <img class="" style="height: 45px;" src="./assets/img/footer/footer-svg-payment/truemoney-icon-2.png">
           </div>
         </div>
-        <p class="mt-3 mb-2 text-white">ขนส่ง</p>
-        <div class="row">
-          <div class="col-auto pr-0" style="display:flex; align-items:center;">
-            <img style="height: 25px;" src="./assets/img/footer/transport-icon/kerry-icon.png">
+        <!-- <div class="row" style="margin-left: -4px; margin-right: -4px;">
+          <div class="col-auto mt-2 align-items-center" style="padding-left: 4px; padding-right: 4px;">
+            <img class="" style="height: 45px;" src="./assets/img/footer/footer-svg-payment/ShopeePay-white.png">
           </div>
-          <div class="col-auto pl-0" style="display:flex; align-items:center;">
-            <img style="margin-left: 5px; height: 25px;" src="./assets/img/footer/transport-icon/scg-express-icon.png">
+          <div class="col-auto  pl-1" style="display:flex; align-items:center;">
+            <img class="" style="height: 45px;" src="./assets/img/footer/footer-svg-payment/truemoney-icon-2.png">
           </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-auto pr-0" style="display:flex; align-items:center;">
-            <img style="height: 25px;" src="./assets/img/footer/transport-icon/th-post-icon.png">
+        </div> -->
+        <!-- DELIVERY -->
+        <p class="mt-3 mb-0 text-white">ขนส่ง</p>
+        <!-- <div class="row" style="margin-left: -4px; margin-right: -4px;">
+          <div class="col-auto mt-2 align-items-center" style="padding-left: 4px; padding-right: 4px;">
+            <img class="img-fluid" style="max-width: 70px;"
+              src="./assets/img/delivery-icon/white/kerry-logo-b-bg-w.png">
           </div>
-          <div class="col-auto pl-0" style="display:flex; align-items:center;">
-            <img style="margin-left: 5px; height: 25px;" src="./assets/img/footer/transport-icon/j_t-icon.png">
+          <div class="col-auto mt-2 align-items-center" style="padding-left: 4px; padding-right: 4px;">
+            <img class="img-fluid" style="max-width: 70px;"
+              src="./assets/img/delivery-icon/white/thailandPost-logo-b-bg-w.png">
+          </div>
+        </div> -->
+        <div class="row" style="margin-left: -4px; margin-right: -4px;">
+          <!-- <div class="col-auto mt-2 align-items-center" style="padding-left: 4px; padding-right: 4px;">
+            <img class="img-fluid" style="max-width: 70px;" src="./assets/img/delivery-icon/white/scg-logo-b-bg-w.png">
+          </div> -->
+          <div class="col-auto mt-2 align-items-center" style="padding-left: 4px; padding-right: 4px;">
+            <img class="img-fluid" style="max-width: 70px;"
+              src="./assets/img/delivery-icon/white/flash-logo-b-bg-w.png">
           </div>
         </div>
       </div>
-      <div class="col col-md-6 col-lg-3 mt-5">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-5">
         <p class="mb-2 text-white">ติดต่อเจ้าหน้าที่</p>
-        <div class="row">
-          <a href="#" class="col col-contact-p text-dark text-center ml-3 mr-1"
-            style="text-decoration: none; background-color: #FFF; border-radius: 8px;">
-            <img class="" style="width: 40px;" src="./assets/img/noti-chat-icon.png">
-            <p class="mt-2 mb-0" style="font-size: 0.8rem;">ข้อความ</p>
-          </a>
-          <a href="#" class="col col-contact-p text-dark text-center ml-1 mr-1"
-            style="text-decoration: none; background-color: #FFF; border-radius: 8px;">
-            <img class="" style="width: 40px;" src="./assets/img/Email-Icon.png">
-            <p class="mt-2 mb-0" style="font-size: 0.8rem;">E-mail</p>
-          </a>
-          <a href="#" class="col col-contact-p text-dark text-center ml-1 mr-3"
-            style="text-decoration: none; background-color: #FFF; border-radius: 8px;">
-            <img class="" style="width: 40px;" src="./assets/img/operator-icon.png">
-            <p class="mt-2 mb-0" style="font-size: 0.8rem;">โทรศัพท์</p>
-            <p class="mb-0" style="font-size: 0.5rem;">02-755-0000</p>
-          </a>
+        <div class="row ml-0 mr-0">
+          <div class="col pl-0 pr-0">
+            <div (click)="gotoChatAdmin()" class="text-center col-contact-p">
+              <img class="img-fluid" style="width: 40px;" src="./assets/img/noti-chat-icon-bg-gray.svg">
+              <p class="mt-2 mb-0" style="font-size: 0.8rem;">ข้อความ</p>
+            </div>
+          </div>
+          <div class="col pl-2 pr-2">
+            <div class="text-center col-contact-p" data-toggle="modal" data-target="#modalSendEmail">
+              <img class="img-fluid" style="width: 40px;" src="./assets/img/Email-Icon.svg">
+              <p class="mt-2 mb-0" style="font-size: 0.8rem;">E-mail</p>
+            </div>
+          </div>
+          <div class="col pl-0 pr-0">
+            <a href="tel:082-9624698" class="text-decoration-none">
+              <div class="text-center col-contact-p">
+                <img class="img-fluid" style="width: 40px;" src="./assets/img/operator-icon.svg">
+                <p class="mt-2 mb-0 text-dark" style="font-size: 0.8rem;">โทรศัพท์</p>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-      <div class="col col-md-6 col-lg-3 mt-5">
-        <img class="img-fluid m-1" src="./assets/img/ios-download.png">
-        <img class="img-fluid m-1" src="./assets/img/and-download.png">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-5">
+        <div class="row">
+          <div class="col-6 col-sm-12 col-md-12 col-lg-12 pr-banner-app">
+            <img class="img-fluid m-1" src="./assets/img/ios-download.png">
+          </div>
+          <div class="col-6 col-sm-12 col-md-12 col-lg-12 pl-banner-app">
+            <img class="img-fluid m-1" src="./assets/img/and-download.png">
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
+
+<!-- END MODAL SEND EMAIL -->
+<div class="modal fade" id="modalSendEmail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-bottom">
+    <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+      <div class="row">
+        <div class="col text-center">
+          <p>ติดต่อเจ้าหน้าที่</p>
+        </div>
+        <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+          <button type="button" class="close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body p-0">
+        <!-- ROW 1 -->
+        <div class="row ml-0 mr-0">
+          <div class="col col-r-add pl-0">
+            <div class="input-style">
+              <p class="mb-0 text-input">ชื่อ*</p>
+              <input class="form-control border-0 p-0 text-placeholder" maxlength="100"
+                style="box-shadow: none; background-color: #F2F6FA;" #inputName (keyup)='nameInput($event)'
+                placeholder="ชื่อจริง">
+            </div>
+          </div>
+          <div class="col col-l-add pr-0">
+            <div class="input-style">
+              <p class="mb-0 text-input">นามสกุล*</p>
+              <input class="form-control border-0 p-0 text-placeholder" maxlength="100"
+                style="box-shadow: none; background-color: #F2F6FA;" #inputLastName (keyup)='lastNameInput($event)'
+                placeholder="นามสกุล">
+            </div>
+          </div>
+        </div>
+        <!-- ROW 2 -->
+        <div class="row mt-2 ml-0 mr-0">
+          <div class="col pl-0 pr-0">
+            <div class="input-style">
+              <p class="mb-0 text-input">หมายเลขโทรศัพท์*</p>
+              <input class="form-control border-0 p-0 text-placeholder" maxlength="10"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                style="box-shadow: none; background-color: #F2F6FA;" #inputPhone (keyup)='phoneInput($event)'
+                placeholder="XXXXXXXXXX">
+            </div>
+          </div>
+        </div>
+        <!-- ROW 3 -->
+        <div class="row mt-2 ml-0 mr-0">
+          <div class="col pl-0 pr-0">
+            <div class="input-style">
+              <p class="mb-0 text-input">E-mail</p>
+              <input class="form-control border-0 p-0 text-placeholder" maxlength="100"
+                style="box-shadow: none; background-color: #F2F6FA;" #inputEmail (keyup)='emailInput($event)'
+                placeholder="simple@A Bid More.com">
+                <p *ngIf="checkEmail" class="text-danger">ข้อผิดพลาดอีเมล์ไม่ถูกต้อง</p>
+            </div>
+          </div>
+        </div>
+        <!-- ROW 4 -->
+        <div class="row mt-2 ml-0 mr-0">
+          <div class="col pl-0 pr-0">
+            <div class="input-style">
+              <p class="mb-0 text-input">หัวข้อที่ต้องการติดต่อ</p>
+              <input class="form-control border-0 p-0 text-placeholder" maxlength="50"
+                style="box-shadow: none; background-color: #F2F6FA;" #inputTopic (keyup)='topicInput($event)' placeholder="หัวข้อ">
+            </div>
+          </div>
+        </div>
+        <!-- ROW 5 -->
+        <div class="row mt-2 ml-0 mr-0">
+          <div class="col pl-0 pr-0">
+            <div class="input-style">
+              <p class="mb-0 text-input">รายละเอียด</p>
+              <textarea rows="5" maxlength="300" class="form-control border-0 p-0 text-placeholder" style="box-shadow: none; background-color: #F2F6FA;" placeholder="รายละเอียด" #inputDescription (keyup)='descriptionInput($event)'></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- BUTTON SUBMIT -->
+        <button data-toggle="modal" data-target="#ModalPopupSubmitSendEmail" data-backdrop="static" data-keyboard="false"
+          (click)="sendEmail()"
+          type="button" class="btn mt-2" [class.disabled]="name == '' || lastname == '' || phone == '' || email == '' || topic == '' || description == ''"
+          style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;"
+          data-dismiss="modal" aria-label="Close">
+          ส่งข้อมูล
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL SEND EMAIL -->
+
+  <!-- MODAL POPUP SUBMIT ADD -->
+  <div class="modal fade" id="ModalPopupSubmitSendEmail" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">ต้องการส่ง E-mail หา A Bid More ?</p>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal" (click)="okSendEmail()">ตกลง</button>
+          </div>
+          <div class="mt-2">
+            <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+              <p class="text-center mb-0">ยกเลิก</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP SUBMIT ADD -->

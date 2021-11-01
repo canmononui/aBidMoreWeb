@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="626" viewBox="0 0 1000 626">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #1d2025;
+      }
+    </style>
+  </defs>
+  <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-1" width="1000" height="626" rx="50" ry="50"/>
+  <circle id="Ellipse_2_copy" data-name="Ellipse 2 copy" class="cls-2" cx="747.64" cy="459.563" r="82.079"/>
+  <circle class="cls-2" cx="848.39" cy="459.563" r="82.079"/>
+  <rect class="cls-2" y="135.812" width="1000" height="119.219"/>
+</svg>

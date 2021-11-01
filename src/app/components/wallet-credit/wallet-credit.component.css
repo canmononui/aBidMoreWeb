@@ -63,6 +63,17 @@
   padding: 15px;
   border: 3px solid #E7EDF4; 
   border-radius: 15px; 
+  cursor: pointer;
+}
+
+.list-color {
+  color: #FFF;
+  background-color: #FE5721;
+  border: 3px solid #FE5721;
+}
+
+.text-color {
+  color: #FE5721;
 }
 
 /* MODAL */
@@ -111,11 +122,13 @@
 }
 
 .col-coin-l {
+  padding-left: 0px;
   padding-right: 4px;
 }
 
 .col-coin-r {
   padding-left: 4px;
+  padding-right: 0px;
 }
 
 .img-payment {
@@ -138,21 +151,30 @@
   padding: 30px;
 }
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
 
-
+.btn-submit {
+  border: none; 
+  border-radius: 1.5rem; 
+  width: 100%; 
+  color: #fff; 
+  background-color: #FE5721;
+}
 
 /* Medium devices (tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
-  /* .card-collection {
-    padding: 2rem!important;
-  } */
 
   .col-coin-l {
+    padding-left: 0px;
     padding-right: 4px;
   }
 
   .col-coin-r {
     padding-left: 4px;
+    padding-right: 0px;
   }
 
   .list {
@@ -164,14 +186,12 @@
     font-size: 1.3rem;
   }
 
-
-
+  .disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
 
 }
-
-
-
-
 
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (max-width: 480px) {
@@ -237,11 +257,13 @@
   }
 
   .col-coin-l {
+    padding-left: 0px;
     padding-right: 4px;
   }
 
   .col-coin-r {
     padding-left: 4px;
+    padding-right: 0px;
   }
 
   .text-price {
@@ -289,7 +311,15 @@
     padding: 20px;
   }
 
-
+  .row-mlr {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  
+  .col-plr {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 
 
 

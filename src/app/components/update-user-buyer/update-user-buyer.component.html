@@ -1,0 +1,392 @@
+<!-- SHOW CONTENT INPUT -->
+<div [hidden]="!showContent" class="container">
+  <!-- INFO -->
+  <div [hidden]="!showInfo" class="card_ mb-4">
+    <div class="row row-right">
+      <div class="col-auto">
+        <h2 class="mb-0 text-15">สมัครสมาชิก</h2>
+      </div>
+    </div>
+    <div class="input-style mt-2">
+      <p class="mb-0 text-input">ชื่อโปรไฟล์ (4-10 ตัวอักษรภาษาอังกฤษ)</p>
+      <input class="form-control border-0 p-0 text-placeholder" maxlength="10" [value]="displayName" (keyup)='usernameInput($event)'
+        style="box-shadow: none; background-color: #F2F6FA;" #displayName_ placeholder="ชื่อโปรไฟล์"
+        onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
+        <p *ngIf="displayNameErr" class="mb-0 text-danger" style="font-size: .8rem;">มีผู้ใช้งานชื่อโปรไฟล์นี้แล้ว</p>
+    </div>
+    <div class="input-style mt-2">
+      <p class="mb-0 text-input">ชื่อ</p>
+      <input class="form-control border-0 p-0 text-placeholder" maxlength="100"
+        style="box-shadow: none; background-color: #F2F6FA;" #name_ [value]="name" placeholder="ชื่อจริง">
+    </div>
+    <div class="input-style mt-2">
+      <p class="mb-0 text-input">นามสกุล</p>
+      <input class="form-control border-0 p-0 text-placeholder" maxlength="100"
+        style="box-shadow: none; background-color: #F2F6FA;" #lastName_ [value]="lastName" placeholder="นามสกุล">
+    </div>
+    <!-- DROPDOWN GENDER -->
+    <div class="dropdown">
+      <div class="input-style mt-2" style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <p class="mb-0 text-input">เพศ</p>
+        <div style="box-shadow: none; background-color: #FFF; border-radius: 5px; padding: 6px 12px 6px 16px;">
+          <div class="row">
+            <div class="col-10 pr-0">
+              <p class="mb-0 text-placeholder">{{ textTypeGender }}</p>
+            </div>
+            <div class="col-2 pl-0 text-right">
+              <p class="mb-0 dropdown-toggle"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="dropdown-menu pt-2 pb-2 pl-3 pr-3" role="menu">
+        <li (click)="selectGender('male')"><a class="dropdown-menu-text" style="cursor: pointer;">ชาย</a></li>
+        <li (click)="selectGender('female')"><a class="dropdown-menu-text" style="cursor: pointer;">หญิง</a></li>
+        <li (click)="selectGender('notSpecified')"><a class="dropdown-menu-text" style="cursor: pointer;">ไม่ระบุ</a>
+        </li>
+      </ul>
+    </div>
+    <!-- BIRTH DATE -->
+    <div class="input-style mt-2 mb-2">
+      <p class="mb-0 text-input">วัน/เดือน/ปีเกิด</p>
+      <div class="row">
+        <!-- DAY -->
+        <div class="col-auto">
+          <div class="dropdown" style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <p class="mb-0 text-input">วันที่</p>
+            <div style="box-shadow: none; background-color: #FFF; border-radius: 5px; padding: 6px 12px 6px 16px;">
+              <div class="row">
+                <div class="col-auto pr-0">
+                  <p class="mb-0 text-placeholder">{{ dayText }}</p>
+                </div>
+                <div class="col-auto text-right">
+                  <p class="mb-0 dropdown-toggle"></p>
+                </div>
+              </div>
+            </div>
+            <ul class="dropdown-menu scrollable-menu pt-2 pb-2 pl-3 pr-3" role="menu">
+              <li (click)="selectDay('1')"><a class="dropdown-menu-text" style="cursor: pointer;">1</a></li>
+              <li (click)="selectDay('2')"><a class="dropdown-menu-text" style="cursor: pointer;">2</a></li>
+              <li (click)="selectDay('3')"><a class="dropdown-menu-text" style="cursor: pointer;">3</a></li>
+              <li (click)="selectDay('4')"><a class="dropdown-menu-text" style="cursor: pointer;">4</a></li>
+              <li (click)="selectDay('5')"><a class="dropdown-menu-text" style="cursor: pointer;">5</a></li>
+              <li (click)="selectDay('6')"><a class="dropdown-menu-text" style="cursor: pointer;">6</a></li>
+              <li (click)="selectDay('7')"><a class="dropdown-menu-text" style="cursor: pointer;">7</a></li>
+              <li (click)="selectDay('8')"><a class="dropdown-menu-text" style="cursor: pointer;">8</a></li>
+              <li (click)="selectDay('9')"><a class="dropdown-menu-text" style="cursor: pointer;">9</a></li>
+              <li (click)="selectDay('10')"><a class="dropdown-menu-text" style="cursor: pointer;">10</a></li>
+              <li (click)="selectDay('11')"><a class="dropdown-menu-text" style="cursor: pointer;">11</a></li>
+              <li (click)="selectDay('12')"><a class="dropdown-menu-text" style="cursor: pointer;">12</a></li>
+              <li (click)="selectDay('13')"><a class="dropdown-menu-text" style="cursor: pointer;">13</a></li>
+              <li (click)="selectDay('14')"><a class="dropdown-menu-text" style="cursor: pointer;">14</a></li>
+              <li (click)="selectDay('15')"><a class="dropdown-menu-text" style="cursor: pointer;">15</a></li>
+              <li (click)="selectDay('16')"><a class="dropdown-menu-text" style="cursor: pointer;">16</a></li>
+              <li (click)="selectDay('17')"><a class="dropdown-menu-text" style="cursor: pointer;">17</a></li>
+              <li (click)="selectDay('18')"><a class="dropdown-menu-text" style="cursor: pointer;">18</a></li>
+              <li (click)="selectDay('19')"><a class="dropdown-menu-text" style="cursor: pointer;">19</a></li>
+              <li (click)="selectDay('20')"><a class="dropdown-menu-text" style="cursor: pointer;">20</a></li>
+              <li (click)="selectDay('21')"><a class="dropdown-menu-text" style="cursor: pointer;">21</a></li>
+              <li (click)="selectDay('22')"><a class="dropdown-menu-text" style="cursor: pointer;">22</a></li>
+              <li (click)="selectDay('23')"><a class="dropdown-menu-text" style="cursor: pointer;">23</a></li>
+              <li (click)="selectDay('24')"><a class="dropdown-menu-text" style="cursor: pointer;">24</a></li>
+              <li (click)="selectDay('25')"><a class="dropdown-menu-text" style="cursor: pointer;">25</a></li>
+              <li (click)="selectDay('26')"><a class="dropdown-menu-text" style="cursor: pointer;">26</a></li>
+              <li (click)="selectDay('27')"><a class="dropdown-menu-text" style="cursor: pointer;">27</a></li>
+              <li (click)="selectDay('28')"><a class="dropdown-menu-text" style="cursor: pointer;">28</a></li>
+              <li (click)="selectDay('29')"><a class="dropdown-menu-text" style="cursor: pointer;">29</a></li>
+              <li (click)="selectDay('30')"><a class="dropdown-menu-text" style="cursor: pointer;">30</a></li>
+              <li (click)="selectDay('31')"><a class="dropdown-menu-text" style="cursor: pointer;">31</a></li>
+            </ul>
+          </div>
+        </div>   
+        <!-- MONTH -->
+        <div class="col-auto pl-0 pr-0">
+          <div class="dropdown" style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <p class="mb-0 text-input">เดือน</p>
+              <div style="box-shadow: none; background-color: #FFF; border-radius: 5px; padding: 6px 12px 6px 16px;">
+                <div class="row">
+                  <div class="col-auto pr-0">
+                    <p class="mb-0 text-placeholder">{{ monthText }}</p>
+                  </div>
+                  <div class="col-auto text-right">
+                    <p class="mb-0 dropdown-toggle"></p>
+                  </div>
+                </div>
+              </div>
+            <ul class="dropdown-menu scrollable-menu pt-2 pb-2 pl-3 pr-3" role="menu">
+              <li (click)="selectMonth('มกราคม')"><a class="dropdown-menu-text" style="cursor: pointer;">มกราคม</a></li>
+              <li (click)="selectMonth('กุมภาพันธ์')"><a class="dropdown-menu-text" style="cursor: pointer;">กุมภาพันธ์</a></li>
+              <li (click)="selectMonth('มีนาคม')"><a class="dropdown-menu-text" style="cursor: pointer;">มีนาคม</a></li>
+              <li (click)="selectMonth('เมษายน')"><a class="dropdown-menu-text" style="cursor: pointer;">เมษายน</a></li>
+              <li (click)="selectMonth('พฤษภาคม')"><a class="dropdown-menu-text" style="cursor: pointer;">พฤษภาคม</a></li>
+              <li (click)="selectMonth('มิถุนายน')"><a class="dropdown-menu-text" style="cursor: pointer;">มิถุนายน</a></li>
+              <li (click)="selectMonth('กรกฎาคม')"><a class="dropdown-menu-text" style="cursor: pointer;">กรกฎาคม</a></li>
+              <li (click)="selectMonth('สิงหาคม')"><a class="dropdown-menu-text" style="cursor: pointer;">สิงหาคม</a></li>
+              <li (click)="selectMonth('กันยายน')"><a class="dropdown-menu-text" style="cursor: pointer;">กันยายน</a></li>
+              <li (click)="selectMonth('ตุลาคม')"><a class="dropdown-menu-text" style="cursor: pointer;">ตุลาคม</a></li>
+              <li (click)="selectMonth('พฤศจิกายน')"><a class="dropdown-menu-text" style="cursor: pointer;">พฤศจิกายน</a></li>
+              <li (click)="selectMonth('ธันวาคม')"><a class="dropdown-menu-text" style="cursor: pointer;">ธันวาคม</a></li>
+            </ul>
+          </div>
+        </div>   
+        <!-- YEAR -->
+        <div class="col-auto">
+          <div class="dropdown" style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <p class="mb-0 text-input">ปี</p>
+            <div style="box-shadow: none; background-color: #FFF; border-radius: 5px; padding: 6px 12px 6px 16px;">
+              <div class="row">
+                <div class="col-auto pr-0">
+                  <p class="mb-0 text-placeholder">{{ yearText }}</p>
+                </div>
+                <div class="col-auto text-right">
+                  <p class="mb-0 dropdown-toggle"></p>
+                </div>
+              </div>
+            </div>
+            <ul class="dropdown-menu scrollable-menu pt-2 pb-2 pl-3 pr-3" role="menu">
+              <div *ngFor="let data of yearArr">
+                <li (click)="selectYear(data)"><a class="dropdown-menu-text" style="cursor: pointer;">{{ data }}</a></li>
+              </div>
+            </ul>
+          </div>
+        </div>      
+    </div>
+  </div>
+    <!-- PHONE NUMBER -->
+    <div class="input-style mt-2 mb-2" [class.disabled]="phoneNumber != ''">
+      <p class="mb-0 text-input">หมายเลขโทรศัพท์ (เพื่อขอรหัส OTP)</p>
+      <input class="form-control border-0 p-0 text-placeholder" style="box-shadow: none; background-color: #F2F6FA;"
+        #phoneNumber_ [value]="phoneNumber" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10"
+        placeholder="xxxxxxxxxx">
+    </div>
+    <div id="recaptcha-container"></div>
+    <!-- BUTTON SUBMIT -->
+    <div *ngIf="phoneNumber == ''">
+      <button (click)="goToRefCode(displayName_.value, name_.value, lastName_.value, phoneNumber_.value)" type="button"
+        class="btn mt-3 btn-submit" data-toggle="modal" data-target="#ModalPopupOTP" data-backdrop="static"
+        data-keyboard="false">
+        ขอรหัส OTP
+      </button>
+    </div>
+    <p *ngIf="errorTextNull != ''" class="text-danger mb-0">{{ errorTextNull }}</p>
+    <div *ngIf="phoneNumber != ''">
+      <button (click)="goToRefCode_(displayName_.value, name_.value, lastName_.value)" type="button" class="btn mt-3 btn-submit">
+        ถัดไป
+      </button>
+    </div>
+  </div>
+  <!-- END INFO -->
+
+  <!-- INPUT REF CODE -->
+  <div *ngIf="showRefCode" class="card_ mb-4">
+    <div class="row row-right">
+      <div class="col-auto">
+        <h2 class="mb-0 text-15">รหัสแนะนำสามารถเพิ่มได้ในภายหลัง</h2>
+      </div>
+      <div class="col align-self-center text-right">
+        <a (click)="backWardToInfo()" class="backWard-text">
+          <i class="fa fa-angle-left mr-2"></i>ย้อนกลับ
+        </a>
+      </div>
+    </div>
+    <p class="mb-0 text-dark">กรุณาเพิ่มรหัสแนะนำเพื่อรับสิทธิประโยชน์พิเศษ</p>
+    <div class="input-style mt-2">
+      <p class="mb-0 text-input">รหัสแนะนำ</p>
+      <input class="form-control border-0 p-0 text-placeholder" [class.disabled]="refCodeCheck"
+        style="box-shadow: none; background-color: #F2F6FA;" #refCode_ [value]="refCode"
+        placeholder="ตัวอย่างรหัส AB1621859416">
+    </div>
+    <p class="mt-2 mb-0 text-danger">{{ errorText5 }}</p>
+    <!-- BUTTON SUBMIT -->
+    <button (click)="goToCondition(refCode_.value)" type="button" class="btn mt-3 btn-submit">
+      ถัดไป
+    </button>
+  </div>
+  <!-- END INPUT REF CODE -->
+
+
+  <!-- INPUT CONDITION -->
+  <div *ngIf="showCondition" class="card_ mb-4">
+    <div class="row row-right">
+      <div class="col-auto">
+        <h2 class="mb-0">เงื่อนไข</h2>
+      </div>
+      <div class="col align-self-center text-right">
+        <a (click)="backWardToRefCode()" class="backWard-text">
+          <i class="fa fa-angle-left mr-2"></i>ย้อนกลับ
+        </a>
+      </div>
+    </div>
+    <!-- HTML TAG CONTRACT -->
+    <div *ngIf="contract != undefined" class="input-style contract mt-2" [innerHTML]="contract.html"></div>
+    <!-- DOWNLOAD FILE -->
+    <div class="input-style mt-2">
+      <a class="row mt-4 mb-2" style="color: #343a40; text-decoration: none;"
+      href="https://firebasestorage.googleapis.com/v0/b/abidmore-seller.appspot.com/o/condition-buyer%2F%E0%B8%AA%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B2%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99%20A%20BID%20MORE.pdf?alt=media&token=034dbae4-5e81-4802-a2ea-6b7cbfbcb764"
+      target="_blank">
+      <div class="col-auto pr-0">
+        <button type="button" class="btn btn-warning btn-circle btn-lg text-white">
+          <i class="fa fa-file"></i>
+        </button>
+      </div>
+      <div class="col align-self-center">
+        <p class="mb-0">สัญญาข้อตกลงผู้ใช้งาน A Bid More</p>
+      </div>
+    </a>
+    </div>
+    <p class="mb-4 text-dark">กรุณาอ่านสัญญาข้อตกลงมาร์เก็ตเพลส A Bid More เพื่อรับทราบถึงเงื่อนไขการใช้งาน
+      เมื่อกดยอมรับเงื่อนไขจะถือว่าท่านได้รับทราบถึงเงื่อนไขและยอมรับตามจดหมายฉบับนี้
+    </p>
+    <div class="custom-control custom-radio custom-control-inline" (click)="checkCon()">
+      <input type="radio" id="customRadioInline5" name="customRadioInline3" class="custom-control-input">
+      <label class="custom-control-label" style="color: #616a71;" for="customRadioInline5">ยอมรับเงื่อนไข</label>
+    </div>
+    <!-- BUTTON SUBMIT -->
+    <re-captcha *ngIf="checkCondition" (resolved)="resolved($event)" siteKey="6LfvpuoZAAAAAAKnsMZkIVEHywtargEw6bNqzHZu">
+    </re-captcha>
+    <button type="button" [disabled]="captchaVerify" (click)="goToUpdateUserBuyer()" class="btn mt-3 btn-submit">
+      บันทึกข้อมูล
+    </button>
+  </div>
+  <!-- END INPUT CONDITION -->
+</div>
+<!-- END SHOW CONTENT INPUT -->
+
+<!-- LOADING CONTENT -->
+<div *ngIf="showLoading">
+  <div style="height: 100vh;">
+    <div class="container h-100 d-flex justify-content-center">
+      <div class="my-auto text-center">
+        <img class="rounded-circle shadow" style="width: 60px; height: 60px;"
+          src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg">
+        <p>Loading...</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END LOADING CONTENT -->
+
+<!-- MODAL -->
+<!-- MODAL POPUP OTP -->
+<div class="modal fade" id="ModalPopupOTP" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-otp" style="border-radius: 1rem;">
+      <!-- SHOW ERROR -->
+      <div *ngIf="errorText2 != ''">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">{{ errorText2 }}</p>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;" data-dismiss="modal"
+              (click)="next()">ตกลง</button>
+          </div>
+        </div>
+      </div>
+      <!-- LOADING CONTENT -->
+      <p *ngIf="textLoad" class="text-center mb-0">กำลังโหลด</p>
+      <!-- SUBMIT OTP FAIL -->
+      <div *ngIf="submitOTPFail">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">{{ errorTextOtpFail }}</p>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              (click)="otpFail()">เพิ่มรหัส OTP อีกครั้ง</button>
+          </div>
+        </div>
+      </div>
+      <!-- RESEND OTP -->
+      <div [hidden]="!reSendOTP">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center mt-2 mb-2">กรุณายืนยันฉันไม่ใช่โปรแกรมอัตโนมัติ</p>
+        <div id="recaptcha-container-resend"></div>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              (click)="requestOtpCodeAgain()">ขอรหัสใหม่อีกครั้ง</button>
+          </div>
+        </div>
+        <div class="mt-2">
+          <a (click)="closeResendOTP()" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+      <!-- SHOW POPUP OTP -->
+      <div *ngIf="showOtp">
+        <h4 class="mb-0">รหัส OTP</h4>
+        <div class="otp mt-2 mb-2">
+          <div class="row justify-content-center otp-input" style="margin-left: -4px; margin-right: -4px;">
+            <div class="col-2" style="padding-left: 4px; padding-right: 4px;">
+              <div class="input-otp-style">
+                <input class="form-control border-0 p-0 text-placeholder text-center"
+                  style="box-shadow: none; background-color: #F2F6FA;" #digit1_ (keyup)="inputFocus(digit1_, digit2_)"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="1" placeholder="-">
+              </div>
+            </div>
+            <div class="col-2" style="padding-left: 4px; padding-right: 4px;">
+              <div class="input-otp-style">
+                <input class="form-control border-0 p-0 text-placeholder text-center"
+                  style="box-shadow: none; background-color: #F2F6FA;" #digit2_ (keyup)="inputFocus(digit2_, digit3_)"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="1" placeholder="-">
+              </div>
+            </div>
+            <div class="col-2" style="padding-left: 4px; padding-right: 4px;">
+              <div class="input-otp-style">
+                <input class="form-control border-0 p-0 text-placeholder text-center"
+                  style="box-shadow: none; background-color: #F2F6FA;" #digit3_ (keyup)="inputFocus(digit3_, digit4_)"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="1" placeholder="-">
+              </div>
+            </div>
+            <div class="col-2" style="padding-left: 4px; padding-right: 4px;">
+              <div class="input-otp-style">
+                <input class="form-control border-0 p-0 text-placeholder text-center"
+                  style="box-shadow: none; background-color: #F2F6FA;" #digit4_ (keyup)="inputFocus(digit4_, digit5_)"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="1" placeholder="-">
+              </div>
+            </div>
+            <div class="col-2" style="padding-left: 4px; padding-right: 4px;">
+              <div class="input-otp-style">
+                <input class="form-control border-0 p-0 text-placeholder text-center"
+                  style="box-shadow: none; background-color: #F2F6FA;" #digit5_ (keyup)="inputFocus(digit5_, digit6_)"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="1" placeholder="-">
+              </div>
+            </div>
+            <div class="col-2" style="padding-left: 4px; padding-right: 4px;">
+              <div class="input-otp-style">
+                <input class="form-control border-0 p-0 text-placeholder text-center"
+                  style="box-shadow: none; background-color: #F2F6FA;" #digit6_
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="1" placeholder="-">
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-left: -4px; margin-right: -4px;">
+            <div class="col-auto" style="padding-left: 4px; padding-right: 0px;">
+              <p class="mb-0 text-input" style="color: #FE5721; cursor: pointer;" data-dismiss="modal"
+                (click)="changePhoneNumber()">แก้ไขข้อมูล</p>
+            </div>
+            <div class="col text-right" style="padding-left: 0px; padding-right: 4px;">
+              <p class="mb-0 text-input" [class.disabled]="display != ''" style="color: #FE5721; cursor: pointer;"
+                (click)="reSendOTPClick()">ขอรหัสใหม่{{ display }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- BUTTON SUBMIT -->
+        <button
+          (click)="checkOtp(digit1_.value, digit2_.value, digit3_.value, digit4_.value, digit5_.value, digit6_.value)"
+          type="button" class="btn mt-3 btn-submit">
+          ยืนยันรหัส OTP
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL POPUP OTP -->
+<!-- END MODAL -->

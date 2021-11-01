@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1, .cls-6 {
+        fill: #f4f4f4;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #adcdfc;
+      }
+
+      .cls-3 {
+        fill: #7fa9f1;
+      }
+
+      .cls-4 {
+        fill: #bea419;
+      }
+
+      .cls-5 {
+        fill: #f2c900;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M500,0.655c275.961,0,499.672,223.711,499.672,499.673S775.961,1000,500,1000,0.328,776.289.328,500.328,224.039,0.655,500,.655Z"/>
+  <path class="cls-2" d="M461,389L397,279l39-73H558l39,73.066L537,390Z"/>
+  <path class="cls-3" d="M555.569,205.549l2.862,0.9-58,184-2.862-.9Z"/>
+  <path id="Shape_2_copy" data-name="Shape 2 copy" class="cls-3" d="M438.431,205.549l-2.862.9,58,184,2.862-.9Z"/>
+  <path class="cls-3" d="M397,281v-3H596v3H397Z"/>
+  <path class="cls-3" d="M461.327,279.7l-2.654-1.4,38-72,2.654,1.4Z"/>
+  <path id="Shape_4_copy" data-name="Shape 4 copy" class="cls-3" d="M532.673,279.7l2.654-1.4-38-72-2.654,1.4Z"/>
+  <ellipse class="cls-4" cx="500" cy="596.5" rx="235" ry="214.5"/>
+  <ellipse id="Ellipse_2_copy" data-name="Ellipse 2 copy" class="cls-5" cx="500" cy="592" rx="235" ry="210"/>
+  <ellipse class="cls-6" cx="498.5" cy="585.5" rx="180.5" ry="165.5"/>
+</svg>

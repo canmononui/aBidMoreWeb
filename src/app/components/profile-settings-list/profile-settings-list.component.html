@@ -7,59 +7,59 @@
       <p class="text-white text-center mb-0">หน้าโปรไฟล์</p>
     </div>
   
-    <div class="card-body">
+    <div *ngIf="showContent" class="card-body">
       <!-- List 1 -->
       <div class="card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
-            <p class="mb-0 font-store">canm****</p>
+            <p class="mb-0 font-store">{{ showDisplayName }}</p>
           </div>
           <div class="col-auto align-self-center text-right">
             <!-- <button type="button" class="btn btn-circle">
-              <i class="fa fa-angle-right font-weight-bold"></i>
+              <i class="fa fa-pencil font-weight-bold"></i>
             </button> -->
             <p class="mb-0 font-on-off" style="display: inline">เปิด-ปิดชื่อในการประมูล</p>
-            <button type="button" class="btn btn-sm btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
+            <button (click)="hideSubmit()" type="button" class="btn btn-sm btn-toggle" [class.active]="this.userBuyer.hideDisplayName" data-toggle="button" aria-pressed="true" autocomplete="off">
               <div class="handle"></div>
             </button>
           </div>
         </div>
       </div>
       <!-- List 2 -->
-      <div class="card-list card-padding">
+      <div class="card-list card-padding router" [routerLink]="['/profile-settings-username']">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
-            <p class="mb-0 font-store">ชื่อโปรไฟล์: canmononui</p>
+            <p class="mb-0 font-store">ชื่อโปรไฟล์: {{ userBuyer.displayName }}</p>
           </div>
           <div class="col-auto align-self-center">
             <button type="button" class="btn btn-circle">
-              <i class="fa fa-angle-right font-weight-bold"></i>
+              <i class="fa fa-pencil font-weight-bold"></i>
             </button>
           </div>
         </div>
       </div>
       <!-- List 3 -->
-      <div class="card-list card-padding">
+      <div class="card-list card-padding router" [routerLink]="['/profile-settings-name']">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
-            <p class="mb-0 font-store">ชื่อ: สุทัศน์</p>
+            <p class="mb-0 font-store">ชื่อ: {{ userBuyer.name }}</p>
           </div>
           <div class="col-auto align-self-center">
             <button type="button" class="btn btn-circle">
-              <i class="fa fa-angle-right font-weight-bold"></i>
+              <i class="fa fa-pencil font-weight-bold"></i>
             </button>
           </div>
         </div>
       </div>
       <!-- List 4 -->
-      <div class="card-list card-padding">
+      <div class="card-list card-padding router" [routerLink]="['/profile-settings-lastname']">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
-            <p class="mb-0 font-store">นามสกุล: สุขจิต</p>
+            <p class="mb-0 font-store">นามสกุล: {{ userBuyer.lastName }}</p>
           </div>
           <div class="col-auto align-self-center">
             <button type="button" class="btn btn-circle">
-              <i class="fa fa-angle-right font-weight-bold"></i>
+              <i class="fa fa-pencil font-weight-bold"></i>
             </button>
           </div>
         </div>
@@ -68,33 +68,115 @@
       <div class="card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
-            <p class="mb-0 font-store">หมายเลขโทรศัพท์: ********15</p>
+            <p class="mb-0 font-store">หมายเลขโทรศัพท์: {{ showPhoneNumber }}</p>
           </div>
-          <div class="col-auto align-self-center">
+          <!-- <div class="col-auto align-self-center">
             <button type="button" class="btn btn-circle">
-              <i class="fa fa-angle-right font-weight-bold"></i>
+              <i class="fa fa-pencil font-weight-bold"></i>
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- List 6 -->
       <div class="card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
-            <p class="mb-0 font-store">E-mail: ca*****@hotmail.co.th</p>
+            <p class="mb-0 font-store">E-mail: {{ userBuyer.email }}</p>
+          </div>
+          <!-- <div class="col-auto align-self-center">
+            <button type="button" class="btn btn-circle">
+              <i class="fa fa-pencil font-weight-bold"></i>
+            </button>
+          </div> -->
+        </div>
+      </div>
+      <!-- List 7 -->
+      <div (click)="copyYourRefCode()" data-toggle="modal" data-target="#ModalCopyYourRefCode" class="card-list card-padding router">
+        <div class="row mt-set ml-0 mr-0 chat-list">
+          <div class="col align-self-center">
+            <p class="mb-0 font-store">รหัสแนะนำของคุณ: {{ userBuyer.yourRefCode }}</p>
           </div>
           <div class="col-auto align-self-center">
             <button type="button" class="btn btn-circle">
-              <i class="fa fa-angle-right font-weight-bold"></i>
+              <i class="fa fa-clone font-weight-bold"></i>
             </button>
           </div>
         </div>
       </div>
-  
+      <!-- List 8 -->
+      <div (click)="copyLinkYourRefCode()" data-toggle="modal" data-target="#ModalCopyLinkYourRefCode" class="card-list card-padding router">
+        <div class="row mt-set ml-0 mr-0 chat-list">
+          <div class="col align-self-center">
+            <p class="mb-0 font-store">ลิงก์แนะนำของคุณ: https://abidmore.com/{{ userBuyer.yourRefCode }}</p>
+          </div>
+          <div class="col-auto align-self-center">
+            <button type="button" class="btn btn-circle">
+              <i class="fa fa-clone font-weight-bold"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- List 9 -->
+      <div *ngIf="userBuyer.refCode == null" class="card-list card-padding router" [routerLink]="['/profile-settings-refcode']">
+        <div class="row mt-set ml-0 mr-0 chat-list">
+          <div class="col align-self-center">
+            <p class="mb-0 font-store">รหัสแนะนำ: ไม่มี</p>
+          </div>
+          <div class="col-auto align-self-center">
+            <button type="button" class="btn btn-circle">
+              <i class="fa fa-pencil font-weight-bold"></i>
+            </button>
+          </div>
+        </div>
+      </div>    
+    </div>
+    <!-- Card Body -->
   </div>
-  <!-- Card Body -->
-  </div>
+</div>
+<!-- End Container -->
 
+<div class="modal fade" id="ModalCopyYourRefCode" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+      <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+      <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+      <p class="text-center">คัดลอกรหัสแนะนำของคุณเรียบร้อย</p>
 
+      <div class="mt-4">
+        <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+          <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+            data-dismiss="modal">ยืนยัน</button>
+        </div>
+        <div class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- End Container -->
+</div>
+
+<div class="modal fade" id="ModalCopyLinkYourRefCode" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+      <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+      <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+      <p class="text-center">คัดลอกลิงก์แนะนำของคุณเรียบร้อย</p>
+
+      <div class="mt-4">
+        <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+          <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+            data-dismiss="modal">ยืนยัน</button>
+        </div>
+        <div class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

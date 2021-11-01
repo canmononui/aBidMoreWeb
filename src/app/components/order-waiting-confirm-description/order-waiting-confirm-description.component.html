@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="card card-radius">
+    <div class="card-tab card-tab-radius">
+      <p class="text-white text-center mb-0">รายละเอียด</p>
+    </div>
+
+    <div *ngIf="item != null" class="card-body">
+      <!-- Order Item 1 -->
+      <div class="card-list card-padding">
+        <div class="row row-mlr mt-2">
+          <div class="col-auto col-product col-plr">
+            <img (click)="gotoProductDes(item.productKey)" class="img-fluid align-self-center img-product" style="border-radius: 10px; cursor: pointer"
+              src="{{ item.imgProduct[0].imgUrl }}">
+          </div>
+          <div class="col col-plr pl-0">
+            <div class="row row-mlr">
+              <div class="col col-plr align-self-center">
+                <h5 class="mb-0 font-topic">คำสั่งซื้อ #{{ item.orderNo }}</h5>
+              </div>
+              <div class="col-auto col-plr align-self-center text-right">
+                <p class="mb-0 font-des">{{ item.createAt.seconds*1000 | date: 'd/M/yyyy' }}</p>
+              </div>
+            </div>
+            <h5 (click)="gotoProductDes(item.productKey)" class="mb-0 font-topic productName" style="cursor: pointer;">{{ item.productName | slice:0:30 }}...</h5>
+            <p class="mb-0 text-left font-sm-7">ที่อยู่ : {{ item.delivery.buyyerAddress.addressString }}</p>
+          </div>
+        </div>
+        <div class="row row-mlr mt-3">
+          <div class="col col-md-6 col-xl-6 col-plr align-self-center">
+            <div class="row row-mlr">
+              <div class="col-auto col-plr">
+                <p class="mb-0 font-sm-7">ขนส่ง : {{ item.delivery.priceDelivery.deliveryName }}</p>
+              </div>
+              <div class="col-auto col-sm-pl col-plr">
+                <p class="mb-0 font-sm-7" style="color: #FE5721;">฿{{ item.delivery.priceDelivery.priceDeliveryInput | currency: 'THB' : '' : '0.0' }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto col-md-6 col-xl-6 col-plr text-right align-self-center" style="color: #FE5721;">
+            <a class="font-sm-1">ราคาสินค้า </a>
+            <a class="font-sm-1">฿{{ item.priceOfProduct | currency: 'THB' : '' : '0.0' }}</a>
+          </div>
+        </div>
+        <div class="row row-mlr">
+          <div class="col-12 col-plr text-right align-self-center" style="color: #FE5721;">
+            <a class="font-sm-1">ราคารวม </a>
+            <a class="font-sm-1">฿{{ (item.priceOfProduct + item.delivery.priceDelivery.priceDeliveryInput) | currency: 'THB' : '' : '0.0' }}</a>
+          </div>
+        </div>
+      </div>
+      <!-- End Order Item 1 -->
+
+      <!-- Transport Description -->
+      <div class="card-list card-padding mt-3">
+        <p class="mb-0">ผู้ส่งสินค้า : {{ item.delivery.priceDelivery.deliveryName }}</p>
+        <div class="row row-mlr">
+          <div class="col-auto col-plr pr-0">
+            <p *ngIf="transport == null" class="mb-0">ข้อมูลการติดตาม : ไม่พบรหัสติดตามสินค้า</p>
+            <p *ngIf="transport != null" class="mb-0">ข้อมูลการติดตาม : {{ transport.pno }}</p>
+          </div>
+          <div class="col-auto col-plr">
+            <button type="button" class="btn btn-circle-clone">
+              <i class="fa fa-clone" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <!-- DESCRIPTION-->
+        <div class="mt-2" style="background-color: #373E48; border-radius: 5px; padding: 15px;">
+          <!-- TRANSPORT -->
+          <p class="text-white mb-0">การขนส่ง</p>
+          <!-- TRANSPORT EMPTY -->
+          <div *ngIf="transport == null" class="mt-4 mb-4">
+            <p class="text-center text-danger mb-0">ไม่พบข้อมูลรายละเอียดการจัดส่ง</p>
+            <p class="text-center text-danger mb-0">โปรดติดตามสินค้าผ่านเว็บไซต์</p>
+          </div>
+          <!-- TRANSPORT !EMPTY -->
+          <div *ngIf="transport != null">
+            <div *ngFor="let data of transport.routes; let i = index;" class="row row-mlr mt10">
+              <div class="col-auto col-plr pr-0 align-self-center">
+                <div [class.dot-start]="i+1 < transport.routes.length"></div>
+                <div [class.line-start]="i+1 > 1 && i+1 != transport.routes.length"></div>
+                <div [class.dot-now-opa]="i+1 == transport.routes.length"></div>
+                <div [class.dot-now]="i+1 == transport.routes.length"></div>
+                <div [class.line-start]="i+1 != 1 && i+1 == transport.routes.length"></div>
+              </div>
+              <div class="col col-plr">
+                <!-- FOR FLASH EX -->
+                <div *ngIf="item.delivery.priceDelivery.deliveryName == 'Flash Express'">
+                  <p class="mb-0 text-white font-sm-1">{{ data.stateTextTH }}</p>
+                  <p class="mb-0 font-sm-7" style="color: #A2A2A2;">{{ data.stateDate | date: 'd/M/yyyy' }} {{ data.stateDate | date: "HH:mm" }}</p>
+                </div>
+                <!-- FOR THAI POST -->
+                <div *ngIf="item.delivery.priceDelivery.deliveryName == 'Thailand Post'">
+                  <p class="mb-0 text-white font-sm-1">{{ data.statusDescription }}</p>
+                  <p class="mb-0 font-sm-7" style="color: #A2A2A2;">{{ data.statusDate }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END TRANSPORT -->
+        </div>
+        <div class="mt-2">
+          <a class="mb-0">คุณสามารถติดตามสถานะสินค้าที่คุณสั่งซื้อจาก </a>
+          <a class="mb-0" style="color: #FE5721;">{{ item.delivery.priceDelivery.deliveryName }}</a>
+          <a class="mb-0"> เว็บไซต์สำหรับการติดตามสถานะสินค้า</a>
+        </div>
+        <!-- Button -->
+        <div class="row row-mlr">
+          <div class="col col-plr pr-1">
+            <button (click)="gotoReturn()" type="button" class="router btn mt-2"
+            style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #383D47;">
+            คืนสินค้า
+          </button>
+          </div>
+          <div class="col col-plr pl-1">
+            <button data-toggle="modal" data-target="#ModalCenterConfirmOrder" type="button" class="router btn mt-2"
+              style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
+              ยืนยันสินค้า
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- End Transport Description -->
+    </div>
+    <!-- End Card Body -->
+  </div>
+  <!-- End Card -->
+</div>
+<!-- End Container -->
+
+<!-- MODAL POPUP -->
+<div class="modal fade" id="ModalCenterConfirmOrder" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+      <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+      <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+      <p class="text-center">ต้องการยืนยันสินค้า ?</p>
+      <p *ngIf="item != null" class="text-center">ยืนยันเพื่อโอน ฿{{ (item.priceOfProduct + item.delivery.priceDelivery.priceDeliveryInput) | currency: 'THB' : '' : '0.0' }} ให้ผู้ขาย</p>
+      <p class="text-center text-secondary">คุณจะไม่สามารถขอคืนเงินหรือคืนสินค้าได้ โปรดตรวจสอบว่าคุณได้รับและตรวจสอบสินค้าและยินยอมให้โอนเงินไปยังผู้ขาย</p>
+
+      <div class="mt-4">
+        <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+          <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+            data-dismiss="modal" (click)="confirmOrder()">ยืนยัน</button>
+        </div>
+        <div class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

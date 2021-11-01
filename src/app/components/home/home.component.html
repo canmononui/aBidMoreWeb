@@ -1,0 +1,829 @@
+<app-carousel></app-carousel>
+
+<!-- <div data-toggle="modal" data-target="#modalPopupInstruction" data-backdrop="static" data-keyboard="false" style="text-decoration: none; cursor: pointer;">
+  <p class="mb-0">OPEN MODAL POPUP INSTRUCTION</p>
+</div> -->
+
+<!-- END AUCTIONING -->
+<div *ngIf="showContent" style="background-color: #F26E24;">
+  <div class="container container-auctioning">
+    <div class="row justify-content-between">
+      <div class="col-auto">
+        <p class="font-weight-bold text-white mb-0 text-header">กำลังประมูล</p>
+        <p class="text-white mb-0" style="border-bottom: 2.5px solid #FFF; max-width: 30px;"></p>
+      </div>
+      <div class="col-auto">
+        <p class="text-white" style="cursor: pointer;" (click)="gotoMoreBidding()">แสดงเพิ่มเติม</p>
+      </div>
+    </div>
+    <p *ngIf="showNoProductBiddingText" class="text-white text-center mt-3 mb-3">พบสินค้าใหม่เร็ว ๆ นี้</p>
+    <!-- AUCTIONING ROW 1 -->
+    <div *ngIf="auctioningRow1" class="row m-row-card-product row-auctioning-mr">
+      <div class="col p-col-card-product">
+        <div *ngIf="productBidding.length >= 1" class="card-border-3 bg-white">
+          <div (click)="productDes(productBidding[0].key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ productBidding[0].value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="timeCount0.hoursToDday + timeCount0.minutesToDday + timeCount0.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ timeCount0.hoursToDday }}:{{ timeCount0.minutesToDday }}:{{ timeCount0.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="timeCount0.hoursToDday == '00' && timeCount0.minutesToDday == '00' && timeCount0.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                <a *ngIf="productBidding[0].value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productBidding[0].value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="productBidding[0].value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <!-- <a *ngIf="productBidding[0] == undefined" class="img-card-time p-text-other" style="color: red;">
+                    AAAA
+                  </a> -->
+                  <a class="img-card-time p-text-other">
+                    ฿{{ productBidding[0].value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                  <img *ngIf="timeCount0.hoursToDday == '00' && timeCount0.minutesToDday == '00' && timeCount0.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                  <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                  <img *ngIf="timeCount0.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                  <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                  <img *ngIf="timeCount0.hoursToDday == '00' && timeCount0.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                  <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                  <img *ngIf="timeCount0.hoursToDday == '00' && timeCount0.minutesToDday == '00' && timeCount0.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                  <!-- ORIGINAL -->
+                  <!-- <img class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg"> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME -->
+            <div (click)="productDes(productBidding[0].key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ productBidding[0].value.name | slice:0:18 }}<a *ngIf="productBidding[0].value.name.length > 18">...</a></h5>
+            </div>
+            <!-- END PRODUCT NAME -->
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productBidding[0].value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productBidding[0].value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[0].value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productBidding[0].value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[0].value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productBidding[0].value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[0].value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productBidding[0].value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[0].value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productBidding[0].value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productBidding[0].key, productBidding[0].value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productBidding[0].value.likeStatus"
+                [class.heart-grey]="!productBidding[0].value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+      <div class="col p-col-card-product">
+        <div *ngIf="productBidding.length >= 2" class="card-border-3 bg-white">
+          <div (click)="productDes(productBidding[1].key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ productBidding[1].value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="timeCount1.hoursToDday + timeCount1.minutesToDday + timeCount1.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ timeCount1.hoursToDday }}:{{ timeCount1.minutesToDday }}:{{ timeCount1.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="timeCount1.hoursToDday == '00' && timeCount1.minutesToDday == '00' && timeCount1.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                <!-- {{ productBidding[1].value.priceData.priceAutoWin }} -->
+                <a *ngIf="productBidding[1].value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productBidding[1].value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="productBidding[1].value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <a class="img-card-time p-text-other">
+                    ฿{{ productBidding[1].value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                  <img *ngIf="timeCount1.hoursToDday == '00' && timeCount1.minutesToDday == '00' && timeCount1.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                  <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                  <img *ngIf="timeCount1.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                  <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                  <img *ngIf="timeCount1.hoursToDday == '00' && timeCount1.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                  <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                  <img *ngIf="timeCount1.hoursToDday == '00' && timeCount1.minutesToDday == '00' && timeCount1.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME -->
+            <div (click)="productDes(productBidding[1].key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ productBidding[1].value.name | slice:0:18 }}<a *ngIf="productBidding[1].value.name.length > 18">...</a></h5>
+            </div>
+            <!-- END PRODUCT NAME -->
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productBidding[1].value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productBidding[1].value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[1].value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productBidding[1].value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[1].value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productBidding[1].value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[1].value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productBidding[1].value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[1].value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productBidding[1].value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productBidding[1].key, productBidding[1].value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productBidding[1].value.likeStatus"
+                [class.heart-grey]="!productBidding[1].value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+      <div class="col p-col-card-product col-md-hide col-sm-hide">
+        <div *ngIf="productBidding.length >= 3" class="card-border-3 bg-white">
+          <div (click)="productDes(productBidding[2].key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ productBidding[2].value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="timeCount2.hoursToDday + timeCount2.minutesToDday + timeCount2.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ timeCount2.hoursToDday }}:{{ timeCount2.minutesToDday }}:{{ timeCount2.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="timeCount2.hoursToDday == '00' && timeCount2.minutesToDday == '00' && timeCount2.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                <a *ngIf="productBidding[2].value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productBidding[2].value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="productBidding[2].value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <a class="img-card-time p-text-other">
+                    ฿{{ productBidding[2].value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                  <img *ngIf="timeCount2.hoursToDday == '00' && timeCount2.minutesToDday == '00' && timeCount2.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                  <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                  <img *ngIf="timeCount2.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                  <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                  <img *ngIf="timeCount2.hoursToDday == '00' && timeCount2.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                  <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                  <img *ngIf="timeCount2.hoursToDday == '00' && timeCount2.minutesToDday == '00' && timeCount2.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME -->
+            <div (click)="productDes(productBidding[2].key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ productBidding[2].value.name | slice:0:18 }}<a *ngIf="productBidding[2].value.name.length > 18">...</a></h5>
+            </div>
+            <!-- END PRODUCT NAME -->
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productBidding[2].value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productBidding[2].value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[2].value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productBidding[2].value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[2].value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productBidding[2].value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[2].value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productBidding[2].value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[2].value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productBidding[2].value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productBidding[2].key, productBidding[2].value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productBidding[2].value.likeStatus"
+                [class.heart-grey]="!productBidding[2].value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+      <div class="col p-col-card-product col-md-hide col-sm-hide">
+        <div *ngIf="productBidding.length >= 4" class="card-border-3 bg-white">
+          <div (click)="productDes(productBidding[3].key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ productBidding[3].value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="timeCount3.hoursToDday + timeCount3.minutesToDday + timeCount3.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ timeCount3.hoursToDday }}:{{ timeCount3.minutesToDday }}:{{ timeCount3.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="timeCount3.hoursToDday == '00' && timeCount3.minutesToDday == '00' && timeCount3.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                <a *ngIf="productBidding[3].value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productBidding[3].value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="productBidding[3].value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <a class="img-card-time p-text-other">
+                    ฿{{ productBidding[3].value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                  <img *ngIf="timeCount3.hoursToDday == '00' && timeCount3.minutesToDday == '00' && timeCount3.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                  <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                  <img *ngIf="timeCount3.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                  <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                  <img *ngIf="timeCount3.hoursToDday == '00' && timeCount3.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                  <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                  <img *ngIf="timeCount3.hoursToDday == '00' && timeCount3.minutesToDday == '00' && timeCount3.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME -->
+            <div (click)="productDes(productBidding[3].key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ productBidding[3].value.name | slice:0:18 }}<a *ngIf="productBidding[3].value.name.length > 18">...</a></h5>
+            </div>
+            <!-- END PRODUCT NAME -->
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productBidding[3].value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productBidding[3].value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[3].value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productBidding[3].value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[3].value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productBidding[3].value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[3].value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productBidding[3].value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[3].value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productBidding[3].value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productBidding[3].key, productBidding[3].value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productBidding[3].value.likeStatus"
+                [class.heart-grey]="!productBidding[3].value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto p-col-card-product align-self-center">
+        <button *ngIf="productBidding.length > 4" (click)="auctioningNext()" type="button" class="btn btn-circle auctioning-next-icon"
+          style="background-color: #767676; color: #FFF; cursor: pointer;">
+          <img style="width: 20px;" src="./assets/img/arrow/white-r.png">
+        </button>
+      </div>
+    </div>
+    <!-- END AUCTIONING ROW 1 -->
+
+    <!-- AUCTIONING ROW 2 -->
+    <div *ngIf="auctioningRow2" class="row m-row-card-product row-auctioning-ml">
+      <div class="col-auto p-col-card-product align-self-center">
+        <button (click)="auctioningPrevious()" type="button" class="btn btn-circle auctioning-previous-icon"
+          style="background-color: #767676; color: #FFF; cursor: pointer;">
+          <img style="width: 20px;" src="./assets/img/arrow/white-l.png">
+        </button>
+      </div>
+      <div class="col p-col-card-product">
+        <div *ngIf="productBidding.length >= 5" class="card-border-3 bg-white">
+          <div (click)="productDes(productBidding[4].key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ productBidding[4].value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="timeCount4.hoursToDday + timeCount4.minutesToDday + timeCount4.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ timeCount4.hoursToDday }}:{{ timeCount4.minutesToDday }}:{{ timeCount4.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="timeCount4.hoursToDday == '00' && timeCount4.minutesToDday == '00' && timeCount4.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                <a *ngIf="productBidding[4].value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productBidding[4].value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="productBidding[4].value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <a class="img-card-time p-text-other">
+                    ฿{{ productBidding[4].value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                  <img *ngIf="timeCount4.hoursToDday == '00' && timeCount4.minutesToDday == '00' && timeCount4.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                  <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                  <img *ngIf="timeCount4.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                  <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                  <img *ngIf="timeCount4.hoursToDday == '00' && timeCount4.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                  <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                  <img *ngIf="timeCount4.hoursToDday == '00' && timeCount4.minutesToDday == '00' && timeCount4.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME -->
+            <div (click)="productDes(productBidding[4].key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ productBidding[4].value.name | slice:0:18 }}<a *ngIf="productBidding[4].value.name.length > 18">...</a></h5>
+            </div>
+            <!-- END PRODUCT NAME -->
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productBidding[4].value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productBidding[4].value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[4].value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productBidding[4].value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[4].value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productBidding[4].value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[4].value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productBidding[4].value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[4].value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productBidding[4].value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productBidding[4].key, productBidding[4].value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productBidding[4].value.likeStatus"
+                [class.heart-grey]="!productBidding[4].value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+      <div class="col p-col-card-product">
+        <div *ngIf="productBidding.length >= 6" class="card-border-3 bg-white">
+          <div (click)="productDes(productBidding[5].key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ productBidding[5].value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="timeCount5.hoursToDday + timeCount5.minutesToDday + timeCount5.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ timeCount5.hoursToDday }}:{{ timeCount5.minutesToDday }}:{{ timeCount5.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="timeCount5.hoursToDday == '00' && timeCount5.minutesToDday == '00' && timeCount5.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                <a *ngIf="productBidding[5].value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productBidding[5].value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="productBidding[5].value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <a class="img-card-time p-text-other">
+                    ฿{{ productBidding[5].value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                  <img *ngIf="timeCount5.hoursToDday == '00' && timeCount5.minutesToDday == '00' && timeCount5.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                  <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                  <img *ngIf="timeCount5.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                  <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                  <img *ngIf="timeCount5.hoursToDday == '00' && timeCount5.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                  <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                  <img *ngIf="timeCount5.hoursToDday == '00' && timeCount5.minutesToDday == '00' && timeCount5.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME -->
+            <div (click)="productDes(productBidding[5].key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ productBidding[5].value.name | slice:0:18 }}<a *ngIf="productBidding[5].value.name.length > 18">...</a></h5>
+            </div>
+            <!-- END PRODUCT NAME -->
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productBidding[5].value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productBidding[5].value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[5].value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productBidding[5].value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[5].value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productBidding[5].value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[5].value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productBidding[5].value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[5].value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productBidding[5].value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productBidding[5].key, productBidding[5].value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productBidding[5].value.likeStatus"
+                [class.heart-grey]="!productBidding[5].value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+      <div class="col p-col-card-product col-md-hide col-sm-hide">
+        <div *ngIf="productBidding.length >= 7" class="card-border-3 bg-white">
+          <div (click)="productDes(productBidding[6].key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ productBidding[6].value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="timeCount6.hoursToDday + timeCount6.minutesToDday + timeCount6.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ timeCount6.hoursToDday }}:{{ timeCount6.minutesToDday }}:{{ timeCount6.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="timeCount6.hoursToDday == '00' && timeCount6.minutesToDday == '00' && timeCount6.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                <a *ngIf="productBidding[6].value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productBidding[6].value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="productBidding[6].value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <a class="img-card-time p-text-other">
+                    ฿{{ productBidding[6].value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                  <img *ngIf="timeCount6.hoursToDday == '00' && timeCount6.minutesToDday == '00' && timeCount6.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                  <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                  <img *ngIf="timeCount6.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                  <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                  <img *ngIf="timeCount6.hoursToDday == '00' && timeCount6.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                  <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                  <img *ngIf="timeCount6.hoursToDday == '00' && timeCount6.minutesToDday == '00' && timeCount6.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME -->
+            <div (click)="productDes(productBidding[6].key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ productBidding[6].value.name | slice:0:18 }}<a *ngIf="productBidding[6].value.name.length > 18">...</a></h5>
+            </div>
+            <!-- END PRODUCT NAME -->
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productBidding[6].value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productBidding[6].value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[6].value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productBidding[6].value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[6].value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productBidding[6].value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[6].value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productBidding[6].value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[6].value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productBidding[6].value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productBidding[6].key, productBidding[6].value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productBidding[6].value.likeStatus"
+                [class.heart-grey]="!productBidding[6].value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+      <div class="col p-col-card-product col-md-hide col-sm-hide">
+        <div *ngIf="productBidding.length >= 8" class="card-border-3 bg-white">
+          <div (click)="productDes(productBidding[6].key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ productBidding[7].value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="timeCount7.hoursToDday + timeCount7.minutesToDday + timeCount7.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ timeCount7.hoursToDday }}:{{ timeCount7.minutesToDday }}:{{ timeCount7.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="timeCount7.hoursToDday == '00' && timeCount7.minutesToDday == '00' && timeCount7.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                <a *ngIf="productBidding[7].value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productBidding[7].value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="productBidding[7].value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <a class="img-card-time p-text-other">
+                    ฿{{ productBidding[7].value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                  <img *ngIf="timeCount7.hoursToDday == '00' && timeCount7.minutesToDday == '00' && timeCount7.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                  <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                  <img *ngIf="timeCount7.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                  <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                  <img *ngIf="timeCount7.hoursToDday == '00' && timeCount7.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                  <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                  <img *ngIf="timeCount7.hoursToDday == '00' && timeCount7.minutesToDday == '00' && timeCount7.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME -->
+            <div (click)="productDes(productBidding[7].key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ productBidding[7].value.name | slice:0:18 }}<a *ngIf="productBidding[7].value.name.length > 18">...</a></h5>
+            </div>
+            <!-- END PRODUCT NAME -->
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productBidding[7].value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productBidding[7].value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[7].value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productBidding[7].value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[7].value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productBidding[7].value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[7].value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productBidding[7].value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productBidding[7].value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productBidding[7].value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productBidding[7].key, productBidding[7].value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productBidding[7].value.likeStatus"
+                [class.heart-grey]="!productBidding[7].value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END AUCTIONING ROW 2 -->
+  </div>
+</div>
+<!-- END AUCTIONING -->
+
+<!-- BANNER 3 COL -->
+<!-- <div class="container con-banner-mt">
+  <div class="row row-banner-3">
+    <div class="col-12 col-md-4 col-lg-4 col-banner-3">
+      <img class="w-100" style="border-radius: 10px; cursor: pointer;" src="./assets/img/banner/banner1.png">
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 col-banner-3">
+      <img class="w-100" style="border-radius: 10px; cursor: pointer;" src="./assets/img/banner/banner1.png">
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 col-banner-3">
+      <img class="w-100" style="border-radius: 10px; cursor: pointer;" src="./assets/img/banner/banner1.png">
+    </div>
+  </div>
+</div> -->
+<!-- BANNER 3 COL -->
+
+<!-- WAIT AUCTION NEXT -->
+<div *ngIf="showContent" class="container mt-2">
+  <div class="container-soon" style="background-color: #1F242A; border-radius: 10px;">
+    <div class="row justify-content-between">
+      <div class="col-auto">
+        <p class="font-weight-bold text-white mb-0 text-header">เริ่มประมูลเร็ว ๆ นี้</p>
+      </div>
+      <div class="col-auto">
+        <p class="text-white" style="cursor: pointer;" (click)="gotoMoreWaitAction()">แสดงเพิ่มเติม</p>
+      </div>
+    </div>
+    <p *ngIf="showNoProductWaitActionText" class="text-white text-center mt-3 mb-3">พบสินค้าใหม่เร็ว ๆ นี้</p>
+    <div class="row m-row-card-product">
+      <div *ngFor="let data of productWaitAction" class="col-6 col-md-6 col-lg-3 p-col-card-product"
+        style="margin-top: 8px;">
+        <div class="card-border-3 bg-white">
+          <div (click)="productDes(data.key)" class="posi-card" style="cursor: pointer;">
+            <img class="product-img-card img-cover" src="{{ data.value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(99, 99, 99, 0.7); backdrop-filter: blur(5px); border-radius: 5px;">
+                <p class="text-white text-date-time mb-0 w-auto">{{ data.value.dateTime.dateTime.seconds*1000 | date: 'd/M/yyyy' }} | {{ data.value.dateTime.dateTime.seconds*1000 | date: "HH:mm" }}</p>
+              </div>
+            </div>
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon.svg">
+                <a *ngIf="data.value.priceData.priceAutoWin != 0" class="mb-0">฿{{ data.value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                <a *ngIf="data.value.priceData.priceAutoWin == 0" class="mb-0">ประมูล</a>
+              </a>
+            </div>
+            <div class="bg-right-time-a">
+              <div class="row m-0">
+                <div class="col-auto p-0 time-position">
+                  <a class="img-card-time p-text-other last-price">
+                    ฿{{ data.value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <img class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg-b.svg">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- CARD BODY -->
+          <div class="card-body-padding">
+            <!-- PRODUCT NAME & TIME COUNT BID MAX -->
+            <div (click)="productDes(data.key)" style="cursor: pointer;">
+              <h5 class="card-title productName">{{ data.value.name | slice:0:18 }}<a *ngIf="data.value.name.length > 18">...</a></h5>
+              <a class="text-left pt-1 pb-1 pl-2 pr-2 time-bid-max" style="background-color: rgba(99, 99, 99, 0.7); backdrop-filter: blur(5px); border-radius: 5px;">
+                <a class="text-white text-date-time mb-0">{{ data.value.dateTime.timeCountMax.value }} {{ data.value.dateTime.timeCountMax.typeTH }}</a>
+              </a>
+            </div>
+            <!-- END PRODUCT NAME & TIME COUNT BID MAX -->
+            <!-- RATEING STAR & HEART LIKE -->
+            <div class="mt-1">
+              <ul class="rating-stars">
+                <li>
+                  <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 0.5"
+                    [class.fa-star-o]="data.value.ratingStars < 0.5"></i>
+                  <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 1.5"
+                    [class.fa-star-o]="data.value.ratingStars < 1.5"></i>
+                  <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 2.5"
+                    [class.fa-star-o]="data.value.ratingStars < 2.5"></i>
+                  <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 3.5"
+                    [class.fa-star-o]="data.value.ratingStars < 3.5"></i>
+                  <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 4.5"
+                    [class.fa-star-o]="data.value.ratingStars < 4.5"></i>
+                </li>
+              </ul>
+              <var (click)="likeThisProduct(data.key, data.value)" class="float-right heart" style="cursor: pointer;">
+                <i class="fa fa-heart" [class.heart-color]="data.value.likeStatus"
+                  [class.heart-grey]="!data.value.likeStatus"></i>
+              </var>
+            </div>
+            <!-- END RATEING STAR & HEART LIKE -->
+          </div>
+          <!-- END CARD BODY -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END WAIT AUCTION NEXT -->
+
+<!-- BANNER 3 COL -->
+<!-- <div class="container mt-2">
+  <div class="row row-banner-3">
+    <div class="col-12 col-md-4 col-lg-4 col-banner-3">
+      <img class="w-100" style="border-radius: 10px; cursor: pointer;" src="./assets/img/banner/banner1.png">
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 col-banner-3">
+      <img class="w-100" style="border-radius: 10px; cursor: pointer;" src="./assets/img/banner/banner1.png">
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 col-banner-3">
+      <img class="w-100" style="border-radius: 10px; cursor: pointer;" src="./assets/img/banner/banner1.png">
+    </div>
+  </div>
+</div> -->
+<!-- BANNER 3 COL -->
+
+<!-- AUCTION NEXT -->
+<div *ngIf="showContent" class="container container-other">
+  <div class="row justify-content-between">
+    <div class="col-auto">
+      <p class="font-weight-bold text-dark mb-0 text-header">สินค้าอื่นๆ</p>
+    </div>
+    <div class="col-auto">
+      <p class="text-dark" style="cursor: pointer;" (click)="gotoMoreProductOther()">แสดงเพิ่มเติม</p>
+    </div>
+  </div>
+  <p *ngIf="showNoProductOtherText" class="text-dark text-center mt-3 mb-3">พบสินค้าใหม่เร็ว ๆ นี้</p>
+  <!-- AUCTION NEXT ROW 1 -->
+  <div class="row m-row-card-product">
+    <div *ngFor="let data of productOther" class="col-6 col-md-6 col-lg-3 p-col-card-product mt-2">
+      <div class="card-border-3 bg-white">
+        <div (click)="productDes(data.key)" class="posi-card" style="cursor: pointer;">
+          <img src="{{ data.value.imgProduct[0].imgUrl }}" class="product-img-card">
+          <div class="bg-left-auto">
+            <a class="img-card-auto-win p-text-other">
+              <img class="img-fluid img-auto-win-other" src="./assets/img/cart-icon-forSale.svg">
+              ฿{{ data.value.priceData.priceProduct | currency: 'THB' : '' : '0.0' }}
+            </a>
+          </div>
+        </div>
+        <div class="card-body-padding">
+          <!-- PRODUCT NAME -->
+          <div (click)="productDes(data.key)" style="cursor: pointer;">
+            <h5 class="card-title productName">{{ data.value.name | slice:0:18 }}<a *ngIf="data.value.name.length > 18">...</a></h5>
+          </div>
+          <!-- END PRODUCT NAME -->
+          <ul class="rating-stars">
+            <li>
+              <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 0.5"
+                [class.fa-star-o]="data.value.ratingStars < 0.5"></i>
+              <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 1.5"
+                [class.fa-star-o]="data.value.ratingStars < 1.5"></i>
+              <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 2.5"
+                [class.fa-star-o]="data.value.ratingStars < 2.5"></i>
+              <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 3.5"
+                [class.fa-star-o]="data.value.ratingStars < 3.5"></i>
+              <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 4.5"
+                [class.fa-star-o]="data.value.ratingStars < 4.5"></i>
+            </li>
+          </ul>
+          <var (click)="likeThisProduct(data.key, data.value)" class="float-right heart" style="cursor: pointer;">
+            <i class="fa fa-heart" [class.heart-color]="data.value.likeStatus"
+              [class.heart-grey]="!data.value.likeStatus"></i>
+          </var>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END AUCTION NEXT ROW 1 -->
+</div>
+<!-- END AUCTION NEXT -->
+
+<!-- MODAL POPUP INSTRUCTION -->
+<div class="modal fade bd-example-modal-sm" [class.show]="showPopupInstruction" [class.modalShow]="showPopupInstruction" id="modalPopupInstructionHome" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content" style="border-radius: 10px;">
+      <!-- IMG BACKGROUD MODAL -->
+      <img class="img-fluid img-popup-instruc" src="{{ imgSrc }}" style="border-radius: 10px;">
+      <!-- BUTTON CHANGE LANGUAGE -->
+      <div class="icon-language">
+        <div class="row" style="margin-left: -2px; margin-right: -2px;">
+          <div class="col-auto" style="padding-left: 2px; padding-right: 2px;">
+            <button type="button" class="btn btn-language"
+              style="background-color: #FE5721; color: #FFF;">
+              <p class="mb-0">ก</p>
+            </button>
+          </div>
+          <div class="col-auto disabled" style="padding-left: 2px; padding-right: 2px;">
+            <button type="button" class="btn btn-language"
+              style="background-color: #FFF; color: #000; border: 2px solid #E7EDF4;">
+              <p class="mb-0">A</p>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- BUTTON CLOSE MODAL -->
+      <div class="icon-close">
+        <button type="button" class="btn btn-circle-modal" data-dismiss="modal" aria-label="Close"
+          style="background-color: #767676; color: #FFF;" (click)="closeModalInstruction()">
+          <p class="mb-0">x</p>
+        </button>
+      </div>
+      <!-- TEXT CONTEXT AUCTION -->
+      <div *ngIf="textDesAuction_1" class="text-description text-white">
+        <p class="font-weight-bold mb-0 text-topic">การประมูล</p>
+        <p class="mb-0 text-des">เติมเงินเริ่มต้นเพียง 10 บาท</p>
+        <p class="mb-0 text-des">สำหรับเครดิตการประมูล 10 เท่า</p>
+        <p class="mb-0 text-des">ใส่ราคาสินค้าเพื่อเริ่มการประมูลสินค้า</p>
+        <p class="mb-0 text-des">และเพิ่มราคาเพื่อจะเป็นผู้ชนะการประมูล</p>
+      </div>
+      <!-- TEXT CONTEXT AUTO WIN -->
+      <div *ngIf="textDesAutoWin_2" class="text-description text-white">
+        <p class="font-weight-bold mb-0 text-topic">Auto Win</p>
+        <p class="mb-0 text-des">คุณสามารถกดเพิ่มสินค้าลงรถเข็นได้อัตโนมัติ</p>
+        <p class="mb-0 text-des">จากเมนู Auto win โดยคุณจะได้สินค้า</p>
+        <p class="mb-0 text-des">ในราคาที่ถูกกำหนดจากทางร้านค้า</p>
+        <p class="mb-0 text-des">โดยคุณจะเป็นผู้ชนะการประมูลในทันที</p>
+      </div>
+      <!-- TEXT CONTEXT AUTO BID -->
+      <div *ngIf="textDesAutoBid_3" class="text-description text-white">
+        <p class="font-weight-bold mb-0 text-topic">Auto Bid</p>
+        <p class="mb-0 text-des">คุณสามารถใช้ Auto Bid เพื่อเป็นตัวช่วย</p>
+        <p class="mb-0 text-des">ในการใส่ราคาการประมูลสินค้าอัตโนมัติ</p>
+        <p class="mb-0 text-des">โดยคุณสามารถเลือกราคาสูงสุด</p>
+        <p class="mb-0 text-des">ในการประมูลแข่งขันและสามารถยกเลิกได้ทุกเมื่อ</p>
+      </div>
+      <!-- TEXT CONTEXT SELLER -->
+      <div *ngIf="textDesSeller_4" class="text-description text-white">
+        <p class="font-weight-bold mb-0 text-topic">ลงขายสินค้ากับเรา</p>
+        <p class="mb-0 text-des">เรารองรับสินค้ามากมาย หลากหลายประเภท</p>
+        <p class="mb-0 text-des">หากสนใจสามารถสมัครสมาชิก Seller</p>
+        <p class="mb-0 text-des">กับทางเราได้เพียงขั้นตอนง่าย ๆ และเราหวังว่า</p>
+        <p class="mb-0 text-des">จะมีสินค้าดี ๆ ของคุณบน A Bid More</p>
+      </div>
+      <!-- MODAL PREVIOUS -->
+      <div [hidden]="textDesAuction_1" class="icon-previous">
+        <button (click)="modalPrevious()" type="button" class="btn btn-circle-modal auctioning-icon" style="background-color: #767676; color: #FFF; cursor: pointer;">
+          <img style="width: 20px;" src="./assets/img/arrow/white-l.png">
+        </button>
+      </div>
+      <!-- MODAL NEXT -->
+      <div [hidden]="textDesSeller_4" class="icon-next">
+        <button (click)="modalNext()" type="button" class="btn btn-circle-modal auctioning-icon" style="background-color: #767676; color: #FFF; cursor: pointer;">
+          <img style="width: 20px;" src="./assets/img/arrow/white-r.png">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL POPUP INSTRUCTION -->
+

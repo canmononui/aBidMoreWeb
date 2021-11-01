@@ -10,6 +10,49 @@
   background-color: #a3a3a3;
   opacity: .5;
 }
+
 .carousel .carousel-indicators > li.active {
   background-color: #373E48;
+}
+
+.carousel-img {
+  border-radius: 10px;
+  width:100%;
+}
+
+.row-carousel-m {
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+.col-carousel-p {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.img-x-1 {
+  height: 100%;
+}
+
+.img-x-3 {
+  margin-top: 8px;
+}
+
+.container-mb {
+  margin-bottom: 24px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  .img-x-2 {
+    margin-top: 4px;
+  }
+
+  .img-x-3 {
+    margin-top: 4px;
+  }
+
+  .container-mb {
+    margin-bottom: 15px;
+  }
 }

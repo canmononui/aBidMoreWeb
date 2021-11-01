@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f4f4f4;
+      }
+
+      .cls-2 {
+        fill: #8c9cb6;
+      }
+
+      .cls-2, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        font-size: 300px;
+        fill: #d55c54;
+        font-family: Kanit;
+        font-weight: 500;
+      }
+
+      .cls-4 {
+        fill: #373e48;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="500" cy="500" r="500"/>
+  <path class="cls-2" d="M183.31,320.062V441.15s58.427,4.01,58.427,58.427c0,0-.385,60.12-59.274,60.12V685.018s5.316,33.024,33.871,33.024H782.819s33.871-4.07,33.871-34.717V560.544s-58.427-4.539-58.427-59.274c0,0,1.638-59.273,59.274-59.273V315.829s-6.058-33.871-40.645-33.871H223.108S183.31,282.9,183.31,320.062Z"/>
+  <text id="_" data-name="%" class="cls-3" transform="translate(498.704 581.961) scale(0.847)">%</text>
+  <path id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-4" d="M371.131,327.683h18.951a10,10,0,0,1,10,10V378.65a10,10,0,0,1-10,10H371.131a10,10,0,0,1-10-10V337.683A10,10,0,0,1,371.131,327.683Z"/>
+  <path id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-4" d="M371.131,422.521h18.951a10,10,0,0,1,10,10v40.967a10,10,0,0,1-10,10H371.131a10,10,0,0,1-10-10V432.521A10,10,0,0,1,371.131,422.521Z"/>
+  <path id="Rounded_Rectangle_1_copy_2" data-name="Rounded Rectangle 1 copy 2" class="cls-4" d="M371.131,517.359h18.951a10,10,0,0,1,10,10v40.967a10,10,0,0,1-10,10H371.131a10,10,0,0,1-10-10V527.359A10,10,0,0,1,371.131,517.359Z"/>
+  <path id="Rounded_Rectangle_1_copy_3" data-name="Rounded Rectangle 1 copy 3" class="cls-4" d="M371.131,612.2h18.951a10,10,0,0,1,10,10v40.967a10,10,0,0,1-10,10H371.131a10,10,0,0,1-10-10V622.2A10,10,0,0,1,371.131,612.2Z"/>
+</svg>

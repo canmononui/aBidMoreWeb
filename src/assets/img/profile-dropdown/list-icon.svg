@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke-width: 50px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #1e2329;
+      }
+
+      .cls-2 {
+        fill: #d5d5d5;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-width: 40px;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        fill: #1e2329;
+      }
+    </style>
+  </defs>
+  <rect id="Rounded_Rectangle_2" data-name="Rounded Rectangle 2" class="cls-1" x="100" y="77" width="801" height="923" rx="70" ry="70"/>
+  <rect id="Rounded_Rectangle_3" data-name="Rounded Rectangle 3" class="cls-2" x="294" y="37" width="412" height="233" rx="63.5" ry="63.5"/>
+  <circle class="cls-3" cx="501" cy="94" r="94"/>
+  <rect id="Rounded_Rectangle_5_copy_2" data-name="Rounded Rectangle 5 copy 2" class="cls-4" x="392.5" y="640.25" width="307" height="52" rx="26" ry="26"/>
+  <circle id="Ellipse_2_copy_2" data-name="Ellipse 2 copy 2" class="cls-4" cx="325.5" cy="666.25" r="26"/>
+  <rect id="Rounded_Rectangle_5_copy_3" data-name="Rounded Rectangle 5 copy 3" class="cls-4" x="392.5" y="755.25" width="307" height="52" rx="26" ry="26"/>
+  <circle id="Ellipse_2_copy_3" data-name="Ellipse 2 copy 3" class="cls-4" cx="325.5" cy="781.25" r="26"/>
+  <rect id="Rounded_Rectangle_5_copy" data-name="Rounded Rectangle 5 copy" class="cls-4" x="393.5" y="525.25" width="307" height="52" rx="26" ry="26"/>
+  <circle id="Ellipse_2_copy" data-name="Ellipse 2 copy" class="cls-4" cx="326.5" cy="551.25" r="26"/>
+  <rect id="Rounded_Rectangle_5" data-name="Rounded Rectangle 5" class="cls-4" x="393.5" y="410.25" width="307" height="52" rx="26" ry="26"/>
+  <circle class="cls-4" cx="326.5" cy="436.25" r="26"/>
+</svg>

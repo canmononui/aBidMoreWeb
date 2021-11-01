@@ -1,231 +1,282 @@
-<!-- <div class="container-sm">
-  <div class="card" style="background-color: cornflowerblue;">
-    100% wide until medium breakpoint SM
+<!-- <div><canvas id="timeBidChart" style="width: 100%; height: 100%;"></canvas></div> -->
+<div *ngIf="noProduct" style="height: 100vh;">
+  <div class="container h-100 d-flex justify-content-center">
+    <div class="my-auto text-center">
+      <img class="rounded-circle shadow" style="width: 60px; height: 60px;"
+        src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg">
+      <p class="mt-2">ไม่พบสินค้า</p>
+      <p (click)="gotoHome()" style="color: #FE5721; cursor: pointer;">กลับสู่หน้าหลัก</p>
+    </div>
   </div>
 </div>
-<div class="container-md">
-  <div class="card" style="background-color:rgb(248, 149, 83);">
-    100% wide until medium breakpoint MD
-  </div>
-</div>
-<div class="container-lg">
-  <div class="card" style="background-color: cornflowerblue;">
-    100% wide until medium breakpoint LG
-  </div>
-</div>
-<div class="container-xl">
-  <div class="card" style="background-color:rgb(248, 149, 83);">
-    100%  wide until medium breakpoint XL
-  </div>
-</div> -->
 
+<div *ngIf="bannerTop" class="container-sm container-sm-banner-top mt-3">
+  <div class="p-3" style="background-color: #FE5721; border-radius: 10px;">
+    <div class="row"> 
+      <div class="col"> 
+        <p class="mb-0 text-white">หากต้องการเปลี่ยนแปลงตัวเลือกสินค้าโปรดกด "ร่วมประมูล" อีกครั้ง</p>
+      </div>
+      <div class="col-auto"> 
+        <i (click)="hideBannerTop()" class="fa fa-times-circle text-white" style="cursor: pointer;" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="container-sm">
+<div *ngIf="showContent && productDes != undefined" class="container-sm">
+<!-- <div [hidden]="!showContent" class="container-sm"> -->
+<!-- <div class="container-sm"> -->
+<!-- <div [hidden]="!showContent" class="container-sm"> -->
   <div class="card-collection-show">
     <div class="row">
+      <!-- COL LEFT IMG -->
       <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-6 col-left-img">
         <div class="product-top">
-          <img (click)="pic()" data-toggle="modal" data-target="#ModalPopupImg" class="product-top-img" src="./assets/img/bag.png" style="cursor: pointer;">
+          <img data-toggle="modal" data-target="#ModalPopupImg" class="product-top-img" src="{{ productImgTop }}"
+            style="cursor: pointer;">
           <!-- Start -->
           <div class="icon-start">
             <div class="row m-0">
               <div class="col-auto col-icon-p">
-                <button (click)="heart()" type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;">
-                  <i class="fa fa-heart"></i>
+                <button (click)="likeThisProduct()" type="button" class="btn btn-circle" [class.disabled]="productDes.productStatus == 'bidded'"
+                  style="background-color: #ADADAE; color: #FFF;">
+                  <!-- <i class="fa fa-heart"></i> -->
+                  <i class="fa fa-heart" [class.heart-color]="statusLike" [class.heart-grey]="!statusLike"></i>
                 </button>
               </div>
               <div class="col-auto col-icon-p">
-                <button type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;">
+                <button data-toggle="modal" data-target="#modalSharedProduct" type="button" class="btn btn-circle"
+                  style="background-color: #ADADAE; color: #FFF;">
                   <i class="fa fa-share-alt"></i>
                 </button>
               </div>
               <div class="col-auto col-icon-p">
-                <button type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;">
-                  <i class="fa fa-ellipsis-h"></i>
+                <button data-toggle="modal" data-target="#ModalPopupReport" type="button" class="btn btn-circle" [class.disabled]="productDes.productStatus == 'bidded'"
+                  style="background-color: #ADADAE; color: #FFF;">
+                  <i class="fa fa-exclamation-triangle"></i>
                 </button>
               </div>
             </div>
           </div>
           <!-- Middle Left -->
           <div class="icon-middle-left">
-            <button type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;"
-              (click)="left()">
+            <button [hidden]="indexOfproductImgTop == 0" (click)="previousImg()" type="button" class="btn btn-circle"
+              style="background-color: #ADADAE; color: #FFF;">
               <img style="width: 20px;" src="./assets/img/arrow/white-l.png">
             </button>
           </div>
           <!-- Middle Right -->
           <div class="icon-middle-right">
-            <button type="button" class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;"
-              (click)="right()">
+            <button [hidden]="indexOfproductImgTop+1 == productDes.imgProduct.length" (click)="nextImg()" type="button"
+              class="btn btn-circle" style="background-color: #ADADAE; color: #FFF;">
               <img style="width: 20px;" src="./assets/img/arrow/white-r.png">
             </button>
           </div>
           <!-- End -->
           <div class="icon-end">
-            <div (click)="dot()" class="mb-0 text-white text-center">
-              <i class="fa fa-circle dot-active"></i>
-              <i class="fa fa-circle dot"></i>
-              <i class="fa fa-circle dot"></i>
-              <i class="fa fa-circle dot"></i>
-              <i class="fa fa-circle dot"></i>
+            <div class="mb-0 text-white">
+              <div class="row justify-content-center">
+                <div class="col-auto p-0 align-self-center" *ngFor="let _dataImg of productDes.imgProduct; let i = index;">
+                  <i class="fa fa-circle" style="cursor: pointer;" [class.dot-active]="productImgTop == _dataImg.imgUrl"
+                    [class.dot]="productImgTop != _dataImg.imgUrl" (click)="selectImg(i, _dataImg.imgUrl)"></i>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
+        <!-- OTHER IMG -->
         <div class="row row-img-show">
-          <div class="col pr-0">
-            <img class="card-img-top img-border-radius" src="./assets/img/bag.png">
-          </div>
-          <div class="col pl-3 pr-0">
-            <img class="card-img-top img-border-radius" src="./assets/img/bag.png">
-          </div>
-          <div class="col pl-3 pr-0">
-            <img class="card-img-top img-border-radius" src="./assets/img/bag.png">
-          </div>
-          <div class="col pl-3 pr-0">
-            <img class="card-img-top img-border-radius" src="./assets/img/bag.png">
-          </div>
-          <div class="col pl-3 pr-0">
-            <img class="card-img-top img-border-radius" src="./assets/img/bag.png">
+          <div *ngFor="let _dataImg of productDes.imgProduct; let i = index;" class="col pr-0" style="max-width: 20%;">
+            <img class="card-img-top img-border-radius" style="cursor: pointer;" [class.img-border-color]="productImgTop == _dataImg.imgUrl" (click)="selectImg(i, _dataImg.imgUrl)"
+              src="{{ _dataImg.imgUrl }}">
           </div>
         </div>
       </div>
-
+      <!-- COL RIGHT DES -->
       <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-6 col-right-des">
+        <h5 class="mb-0 product-name-size">{{ productDes.name | slice:0:30 }}<a *ngIf="productDes.name.length > 30">...</a></h5>
+        <ul class="rating-stars mb-2">
+          <li>
+            <i class="fa star-color" [class.fa-star]="productDes.ratingStars >= 0.5"
+              [class.fa-star-o]="productDes.ratingStars < 0.5"></i>
+            <i class="fa star-color" [class.fa-star]="productDes.ratingStars >= 1.5"
+              [class.fa-star-o]="productDes.ratingStars < 1.5"></i>
+            <i class="fa star-color" [class.fa-star]="productDes.ratingStars >= 2.5"
+              [class.fa-star-o]="productDes.ratingStars < 2.5"></i>
+            <i class="fa star-color" [class.fa-star]="productDes.ratingStars >= 3.5"
+              [class.fa-star-o]="productDes.ratingStars < 3.5"></i>
+            <i class="fa star-color" [class.fa-star]="productDes.ratingStars >= 4.5"
+              [class.fa-star-o]="productDes.ratingStars < 4.5"></i>
+          </li>
+        </ul>
         <div class="card" style="border: 3px solid #E7EDF4; border-radius: 10px;">
-
-          <div class="row ml-0 mr-0">
-            <div class="col"
-              style="padding-top: 15px; padding-bottom: 15px; border-right: 0.5px solid #E7EDF4; border-bottom: 0.5px solid #E7EDF4;">
-
+          <div *ngIf="productDes.productStatus != 'forSale'" class="row ml-0 mr-0">
+            <!-- COL BIDDING DESCRIPTION -->
+            <div class="col" style="padding-top: 15px; padding-bottom: 15px; border-right: 0.5px solid #E7EDF4; border-bottom: 0.5px solid #E7EDF4;">
               <div style="display:flex; align-items:center;">
                 <div class="row">
-                  <div class="col-auto">
-                    <img class="img-sm" src="./assets/img/Clock.png">
+                  <div class="col-auto text-center align-self-center">
+                  <div class="row">
+                    <div class="col-auto align-self-center">
+                      <!-- ICON STATUS BIDDED -->
+                      <img *ngIf="productDes.productStatus == 'bidded'" class="img-fluid img-sm" src="./assets/img/waitAuction-B.svg">
+                      <!-- ICON WAIT AUCTION -->
+                      <img *ngIf="productDes.productStatus == 'waitAuction'" class="img-fluid img-sm" src="./assets/img/waitAuction.svg">
+                      <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                      <img *ngIf="productDes.productStatus == 'bidding' && hoursToDday == '00' && minutesToDday == '00' && secondsToDday == '00'" class="img-fluid img-sm" src="./assets/img/waitAuction-B.svg">
+                      <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                      <img *ngIf="productDes.productStatus == 'bidding' && hoursToDday != '00'" class="img-fluid img-sm" src="./assets/img/bidding-loading-100.gif">
+                      <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                      <img *ngIf="productDes.productStatus == 'bidding' && hoursToDday == '00' && minutesToDday != '00'" class="img-fluid img-sm" src="./assets/img/bidding-loading-75.gif">
+                      <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                      <img *ngIf="productDes.productStatus == 'bidding' && hoursToDday == '00' && minutesToDday == '00' && secondsToDday != '00'" class="img-fluid img-sm" src="./assets/img/bidding-loading-50.gif">
+                    </div>
+                    <div class="col-auto p-0 align-self-center">
+                      <!-- STATUS BIDDED -->
+                      <h5 *ngIf="productDes.productStatus == 'bidded'" class="mb-0 font-weight-bold time-bid-size-loading">FINISH</h5>
+                      <!-- TIME BIDDING -->
+                      <!-- TIME COUNTING DOWN -->
+                      <h5 *ngIf="productDes.productStatus == 'bidding' && (hoursToDday+minutesToDday+secondsToDday != '000000')" 
+                        class="mb-0 font-weight-bold time-bid-size">{{ hoursToDday }}:{{ minutesToDday }}:{{ secondsToDday }}</h5>
+                      <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                      <h5 *ngIf="productDes.productStatus == 'bidding' && hoursToDday == '00' && minutesToDday == '00' && secondsToDday == '00'" 
+                        class="mb-0 font-weight-bold time-bid-size-loading">LOADING</h5>
+                      <!-- TIME WAIT AUCTION -->
+                      <did *ngIf="productDes.productStatus == 'waitAuction'" class="text-left">
+                        <!-- DATE START BIDDING -->
+                        <p class="mb-0 font-weight-bold time-waitAuction-size" style="line-height: 0.7;">{{ productDes.dateTime.dateTime.seconds*1000 | date: 'd/M/yyyy' }}</p>
+                        <!-- TIME START BIDDING -->
+                        <p class="mb-0 font-weight-bold time-waitAuction-size">{{ productDes.dateTime.dateTime.seconds*1000 | date: "HH:mm" }}</p>
+                      </did>
+                      <div class="text-left mt-2">
+                        <!-- LAST BIDDING -->
+                        <!-- PRICE LAST BIDDING -->
+                        <p class="mb-0 bidding-size" style="line-height: 0.7;">฿{{ biddingPrice | currency: 'THB' : '' : '0.0' }}</p>
+                        <!-- BUYER NAME LAST BIDDING -->
+                        <p class="mb-0 bidding-size">{{ biddingBuyerName }}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="mb-0 font-weight-bold">฿7,500</p>
-                    <p class="mb-0">canm****</p>
                   </div>
                 </div>
               </div>
-
-              <!-- TEST -->
-              <!-- You can now use it in app.component.html -->
-              <!-- <circle-progress
-                  [percent]="85"
-                  [radius]="100"
-                  [outerStrokeWidth]="6"
-                  [innerStrokeWidth]="8"
-                  [outerStrokeColor]="'#FE5721'"
-                  [innerStrokeColor]="'#C7E596'"
-                  [animation]="true"
-                  [animationDuration]="300"
-                  [title]="20"
-                ></circle-progress> -->
-              <!-- TEST -->
-
             </div>
-
-            <div class="col" style="padding-top: 15px; border-bottom: 0.5px solid #E7EDF4;">
-              <div class="mt-set-price d-flex justify-content-center align-items-center">
-                <a href="#">
-                  <i class="fa fa-minus-circle fa-2x" style="color: #F35F30;" aria-hidden="true"></i>
-                </a>
-                <p class="mb-0 ml-3 mr-3 font-weight-bold" style="display: inline;">฿7,500</p>
-                <a href="#">
-                  <i class="fa fa-plus-circle fa-2x" style="color: #F35F30;" aria-hidden="true"></i>
-                </a>
+            <div class="col align-items-center col-price">
+              <!-- COL BIDDING PRICE -->
+              <div class="row" [class.disabled]="productDes.productStatus == 'bidded'">
+                <div class="col-auto pl-2">
+                  <!-- LEFT MINUS BUTTON -->
+                  <a (click)="auctionPriceDown()" [class.disabled]="auctionPriceDownDisabled" style="cursor: pointer;">
+                    <i class="fa fa-minus-circle fa-2x" style="color: #F35F30;" aria-hidden="true"></i>
+                  </a>
+                </div>
+                <div class="col p-0 text-center">
+                  <!-- PRICE FOR NEXT BIDDING -->
+                  <p class="mb-0 font-weight-bold" style="display: inline;">฿{{ auctionPrice | currency: 'THB' : '' : '0.0' }}</p>
+                </div>
+                <div class="col-auto pr-2">
+                  <!-- RIGHT PLUS BUTTON -->
+                  <a (click)="auctionPriceUp()" [class.disabled]="buyerUID == productDes.sellerUID || productDes.productStatus == 'waitAuction'" style="cursor: pointer;">
+                    <i class="fa fa-plus-circle fa-2x" style="color: #F35F30;" aria-hidden="true"></i>
+                  </a>
+                </div>
               </div>
               <div style="position: absolute; bottom: 0; right: 0;">
-                <p class="mr-1 mb-1 p-text-des">เครดิตคงเหลือ 10,000</p>
+                <p class="mr-1 mb-1 p-text-des disabled">เครดิตคงเหลือ</p>
               </div>
             </div>
           </div>
           <div class="row ml-0 mr-0">
-            <div class="col" style="padding-top: 15px; padding-bottom: 15px; border-right: 0.5px solid #E7EDF4;">
-              <div style="position: absolute; top: 0; right: 0;">
-                <a href="#" class="text-dark mr-1 mt-1 p-text-des" style="text-decoration: none; cursor: pointer;">
-                  เพิ่มสินค้าลงรถเข็น<i class="fa fa-question-circle ml-1" aria-hidden="true"></i>
+            <div class="col" [class.disabled]="productDes.productStatus == 'bidding' || productDes.productStatus == 'bidded'" style="padding-top: 15px; padding-bottom: 15px;">
+              <!-- COL AUTO WIN -->
+              <div [class.disabled]="productDes.priceData.priceAutoWin == 'ประมูลเท่านั้น' || productDes.salesType == 'auction' || buyerUID == productDes.sellerUID" style="position: absolute; top: 0; right: 0;">
+                <a (click)="addToCart()" class="text-dark mr-1 mt-1 p-text-des" style="text-decoration: none; cursor: pointer;">
+                  เพิ่มสินค้าลงรถเข็น
                 </a>
               </div>
-
-              <div class="mt-4 mb-4" style="display:flex; align-items:center;">
-                <div class="row">
-                  <div class="col-auto">
-                    <img class="img-sm" src="./assets/img/auto-win-text-icon.png">
-                  </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="mb-0 font-weight-bold">฿15,000</p>
-                    <p class="mb-0 p-text-des">ซื้อในราคาเต็ม</p>
-                  </div>
+              <div (click)="addToCart()" class="row mt-4 mb-4" [class.disabled]="productDes.priceData.priceAutoWin == 'ประมูลเท่านั้น' || productDes.salesType == 'auction' || buyerUID == productDes.sellerUID" style="display: flex; align-items: center; text-decoration: none; cursor: pointer;">
+              <!-- <div class="row mt-4 mb-4" style="display: flex; align-items: center; text-decoration: none; cursor: pointer;"> -->
+                <div class="col-auto">
+                  <img *ngIf="productDes.productStatus != 'forSale'" class="img-fluid img-sm" src="./assets/img/auto-win-text-icon.svg">
+                  <img *ngIf="productDes.productStatus == 'forSale'" class="img-fluid img-sm" src="./assets/img/cart-icon-forSale.svg">
+                </div>
+                <!-- PRODUCT STATUS BIDDING || WAIT AUCTION -->
+                <div *ngIf="productDes.productStatus != 'forSale'" class="col-auto pl-0 align-self-center">
+                  <a *ngIf="productDes.priceData.priceAutoWin != 0" class="mb-0 font-weight-bold">฿{{ productDes.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                  <a *ngIf="productDes.priceData.priceAutoWin == 0" class="mb-0 font-weight-bold">ประมูล</a>
+                  <!-- <p class="mb-0 p-text-des">ซื้อในราคาเต็ม</p> -->
+                </div>
+                <!-- PRODUCT STATUS FOR SALE -->
+                <div *ngIf="productDes.productStatus == 'forSale'">
+                  <a class="mb-0 font-weight-bold">฿{{ productDes.priceData.priceProduct | currency: 'THB' : '' : '0.0' }}</a>
+                  <!-- <p class="mb-0 p-text-des">ซื้อในราคาเต็ม</p> -->
                 </div>
               </div>
-
-              <div class="ml-1 mb-1" style="position: absolute; bottom: 0; left: 0;">
+              <div *ngIf="productDes.productStatus != 'forSale'" class="ml-1 mb-1" style="position: absolute; bottom: 0; left: 0;">
                 <a class="text-dark p-text-des" style="text-decoration: none; cursor: pointer;" data-toggle="modal"
                   data-target="#modalAutoWin">
                   <i class="fa fa-question-circle mr-1" aria-hidden="true"></i>รายละเอียด
                 </a>
               </div>
             </div>
-
-            <div class="col" style="padding-top: 15px; padding-bottom: 15px;">
-              <div class="mr-2 mt-1" style="position: absolute; top: 0; right: 0;">
+            <div *ngIf="productDes.productStatus != 'forSale'" class="col disabled" style="padding-top: 15px; padding-bottom: 15px; border-left: 0.5px solid #E7EDF4;">
+              <!-- COL AUTO BID -->
+              <div [class.disabled]="abidmoreCoin == 0 || autoBidShow == 'กำหนดราคา' || userBuyer == undefined" class="mr-2 mt-1" style="position: absolute; top: 0; right: 0;">
                 <div class="checkbox checkbox-circle">
-                  <input id="checkbox7" class="styled" type="checkbox">
+                  <input id="checkbox7" class="styled" type="checkbox" checked>
                   <label for="checkbox7"></label>
                 </div>
               </div>
-
               <div class="mt-4 mb-4" style="display:flex; align-items:center;">
-                <div class="row">
+                <div class="row" [class.disabled]="abidmoreCoin == 0 || userBuyer == undefined">
                   <div class="col-auto">
-                    <img class="img-fluid img-sm" src="./assets/img/auto-bid-text-icon.png">
+                    <img class="img-fluid img-sm" src="./assets/img/auto-bid-text-icon.svg">
                   </div>
                   <div class="col pl-0 pr-0 align-self-center">
-                    <!-- <p class="mb-0 font-weight-bold p-text-set-price">กำหนดราคา</p> -->
                     <a class="text-dark mb-0 font-weight-bold p-text-set-price"
                       style="text-decoration: none; cursor: pointer;" data-toggle="modal"
                       data-target="#modalAutoBidSetPrice">
-                      กำหนดราคา
+                      {{ autoBidShow }}
                     </a>
                   </div>
                 </div>
               </div>
-
               <div class="ml-1 mb-1" style="position: absolute; bottom: 0; left: 0;">
                 <a class="text-dark p-text-des" style="text-decoration: none; cursor: pointer;" data-toggle="modal"
                   data-target="#modalAutoBid">
                   <i class="fa fa-question-circle mr-1" aria-hidden="true"></i>รายละเอียด
                 </a>
               </div>
-
               <div class="mr-1 mb-1 p-text-des" style="position: absolute; bottom: 0; right: 0;">
                 <img class="card-img-top img-border-radius img-coins-color" src="./assets/img/coins_color_2-1.png">
-                x 127
+                x {{ abidmoreCoin }}
               </div>
-
             </div>
           </div>
         </div>
+        
+        <!-- BIDDING & ADD TO CART BUTTON -->
+        <button (click)="biddingSubmit()" type="button" class="btn button-border-radius mt-3 text-white" [class.disabled]="productDes.productStatus == 'waitAuction' || productDes.productStatus == 'bidded' || buyerUID == productDes.sellerUID">{{ textBiddingButton }}</button>
+        <!-- END BIDDING & ADD TO CART BUTTON -->
 
-        <button type="button" class="btn button-border-radius mt-3 text-white">ร่วมประมูล</button>
-
-        <div class="card mt-3 p-history" style="border: 3px solid #E7EDF4; border-radius: 10px;">
+        <!-- BIDDING HISTORY -->
+        <div *ngIf="productDes.productStatus == 'bidding' || productDes.productStatus == 'bidded' || productDes.productStatus == 'waitAuction'" class="card mt-3 p-history" style="border: 3px solid #E7EDF4; border-radius: 10px;">
           <div class="row">
             <div class="col-8">
               <h5>ประวัติการประมูล</h5>
             </div>
             <div class="col-4 text-right">
               <div class="text-dark mt-2" style="line-height: 1;">
-                <a style="text-decoration: none; cursor: pointer;" data-toggle="modal"
-                  data-target="#modalHistory">เพิ่มเติม</a>
+                <a [class.disabled]="showNoBiddinHistoryText" style="text-decoration: none; cursor: pointer;"
+                  data-toggle="modal" data-target="#modalHistory" data-backdrop="static" data-keyboard="false" 
+                  (click)="getHistoryList()">เพิ่มเติม</a>
               </div>
             </div>
           </div>
-          <!-- THIS TABLE WHEN PHONE HIDE -->
-          <table class="table table-borderless mt-2 mb-0">
+          <div *ngIf="showNoBiddinHistoryText" class="text-center">
+            <p class="mt-2 mb-2">เริ่มประมูลเป็นคนแรก</p>
+          </div>
+          <table *ngIf="!showNoBiddinHistoryText" class="table table-borderless mt-2 mb-0">
             <thead>
               <tr>
                 <th class="text-center p-text-history p-0" scope="col">ชื่อผู้ใช้</th>
@@ -235,81 +286,97 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-                <td class="p-text-history pt-0 pb-0">฿7,000</td>
-                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-                <td class="p-text-history pt-0 pb-0">12:05:00</td>
-              </tr>
-              <tr>
-                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-                <td class="p-text-history pt-0 pb-0">฿7,000</td>
-                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-                <td class="p-text-history pt-0 pb-0">12:05:00</td>
-              </tr>
-              <tr>
-                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-                <td class="p-text-history pt-0 pb-0">฿7,000</td>
-                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-                <td class="p-text-history pt-0 pb-0">12:05:00</td>
-              </tr>
-              <tr>
-                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-                <td class="p-text-history pt-0 pb-0">฿7,000</td>
-                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-                <td class="p-text-history pt-0 pb-0">12:05:00</td>
-              </tr>
-              <tr>
-                <th scope="row" class="p-text-history pt-0 pb-0">• canm****</th>
-                <td class="p-text-history pt-0 pb-0">฿7,000</td>
-                <td class="p-text-history pt-0 pb-0">2020/04/04</td>
-                <td class="p-text-history pt-0 pb-0">12:05:00</td>
+              <tr *ngFor="let data of productDes.biddingHistory">
+                <th class="text-left p-text-history p-0">• {{ data.value.buyerName }}</th>
+                <td class="text-center p-text-history p-0">฿{{ data.value.biddingPrice | currency: 'THB' : '' : '0.0' }}</td>
+                <td class="text-center p-text-history p-0">{{ data.value.createAt.seconds*1000 | date: 'd/M/yyyy' }}</td>
+                <td class="text-center p-text-history p-0">{{ data.value.createAt.seconds*1000 | date: "HH:mm:ss" }}</td>
               </tr>
             </tbody>
           </table>
-
         </div>
-
+        <!-- END BIDDING HISTORY -->
       </div>
     </div>
   </div>
 
+  <div class="card-collection">
+    <h5 class="mb-3">ชื่อสินค้า</h5>
+    <p class="mb-3">{{ productDes.name }}</p>
+    <h5 class="mt-3 mb-3">รายละเอียด</h5>
+    <div [innerHTML]="productDes.productDescription"></div>
+
+    <h5 class="mt-3 mb-3">ชนิดสินค้า</h5>
+    <p *ngIf="productDes.type == 'new'" class="mb-3">สินค้าใหม่</p>
+    <p *ngIf="productDes.type == 'secondHand'" class="mb-0" style="color: #FE5721;">สินค้ามือสอง</p>
+    <p *ngIf="productDes.type == 'secondHand'" class="mb-3" style="color: #FE5721;">{{ productDes.type2HandPer }}</p>
+    <div *ngIf="productDes.salesType == 'auction'">
+      <h5 class="mt-3 mb-3">ระยะเวลาประมูล/ชิ้น</h5>
+      <a class="mb-3">
+        <a class="mb-0">เวลานับถอยหลัง </a>
+        <!-- HOUR -->
+        <a *ngIf="productDes.dateTime.timeBidCount.hour < 10" class="mb-3">0</a>
+        <a class="mb-0">{{ productDes.dateTime.timeBidCount.hour }}:</a>
+        <!-- MIN -->
+        <a *ngIf="productDes.dateTime.timeBidCount.minute < 10" class="mb-3">0</a>
+        <a class="mb-0">{{ productDes.dateTime.timeBidCount.minute }}:</a>
+        <!-- SEC -->
+        <a *ngIf="productDes.dateTime.timeBidCount.second < 10" class="mb-3">0</a>
+        <a class="mb-0">{{ productDes.dateTime.timeBidCount.second }}</a>
+      </a>
+    </div>
+  </div>
 
   <div class="card-collection">
     <h5 class="mb-3">ตัวเลือกสินค้า</h5>
-    <p class="mb-1">สี</p>
-    <div class="row mr-0 ml-0">
-      <button type="button" class="btn btn-color mr-2 mb-2">ดำ</button>
-      <button type="button" class="btn btn-outline-color mr-2 mb-2">เทาเข้ม</button>
-      <button type="button" class="btn btn-outline-color mr-2 mb-2">เทาอ่อน</button>
-      <button type="button" class="btn btn-outline-color mb-2">ลายทหาร</button>
-    </div>
-    <p class="mt-3 mb-1">ขนาด</p>
-    <div class="row mr-0 ml-0">
-      <button type="button" class="btn btn-color mr-2 mb-2">9 US</button>
-      <button type="button" class="btn btn-outline-color mr-2 mb-2">10 US</button>
-      <button type="button" class="btn btn-outline-color mr-2 mb-2">11 US</button>
-      <button type="button" class="btn btn-outline-color mb-2">12 US</button>
+    <div *ngFor="let _dataOp of productDes.productOption; let i = index;">
+      <p class="mb-0 productDataText">• ตัวเลือกที่ {{ i+1 }} ({{ _dataOp.optionName }})</p>
+      <div *ngIf="_dataOp.subOption.length == 0">
+        <div class="row ml-2">
+          <div class="col-auto pl-0">
+            <button (click)="selectproductOption(_dataOp.optionName, null)" type="button" 
+            [class.btn-outline-color]="_dataOp.optionName != productOptionSelect.optionName && productOptionSelect.subOption != null"
+            [class.btn-color]="_dataOp.optionName == productOptionSelect.optionName && productOptionSelect.subOption == null"
+            [class.disabled]="productDes.productStatus == 'bidded' || _dataOp.optionNumber <= 0"
+            class="btn btn-op mr-2 mb-2">{{ _dataOp.optionName }} (จำนวน {{ _dataOp.optionNumber }})</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="_dataOp.subOption.length != 0">
+        <div class="row ml-2">
+          <div *ngFor="let _dataSub of _dataOp.subOption" class="col-auto pl-0 pr-2">
+            <button (click)="selectproductOption(_dataOp.optionName, _dataSub.subOption)" type="button"
+              class="btn btn-op mr-2 mb-2"
+              [class.btn-outline-color]="_dataOp.optionName != productOptionSelect.optionName && _dataSub.subOption != productOptionSelect.subOption"
+              [class.btn-color]="_dataOp.optionName == productOptionSelect.optionName && _dataSub.subOption == productOptionSelect.subOption"
+              [class.disabled]="productDes.productStatus == 'bidded' || _dataSub.subOptionNumber <= 0">
+              {{ _dataSub.subOption }} (จำนวน {{ _dataSub.subOptionNumber }})</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="card-collection">
     <h5 class="mb-3">การจัดส่ง</h5>
-    <div class="row mr-0 ml-0">
-      <p class="mb-1">• ไปรษณีย์ไทย (EMS)</p>
-      <p class="ml-3 mb-1" style="color: #FE5721;">฿100</p>
-    </div>
-    <div class="row mr-0 ml-0">
-      <p class="mb-1">• ไปรษณีย์ไทย (EMS)</p>
-      <p class="ml-3 mb-1" style="color: #FE5721;">฿100</p>
-    </div>
-    <div class="row mr-0 ml-0">
-      <p class="mb-1">• ไปรษณีย์ไทย (EMS)</p>
-      <p class="ml-3 mb-1" style="color: #FE5721;">฿100</p>
-    </div>
-    <div class="row mr-0 ml-0">
-      <p class="mb-1">• ไปรษณีย์ไทย (EMS)</p>
-      <p class="ml-3 mb-1" style="color: #FE5721;">฿100</p>
+    <div *ngFor="let data of productDes.priceDelivery">
+      <div *ngIf="data.deliveryName != 'handPickUp'" class="row mr-0 ml-0">
+        <div class="col-4 col-md-4 col-lg-2 pl-0 pr-0">
+          <p class="mb-0">• {{ data.deliveryName }}</p>
+        </div>
+        <div class="col-8 col-md-8 col-lg-10">
+          <p class="mb-0" style="color: #FE5721;">฿{{ data.priceDeliveryInput | currency: 'THB' : '' : '0.0' }}</p>
+        </div>
+      </div>
+      <div *ngIf="data.deliveryName == 'handPickUp'" class="row mr-0 ml-0">
+        <div class="col-4 col-md-4 col-lg-2 pl-0 pr-0">
+          <p class="mb-0">• นัดรับสินค้า</p>
+        </div>
+        <div class="col-8 col-md-8 col-lg-10">
+          <p class="mb-0" style="color: #FE5721;">รายละเอียด (ประเทศ {{ data.country }} จังหวัด {{ data.province }}) {{
+            data.description }}</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -321,249 +388,117 @@
     <p class="mb-1">• คุณต้องส่งสินค้าคืนไปยังผู้ขายเพื่อการตรวจสอบและพิจารณาการคืนเงิน</p>
   </div>
 
-  <div class="card-collection">
-    <h5 class="mb-3">รายละเอียด</h5>
-    <p class="mb-1">เทียบไซส์<br />
-      7.5UK/ 8US/ 41/ 260<br />
-      8UK/ 8.5US/ 42/ 265<br />
-      8.5UK/ 9US/ 42⅔/ 270<br />
-      9UK/ 9.5US/ 43⅓/ 275<br />
-      9.5UK/ 10US/ 44/ 280<br />
-      10UK/ 10.5US/ 45⅓/285</p>
-    <p class="mt-3 mb-1">
-      Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรองเท้าคู่สวยที่ใส่ไปได้ในทุกที่
-      และตอบรับไลฟ์สไตล์ของผู้สวมใส่ได้อย่างลงตัว
-      เพราะรองเท้าคู่นี้เกิดขึ้นจากความกล้าในการผสมผสานหลากหลายองค์ประกอบเข้าด้วยกัน ทั้งในเรื่องของรูปทรง องศา
-      และวัสดุที่ใช้
-      เรื่อยไปจนถึงการเลือกสีสันที่ตัดกัน การออกแบบเกิดขึ้นอย่างไม่หวั่นเกรงสิ่งใด
-      ด้วยการประกอบส่วนบนของรองเท้าให้ดูโมเดิร์น
-      ในโครงร่างที่ดูเหนือจริง
-      พร้อมทั้งใส่รายละเอียดจากแนวทางการออกแบบของอาดิดาสที่มีมาในอดีตเข้าไปจนได้รองเท้าที่มาพร้อมคอนเซ็ปต์
-      การออกแบบที่เปี่ยมด้วยเอกลักษณ์ พื้นรองเท้าชั้นกลาง (midsole) ถูกยกระดับขึ้นด้วยเทคโนโลยี BOOST ซึ่งบีบอัดเม็ด EVA
-      จำนวนมากอยู่ภายในจนทำให้พื้นรองเท้ามีความคงทน ต้านทานแรง และตอบสนองได้อย่างฉับไว ในขณะที่ส่วนบนของรองเท้า
-      อาดิดาสเลือกใช้เทคโนโลยี Primeknit ที่ช่วยยกระดับความยืดหยุ่น ความมั่นคง และความแข็งแกร่งของรองเท้าขึ้นอีกขั้น</p>
+  <div *ngIf="reviewList.length != 0" class="card-collection">
+    <h5 class="mb-0">รีวิวสินค้า</h5>
+    <div *ngFor="let data of reviewList">
+      <div class="mt-3" style="background-color: #eef3f7; padding: 16px; border-radius: 13px;">
+        <div class="row">
+          <div class="col-auto">
+            <img class="img-fluid rounded-circle img-store" style="width: 60px; height: 60px;" src="{{ data.value.buyerProfileImg.imgUrl }}">
+          </div>
+          <div class="col pl-0">
+            <p class="mb-0" style="line-height: 1.2;">{{ data.value.buyerDisplayName }}</p>
+            <p class="mb-0" style="line-height: 1; font-size: 1rem; color: rgb(149, 148, 148);">{{ data.value.createAt.seconds*1000 | date: 'd/M/yyyy' }}</p>
+            <!-- <p class="mb-0">{{ data.value.ratingStars }}</p> -->
+            <ul class="rating-stars" style="line-height: 1.2;">
+              <li>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 0.5"
+                  [class.fa-star-o]="data.value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 1.5"
+                  [class.fa-star-o]="data.value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 2.5"
+                  [class.fa-star-o]="data.value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 3.5"
+                  [class.fa-star-o]="data.value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 4.5"
+                  [class.fa-star-o]="data.value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-2 mb-0">{{ data.value.comment }}</p>
+      </div>
+    </div>
   </div>
 
-  <div class="card-collection">
-
-
+  <div *ngIf="userSeller != undefined" class="card-collection">
     <div class="row justify-content-between">
       <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 pr-0 align-self-center">
         <div class="row">
-          <div class="col-auto">
-            <img class="img-fluid rounded-circle img-store" src="./assets/img/store-band-name.png">
+          <div class="col-auto" style="cursor: pointer;" (click)="gotoShopDes()">
+            <img class="img-fluid rounded-circle img-store" src="{{ userSeller.profileImg.imgUrl }}">
           </div>
-          <div class="col-auto pl-0 align-self-center">
-            <h5 class="mb-0">STORE NAME</h5>
-            <i class="fa fa-users mr-2"></i>1.7k
-            <i class="fa fa-star ml-3 mr-2" style="color: #FFA101;"></i>4.0
+          <div class="col-auto pl-0 align-self-center" style="cursor: pointer;" (click)="gotoShopDes()">
+            <h5 class="mb-0">{{ userSeller.shopName }}</h5>
+            <i class="fa fa-users mr-2"></i>{{ userSeller.followerBuyer }}
           </div>
         </div>
       </div>
 
       <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 pl-0">
-        <button type="button" class="btn button-store-color text-white" style="width: 100%;">
+        <button (click)="followShop()" type="button" class="btn button-store-color">
           <img class="mr-1" style="margin-top: -5px; width: 20px;" src="./assets/img/store-icon-white.png">
-          ติดตาม
+          {{ userSeller.follow }}
         </button><br />
-        <button type="button" class="btn button-store mt-2 text-dark" style="width: 100%;">
-          <img class="mr-1" style="margin-top: -5px; width: 20px;" src="./assets/img/noti-chat-icon.png">
+        <button (click)="gotoChatRoom()" type="button" class="btn button-store mt-2 text-dark w-100">
+          <img class="mr-1" style="margin-top: -5px; width: 20px;" src="./assets/img/noti-chat-icon-bg-gray.svg">
           ข้อความ
         </button>
       </div>
     </div>
-
   </div>
 
-
-  <div class="card-collection-other mb-5">
+  <div class="container pb-4">
     <div class="row mt-3">
       <div class="col">
-        <h5>สินค้าอื่นๆ</h5>
+        <h5 class="mb-0">สินค้าอื่นๆ</h5>
       </div>
-      <div class="col text-right">
+      <!-- <div class="col text-right">
         <a style="text-decoration: none; cursor: pointer;">
           <div class="text-dark mt-2" style="line-height: 1;">เพิ่มเติม</div>
         </a>
-      </div>
+      </div> -->
     </div>
-
-    <div class="row">
-      <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-1">
-        <div class="card card-border-3">
-          <div class="card" style="border: none;">
-            <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-            <div class="card-img-overlay d-flex flex-column justify-content-end">
-              <div class="row">
-                <div class="col-6 pr-1">
-                  <div class="img-card-auto-win">
-                    <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                      src="./assets/img/auto-win-text-icon.png">
-                    <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-                  </div>
-                </div>
-                <div class="col-6 pl-1">
-                  <div class="img-card-time text-right">
-                    <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                    <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                      src="./assets/img/Clock.png">
-                  </div>
-                </div>
-              </div>
+    <p *ngIf="showNoProductOtherText" class="text-dark text-center mt-3 mb-3">พบสินค้าใหม่เร็ว ๆ นี้</p>
+    <div class="row m-row-card-product">
+      <div *ngFor="let data of productOther" class="col-6 col-md-6 col-lg-3 p-col-card-product mt-2">
+        <div (click)="gotoProductDes(data.key)" class="card-border-3 bg-white" style="cursor: pointer;">
+          <div class="posi-card">
+            <img src="{{ data.value.imgProduct[0].imgUrl }}" class="product-img-card">
+            <div class="bg-left-auto">
+              <a class="img-card-auto-win p-text-other">
+                <img class="img-fluid img-auto-win-other" src="./assets/img/cart-icon-forSale.svg">
+                ฿{{ data.value.priceData.priceProduct | currency: 'THB' : '' : '0.0' }}
+              </a>
             </div>
           </div>
-
-          <div class="card-body card-body-padding">
-            <h5 class="card-title ">Herschel Supply Retreat Backpack...</h5>
-            <p class="card-text ">กระเป๋ารุ่นยอดนิยมของ...</p>
+          <div class="card-body-padding">
+            <h5 class="card-title">{{ data.value.name | slice:0:18 }}...</h5>
             <ul class="rating-stars">
               <li>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star-o" style="color: #FFA101;"></i>
-                <i class="fa fa-star-o" style="color: #FFA101;"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 0.5"
+                  [class.fa-star-o]="data.value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 1.5"
+                  [class.fa-star-o]="data.value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 2.5"
+                  [class.fa-star-o]="data.value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 3.5"
+                  [class.fa-star-o]="data.value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="data.value.ratingStars >= 4.5"
+                  [class.fa-star-o]="data.value.ratingStars < 4.5"></i>
               </li>
             </ul>
             <var class="float-right">
-              <i class="fa fa-heart" style="color: #FE5721"></i>
-            </var>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-2">
-        <div class="card card-border-3">
-          <div class="card" style="border: none;">
-            <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-            <div class="card-img-overlay d-flex flex-column justify-content-end">
-              <div class="row">
-                <div class="col-6 pr-1">
-                  <div class="img-card-auto-win">
-                    <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                      src="./assets/img/auto-win-text-icon.png">
-                    <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-                  </div>
-                </div>
-                <div class="col-6 pl-1">
-                  <div class="img-card-time text-right">
-                    <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                    <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                      src="./assets/img/Clock.png">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body card-body-padding">
-            <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-            <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-            <ul class="rating-stars">
-              <li>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star-o" style="color: #FFA101;"></i>
-                <i class="fa fa-star-o" style="color: #FFA101;"></i>
-              </li>
-            </ul>
-            <var class="float-right">
-              <i class="fa fa-heart" style="color: #FE5721"></i>
-            </var>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-1">
-        <div class="card card-border-3">
-          <div class="card" style="border: none;">
-            <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-            <div class="card-img-overlay d-flex flex-column justify-content-end">
-              <div class="row">
-                <div class="col-6 pr-1">
-                  <div class="img-card-auto-win">
-                    <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                      src="./assets/img/auto-win-text-icon.png">
-                    <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-                  </div>
-                </div>
-                <div class="col-6 pl-1">
-                  <div class="img-card-time text-right">
-                    <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                    <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                      src="./assets/img/Clock.png">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body card-body-padding">
-            <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-            <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-            <ul class="rating-stars">
-              <li>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star-o" style="color: #FFA101;"></i>
-                <i class="fa fa-star-o" style="color: #FFA101;"></i>
-              </li>
-            </ul>
-            <var class="float-right">
-              <i class="fa fa-heart" style="color: #FE5721"></i>
-            </var>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-2">
-        <div class="card card-border-3">
-          <div class="card" style="border: none;">
-            <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-            <div class="card-img-overlay d-flex flex-column justify-content-end">
-              <div class="row">
-                <div class="col-6 pr-1">
-                  <div class="img-card-auto-win">
-                    <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                      src="./assets/img/auto-win-text-icon.png">
-                    <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-                  </div>
-                </div>
-                <div class="col-6 pl-1">
-                  <div class="img-card-time text-right">
-                    <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                    <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                      src="./assets/img/Clock.png">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body card-body-padding">
-            <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-            <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-            <ul class="rating-stars">
-              <li>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star" style="color: #FFA101;"></i>
-                <i class="fa fa-star-o" style="color: #FFA101;"></i>
-                <i class="fa fa-star-o" style="color: #FFA101;"></i>
-              </li>
-            </ul>
-            <var class="float-right">
-              <i class="fa fa-heart" style="color: #FE5721"></i>
+              <i class="fa fa-heart" [class.heart-color]="data.value.likeStatus"
+                [class.heart-grey]="!data.value.likeStatus"></i>
             </var>
           </div>
         </div>
       </div>
     </div>
-
-
   </div>
 
-
-  <!-- Button Modal Popup -->
+  <!-- BUTTON MODAL POPUP -->
   <!-- <div class="container">
     <div class="row">
       <div class="col">
@@ -575,200 +510,10 @@
       </div>
     </div>
   </div> -->
-  <!-- Button Modal Popup -->
+  <!-- END BUTTON MODAL POPUP -->
+</div>
 
-  <!-- Modal History -->
-  <div class="modal fade" id="modalHistory" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-bottom">
-      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-
-        <div class="row">
-          <!-- <div class="col-auto">
-          <a href="#" class="" style="text-decoration: none; cursor: pointer; color: #FE5721;">
-            ยกเลิก
-          </a>
-        </div> -->
-          <div class="col text-center">
-            <p>ประวัติการประมูล</p>
-          </div>
-          <div class="col-auto">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="modal-body p-0 align-self-center modal-table-width">
-          <table class="table table-borderless mt-2 mb-0">
-            <thead>
-              <tr>
-                <th class="text-center p-text-history p-0" scope="col">ชื่อผู้ใช้</th>
-                <th class="text-center p-text-history p-0" scope="col">ราคา</th>
-                <th class="text-center p-text-history p-0" scope="col">วันที่</th>
-                <th class="text-center p-text-history p-0" scope="col">เวลา</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-                <td class="text-center p-text-history p-0">฿7,000</td>
-                <td class="text-center p-text-history p-0">2020/04/04</td>
-                <td class="text-center p-text-history p-0">12:05:00</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-                <td class="text-center p-text-history p-0">฿7,000</td>
-                <td class="text-center p-text-history p-0">2020/04/04</td>
-                <td class="text-center p-text-history p-0">12:05:00</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-                <td class="text-center p-text-history p-0">฿7,000</td>
-                <td class="text-center p-text-history p-0">2020/04/04</td>
-                <td class="text-center p-text-history p-0">12:05:00</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-                <td class="text-center p-text-history p-0">฿7,000</td>
-                <td class="text-center p-text-history p-0">2020/04/04</td>
-                <td class="text-center p-text-history p-0">12:05:00</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-center p-text-history p-0">• canm****</th>
-                <td class="text-center p-text-history p-0">฿7,000</td>
-                <td class="text-center p-text-history p-0">2020/04/04</td>
-                <td class="text-center p-text-history p-0">12:05:00</td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal History -->
-
-  <!-- Modal Auto Win -->
-  <div class="modal fade" id="modalAutoWin" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-bottom">
-      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-
-        <div class="row">
-          <div class="col text-center">
-            <p>Auto Win</p>
-          </div>
-          <div class="col-auto">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="modal-body p-0">
-          <p>ตัวช่วยการประมูล</p>
-          <p class="pl-1 mb-1">• เมื่อคุณเพิ่มสินค้าชิ้นนี้ลงในรถเข็นด้วยวิธีการ Auto Win สินค้านี้จะยังไม่จบการประมูล
-          </p>
-          <p class="pl-1 mb-1">• เมื่อคุณชำระเงินสำหรับสินค้านี้เรียบร้อย คุณจะเป็นผู้ชนะการประมูล
-            การประมูลจะจบลงและสินค้าชิ้นนี้จะเป็นของคุณ</p>
-          <p class="pl-1 mb-1">• ระบบจะทำการประมูลสู้อัตโนมัติหากคุณไม่ใช่ผู้ชนะการประมูลสินค้าชิ้นนี้</p>
-          <p class="pl-1 mb-1">• หากคุณไม่ทำการชำระเงินสำหรับสินค้านี้ที่เพิ่มลงในรถเข็นด้วยวิธีการ Auto Win
-            และมีผู้ชนะการประมูลการประมูลจบลงก่อนที่คุณจะทำการชำระเงินสินค้าชิ้นนี้จะตกเป็นของผู้ชนะการประมูลทันที</p>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!-- Modal Auto Win -->
-
-  <!-- Modal Auto Bid -->
-  <div class="modal fade" id="modalAutoBid" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-bottom">
-      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-
-        <div class="row">
-          <div class="col text-center">
-            <p>Auto Bid</p>
-          </div>
-          <div class="col-auto">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="modal-body p-0">
-          <div class="row">
-            <div class="col text-right">
-              <div class="align-self-center">
-                <img class="img-border-radius" style="width: 70px;" src="./assets/img/wallet-modal.png">
-                <p>เติมเครดิต</p>
-              </div>
-            </div>
-            <div class="col">
-              <div>
-                <img class="img-border-radius" style="width: 70px;" src="./assets/img/coins_color_modal.png">
-                <p class="pl-watch-vdo">ดูวิดีโอ</p>
-              </div>
-            </div>
-          </div>
-
-          <p>ตัวช่วยการประมูล</p>
-          <p class="pl-1 mb-1">• Auto Bid เป็นตัวช่วยคุณสำหรับใช้ในการประมูล</p>
-          <p class="pl-1 mb-1">•
-            คุณสามารถตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้และจะถูกการันตีเครดิตตามราคาที่คุณตั้ง</p>
-          <p class="pl-1 mb-1">• ระบบจะทำการประมูลสู้อัตโนมัติหากคุณไม่ใช่ผู้ชนะการประมูลสินค้าชิ้นนี้</p>
-          <p class="pl-1 mb-1">• การตั้งราคาเพื่อเปิดใช้งาน Auto Bid จำนวน 1 ครั้ง จะถูกหักเหรียญจำนวน 1
-            เหรียญโดยคุณสามารถเก็บสะสมเหรียญจาก</p>
-          <p class="pl-4 mb-1 font-weight-bold" style="color: #FE5721;">• การเติมเงินเพื่อรับเครดิตการประมูล</p>
-          <p class="pl-4 mb-1 font-weight-bold" style="color: #FE5721;">• การดูวิดีโอโฆษณา</p>
-          <p class="pl-1 mb-1">• คุณสามารถกดยกเลิก Auto Bid ได้ทุกเมื่อ</p>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!-- Modal Auto Bid -->
-
-  <!-- Modal Auto Bid Set Price -->
-  <div class="modal fade" id="modalAutoBidSetPrice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-bottom">
-      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-
-        <div class="row">
-          <div class="col-auto">
-            <a href="#" class="" style="text-decoration: none; cursor: pointer; color: #FE5721;">
-              ตกลง
-            </a>
-          </div>
-          <div class="col text-center">
-            <p>Auto Bid</p>
-          </div>
-          <div class="col-auto">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-        </div>
-
-        <p class="mt-3">ตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้</p>
-        <div class="modal-body p-0 align-self-center modal-input-width">
-          <div class="input-style">
-            <p class="mb-0" style="font-size: 17px;">เครดิต</p>
-            <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;"
-              id="auto-bid-set-price" placeholder="ราคา">
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!-- Modal Auto Bid Set Price -->
-
-  <!-- Modal Popup -->
+  <!-- MODAL POPUP -->
   <!-- <div class="modal fade" id="ModalAddCenter" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
@@ -792,21 +537,641 @@
     </div>
   </div> -->
 
-  <!-- Modal Popup Img -->
-  <div class="modal fade" id="ModalPopupImg" role="dialog" aria-hidden="true">
+  <!-- MODAL POPUP BIDDED HAVE WINNER -->
+  <div class="modal fade" [class.show]="showModalBidded" [class.modalShow]="showModalBidded" id="ModalPopupBiddedWinner" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="product-top">
-        <img (click)="pic()" data-toggle="modal" data-target="#ModalPopupImg" class="product-top-img" src="./assets/img/bag.png" style="cursor: pointer;">
-        <!-- Start -->
-        <div class="icon-start">
-          <button data-dismiss="modal" aria-label="Close" type="button" class="btn btn-circle" style="background-color: #585858; color: #FFF;">
-            <i class="fa fa-times"></i>
-          </button>
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+
+        <!-- LOADING -->
+        <div *ngIf="nextProDuctLoading" class="text-center">
+          <img class="rounded-circle shadow" style="width: 60px; height: 60px;"
+            src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg">
+          <p>Loading...</p>
+          <!-- BUTTON CLOSE MODAL -->
+          <div class="mt-4">
+            <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+              <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+                style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+                data-dismiss="modal" (click)="closeModalPopupBidded()">ปิด</button>
+            </div>
+          </div>
+        </div>
+        <!-- END BUTTON CLOSE MODAL -->
+        <!-- END LOADING -->
+
+        <!-- NO PRODUCT NEXT -->
+        <div *ngIf="showNOProductNext"> 
+          <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+          <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+          <p class="text-center">สินค้าหมดพบสินค้าใหม่เร็วๆ นี้</p>
+          <!-- BUTTON -->
+          <div class="mt-4">
+            <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+              <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+                style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+                data-dismiss="modal" (click)="closeModalPopupBidded()">ตกลง</button>
+            </div>
+          </div>
+        </div>
+        <!-- END NO PRODUCT NEXT -->
+
+        <!-- WINNER DETAIL -->
+        <div *ngIf="productDes != undefined && productDes.productStatus == 'bidded' && productDes.biddingHistory != undefined && showWinnerDetail">
+          <!-- IMG + TEXT WINNER -->
+          <div *ngIf="productDes.winner.uid == buyerUID">
+            <img class="img-fluid" src="../../assets/img/winner.png">
+            <p class="mb-0 text-center">(คุณคือผู้ชนะประมูลสินค้านี้)</p>
+            <p class="mb-0 text-center">โปรดชำระเงินภายใน 24 ชั่วโมง</p>
+          </div>
+          <!-- TABLE -->
+          <table class="table table-borderless mt-2 mb-0" style="opacity: 50%;">
+            <thead>
+              <tr>
+                <th class="text-center p-text-history p-0" scope="col">ชื่อผู้ใช้</th>
+                <th class="text-center p-text-history p-0" scope="col">ราคา</th>
+                <th class="text-center p-text-history p-0" scope="col">วันที่</th>
+                <th class="text-center p-text-history p-0" scope="col">เวลา</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="p-text-history p-0">{{ productDes.biddingHistory[0].value.buyerName }}</th>
+                <td class="text-center p-text-history p-0">฿{{ productDes.biddingHistory[0].value.biddingPrice }}</td>
+                <td class="text-center p-text-history p-0">{{ productDes.biddingHistory[0].value.createAt.seconds*1000 | date: 'd/M/yyyy' }}</td>
+                <td class="text-center p-text-history p-0">{{ productDes.biddingHistory[0].value.createAt.seconds*1000 | date: "HH:mm:ss" }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- BUTTON -->
+          <div *ngIf="productDes.winner.uid == buyerUID" class="mt-4">
+            <div class="row">
+              <div class="form-group col-6 col-sm-6 col-lg-6 pr-1 text-center" style="margin: 0 auto;">
+                <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+                  style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+                  data-dismiss="modal" (click)="goToPaymentItems()">ตรวจสอบสินค้า</button>
+              </div>
+              <div class="form-group col-6 col-sm-6 col-lg-6 pl-1 text-center" style="margin: 0 auto;">
+                <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+                  style="border: none; border-radius: 1.5rem; width: 100%; background-color: #1F242A;"
+                  data-dismiss="modal" (click)="goToNextProDuctBidding()">ชิ้นถัดไป</button>
+              </div>
+            </div>
+            <div class="mt-4">
+              <p class="text-center" style="cursor: pointer;" (click)="closeModalPopupBidded()">ปิด</p>
+            </div>
+          </div>
+      
+        </div>
+        <!-- END WINNER DETAIL -->
+
+
+
+
+    
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP BIDDED HAVE WINNER -->
+
+  <!-- MODAL POPUP FAIL -->
+  <div class="modal fade" [class.show]="selectProductOptionFail" [class.modalShow]="selectProductOptionFail" id="ModalPopupSelectProductOptionFail" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">{{ productOpText }}</p>
+        <!-- PRODUCT OPTION -->
+        <div *ngIf="productOpText == 'โปรดเลือกตัวเลือกสินค้า'">
+          <div *ngFor="let _dataOp of productDes.productOption; let i = index;">
+            <p class="mb-0 productDataText">• ตัวเลือกที่ {{ i+1 }} ({{ _dataOp.optionName }})</p>
+            <div *ngIf="_dataOp.subOption.length == 0">
+              <div class="row ml-2">
+                <div class="col-auto pl-0">
+                  <!-- <button (click)="selectproductOption(_dataOp.optionName, null)" type="button" 
+                  [class.btn-outline-color]="_dataOp.optionName != productOptionSelect.optionName && productOptionSelect.subOption != null"
+                  [class.btn-color]="_dataOp.optionName == productOptionSelect.optionName && productOptionSelect.subOption == null"
+                  [class.disabled]="productDes.productStatus == 'bidded'"
+                  class="btn btn-op mr-2 mb-2">{{ _dataOp.optionName }}</button> -->
+                  <button (click)="selectproductOption(_dataOp.optionName, null)" type="button" 
+                  [class.btn-outline-color]="_dataOp.optionName != productOptionSelect.optionName && productOptionSelect.subOption != null"
+                  [class.btn-color]="_dataOp.optionName == productOptionSelect.optionName && productOptionSelect.subOption == null"
+                  [class.disabled]="productDes.productStatus == 'bidded' || _dataOp.optionNumber <= 0"
+                  class="btn btn-op mr-2 mb-2">{{ _dataOp.optionName }} (จำนวน {{ _dataOp.optionNumber }})</button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="_dataOp.subOption.length != 0">
+              <div class="row ml-2">
+                <div *ngFor="let _dataSub of _dataOp.subOption" class="col-auto pl-0 pr-2">
+                  <!-- <button (click)="selectproductOption(_dataOp.optionName, _dataSub.subOption)" type="button"
+                    class="btn btn-op mr-2 mb-2"
+                    [class.btn-outline-color]="_dataOp.optionName != productOptionSelect.optionName && _dataSub.subOption != productOptionSelect.subOption"
+                    [class.btn-color]="_dataOp.optionName == productOptionSelect.optionName && _dataSub.subOption == productOptionSelect.subOption"
+                    [class.disabled]="productDes.productStatus == 'bidded'">
+                    {{ _dataOp.optionName }} {{ _dataSub.subOption }}</button> -->
+                  <button (click)="selectproductOption(_dataOp.optionName, _dataSub.subOption)" type="button"
+                    class="btn btn-op mr-2 mb-2"
+                    [class.btn-outline-color]="_dataOp.optionName != productOptionSelect.optionName && _dataSub.subOption != productOptionSelect.subOption"
+                    [class.btn-color]="_dataOp.optionName == productOptionSelect.optionName && _dataSub.subOption == productOptionSelect.subOption"
+                    [class.disabled]="productDes.productStatus == 'bidded' || _dataSub.subOptionNumber <= 0">
+                    {{ _dataSub.subOption }} (จำนวน {{ _dataSub.subOptionNumber }})</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END PRODUCT OPTION -->
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary" [class.disabled]="productOptionSelect.optionName == '' && productOptionSelect.subOption == ''"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal" (click)="okModalPopupSelectProductOptionFail()">ตกลง</button>
+          </div>
+        </div>
+        <div class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center" (click)="closeModalPopupSelectProductOptionFail()">ยกเลิก</p>
+          </a>
         </div>
       </div>
     </div>
   </div>
-  <!-- End Modal Popup Img -->
+  <!-- END MODAL POPUP FAIL -->
 
+  <!-- MODAL POPUP FAIL -->
+  <div class="modal fade" [class.show]="biddingFail" [class.modalShow]="biddingFail" id="ModalPopupBiddingFail" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">มีผู้ประมูลราคาที่สูงกว่า โปรดเพิ่มราคาประมูลให้สูงขึ้น</p>
 
-</div>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal" (click)="closeModalPopupBiddingFail()">ตกลง</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP FAIL -->
+
+  <!-- MODAL HISTORY -->
+  <div class="modal fade" id="modalHistory" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+
+        <div class="row">
+          <div class="col text-center">
+            <p>ประวัติการประมูล</p>
+          </div>
+          <div class="col-auto" (click)="unsubscribeGetHistoryList()" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-body p-0 align-self-center modal-table-width">
+          <table *ngIf="historyList.length != 0" class="table table-borderless mt-2 mb-0">
+            <thead>
+              <tr>
+                <th class="text-center p-text-history p-0" scope="col">ชื่อผู้ใช้</th>
+                <th class="text-center p-text-history p-0" scope="col">ราคา</th>
+                <th class="text-center p-text-history p-0" scope="col">วันที่</th>
+                <th class="text-center p-text-history p-0" scope="col">เวลา</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of historyList">
+                <th class="text-left p-text-history p-0">• {{ data.value.buyerName }}</th>
+                <td class="text-center p-text-history p-0">฿{{ data.value.biddingPrice }}</td>
+                <td class="text-center p-text-history p-0">{{ data.value.createAt.seconds*1000 | date: 'd/M/yyyy' }}</td>
+                <td class="text-center p-text-history p-0">{{ data.value.createAt.seconds*1000 | date: "HH:mm:ss" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL HISTORY -->
+
+  <!-- MODAL AUTO WIN -->
+  <div class="modal fade" id="modalAutoWin" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+        <div class="row">
+          <div class="col text-center">
+            <p>Auto Win</p>
+          </div>
+          <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body p-0">
+          <p>ตัวช่วยการประมูล</p>
+          <p class="pl-1 mb-1">• เมื่อคุณเพิ่มสินค้าชิ้นนี้ลงในรถเข็นด้วยวิธีการ Auto Win สินค้านี้จะยังไม่จบการประมูล
+          </p>
+          <p class="pl-1 mb-1">• เมื่อคุณชำระเงินสำหรับสินค้านี้เรียบร้อย คุณจะเป็นผู้ชนะการประมูล
+            การประมูลจะจบลงและสินค้าชิ้นนี้จะเป็นของคุณ</p>
+          <p class="pl-1 mb-1">• ระบบจะทำการประมูลสู้อัตโนมัติหากคุณไม่ใช่ผู้ชนะการประมูลสินค้าชิ้นนี้</p>
+          <p class="pl-1 mb-1">• หากคุณไม่ทำการชำระเงินสำหรับสินค้านี้ที่เพิ่มลงในรถเข็นด้วยวิธีการ Auto Win
+            และมีผู้ชนะการประมูลการประมูลจบลงก่อนที่คุณจะทำการชำระเงินสินค้าชิ้นนี้จะตกเป็นของผู้ชนะการประมูลทันที</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL AUTO WIN -->
+
+  <!-- MODAL AUTO BID -->
+  <div class="modal fade" id="modalAutoBid" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+        <div class="row">
+          <div class="col text-center">
+            <p>Auto Bid</p>
+          </div>
+          <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body p-0">
+          <div class="row">
+            <div class="col text-right">
+              <div class="align-self-center">
+                <img class="img-border-radius" style="width: 70px; margin-right: 25px; cursor: pointer;"
+                  src="./assets/img/coins_color_modal.png" data-toggle="modal" data-target="#modalCoinAutoBid">
+                <p style="cursor: pointer;" data-toggle="modal" data-target="#modalCoinAutoBid">ซื้อเหรียญ Auto Bid</p>
+              </div>
+            </div>
+            <div class="col">
+              <div>
+                <img class="img-border-radius" style="width: 70px;" src="./assets/img/old-television-130-modal.png">
+                <p class="pl-watch-vdo">ดูวิดีโอ</p>
+              </div>
+            </div>
+          </div>
+          <p>ตัวช่วยการประมูล</p>
+          <p class="pl-1 mb-1">• Auto Bid เป็นตัวช่วยคุณสำหรับใช้ในการประมูล</p>
+          <p class="pl-1 mb-1">•
+            คุณสามารถตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้และจะถูกการันตีเครดิตตามราคาที่คุณตั้ง</p>
+          <p class="pl-1 mb-1">• ระบบจะทำการประมูลสู้อัตโนมัติหากคุณไม่ใช่ผู้ชนะการประมูลสินค้าชิ้นนี้</p>
+          <p class="pl-1 mb-1">• การตั้งราคาเพื่อเปิดใช้งาน Auto Bid จำนวน 1 ครั้ง จะถูกหักเหรียญจำนวน 1
+            เหรียญโดยคุณสามารถเก็บสะสมเหรียญจาก</p>
+          <p class="pl-4 mb-1 font-weight-bold" style="color: #FE5721;">• การเติมเงินเพื่อรับเครดิตการประมูล</p>
+          <p class="pl-4 mb-1 font-weight-bold" style="color: #FE5721;">• การดูวิดีโอโฆษณา</p>
+          <p class="pl-1 mb-1">• คุณสามารถกดยกเลิก Auto Bid ได้ทุกเมื่อ</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL AUTO BID -->
+
+  <!-- MODAL AUTO BID SET PRICE -->
+  <div class="modal fade" id="modalAutoBidSetPrice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+        <div class="row">
+          <div class="col-auto">
+            <a data-dismiss="modal" aria-label="Close" 
+              style="text-decoration: none; cursor: pointer; color: #FE5721;"
+              (click)="setPriceAutoBid(priceAutoBidInput.value)" 
+              data-toggle="modal" data-target="#ModalPopupSetPriceAutoBid">
+              ตกลง
+            </a>
+          </div>
+          <div class="col text-center">
+            <p>Auto Bid</p>
+          </div>
+          <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <p class="mt-3">ตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้</p>
+        <div class="modal-body p-0 align-self-center modal-input-width">
+          <div class="input-style">
+            <p class="mb-0" style="font-size: 17px;">จำนวนเงิน</p>
+            <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;"
+            #priceAutoBidInput
+            oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="กำหนดราคา">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL AUTO BID SET PRICE -->
+
+  <!-- MODAL SHARED -->
+  <div class="modal fade" id="modalSharedProduct" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+        <div class="row">
+          <div class="col text-center">
+            <p>แชร์สินค้า</p>
+          </div>
+          <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body p-0 align-self-center">
+          <div class="row">
+            <!-- LEFT -->
+            <div class="col-12 col-md-12 col-xl-auto">
+              <div class="row">
+                <div class="col-12 col-md-12 col-xl-4 col-icon-mt mt-2 text-center disabled">
+                  <div class="row">
+                    <div class="col-auto col-md-auto col-xl-12">
+                      <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/FB-Icon.svg">
+                    </div>
+                    <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm">
+                      <p class="mb-0 shared-text">Facebook</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-12 col-xl-4 col-icon-mt mt-2 text-center disabled">
+                  <div class="row">
+                    <div class="col-auto col-md-auto col-xl-12">
+                      <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/ms-Icon.svg">
+                    </div>
+                    <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm">
+                      <p class="mb-0 shared-text">Messenger</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-12 col-xl-4 col-icon-mt mt-2 text-center disabled">
+                  <div class="row">
+                    <div class="col-auto col-md-auto col-xl-12">
+                      <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/line-Icon.svg">
+                    </div>
+                    <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm">
+                      <p class="mb-0 shared-text">Line</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- RIGHT -->
+            <div class="col-12 col-md-12 col-xl-auto" style="border-left: 2px solid #C9C9C9;">
+              <div class="row">
+                <div class="col-12 col-md-12 col-xl-3 col-icon-mt mt-2 text-center disabled">
+                  <div class="row">
+                    <div class="col-auto col-md-auto col-xl-12">
+                      <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/Email-Icon.svg">
+                    </div>
+                    <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm">
+                      <p class="mb-0 shared-text">E-mail</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-12 col-xl-3 col-icon-mt mt-2 text-center disabled">
+                  <div class="row">
+                    <div class="col-auto col-md-auto col-xl-12">
+                      <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/SMS-Icon.svg">
+                    </div>
+                    <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm">
+                      <p class="mb-0 shared-text">SMS</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-12 col-xl-3 col-icon-mt mt-2 text-center disabled">
+                  <div class="row">
+                    <div class="col-auto col-md-auto col-xl-12">
+                      <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/copy-Icon.svg">
+                    </div>
+                    <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm">
+                      <p class="mb-0 shared-text">คัดลอกข้อมูล</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-12 col-xl-3 col-icon-mt mt-2 text-center" style="cursor: pointer;">
+                  <div class="row" (click)="copyLink()" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#ModalCopyLink">
+                    <div class="col-auto col-md-auto col-xl-12">
+                      <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/copy-link-Icon.svg">
+                    </div>
+                    <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm">
+                      <p class="mb-0 shared-text">คัดลอกลิงก์</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL SHARED -->
+
+  <!-- MODAL POPUP IMG -->
+  <div class="modal fade" id="ModalPopupImg" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content border-0" style="border-radius: 5px;">
+        <div class="product-top">
+          <img class="product-top-img" src="{{ productImgTop }}">
+          <div class="icon-start">
+            <button data-dismiss="modal" aria-label="Close" type="button" class="btn btn-circle"
+              style="background-color: #585858; color: #FFF; cursor: pointer;">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP IMG -->
+
+  <!-- MODAL POPUP REPORT -->
+  <div class="modal fade" id="ModalPopupReport" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">ต้องการรายงานสินค้า ?</p>
+
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button (click)="reportProduct()" id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal">ยืนยัน</button>
+          </div>
+          <div class="mt-2">
+            <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+              <p class="text-center">ยกเลิก</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP REPORT -->
+
+  <!-- MODAL COIN AUTO BID -->
+  <div class="modal fade" id="modalCoinAutoBid" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+        <div class="row row-mlr">
+          <div class="col col-plr text-center">
+            <p>เหรียญ Auto Bid</p>
+          </div>
+          <div class="col-auto col-plr" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body p-0">
+          <div class="row m-0">
+            <!-- LEFT -->
+            <div class="col-12 col-md-6 col-xl-6 modal-col mb-2">
+              <div class="card border-0">
+                <img class="card-img img-cover" src="./assets/img/wallet_popup.png">
+                <div class="card-img-overlay overlay-cover text-center d-flex flex-column justify-content-center">
+                  <div class="align-self-center">
+                    <p class="mb-0 text-white">จำนวนเงิน</p>
+                    <h1 class="mb-0" style="color: #FE5721;">฿0.00</h1>
+                    <p class="mb-0 text-white">ยอดเงินที่ต้องชำระ</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- RIGHT -->
+            <div class="col-12 col-md-6 col-xl-6 modal-col">
+              <p class="text-center">กรุณาเลือกแพคเกจ</p>
+              <!-- ROW 1 -->
+              <div class="row ml-0 mr-0 mb-2">
+                <div class="col col-coin-l">
+                  <div class="list">
+                    <div class="row row-mlr">
+                      <div class="col-auto col-plr pr-0 align-self-center">
+                        <h3 class="mb-0 text-price" style="color: #FE5721;">฿10</h3>
+                      </div>
+                      <div class="col col-plr pl-0 text-right">
+                        <img class="img-fluid img-wallet" src="./assets/img/coins_color_modal.png">
+                        <a class="text-coin"> x 20</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col col-coin-r">
+                  <div class="list">
+                    <div class="row row-mlr">
+                      <div class="col-auto col-plr pr-0 align-self-center">
+                        <h3 class="mb-0 text-price" style="color: #FE5721;">฿20</h3>
+                      </div>
+                      <div class="col col-plr pl-0 text-right">
+                        <img class="img-fluid img-wallet" src="./assets/img/coins_color_modal.png">
+                        <a class="text-coin"> x 42</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ROW 2 -->
+              <div class="row ml-0 mr-0">
+                <div class="col col-coin-l">
+                  <div class="list">
+                    <div class="row row-mlr">
+                      <div class="col-auto col-plr pr-0 align-self-center">
+                        <h3 class="mb-0 text-price" style="color: #FE5721;">฿50</h3>
+                      </div>
+                      <div class="col col-plr pl-0 text-right">
+                        <img class="img-fluid img-wallet" src="./assets/img/coins_color_modal.png">
+                        <a class="text-coin"> x 105</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col col-coin-r">
+                  <div class="list">
+                    <div class="row row-mlr">
+                      <div class="col-auto col-plr pr-0 align-self-center">
+                        <h3 class="mb-0 text-price" style="color: #FE5721;">฿100</h3>
+                      </div>
+                      <div class="col col-plr pl-0 text-right">
+                        <img class="img-fluid img-wallet" src="./assets/img/coins_color_modal.png">
+                        <a class="text-coin"> x 220</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- BUTTON SUBMIT -->
+              <button type="button" class="btn mt-2"
+                style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
+                ชำระเงิน
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL COIN AUTO BID -->
+
+  <!-- MODAL POPUP SET PRICE AUTOBID -->
+  <div class="modal fade" id="ModalPopupSetPriceAutoBid" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">{{ setPriceAutoBidText }}</p>
+
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal">ตกลง</button>
+          </div>
+          <!-- <div class="mt-2">
+            <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+              <p class="text-center">ยกเลิก</p>
+            </a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP SET PRICE AUTOBID -->
+
+  <!-- MODAL POPUP COPY -->
+  <div class="modal fade" id="ModalCopyLink" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">คัดลอกลิงก์เรียบร้อย</p>
+  
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal">ยืนยัน</button>
+          </div>
+          <div class="mt-2">
+            <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+              <p class="text-center">ยกเลิก</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP COPY -->
+<!-- </div> -->

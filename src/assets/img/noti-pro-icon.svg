@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #373e48;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="500" cy="500" r="500"/>
+  <path id="Rounded_Rectangle_1_copy_2" data-name="Rounded Rectangle 1 copy 2" class="cls-2" d="M695.8,417.152L797.27,434.843a5,5,0,1,1-1.718,9.851L694.083,427A5,5,0,1,1,695.8,417.152Z"/>
+  <path id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-2" d="M697.151,372.174l96.714-35.43a5,5,0,1,1,3.44,9.389l-96.714,35.431A5,5,0,1,1,697.151,372.174Z"/>
+  <path id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-2" d="M664.726,334.361l68.04-77.328a5,5,0,0,1,7.508,6.606l-68.04,77.328A5,5,0,1,1,664.726,334.361Z"/>
+  <path class="cls-2" d="M581,349l50,145,18-7s15.108-4.305,14-29L627,358s-7.551-18.148-30-15Z"/>
+  <path class="cls-2" d="M491,289l42-15L641,582l-41,17Z"/>
+  <path class="cls-2" d="M389,595s90.93-29.931,192,5L476,300s-58.916,87.214-147,123Z"/>
+  <path class="cls-2" d="M371,601L311,430l-94,34s-23.978,15.552-16,42l35,103s9.742,29.8,50,23l82,105s-0.622,3.64,9,3l46-17s6.494-3.8,1-11L346,611Z"/>
+</svg>

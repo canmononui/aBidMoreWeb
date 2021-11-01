@@ -1,0 +1,43 @@
+.modal-privacy {
+  background-color: #FFF;
+  border: none;
+  border-radius: 13px;
+  opacity: 1;
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  max-width: 40%;
+}
+
+.button-description {
+  border: none; 
+  border-radius: 1.5rem; 
+  width: 100%; 
+  background-color: #D3D3D3;
+  color: #000;
+}
+
+.button-submit {
+  border: none; 
+  border-radius: 1.5rem; 
+  width: 100%; 
+  background-color: #FE5721;
+  color: #FFF;
+}
+
+@media only screen and (max-width: 768px) {
+  .modal-privacy {
+    bottom: 15px;
+    left: 15px;
+    max-width: 50%;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  .modal-privacy {
+    bottom: 15px;
+    left: 15px;
+    max-width: 80%;
+  }
+}

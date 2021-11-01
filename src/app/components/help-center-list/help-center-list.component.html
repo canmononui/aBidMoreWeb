@@ -1,0 +1,65 @@
+<div class="container">
+  <!-- INPUT -->
+  <div class="row mb-2">
+    <div class="col pr-0">
+      <input #searchInput class="form-control" style="border-radius: 50px;" placeholder="ค้าหาการช่วยเหลือการใช้งาน">
+    </div>
+    <div class="col-auto">
+      <button (click)="searchBtn(searchInput.value)" type="button" class="btn text-placeholder text-center"
+        style="border: none; border-radius: 1.5rem; color: #D9534F; border: 1px solid #D9534F; background-color: #FFF;">
+        ค้นหา
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-2 mb-4">
+    <!-- LIST 1 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('creditBid')">
+      <p class="mb-0">• เครดิตประมูลของ a Bid More คืออะไร?</p>
+    </div>
+    <!-- LIST 2 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('bidding')">
+      <p class="mb-0">• การร่วมประมูลทำได้อย่างไร</p>
+    </div>
+    <!-- LIST 3 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('autoWin')">
+      <p class="mb-0">• Auto Win คืออะไร?</p>
+    </div>
+    <!-- LIST 4 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('autoBid')">
+      <p class="mb-0">• Auto Bid คืออะไร?</p>
+    </div>
+    <!-- LIST 5 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('depositCredit')">
+      <p class="mb-0">• การเติมเครดิตทำได้อย่างไร?</p>
+    </div>
+    <!-- LIST 6 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('refund')">
+      <p class="mb-0">• การคืนเงินของ A Bid More ใช้เวลาเท่าไหร่?</p>
+    </div>
+    <!-- LIST 7 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('transportDay')">
+      <p class="mb-0">• ผู้ให้บริการขนส่งมีระยะเวลาขนส่งกี่วัน?</p>
+    </div>
+    <!-- LIST 8 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('transportTracking')">
+      <p class="mb-0">• ฉันสามารถติดตามสถานะการจัดส่งได้อย่างไร?</p>
+    </div>
+    <!-- LIST 9 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('guarantee')">
+      <p class="mb-0">• การการันตีสินค้าโดย A Bid More คืออะไร?</p>
+    </div>
+    <!-- LIST 10 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('coin')">
+      <p class="mb-0">• การสะสมเหรียญทำได้อย่างไร?</p>
+    </div>
+    <!-- LIST 11 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('rejectProduct')">
+      <p class="mb-0">• ฉันสามารถปฏิเสธสินค้าได้อย่างไร?</p>
+    </div>
+    <!-- LIST 12 -->
+    <div class="card-border-3 bg-white mt-2" style="cursor: pointer;" (click)="helpCenterDetail('registerMerchant')">
+      <p class="mb-0">• การเริ่มขายสินค้าใน A Bid More</p>
+    </div>
+  </div>
+</div>

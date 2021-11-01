@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="939" viewBox="0 0 1000 939">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #8d9eb7;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="497.656" y1="187.781" x2="497.656" y2="939" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#da2929"/>
+      <stop offset="1" stop-color="#f84e4e"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-1" d="M143.145,262.338V367.177H44.355S0,359.591,0,314.758V48.629S0.253,0.242,54.436.242H953.629S1000,1.475,1000,52.661V322.822s-7.473,44.355-44.355,44.355H852.823V262.338h16.129s28.225-2.571,28.225-30.241V131.29s-5.007-26.21-38.306-26.21H133.065s-28.226,2.86-28.226,28.226V238.145S106.917,262.338,143.145,262.338Z"/>
+  <path id="Rounded_Rectangle_4" data-name="Rounded Rectangle 4" class="cls-2" d="M230.967,187.781H764.358a10,10,0,0,1,10,10V929a10,10,0,0,1-10,10H230.967a10,10,0,0,1-10-10V197.781A10,10,0,0,1,230.967,187.781Z"/>
+  <path class="cls-3" d="M498.141,867.177L695.722,659.515s7.137-40.381-28.226-26.209L518.3,790.564V280.483s-4.954-16.129-22.177-16.129c0,0-16.129,1.032-16.129,14.113v512.1L328.786,633.306s-15.038-7.763-22.177,2.016c0,0-9.558,3.915-6.049,20.161Z"/>
+</svg>

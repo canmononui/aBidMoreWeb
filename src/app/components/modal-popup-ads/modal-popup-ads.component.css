@@ -1,0 +1,61 @@
+.img-wallet {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.icon-start {
+  position: absolute; 
+  top: 8px; 
+  right: 8px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+/* CHART */
+.time-text-now {
+  font-size: .9rem;
+  color: #FE5721;
+  /* top: 0px;  */
+  position: relative; 
+  z-index: 99;
+}
+
+.img-sm {
+  width: 30px;
+  height: 30px;
+  margin-top: -25px;
+}
+
+/* .chart-canvas {
+  width: 30px; 
+  height: 30px
+} */
+
+@media only screen and (max-width: 768px) {
+  .time-text-now {
+    top: 0px; 
+  }
+
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  .img-sm {
+    width: 30px;
+    height: 30px;
+    margin-top: -20px;
+  }
+
+  .time-text-now {
+    top: 5px; 
+  }
+}
+/* Small devices (landscape phones, 576px and up) */

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f4f4f4;
+      }
+
+      .cls-2 {
+        fill: #c8cdce;
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill: #dbdddd;
+      }
+
+      .cls-4 {
+        fill: #698f92;
+      }
+
+      .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-6 {
+        fill: #a8e2ef;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="500" cy="500" r="500"/>
+  <path class="cls-2" d="M423,655L400,777l200,2L575,654Z"/>
+  <rect id="Rounded_Rectangle_2" data-name="Rounded Rectangle 2" class="cls-3" x="364" y="773" width="272" height="42" rx="21" ry="21"/>
+  <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-3" x="193" y="198" width="622" height="466" rx="25" ry="25"/>
+  <rect id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-4" x="193" y="198" width="622" height="353" rx="25" ry="25"/>
+  <rect class="cls-4" x="194" y="417" width="620" height="134"/>
+  <rect id="Rounded_Rectangle_1_copy_2" data-name="Rounded Rectangle 1 copy 2" class="cls-5" x="233" y="237" width="535" height="277" rx="25" ry="25"/>
+  <rect id="Rounded_Rectangle_3" data-name="Rounded Rectangle 3" class="cls-6" x="273" y="319" width="453" height="61" rx="25" ry="25"/>
+  <rect id="Rounded_Rectangle_3_copy" data-name="Rounded Rectangle 3 copy" class="cls-6" x="273" y="410" width="215" height="18" rx="9" ry="9"/>
+  <rect id="Rounded_Rectangle_3_copy_2" data-name="Rounded Rectangle 3 copy 2" class="cls-6" x="511" y="410" width="215" height="18" rx="9" ry="9"/>
+  <rect id="Rounded_Rectangle_3_copy_3" data-name="Rounded Rectangle 3 copy 3" class="cls-6" x="273" y="454" width="215" height="18" rx="9" ry="9"/>
+  <rect id="Rounded_Rectangle_3_copy_3-2" data-name="Rounded Rectangle 3 copy 3" class="cls-6" x="511" y="454" width="215" height="18" rx="9" ry="9"/>
+  <circle class="cls-5" cx="502.5" cy="605.5" r="23.5"/>
+</svg>

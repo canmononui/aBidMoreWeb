@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f4f4f4;
+      }
+
+      .cls-2 {
+        fill: #918291;
+      }
+
+      .cls-3 {
+        fill: #f3f0f3;
+      }
+
+      .cls-4 {
+        fill: #cbc4cc;
+      }
+
+      .cls-5, .cls-6 {
+        fill: #e94444;
+      }
+
+      .cls-5 {
+        fill-rule: evenodd;
+      }
+
+      .cls-7 {
+        fill: #fed402;
+      }
+
+      .cls-8 {
+        fill: #e2dee2;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="500" cy="500" r="500"/>
+  <circle class="cls-2" cx="491" cy="509" r="298"/>
+  <circle class="cls-3" cx="492.5" cy="510.5" r="206.5"/>
+  <circle class="cls-4" cx="490.5" cy="508.5" r="86.5"/>
+  <circle class="cls-1" cx="491" cy="509" r="49"/>
+  <path class="cls-5" d="M567,276V210s0.816-12.094,15-12.094c0,0,101.906,26.613,167,118.094,0,0,98.435,112.935,52,284,0,0-3.163,12.594-15,8l-60-29S790.077,365.51,567,276Z"/>
+  <circle class="cls-6" cx="758.5" cy="361.5" r="52.5"/>
+  <circle class="cls-7" cx="609.5" cy="247.5" r="12.5"/>
+  <circle id="Ellipse_3_copy" data-name="Ellipse 3 copy" class="cls-7" cx="771.5" cy="552.5" r="12.5"/>
+  <circle id="Ellipse_3_copy_2" data-name="Ellipse 3 copy 2" class="cls-7" cx="758.5" cy="361.5" r="16.5"/>
+  <circle class="cls-8" cx="638" cy="509" r="20"/>
+  <circle id="Ellipse_8_copy" data-name="Ellipse 8 copy" class="cls-8" cx="343" cy="509" r="20"/>
+  <circle id="Ellipse_8_copy_2" data-name="Ellipse 8 copy 2" class="cls-8" cx="492" cy="362" r="20"/>
+  <circle id="Ellipse_8_copy_3" data-name="Ellipse 8 copy 3" class="cls-8" cx="492" cy="655" r="20"/>
+  <circle id="Ellipse_8_copy_4" data-name="Ellipse 8 copy 4" class="cls-8" cx="388" cy="611" r="14"/>
+  <circle id="Ellipse_8_copy_5" data-name="Ellipse 8 copy 5" class="cls-8" cx="388" cy="407" r="14"/>
+  <circle id="Ellipse_8_copy_6" data-name="Ellipse 8 copy 6" class="cls-8" cx="591" cy="407" r="14"/>
+  <circle id="Ellipse_8_copy_7" data-name="Ellipse 8 copy 7" class="cls-8" cx="591" cy="611" r="14"/>
+</svg>

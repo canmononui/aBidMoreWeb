@@ -1,0 +1,46 @@
+<div *ngIf="showContent" class="container">
+  <div class="card card-radius">
+    <div class="card-tab card-tab-radius">
+      <p class="text-white text-center mb-0">รหัสแนะนำ</p>
+    </div>
+
+    <div class="card-body">
+      <div class="input-style">
+        <p class="mb-0" style="font-size: 17px;">รหัสแนะนำ</p>
+        <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;" id="refCode"
+        #refCode_ placeholder="ตัวอย่างรหัส AB1621859416">
+      </div>
+      <button (click)="check(refCode_.value)" type="button" class="btn btn-mt" data-toggle="modal" data-target="#ModalRefCode"
+        style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
+        บันทึก
+      </button>
+    </div>
+    <!-- Card Body -->
+  </div>
+</div>
+<!-- End Container -->
+
+<!-- MODAL POPUP REFCODE -->
+<div class="modal fade" id="ModalRefCode" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+      <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+      <h5 class="font-weight-bold text-center mt-5">ต้องการบันทึกข้อมูล</h5>
+      <p class="text-center">{{ errorText }}</p>
+
+      <div class="mt-4">
+        <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+          <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+            data-dismiss="modal" (click)="submitRefCode()">ยืนยัน</button>
+        </div>
+        <div *ngIf="errorText != 'โปรดเพิ่มรหัสแนะนำ'" class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL POPUP REFCODE -->

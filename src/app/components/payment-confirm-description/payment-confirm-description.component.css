@@ -259,8 +259,20 @@ input[type="radio"] .styled:checked + label::after {
   /* border: 2.5px solid #E7EDF4;  */
 }
 
+.modalShow {
+  display: block;
+  overflow-y: auto; 
+  padding-right: 15px;
+  background: rgba(0,0,0,0.5);
+}
 
+.productName:hover {
+  color: #a9a9a9;
+}
 
+.ref-code {
+  align-items: center;
+}
 
 
 /* Small devices (landscape phones, 576px and up) */
@@ -419,4 +431,19 @@ input[type="radio"] .styled:checked + label::after {
   .card-number {
     font-size: 1rem;
   }
+
+  .row-mlr {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  
+  .col-plr {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .ref-code {
+    align-items: left;
+  }
+
 }

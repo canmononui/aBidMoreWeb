@@ -13,6 +13,11 @@ body {
   background-color: #F5F5F5;
 }
 
+.router {
+  cursor: pointer; 
+  outline: 0;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (max-width: 480px) {
   .body-color {

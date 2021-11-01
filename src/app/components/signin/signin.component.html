@@ -1,0 +1,189 @@
+<div *ngIf="showContent">
+  <!-- <div class="row nav-sm p-3">
+    <div class="col-auto pr-0">
+      <img src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg" class="align-self-center" style="width: 30px; height: 30px;">
+    </div>
+    <div class="col align-self-center">
+      <p class="mb-0">A Bid More</p>
+    </div>
+  </div> -->
+  
+  <div class="h-vh">
+    <div class="container h-100 d-flex justify-content-center">
+      <div class="my-auto" style="width: 100%;">
+        <!--  -->
+        <div class="row m-0 card_">
+          <!-- Left -->
+          <div class="col-12 col-md-6 col-xl-6 col-regis">
+            <div class="card border-0">
+              <!-- BUTTON CHANGE LANGUAGE -->
+              <!-- <div class="icon-language">
+                <div class="row" style="margin-left: -2px; margin-right: -2px;">
+                  <div class="col-auto" style="padding-left: 2px; padding-right: 2px;">
+                    <button type="button" class="btn btn-language"
+                      style="background-color: #FE5721; color: #FFF;">
+                      <p class="mb-0" (click)="setLanguageTH()">ก</p>
+                    </button>
+                  </div>
+                  <div class="col-auto" style="padding-left: 2px; padding-right: 2px;">
+                    <button type="button" class="btn btn-language"
+                      style="background-color: #FFF; color: #000; border: 2px solid #E7EDF4;">
+                      <p class="mb-0">A</p>
+                    </button>
+                  </div>
+                </div>
+              </div> -->
+              
+              <img class="card-img img-cover" src="./assets/img/wallet_popup_svg.svg">
+              <div class="card-img-overlay overlay-cover text-center d-flex flex-column justify-content-center">
+                <div class="align-self-center">
+                  <h2 class="mb-0 text-white">สมาชิกใหม่?</h2>
+                  <p class="mb-0 text-white">สมัครสมาชิกเพื่อเลือกประมูลสินค้าคุณภาพในเว็บไซต์ของเรา</p>
+                  <button type="button" class="btn mt-3 btn-regis router" [routerLink]="['/signup']">สมัครสมาชิก</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right -->
+          <div class="col-12 col-md-6 col-xl-6 align-self-center">
+            <div *ngIf="showFromLogin">
+            <!-- Right Input From Login -->
+              <div class="row row-right">
+                <div class="col">
+                  <h2 class="mb-0">เข้าสู่ระบบ</h2>
+                </div>
+                <div class="col align-self-center text-right">
+                  <a (click)="forgotPass()" class="forgot-text">ลืมรหัสผ่าน</a>
+                </div>
+              </div>
+              <div class="input-style mt-4">
+                <p class="mb-0 text-input">Email</p>
+                <input type="email" class="form-control border-0 p-0 text-placeholder"
+                  style="box-shadow: none; background-color: #F2F6FA;" #email_ placeholder="email@example.com">
+              </div>
+              <div class="input-style mt-2">
+                <p class="mb-0 text-input">รหัสผ่าน</p>
+                <input type="password" class="form-control border-0 p-0 text-placeholder"
+                  style="box-shadow: none; background-color: #F2F6FA;" #password_ placeholder="รหัสผ่าน"
+                  (keyup.enter)="subMitLogin(email_.value, password_.value)">
+              </div>
+              <!-- Button Submit -->
+              <p *ngIf="auth.statusloginFail" class="mb-0 text-danger">ข้อผิดพลาดอีเมล์หรือรหัสผ่านไม่ถูกต้อง</p>
+              <button (click)="subMitLogin(email_.value, password_.value)" type="button" class="router btn mt-3 btn-submit">
+                เข้าสู่ระบบ
+              </button>
+              <div class="text-center mt-2 text-regis router" [routerLink]="['/signup']">
+                <a style="color: #343a40; text-decoration: none;">สมาชิกใหม่</a>
+              </div>
+              <div class="mt-2">
+                <div class="row">
+                  <div class="col align-self-center">
+                    <div class="" style="border-bottom: 0.5px solid #89898a;"></div>
+                  </div>
+                  <div class="col-auto p-0">
+                    <p class="mb-0">หรือ</p>
+                  </div>
+                  <div class="col align-self-center">
+                    <div class="" style="border-bottom: 0.5px solid #89898a;"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col" style="padding-right: 4px;">
+                    <button type="button" class="btn mt-3 btn-facebook disabled" (click)="facebookLogin()">
+                      <i class="fa fa-facebook mr-2" aria-hidden="true"></i>Facebook
+                    </button>
+                  </div>
+                  <div class="col" style="padding-left: 4px;">
+                    <button type="button" class="btn mt-3 btn-google" (click)="googleLogin()">
+                      <i class="fa fa-google mr-2" aria-hidden="true"></i>Google
+                    </button>
+                  </div>
+                </div>
+                <p class="mt-2 mb-0 text-center router" [routerLink]="['']">ข้าม</p>
+              </div>
+              
+            <!-- End Right Input From Login -->
+          </div>
+          <div *ngIf="showForgotPass">
+            <!-- Right Input Forgot Pass -->
+            <div class="row row-right">
+              <div class="col-8">
+                <h2 class="mb-0">ลืมรหัสผ่าน</h2>
+              </div>
+              <div class="col-4 align-self-center text-right">
+                <a (click)="backWard()" class="forgot-text">
+                  <i class="fa fa-angle-left mr-2"></i>ย้อนกลับ
+                </a>
+              </div>
+            </div>
+            <div class="input-style mt-4">
+              <p class="mb-0 text-input">Email</p>
+              <input type="email" class="form-control border-0 p-0 text-placeholder" 
+                  style="box-shadow: none; background-color: #F2F6FA;" maxlength="100" #emailResetPass_ placeholder="email@example.com">
+            </div>
+            <button data-toggle="modal" data-target="#ModalPopupResetPass"
+                    data-backdrop="static" data-keyboard="false" 
+                    (click)="resetPass(emailResetPass_.value)" type="button" class="btn mt-3 btn-submit" >
+              เปลี่ยนรหัสผ่าน
+            </button>
+          <!-- End Right Input Forgot Pass -->
+          </div>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <!-- MODAL POPUP RESET PASS -->
+  <div class="modal fade" id="ModalPopupResetPass" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <!-- <p class="text-center">{{ textError }}</p> -->
+        <p class="text-center">'ต้องการเปลี่ยนรหัสผ่าน ?'</p>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <!-- <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal" 
+              data-toggle="modal" data-target="#ModalPopupMess"
+              data-backdrop="static" data-keyboard="false"
+              (click)="firebaseResetPass()">ตกลง</button> -->
+              <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal" (click)="firebaseResetPass()">ตกลง</button>
+          </div>
+          <!-- <div *ngIf="status" class="mt-2"> -->
+          <div class="mt-2">
+            <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+              <p class="text-center">ยกเลิก</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP RESET PASS -->
+  
+  <!-- MODAL POPUP MESS -->
+  <div class="modal fade" id="ModalPopupMess" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <!-- <p class="text-center">{{ textError }}</p> -->
+        <p class="text-center">MODAL POPUP MESS</p>
+        <div class="mt-4">
+          <div *ngIf="resetPassStatus" class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal">ตกลง</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP MESS -->

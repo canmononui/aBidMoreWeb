@@ -259,6 +259,7 @@ input[type="radio"] .styled:checked + label::after {
   /* border: 2.5px solid #E7EDF4;  */
 }
 
+/* DESCRIPTION TRANSPORT */
 .dot-start {
   margin-left: 7px; 
   margin-right: 7px;
@@ -296,8 +297,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .line-start {
   border-left: 3px solid #FE5721;
-  height: 80px;
-  margin-top: -87px;
+  height: 60px;
+  margin-top: -67px;
   margin-left: 13px;
   position: absolute;
 }
@@ -308,6 +309,11 @@ input[type="radio"] .styled:checked + label::after {
   margin-left: 13px;
   position: absolute;
 }
+
+.mt10 {
+  margin-top: 10px;
+}
+/* END DESCRIPTION TRANSPORT */
 
 
 
@@ -465,9 +471,10 @@ input[type="radio"] .styled:checked + label::after {
     font-size: 0.8rem;
   }
 
+  /* DESCRIPTION TRANSPORT */
   .line-start {
-    height: 60px;
-    margin-top: -70px;
+    height: 50px;
+    margin-top: -60px;
     margin-left: 13px;
   }
   
@@ -476,5 +483,14 @@ input[type="radio"] .styled:checked + label::after {
     margin-left: 13px;
   }
 
-
+  .row-mlr {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  
+  .col-plr {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  /* END DESCRIPTION TRANSPORT */
 }

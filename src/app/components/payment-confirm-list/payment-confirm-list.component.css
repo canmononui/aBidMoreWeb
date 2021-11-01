@@ -259,8 +259,9 @@ input[type="radio"] .styled:checked + label::after {
   /* border: 2.5px solid #E7EDF4;  */
 }
 
-
-
+.productName:hover {
+  color: #a9a9a9;
+}
 
 
 /* Small devices (landscape phones, 576px and up) */
@@ -414,6 +415,16 @@ input[type="radio"] .styled:checked + label::after {
 
   .text-bank {
     font-size: 0.8rem;
+  }
+
+  .row-mlr {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  
+  .col-plr {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
 

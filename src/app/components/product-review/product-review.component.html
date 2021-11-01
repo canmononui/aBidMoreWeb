@@ -1,0 +1,101 @@
+<div *ngIf="showContent" class="container">
+  <!-- PRODUCT DETAIL -->
+  <div class="container-bg-color mt-2">
+    <div class="row m-0">
+      <div class="col-auto p-0">
+        <img src="{{ productDes.imgProduct[0].imgUrl }}" class="img-fluid border-radius-10" width="80 px">
+      </div>
+      <div class="col-auto pl-2">
+        <p class="mb-0">ชื่อสินค้า: {{ productDes.name }}</p>
+        <p class="mb-0">ชื่อร้านค้า: {{ shopDes.shopName }}</p>
+      </div>
+    </div>
+  </div>
+  <!-- END PRODUCT DETAIL -->
+
+  <!-- REVIEW 1 -->
+  <div *ngIf="reviewList.length != 0">
+    <div *ngFor="let dataReview of reviewList" class="card-border-3 bg-white mt-2">
+      <div class="row">
+        <div class="col-auto">
+          <img src="{{ dataReview.valueUserBuyerDes.profileImg.imgUrl }}" class="img-fluid rounded-circle" width="50px">
+        </div>
+        <div class="col pl-0">
+          <p class="mb-0">{{ dataReview.valueUserBuyerDes.displayName }}</p>
+          <ul class="rating-stars">
+            <li>
+              <i class="fa star-color" [class.fa-star]="dataReview.valueReviewDes.ratingStars >= 0.5"
+                [class.fa-star-o]="dataReview.valueReviewDes.ratingStars < 0.5"></i>
+              <i class="fa star-color" [class.fa-star]="dataReview.valueReviewDes.ratingStars >= 1.5"
+                [class.fa-star-o]="dataReview.valueReviewDes.ratingStars < 1.5"></i>
+              <i class="fa star-color" [class.fa-star]="dataReview.valueReviewDes.ratingStars >= 2.5"
+                [class.fa-star-o]="dataReview.valueReviewDes.ratingStars < 2.5"></i>
+              <i class="fa star-color" [class.fa-star]="dataReview.valueReviewDes.ratingStars >= 3.5"
+                [class.fa-star-o]="dataReview.valueReviewDes.ratingStars < 3.5"></i>
+              <i class="fa star-color" [class.fa-star]="dataReview.valueReviewDes.ratingStars >= 4.5"
+                [class.fa-star-o]="dataReview.valueReviewDes.ratingStars < 4.5"></i>
+            </li>
+          </ul>
+        </div>
+        <!-- <div class="col-auto" style="cursor: pointer;" data-toggle="modal" data-target="#ModalPopupReport">
+          <p class="mb-0">รายงาน</p>
+        </div> -->
+      </div>
+      <p class="mt-2 mb-0">{{ dataReview.valueReviewDes.comment }}</p>
+    </div>
+  </div>
+  <!-- REVIEW 2 -->
+  <!-- <div class="card-border-3 bg-white mt-2">
+    <div class="row">
+      <div class="col-auto">
+        <img src="./assets/img/navbar/store-icon.png" class="img-fluid rounded" width="50 px">
+      </div>
+      <div class="col pl-0">
+        <p class="mb-0">USER NAME</p>
+        <ul class="rating-stars">
+          <li>
+            <i class="fa fa-star" style="color: #FFA101;"></i>
+            <i class="fa fa-star" style="color: #FFA101;"></i>
+            <i class="fa fa-star" style="color: #FFA101;"></i>
+            <i class="fa fa-star" style="color: #FFA101;"></i>
+            <i class="fa fa-star" style="color: #FFA101;"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="col-auto" style="cursor: pointer;" data-toggle="modal" data-target="#ModalPopupReport">
+        <p class="mb-0">รายงาน</p>
+      </div>
+    </div>
+    <p class="mt-2 mb-0">สินค้าตรงตามรูป รายละเอียดครบสอบถามข้อความทางร้านร้านตอบดีมากให้รายละเอียดครบถ้วน แพคส่งสินค้า
+      กันกระแทกดีสุดๆ มีเก็บเงินปลายทางด้วยโหวตให้เลย</p>
+  </div> -->
+</div>
+
+<!-- MODAL POPUP CANCEL -->
+<div class="modal fade" id="ModalPopupReport" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+      <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+      <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+      <!-- <p class="text-center">หากไม่สามารถส่งสินค้าได้ตามกำหนดไม่ว่าเหตุใดก็ตาม ร้านจะถูกหักคะแนน 10 คะแนน</p> -->
+      <div class="input-style">
+        <p class="mb-0 text-input">กรุณาแจ้งเหตุผลหรือรายละเอียด</p>
+        <textarea class="form-control border-0 p-0 text-placeholder" maxlength="100"
+          style="box-shadow: none; background-color: #F2F6FA;" #reportDescription_ placeholder="ข้อความ"></textarea>
+      </div>
+      <div class="mt-4">
+        <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+          <button type="button" class="btn btn-primary"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+            data-dismiss="modal">ตกลง</button>
+        </div>
+        <div class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ENG MODAL POPUP CANCEL -->

@@ -1,0 +1,321 @@
+.card_ {
+  padding: 35px 20px 35px 20px;
+  background-color: #FFF; 
+  border: 3px solid #E7EDF4; 
+  border-radius: 13px;
+}
+
+.input-style {
+  padding: 16px 16px 16px 24px; 
+  border-radius: 10px; 
+  background-color: #F2F6FA;
+}
+
+.btn-submit {
+  border: none; 
+  border-radius: 1.5rem; 
+  width: 100%; 
+  color: #fff; 
+  background-color: #FE5721;
+}
+
+.btn-up {
+  border: 1px solid #585858;
+  border-radius: 1.5rem; 
+  width: auto; 
+  color: #585858; 
+  background-color: #FFF;
+}
+
+.img-cover {
+  /* opacity: 30%; */
+  border-radius: 13px 13px 13px 13px;
+}
+
+.backWard-text {
+  color: #343a40; 
+  text-decoration: none; 
+  cursor: pointer;
+}
+
+.dropdown-menu-text {
+  color: #343a40;
+  text-decoration: none;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #DD5252;
+  background-color: #DD5252;
+}
+
+.btn-log {
+  border: none; 
+  border-radius: 1.5rem; 
+  width: 100%; 
+  color: #fff; 
+  background-color: #373A3C;
+}
+
+.text-log {
+  display: none;
+}
+
+.add-m {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.nav-sm {
+  display: none;
+}
+
+.h-vh {
+  height: 100vh;
+}
+
+#matchList {
+  /* position: absolute; */
+  position: relative;
+  z-index: 99;
+  background-color: white;
+  border: 1px solid #DBE1E6;
+  left: 0;
+  right: 0;
+  /* Vertical scroll bar */
+  max-height: 350px;
+  overflow-y: auto;
+  /* Perven horizontal scrollbar */
+  overflow-x: hidden;
+}
+
+#matchList:hover {
+  cursor: pointer;
+}
+
+.input-otp-style {
+  padding: 8px 8px 8px 8px; 
+  border-radius: 5px; 
+  background-color: #F2F6FA;
+  width: 50px;
+  height: 50px;
+}
+
+.otp {
+  padding: 20px 20px 20px 20px; 
+  border: 3px solid #E7EDF4; 
+  border-radius: 10px;
+}
+
+.otp-input {
+  margin-top: 36px;
+  margin-bottom: 36px;
+}
+
+.modal-otp {
+  padding: 48px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ------------------------------------ */
+
+/* .input-style {
+  padding: 16px 16px 16px 24px; 
+  border-radius: 10px; 
+  background-color: #F2F6FA;
+} */
+
+.bg-input-white {
+  box-shadow: none; 
+  background-color: #FFF; 
+  border-radius: 5px;
+}
+
+/* .btn-submit {
+  border: none; 
+  border-radius: 1.5rem; 
+  width: 100%; 
+  color: #fff; 
+  background-color: #D9534F;
+} */
+
+/* .dropdown-menu-text {
+  color: #343a40;
+  text-decoration: none;
+} */
+
+/* .btn-up {
+  border: 1px solid #585858;
+  border-radius: 1.5rem; 
+  width: auto; 
+  color: #585858; 
+  background-color: #FFF;
+} */
+
+.btn-edit {
+  border: none; 
+  border-radius: 1.5rem; 
+  color: #D9534F; 
+  border: 1px solid #D9534F; 
+  background-color: #F2F6FA;
+}
+
+.dropdown-menu-text {
+  color: #343a40;
+  text-decoration: none;
+}
+
+.dropdown-item:active {
+  color: #FFF; 
+  background-color: #FE5721;
+}
+
+/* ------------------------------------ */
+
+.scrollable-menu {
+  height: auto;
+  max-height: 250px;
+  overflow-x: hidden;
+}
+
+.contract {
+  height: 500px; 
+  width: 100%; 
+  overflow-y: auto;
+}
+
+.modalShow {
+  display: block; 
+  overflow-y: auto;
+  padding-right: 15px;
+  background: rgba(0,0,0,0.5);
+}
+
+@media only screen and (max-width: 768px) {
+  .input-otp-style {
+    padding: 8px 8px 8px 8px; 
+    border-radius: 10px;
+    width: 55px;
+    height: 55px;
+  }
+
+  .otp-input {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .text-input {
+    font-size: 1rem;
+  }
+
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  .container {
+    padding: 0px;
+  }
+
+  .h-vh {
+    height: 95vh;
+  }
+
+  .nav-sm {
+    display: flex;
+  }
+
+  .input-style {
+    padding: 10px 10px 10px 15px; 
+    border-radius: 5px;
+  }
+  
+  .card_ {
+    padding: 16px 8px 16px 8px; 
+    background-color: #FFF;
+    border: none; 
+    border-radius: 0px;
+  }
+  
+  .col-left {
+    display: none;
+  }
+  
+  .row-right {
+    margin-top: 24px;
+  }
+
+  .text-log {
+    display: block;
+  }
+
+  .text-8 {
+    font-size: 0.8rem;
+  }
+
+  .text-10 {
+    font-size: 1rem;
+  }
+
+  .text-15 {
+    font-size: 1.5rem;
+  }
+
+  .sm-p-0 {
+    padding: 0px;
+  }
+
+  .btnAdd-mb-sm {
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-otp {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .otp {
+    padding: 20px 10px 20px 10px;
+  }
+
+  .input-otp-style {
+    padding: 0px 0px 0px 0px; 
+    border-radius: 5px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .text-input {
+    font-size: 1rem;
+  }
+
+  .btn-submit {
+    width: 95%;
+  }
+
+
+}

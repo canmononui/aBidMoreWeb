@@ -1,0 +1,131 @@
+<!-- Modal invite friend -->
+<div class="modal fade" id="modalInviteFriend" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-bottom">
+    <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+      <div class="row row-mlr">
+        <div class="col col-plr text-center">
+          <p>ชวนเพื่อน</p>
+        </div>
+        <div class="col-auto col-plr" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+          <button type="button" class="close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body p-0 align-self-center">
+        <div class="row m-0">
+          <!-- Left -->
+          <div class="col-12 col-md-12 col-xl-auto col-plr">
+            <div class="row row-mlr">
+              <div class="col-12 col-md-12 col-xl-4 col-icon-mt col-plr mt-2 text-center">
+                <div class="row row-mlr disabled">
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-img-sm col-plr">
+                    <!-- <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/FB-Icon.png"> -->
+                    <img class="img-fluid" style="max-width: 40px;" src="./assets/img/social/FB-Icon.svg">
+                  </div>
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm col-plr align-self-center">
+                    <p class="mb-0 shared-text">Facebook</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-4 col-icon-mt col-plr mt-2 text-center">
+                <div class="row row-mlr disabled">
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-img-sm col-plr">
+                    <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/ms-Icon.svg">
+                  </div>
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm col-plr align-self-center">
+                    <p class="mb-0 shared-text">Messenger</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-4 col-icon-mt col-plr mt-2 text-center">
+                <div class="row row-mlr disabled">
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-img-sm col-plr">
+                    <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/line-Icon.svg">
+                  </div>
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm col-plr align-self-center">
+                    <p class="mb-0 shared-text">Line</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-sm" style="border-left: 2px solid #C9C9C9;"></div>
+          <!-- Right -->
+          <div class="col-12 col-md-12 col-xl-auto col-plr">
+            <div class="row row-mlr">
+              <div class="col-12 col-md-12 col-xl-3 col-icon-mt col-plr mt-2 text-center">
+                <div class="row row-mlr disabled">
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-img-sm col-plr">
+                    <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/Email-Icon.svg">
+                  </div>
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm col-plr align-self-center">
+                    <p class="mb-0 shared-text">E-mail</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-3 col-icon-mt col-plr mt-2 text-center">
+                <div class="row row-mlr disabled">
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-img-sm col-plr">
+                    <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/SMS-Icon.svg">
+                  </div>
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm col-plr align-self-center">
+                    <p class="mb-0 shared-text">SMS</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-3 col-icon-mt col-plr mt-2 text-center">
+                <div class="row row-mlr disabled">
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-img-sm col-plr">
+                    <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/copy-Icon.svg">
+                  </div>
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm col-plr align-self-center">
+                    <p class="mb-0 shared-text">คัดลอกข้อมูล</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-3 col-icon-mt col-plr mt-2 text-center">
+                <div (click)="copyLink()" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#ModalCopyLink" class="row row-mlr"
+                  style="cursor: pointer;">
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-img-sm col-plr">
+                    <img class="img-fluid" style="max-width: 40px;" src="./assets/img/shared/copy-link-Icon.svg">
+                  </div>
+                  <div class="col-auto col-md-auto col-xl-12 col-shared-text-sm col-plr align-self-center">
+                    <p class="mb-0 shared-text">คัดลอกลิงก์</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal invite friend -->
+
+<!-- MODAL COPY LINK -->
+<div class="modal fade" id="ModalCopyLink" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+      <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+      <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+      <p class="text-center">คัดลอกลิงก์เรียบร้อย</p>
+
+      <div class="mt-4">
+        <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+          <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+            data-dismiss="modal">ยืนยัน</button>
+        </div>
+        <div class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL COPY LINK -->

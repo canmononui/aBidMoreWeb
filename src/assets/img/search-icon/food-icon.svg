@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f4f4f4;
+      }
+
+      .cls-2 {
+        fill: #edbf35;
+      }
+
+      .cls-2, .cls-6, .cls-7 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill: #e6b050;
+      }
+
+      .cls-4 {
+        fill: #a45c2d;
+      }
+
+      .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-6 {
+        fill: #dfb230;
+      }
+
+      .cls-7 {
+        fill: #fbc735;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="500.189" cy="500" r="500.001"/>
+  <path class="cls-2" d="M279.687,240s-6.729,71.888,13,133c0,0-28.108,126.762,0,262,0,0-20.589,72.516-13,136l49,15,259.982,4,127.991-16s11.691-79.087-11-135c0,0,31.864-153.652-1-264,0,0,34.622-98.266,6-149Z"/>
+  <rect class="cls-3" x="279.688" y="199" width="437.968" height="41"/>
+  <rect id="Rectangle_1_copy" data-name="Rectangle 1 copy" class="cls-3" x="279.688" y="770" width="437.968" height="41"/>
+  <circle class="cls-4" cx="499.672" cy="506" r="135.984"/>
+  <circle id="Ellipse_2_copy" data-name="Ellipse 2 copy" class="cls-5" cx="500.172" cy="506.5" r="118.484"/>
+  <path class="cls-6" d="M498.672,533s-60.142,19.938-91.994-43c0,0-6.953-20.576,16-12l22,8,25,12,15,10Z"/>
+  <path class="cls-7" d="M420.677,477s39.1,20.485,67,50c0,0,37.034,41.952,67,29,0,0,62.35-24.112,29-80,0,0-18.524-28.847-57-15C526.67,461,481.924,496.114,420.677,477Z"/>
+</svg>

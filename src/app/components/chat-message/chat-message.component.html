@@ -1,65 +1,59 @@
 <div class="container">
   <div class="card card-radius">
-    <div class="pt-3 pb-3 card-tab-radius">
-      <p class="text-white text-center mb-0">STORE NAME</p>
-      <!-- <div class="row m-0">
-        <div class="col-auto pr-0">
-          <button type="button" class="btn btn-circle">
-            <i class="fa fa-angle-left font-weight-bold"></i>
-          </button>
+    <!-- CHAT DISPLAY NAME -->
+    <div class="card-tab card-tab-radius">
+      <div class="row">
+        <div (click)="gotoChatList()" class="col-auto pr-0 text-white align-self-center" style="cursor: pointer;">
+          <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> ย้อนกลับ
         </div>
-        <div class="col pl-0 align-self-center">
-          <p class="text-white text-center mb-0">STORE NAME</p>
+        <div class="col pl-0 align-self-center text-center">
+          <p class="mb-0" style="margin-left: -15px;">
+            <img class="img-fluid rounded-circle" style="width: 35px;" src="{{ profileChat }}">
+            <a class="text-white ml-2 mb-0">{{ displayName }}</a>
+          </p>
         </div>
-      </div> -->
+      </div>
     </div>
-  
-    <div class="card-body">
-      <div>
-        <p class="mt-2 float-right msg-right">สอบถามการนัดรับสินค้าที่หน้าร้านครับ</p>
-        <p class="text-date text-right float-right mb-0">15 มี.ค. 12:31</p>
+    <!-- CARD BODY -->
+    <div class="card-body pb-for-footer scrollable-message" #mesDes>
+      <div *ngIf="showNoMes" class="text-center" style="padding-top: 48px; padding-bottom: 48px;">
+        <p class="text-white mb-0" style="font-size: .8rem;">เริ่มต้นสนทนาง่าย ๆ เพียงเพิ่มข้อความและกด <a
+            style="color: #F26262;">ส่ง</a></p>
       </div>
-      <div>
-        <p class="mt-2 float-left msg-left">สวัสดีครับคุณลูกค้า สามารถเข้ามา
-          รับสินค้าได้ที่หน้าร้านSTORE NAME
-          BTS สถานีสยาม ทางออก 2</p>
-        <!-- <p class="text-date text-left float-left mb-0">15 มี.ค. 12:31</p> -->
+      <div *ngIf="blockSendMess" class="text-center" style="padding-top: 48px; padding-bottom: 48px;">
+        <p class="text-white mb-0" style="font-size: .8rem;">ร้านค้านี้คือร้านค้าของคุณ</p>
       </div>
-      <div>
-        <p class="mt-2 float-left msg-left">โดยคุณลูกค้าต้องทำการกดชำระเงิน
-          ผ่านทางแอพและทำการนัดเวลาเข้า
-          รับของผ่านทางข้อความแอพได้เลยค่ะ</p>
-        <p class="text-date text-left float-left mb-0">15 มี.ค. 12:31</p>
+      <!-- FOR LOOP CHAT MESSAGE LEFT & RIGHT -->
+      <div *ngFor="let mes of messagesList">
+        <p class="mt-2" [class.float-right]="mes.value.uid == auth.currentUserId"
+          [class.msg-right]="mes.value.uid == auth.currentUserId"
+          [class.float-left]="mes.value.uid != auth.currentUserId"
+          [class.msg-left]="mes.value.uid != auth.currentUserId">{{ mes.value.text }}</p>
+        <p class="mb-0 text-date" [class.float-right]="mes.value.uid == auth.currentUserId"
+          [class.text-right]="mes.value.uid == auth.currentUserId"
+          [class.float-left]="mes.value.uid != auth.currentUserId"
+          [class.text-left]="mes.value.uid != auth.currentUserId">{{ mes.value.createAt.seconds*1000 | date: 'd/M/yyyy'
+          }} {{ mes.value.createAt.seconds*1000 | date: "HH:mm:ss" }}</p>
       </div>
+    </div>
+    <!-- END CARD BODY -->
 
-      <div>
-        <p class="mt-2 float-right msg-right">ร้านเปิดวันเวลาไหนบ้างครับ</p>
-        <p class="text-date text-right float-right mb-0">15 มี.ค. 12:31</p>
-      </div>
-
-      <div>
-        <p class="mt-2 float-left msg-left">ร้านเปิดทุกวันค่ะ</p>
-        <p class="text-date text-left float-left mb-0">15 มี.ค. 12:31</p>
-      </div>
-  </div>
-  <!-- Card Body -->
-
-  <div class="card-footer ">
-    <div class="row">
-      <div class="col">
-        <!-- msg-Input -->
-        <form class="d-flex">
-          <input id="search-input" class="form-control search-input" style="box-shadow: none;" type="text" placeholder="ค้นหา...">
-        </form>      
-      </div>
-      <div class="col-auto pl-0 align-self-center">
-        <p class="mb-0" style="color: #F26262;">ส่ง</p>
+    <div class="card-footer footer-mes">
+      <div class="row">
+        <div class="col">
+          <!-- MESSAGE INPUT -->
+          <input #messageInput [(ngModel)]="messageInputValue" maxlength="200"
+            (keyup.enter)="sendMessage(messageInput.value)" class="search-input w-100" type="text"
+            placeholder="ข้อความ">
+        </div>
+        <div class="col-auto pl-0 align-self-center">
+          <!-- <p class="mb-0" style="color: #F26262; cursor: pointer;" (click)="sendMessage(messageInput.value)">ส่ง</p> -->
+          <button type="button" class="btn btn-primary" [class.disabled]="blockSendMess"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+            (click)="sendMessage(messageInput.value)">ส่ง</button>
+        </div>
       </div>
     </div>
   </div>
-
-  </div>
-
-
-  </div>
-  <!-- End Container -->
+</div>
+<!-- End Container -->

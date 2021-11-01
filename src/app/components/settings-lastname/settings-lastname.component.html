@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="showContent" class="container">
   <div class="card card-radius">
     <div class="card-tab card-tab-radius">
       <p class="text-white text-center mb-0">แก้ไขนามสกุล</p>
@@ -8,9 +8,9 @@
       <div class="input-style">
         <p class="mb-0" style="font-size: 17px;">นามสกุล</p>
         <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;" id="lastname"
-          placeholder="สุขจิต">
+        #lastName_ [value]="userBuyer.lastName" placeholder="นามสกุล">
       </div>
-      <button type="button" class="btn btn-mt"
+      <button (click)="submitLastName(lastName_.value)" type="button" class="btn btn-mt"
         style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
         บันทึก
       </button>

@@ -322,11 +322,24 @@ input[type="radio"] .styled:checked + label::after {
   background-color: #FFF;
 }
 
+.reason {
+  background-color: #F2F6FA; 
+  cursor: pointer; 
+  border-radius: 13px;
+}
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
 
-
-
-
+.btn-up {
+  border: 1px solid #585858;
+  border-radius: 1.5rem; 
+  width: auto; 
+  color: #585858; 
+  background-color: #FFF;
+}
 
 
 

@@ -338,13 +338,17 @@ input[type="radio"] .styled:checked + label::after {
   background-color: #585858;
 }
 
+.star-color {
+  color: #FFA101;
+  cursor: pointer;
+}
 
-
-
-
-
-
-
+.modalShow {
+  display: block; 
+  overflow-y: auto;
+  padding-right: 15px;
+  background: rgba(0,0,0,0.5);
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (max-width: 480px) {

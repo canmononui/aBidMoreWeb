@@ -175,7 +175,7 @@ input[type="radio"] .styled:checked + label::after {
   font-size: 12px;
   line-height: 1.42857;
   color: #FFF;
-  background-color: #dd5252;
+  background-color: #B6B6B6;
 }
 
 .img-product {
@@ -416,5 +416,13 @@ input[type="radio"] .styled:checked + label::after {
     font-size: 0.8rem;
   }
 
-
+  .row-mlr {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  
+  .col-plr {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }

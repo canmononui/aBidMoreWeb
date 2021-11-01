@@ -4,143 +4,143 @@
       <p class="text-white text-center mb-0">รายละเอียด</p>
     </div>
 
-    <div class="card-body">
+    <div *ngIf="item != null" class="card-body">
       <!-- Order Item 1 -->
       <div class="card-list card-padding">
-        <div class="row mt-2">
-          <div class="col-auto col-product">
-            <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
-              src="./assets/img/bag.png">
+        <div class="row row-mlr mt-2">
+          <div class="col-auto col-product col-plr">
+            <img (click)="gotoProductDes(item.productKey)" class="img-fluid align-self-center img-product" style="border-radius: 10px; cursor: pointer;"
+              src="{{ item.imgProduct[0].imgUrl }}">
           </div>
-          <div class="col pl-0">
-            <div class="row">
-              <div class="col align-self-center">
-                <h5 class="mb-0 font-topic">คำสั่งซื้อ #002135111</h5>
+          <div class="col col-plr pl-0">
+            <div class="row row-mlr">
+              <div class="col col-plr align-self-center">
+                <h5 class="mb-0 font-topic">คำสั่งซื้อ #{{ item.orderNo }}</h5>
               </div>
-              <div class="col-auto align-self-center text-right">
-                <p class="mb-0 font-des">17/03/2020</p>
+              <div class="col-auto col-plr align-self-center text-right">
+                <p class="mb-0 font-des">{{ item.createAt.seconds*1000 | date: 'd/M/yyyy' }}</p>
               </div>
             </div>
-            <h5 class="mb-0 font-topic">Adidas NMD</h5>
-            <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
-            <p class="mb-0 text-left font-sm-7">ที่อยู่ : (บ้าน) 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา...</p>
+            <h5 (click)="gotoProductDes(item.productKey)" class="mb-0 font-topic productName" style="cursor: pointer;">{{ item.productName | slice:0:30 }}<a *ngIf="item.productName.length > 30">...</a></h5>
+            <p class="mb-0 text-left font-sm-7">ที่อยู่ : {{ item.delivery.buyyerAddress.addressString }}</p>
           </div>
         </div>
-        <div class="row mt-3">
-          <div class="col col-md-6 col-xl-6 align-self-center">
-            <div class="row">
-              <div class="col-auto">
-                <p class="mb-0 font-sm-7">ขนส่ง : Kerry Express</p>
+        <div class="row row-mlr mt-3">
+          <div class="col col-md-6 col-xl-6 col-plr align-self-center">
+            <div class="row row-mlr">
+              <div class="col-auto col-plr">
+                <p class="mb-0 font-sm-7">ขนส่ง : {{ item.delivery.priceDelivery.deliveryName }}</p>
               </div>
-              <div class="col-auto col-sm-pl">
-                <p class="mb-0 font-sm-7" style="color: #FE5721;">฿100</p>
+              <div class="col-auto col-sm-pl col-plr">
+                <p class="mb-0 font-sm-7" style="color: #FE5721;">฿{{ item.delivery.priceDelivery.priceDeliveryInput | currency: 'THB' : '' : '0.0' }}</p>
               </div>
             </div>
           </div>
-          <div class="col-auto col-md-6 col-xl-6 text-right align-self-center" style="color: #FE5721;">
+          <div class="col-auto col-md-6 col-xl-6 col-plr text-right align-self-center" style="color: #FE5721;">
             <a class="font-sm-1">ราคาสินค้า </a>
-            <a class="font-sm-1">฿15,000</a>
+            <a class="font-sm-1">฿{{ item.priceOfProduct | currency: 'THB' : '' : '0.0' }}</a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12 text-right align-self-center" style="color: #FE5721;">
+        <div class="row row-mlr">
+          <div class="col-12 col-plr text-right align-self-center" style="color: #FE5721;">
             <a class="font-sm-1">ราคารวม </a>
-            <a class="font-sm-1">฿15,100</a>
+            <a class="font-sm-1">฿{{ (item.priceOfProduct + item.delivery.priceDelivery.priceDeliveryInput) | currency: 'THB' : '' : '0.0' }}</a>
           </div>
         </div>
       </div>
       <!-- End Order Item 1 -->
-
+      
       <!-- Transport Description -->
       <div class="card-list card-padding mt-3">
-        <p class="mb-0">ผู้ส่งสินค้า : Kerry Express</p>
-        <div class="row">
-          <div class="col-auto pr-0">
-            <p class="mb-0">ข้อมูลการติดตาม : ABM0485275038</p>
+        <p class="mb-0">ผู้ส่งสินค้า : {{ item.delivery.priceDelivery.deliveryName }}</p>
+        <div class="row row-mlr">
+          <div class="col-auto pr-0 col-plr">
+            <p *ngIf="transport == null" class="mb-0">ข้อมูลการติดตาม : ไม่พบรหัสติดตามสินค้า</p>
+            <p *ngIf="transport != null" class="mb-0">ข้อมูลการติดตาม : {{ transport.pno }}</p>
           </div>
-          <div class="col-auto">
-            <button type="button" class="btn btn-circle-clone">
+          <div *ngIf="transport != null" class="col-auto col-plr">
+            <button type="button" class="btn btn-circle-clone" data-toggle="modal" data-target="#ModalPopupCopyTrackNumber" (click)="copyTrackNumber()">
               <i class="fa fa-clone" aria-hidden="true"></i>
             </button>
           </div>
         </div>
-        <!-- Description -->
+        <!-- DESCRIPTION-->
         <div class="mt-2" style="background-color: #373E48; border-radius: 5px; padding: 15px;">
+          <!-- TRANSPORT -->
           <p class="text-white mb-0">การขนส่ง</p>
-          <!-- Start -->
-          <div class="row">
-            <div class="col-auto pr-0 align-self-center">
-              <div class="dot-start"></div>
-            </div>
-            <div class="col">
-              <p class="mb-0 font-sm-7" style="color: #A2A2A2;">จาก</p>
-              <h5 class="mb-0 text-white font-sm-1">เชียงใหม่</h5>
-              <p class="mb-0 font-sm-7" style="color: #A2A2A2;">17/03/2020 10:17</p>
+          <!-- TRANSPORT EMPTY -->
+          <div *ngIf="transport == null" class="mt-4 mb-4">
+            <p class="text-center text-danger mb-0">ไม่พบข้อมูลรายละเอียดการจัดส่ง</p>
+            <p class="text-center text-danger mb-0">โปรดติดตามสินค้าผ่านเว็บไซต์</p>
+          </div>
+          <!-- TRANSPORT !EMPTY -->
+          <div *ngIf="transport != null">
+            <div *ngFor="let data of transport.routes; let i = index;" class="row row-mlr mt10">
+              <div class="col-auto col-plr pr-0 align-self-center">
+                <div [class.dot-start]="i+1 < transport.routes.length"></div>
+                <div [class.line-start]="i+1 > 1 && i+1 != transport.routes.length"></div>
+                <div [class.dot-now-opa]="i+1 == transport.routes.length"></div>
+                <div [class.dot-now]="i+1 == transport.routes.length"></div>
+                <div [class.line-start]="i+1 != 1 && i+1 == transport.routes.length"></div>
+              </div>
+              <div class="col col-plr">
+                <!-- FOR FLASH EX -->
+                <div *ngIf="item.delivery.priceDelivery.deliveryName == 'Flash Express'">
+                  <p class="mb-0 text-white font-sm-1">{{ data.stateTextTH }}</p>
+                  <p class="mb-0 font-sm-7" style="color: #A2A2A2;">{{ data.stateDate | date: 'd/M/yyyy' }} {{ data.stateDate | date: "HH:mm" }}</p>
+                </div>
+                <!-- FOR THAI POST -->
+                <div *ngIf="item.delivery.priceDelivery.deliveryName == 'Thailand Post'">
+                  <p class="mb-0 text-white font-sm-1">{{ data.statusDescription }}</p>
+                  <p class="mb-0 font-sm-7" style="color: #A2A2A2;">{{ data.statusDate }}</p>
+                </div>
+              </div>
             </div>
           </div>
-          <!-- Status -->
-          <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
-            <div class="col-auto pr-0 align-self-center">
-              <div class="dot-start"></div>
-              <div class="line-start"></div>
-              <div class="line-end"></div>
-            </div>
-            <div class="col">
-              <p class="mb-0 text-white font-sm-1">รถเข้ารับพัสดุ</p>
-              <p class="mb-0 font-sm-7" style="color: #A2A2A2;">17/03/2020 12:45</p>
-            </div>
-          </div>
-          <!-- Status -->
-          <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
-            <div class="col-auto pr-0 align-self-center">
-              <div class="dot-start"></div>
-              <div class="line-start"></div>
-              <div class="line-end"></div>
-            </div>
-            <div class="col">
-              <p class="mb-0 text-white font-sm-1">ศูนย์คัดแยกภาคเหนือ</p>
-              <p class="mb-0 font-sm-7" style="color: #A2A2A2;">17/03/2020 20:27</p>
-            </div>
-          </div>
-          <!-- Now -->
-          <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
-            <div class="col-auto pr-0 align-self-center">
-              <div class="dot-now-opa"></div>
-              <div class="dot-now"></div>
-              <div class="line-start"></div>
-              <div class="line-end"></div>
-            </div>
-            <div class="col">
-              <p class="mb-0 text-white font-sm-1">ศูนย์คัดแยกบางนา</p>
-              <p class="mb-0 font-sm-7" style="color: #A2A2A2;">18/03/2020 17:44</p>
-            </div>
-          </div>
-          <!-- End -->
-          <div class="row">
-            <div class="col-auto pr-0 align-self-center">
-              <div class="dot-end"></div>
-            </div>
-            <div class="col">
-              <p class="mb-0 font-sm-7" style="color: #A2A2A2;">ถึง</p>
-              <h5 class="mb-0 text-white font-sm-1">สมุทรปราการ</h5>
-            </div>
-          </div>
+          <!-- END TRANSPORT -->
         </div>
-        <!-- End Description -->
         <div class="mt-2">
           <a class="mb-0">คุณสามารถติดตามสถานะสินค้าที่คุณสั่งซื้อจาก </a>
-          <a class="mb-0" style="color: #FE5721;">Kerry Express</a>
+          <a class="mb-0" style="color: #FE5721;">{{ item.delivery.priceDelivery.deliveryName }}</a>
           <a class="mb-0"> เว็บไซต์สำหรับการติดตามสถานะสินค้า</a>
         </div>
-        <a href="https://th.kerryexpress.com/th/track/" target="_blank" type="button" class="btn mt-2"
-          style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
-          ติดตามสินค้า
-        </a>
+        <button *ngIf="item.delivery.priceDelivery.deliveryName == 'Kerry Express'" 
+        type="button" class="btn mt-2" style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;"
+        onclick="window.open('https://th.kerryexpress.com/th/track/')" target="_blank">ติดตามสินค้าผ่านเว็บไซต์</button>
+        <button *ngIf="item.delivery.priceDelivery.deliveryName == 'Thailand Post'" 
+        type="button" class="btn mt-2" style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;"
+        onclick="window.open('https://track.thailandpost.co.th/')" target="_blank">ติดตามสินค้าผ่านเว็บไซต์</button>
+        <button *ngIf="item.delivery.priceDelivery.deliveryName == 'SCG Express'" 
+        type="button" class="btn mt-2" style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;"
+        onclick="window.open('https://www.scgexpress.co.th/tracking')" target="_blank">ติดตามสินค้าผ่านเว็บไซต์</button>
+        <button *ngIf="item.delivery.priceDelivery.deliveryName == 'Flash Express'" 
+        type="button" class="btn mt-2" style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;"
+        onclick="window.open('https://www.flashexpress.com/th/tracking')" target="_blank">ติดตามสินค้าผ่านเว็บไซต์</button>
       </div>
       <!-- End Transport Description -->
     </div>
     <!-- End Card Body -->
   </div>
   <!-- End Card -->
+
+  <!-- MODAL POPUP COPY -->
+<div class="modal fade" id="ModalPopupCopyTrackNumber" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+      <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+      <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+      <p class="text-center">คัดลอกรหัสติดตามสินค้าเรียบร้อย</p>
+      <div class="mt-4">
+        <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+          <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+            data-dismiss="modal">ตกลง</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ENG MODAL POPUP COPY -->
+
 </div>
 <!-- End Container -->

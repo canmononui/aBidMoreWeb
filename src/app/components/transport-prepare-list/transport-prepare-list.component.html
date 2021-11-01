@@ -1,64 +1,76 @@
 <div class="container">
   <div class="card card-radius">
     <div class="card-tab card-tab-radius">
-      <p class="text-white text-center mb-0">เตรียมการจัดส่ง</p>
+      <div class="row">
+        <div (click)="gotoBuyMenuList()" class="col-auto pr-0 text-white" style="cursor: pointer;">
+          <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> ย้อนกลับ
+        </div>
+        <div class="col pl-0">
+          <p class="text-white text-center mb-0" style="margin-left: -15px;">เตรียมการจัดส่ง</p>
+        </div>
+      </div>
     </div>
 
     <div class="card-body">
-      <!-- Order Item 1 -->
-      <div class="card-list card-padding">
-        <div class="row mt-2">
-          <div class="col-auto col-product">
-            <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
-              src="./assets/img/bag.png">
-          </div>
-          <div class="col pl-0">
-            <div class="row">
-              <div class="col align-self-center">
-                <h5 class="mb-0 font-topic">คำสั่งซื้อ #002135111</h5>
-              </div>
-              <div class="col-auto align-self-center text-right">
-                <p class="mb-0 font-des">17/03/2020</p>
-              </div>
+      <div *ngIf="shippedList.length == 0" class="text-center text-white" style="padding-top: 48px; padding-bottom: 48px;">
+        <p class="mb-0" style="font-size: .9rem;">ไม่มีคำสั่งซื้อรอเตรียมการจัดส่ง</p>
+      </div>
+      <!-- ORDER ITEM -->
+      <div *ngFor="let data of shippedList" class="card-list card-padding mt-3">
+        <div (click)="gotoItem(data.key)">
+          <div class="row row-mlr mt-2">
+            <div class="col-auto col-plr col-product">
+              <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
+                src="{{ data.value.imgProduct[0].imgUrl }}">
             </div>
-            <h5 class="mb-0 font-topic">Adidas NMD</h5>
-            <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
-            <p class="mb-0 text-left font-sm-7">ที่อยู่ : (บ้าน) 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา...</p>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col col-md-6 col-xl-6 align-self-center">
-            <p class="mb-0 font-sm-7">สถานะ : รอการจัดส่ง</p>
-            <div class="row">
-              <div class="col-auto">
-                <p class="mb-0 font-sm-7">ขนส่ง : Kerry Express</p>
+            <div class="col col-plr pl-0">
+              <div class="row row-mlr">
+                <div class="col col-plr align-self-center">
+                  <h5 class="mb-0 font-topic">คำสั่งซื้อ #{{ data.value.orderNo }}</h5>
+                </div>
+                <div class="col-auto col-plr align-self-center text-right">
+                  <p class="mb-0 font-des">{{ data.value.createAt.seconds*1000 | date: 'd/M/yyyy' }}</p>
+                </div>
               </div>
-              <div class="col-auto col-sm-pl">
-                <p class="mb-0 font-sm-7" style="color: #FE5721;">฿100</p>
-              </div>
+              <h5 class="mb-0 font-topic">{{ data.value.productName | slice:0:30 }}<a *ngIf="data.value.productName.length > 30">...</a></h5>
+              <!-- <p class="mb-0 font-des">PRODUCT DES</p> -->
+              <p class="mb-0 text-left font-sm-7">ที่อยู่ : {{ data.value.delivery.buyyerAddress.addressString }}</p>
             </div>
           </div>
-          <div class="col-auto col-md-6 col-xl-6 text-right" style="color: #FE5721;">
-            <a class="font-sm-1 font-sm-show">ราคารวม </a>
-            <a class="font-sm-1">฿15,100</a>
+          <div class="row row-mlr mt-3">
+            <div class="col col-md-6 col-xl-6 col-plr align-self-center">
+              <p class="mb-0 font-sm-7">สถานะ : รอการจัดส่ง</p>
+              <div class="row row-mlr">
+                <div class="col-auto col-plr">
+                  <p class="mb-0 font-sm-7">ขนส่ง : {{ data.value.delivery.priceDelivery.deliveryName }}</p>
+                </div>
+                <div class="col-auto col-sm-pl col-plr">
+                  <p class="mb-0 font-sm-7" style="color: #FE5721;">฿{{ data.value.delivery.priceDelivery.priceDeliveryInput | currency: 'THB' : '' : '0.0' }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto col-md-6 col-xl-6 col-plr text-right" style="color: #FE5721;">
+              <a class="font-sm-1 font-sm-show">ราคารวม </a>
+              <a class="font-sm-1">฿{{ (data.value.priceOfProduct + data.value.delivery.priceDelivery.priceDeliveryInput) | currency: 'THB' : '' : '0.0' }}</a>
+            </div>
           </div>
         </div>
       </div>
-      <!-- End Order Item 1 -->
+      <!-- END ORDER ITEM -->
 
       <!-- Order Item 2 -->
-      <div class="card-list card-padding mt-3">
-        <div class="row mt-2">
-          <div class="col-auto col-product">
+      <!-- <div class="card-list card-padding mt-3">
+        <div class="row row-mlr mt-2">
+          <div class="col-auto col-product col-plr">
             <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
               src="./assets/img/bag.png">
           </div>
-          <div class="col pl-0">
-            <div class="row">
-              <div class="col align-self-center">
+          <div class="col pl-0 col-plr">
+            <div class="row row-mlr">
+              <div class="col col-plr align-self-center">
                 <h5 class="mb-0 font-topic">คำสั่งซื้อ #002135222</h5>
               </div>
-              <div class="col-auto align-self-center text-right">
+              <div class="col-auto col-plr align-self-center text-right">
                 <p class="mb-0 font-des">17/03/2020</p>
               </div>
             </div>
@@ -67,28 +79,27 @@
             <p class="mb-0 text-left font-sm-7">ที่อยู่ : (บ้าน) 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา...</p>
           </div>
         </div>
-        <div class="row mt-3">
-          <div class="col col-md-6 col-xl-6 align-self-center">
+        <div class="row row-mlr mt-3">
+          <div class="col col-md-6 col-xl-6 col-plr align-self-center">
             <p class="mb-0 font-sm-7">สถานะ : รอการจัดส่ง</p>
-            <div class="row">
-              <div class="col-auto">
+            <div class="row row-mlr">
+              <div class="col-auto col-plr">
                 <p class="mb-0 font-sm-7">ขนส่ง : Kerry Express</p>
               </div>
-              <div class="col-auto col-sm-pl">
+              <div class="col-auto col-sm-pl col-plr">
                 <p class="mb-0 font-sm-7" style="color: #FE5721;">฿100</p>
               </div>
             </div>
           </div>
-          <div class="col-auto col-md-6 col-xl-6 text-right align-self-center" style="color: #FE5721;">
+          <div class="col-auto col-md-6 col-xl-6 col-plr text-right align-self-center" style="color: #FE5721;">
             <a class="font-sm-1 font-sm-show">ราคารวม </a>
             <a class="font-sm-1">฿15,100</a>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- End Order Item 2 -->
     </div>
     <!-- End Card Body -->
-    
   </div>
   <!-- End Card -->
 </div>

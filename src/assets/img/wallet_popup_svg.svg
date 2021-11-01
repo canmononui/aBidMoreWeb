@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="702" height="627" viewBox="0 0 702 627">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #373e48;
+      }
+
+      .cls-2, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="606" y1="627" x2="606" y2="397.656" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f37121"/>
+      <stop offset="1" stop-color="#fe9901"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="375" y1="627" x2="375" y2="400.594" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e73106"/>
+      <stop offset="1" stop-color="#fe5721"/>
+    </linearGradient>
+  </defs>
+  <rect class="cls-1" width="702" height="627"/>
+  <path class="cls-2" d="M875,482V627H337V504S577.614,280.128,875,482Z"/>
+  <path class="cls-3" d="M-125,471V627H875V480S650.328,675.216,353,495C353,495,111.217,299.589-125,471Z"/>
+</svg>

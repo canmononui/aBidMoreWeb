@@ -1,0 +1,582 @@
+/* Card Product */
+.img-card-auto-win {
+  padding: 0px 4px 0px 0px;
+  background-color: #fff;
+  border: 3px solid #F0F0F0; 
+  border-radius: 0px 15px 15px 0px; 
+}
+
+.img-card-time {
+  padding: 0px 10px 0px 4px;
+  background-color: #fff;
+  border: 3px solid #F0F0F0; 
+  border-radius: 15px 0px 0px 15px; 
+}
+
+.rating-stars {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+
+.rating-stars li {
+  display: block;
+  text-overflow: clip;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.m-row-card-product {
+  margin-left: -4px; 
+  margin-right: -4px;
+}
+
+.p-col-card-product {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.img-auto-win-other {
+  margin: -5px 1px 0px -12px;
+  max-width: 40px;
+}
+
+.img-time-other {
+  margin: -5px -12px 0px 1px;
+  max-width: 40px;
+}
+
+.img-time-other-set-price {
+  /* border-radius: 100%; */
+  /* border: 2px solid #FE5721; */
+  margin: -5px -12px 0px 1px;
+  max-width: 40px;
+}
+
+.card-border-3 {
+  border: 3px solid #E7EDF4; 
+  border-radius: 15px;
+}
+
+.posi-card {
+  position: relative;
+}
+
+.product-img-card {
+  width: 100%; 
+  border-radius: 13px 13px 0px 0px;
+}
+
+.bg-left-auto {
+  position: absolute; 
+  bottom: 6px; 
+  left: 16px;
+}
+
+.bg-right-time {
+  position: absolute; 
+  bottom: 6px; 
+  right: 16px;
+}
+
+.bg-right-time-a {
+  position: absolute; 
+  bottom: 6px; 
+  right: 16px;
+}
+
+.p-text-other {
+  font-size: 1rem;
+}
+
+.card-body-padding {
+  padding: 20px;
+}
+/* End Card Product */
+
+.btn-circle {
+  background-color: #767676; 
+  color: #FFF;
+  width: 30px;
+  height: 30px;
+  padding: 4px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+/* .scroll {
+  width: 100%;  
+  overflow: auto;  
+  white-space: nowrap;  
+} */
+
+.row-auctioning-mr {
+  margin-right: -42px;
+}
+
+.row-auctioning-ml {
+  margin-left: -42px;
+}
+
+.container-auctioning {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.container-soon {
+  padding-top: 32px;
+  padding-bottom: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.container-other {
+  padding-top: 24px;
+  padding-bottom: 48px;
+}
+
+.auctioning-next-icon {
+  background-color: #767676; 
+  color: #FFF; 
+  cursor: pointer;
+}
+
+.auctioning-previous-icon {
+  background-color: #767676; 
+  color: #FFF; 
+  cursor: pointer;
+  position: relative;
+  z-index: 99;
+}
+
+.row-banner-3 {
+  margin-left: -4px; 
+  margin-right: -4px;
+}
+
+.col-banner-3 {
+  padding-left: 4px; 
+  padding-right: 4px;
+}
+
+.con-banner-mt {
+  margin-top: 8px;
+}
+
+.star-color {
+  color: #FFA101;
+}
+
+.heart-color {
+  color: #FE5721
+}
+
+.heart-grey {
+  color: #A9A9A9;
+}
+
+.text-date {
+  color: #FE5721; 
+  font-size: 0.9rem; 
+  line-height: 0.9;
+}
+
+.text-date-bid {
+  color: #FE5721; 
+  font-size: 0.9rem;
+}
+
+.clock-img-width {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.text-date-position {
+  position: absolute; 
+  bottom: 8px; 
+  right: -1px;
+}
+
+.text-date-position-bid {
+  position: absolute; 
+  bottom: 10px; 
+  right: -5px;
+}
+
+/* .time-position {
+  position: absolute; 
+  bottom: 8px; 
+  right: 47px;
+} */
+
+.time-position {
+  /* position: absolute;  */
+  position: relative;
+  bottom: -2px;
+  right: -10px;
+}
+
+/* FOR MODAL INSTROCTION */
+.img-wallet {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.icon-language {
+  position: absolute; 
+  top: 8px; 
+  left: 8px;
+}
+
+.icon-close {
+  position: absolute; 
+  top: 8px; 
+  right: -45px;
+}
+
+.btn-language {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.btn-circle-modal {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.text-description {
+  position: absolute; 
+  bottom: 48px; 
+  left: 48px;
+}
+
+.text-topic {
+  margin-left: 32px;
+  font-size: 1.2rem;
+}
+
+.text-des {
+  font-size: 1rem;
+}
+
+.icon-previous {
+  position: absolute; 
+  /* top: 8px;  */
+  top: 48%;
+  left: -38px;
+}
+
+.icon-next {
+  position: absolute; 
+  /* top: 8px;  */
+  top: 48%;
+  right: -90px;
+}
+
+.btn-circle-modal {
+  background-color: #767676; 
+  color: #FFF;
+  width: 30px;
+  height: 30px;
+  padding: 4px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.auctioning-icon {
+  background-color: #767676; 
+  color: #FFF; 
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+/* END FOR MODAL INSTROCTION */
+
+.modalShow {
+  display: block; 
+  overflow-y: auto;
+  padding-right: 15px;
+  background: rgba(0,0,0,0.5);
+}
+
+.card-img-overlay {
+  padding: .5rem;
+}
+
+.last-price {
+  color: #A9A9A9;
+}
+
+.modalShow {
+  display: block; 
+  overflow-y: auto;
+  padding-right: 15px;
+  background: rgba(0,0,0,0.5);
+}
+
+/* .time-bid-max {
+  display: flex;
+} */
+
+/* .modal-content {
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
+} */
+
+.productName:hover {
+  color: #a9a9a9;
+}
+
+.heart:hover {
+  /* color: #a9a9a9; */
+  opacity: 0.6;
+}
+
+.img-popup-instruc{
+  min-width: 350px;
+}
+
+.text-header {
+  font-size: 1.5rem;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .col-md-hide {
+    display: none;
+  }
+
+  .auction-next-mt {
+    padding-top: 8px;
+  }
+
+  .text-date {
+    font-size: 0.8rem; 
+    line-height: 0.8;
+  }
+
+  .text-date-position {
+    position: absolute; 
+    bottom: 10px; 
+    right: 0px;
+  }
+
+  .text-date-position-bid {
+    bottom: 9px; 
+    right: -5px;
+  }
+
+  .img-popup-instruc{
+    min-width: none;
+  }
+
+  .text-header {
+    font-size: 1.3rem;
+  }
+  
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  /* Card Product */
+  .img-auto-win-other {
+    max-width: 30px;
+  }
+  
+  .img-time-other {
+    max-width: 30px;
+  }
+
+  .img-time-other-set-price {
+    /* border: 1.8px solid #FE5721; */
+    max-width: 30px;
+  }
+
+  .p-text-other {
+    font-size: 0.5rem;
+  }
+
+  .img-card-auto-win {
+    padding: 2px 4px 2px 0px;
+    background-color: #fff;
+    border: 0.5px solid #F0F0F0; 
+    border-radius: 0px 15px 15px 0px; 
+  }
+
+  .img-card-time {
+    padding: 2px 8px 2px 4px;
+    background-color: #fff;
+    border: 0.5px solid #F0F0F0; 
+    border-radius: 15px 0px 0px 15px; 
+  }
+
+  /* .time-position {
+    position: absolute; 
+    bottom: 5px; 
+    right: 29px;
+  } */
+
+  .time-position {
+    /* position: absolute;  */
+    /* bottom: 5px;  */
+    /* right: 29px; */
+    position: relative;
+    bottom: 1px;
+    right: -7px;
+  }
+
+  .card-border-3 {
+    border: 1.5px solid #E7EDF4;
+    border-radius: 15px;
+  }
+
+  .card-body-padding {
+    padding: 10px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .card-text {
+    font-size: .8rem;
+    margin-bottom: 5px;
+  }
+  /* End Card Product */
+
+  .col-sm-hide {
+    display: none;
+  }
+
+  .row-auctioning-mr {
+    margin-right: -15px;
+  }
+
+  .row-auctioning-ml {
+    margin-left: -15px;
+  }
+
+  .auctioning-next-icon {
+    margin-left: -15px;
+  }
+
+  .auctioning-previous-icon {
+    margin-right: -15px;
+  }
+
+  .container-auctioning {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .container-soon {
+    padding-top: 16px;
+    padding-bottom: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .container-other {
+    padding-top: 16px;
+    padding-bottom: 24px;
+  }
+
+  .auction-next-mt {
+    padding-top: 8px;
+  }
+
+  .col-banner-3 {
+    margin-top: 8px;
+  }
+
+  .con-banner-mt {
+    margin-top: 0px;
+  }
+
+  .text-date {
+    font-size: 0.7rem; 
+    line-height: 0.8;
+  }
+
+  .text-date-position {
+    position: absolute; 
+    bottom: 7px; 
+    right: -4px;
+  }
+
+  .clock-img-width {
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  .text-date-position-bid {
+    bottom: 8px; 
+    right: -7px;
+  }
+
+  .text-date-bid {
+    font-size: 0.7rem;
+  }
+
+  /* FOR MODAL INSTROCTION */
+  .text-description {
+    bottom: 24px; 
+    left: 24px;
+  }
+
+  .text-topic {
+    margin-left: 24px;
+    font-size: 1rem;
+  }
+  
+  .text-des {
+    font-size: .8rem;
+  }
+
+  .icon-previous {
+    left: 10px;
+  }
+
+  .icon-next {
+    right: 0px;
+  }
+  /* END FOR MODAL INSTROCTION */
+
+  .text-date-time {
+    font-size: .8rem;
+  }
+
+  .img-popup-instruc{
+    min-width: none;
+  }
+
+  .icon-close {
+    position: absolute; 
+    top: 8px; 
+    right: 0px;
+  }
+
+  .text-header {
+    font-size: 1rem;
+  }
+
+}

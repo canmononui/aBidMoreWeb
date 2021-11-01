@@ -1,0 +1,154 @@
+.img-wallet {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.icon-language {
+  position: absolute; 
+  top: 8px; 
+  left: 8px;
+}
+
+.icon-close {
+  position: absolute; 
+  top: 8px; 
+  right: -45px;
+}
+
+.btn-language {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.text-topic {
+  margin-left: 32px;
+  font-size: 1.2rem;
+}
+
+.text-des {
+  font-size: 1rem;
+}
+
+.icon-previous {
+  position: absolute; 
+  /* top: 8px;  */
+  top: 48%;
+  left: -38px;
+}
+
+.icon-next {
+  position: absolute; 
+  /* top: 8px;  */
+  top: 48%;
+  right: -48px;
+}
+
+.btn-circle {
+  background-color: #767676; 
+  color: #FFF;
+  width: 30px;
+  height: 30px;
+  padding: 4px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.auctioning-icon {
+  background-color: #767676; 
+  color: #FFF; 
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.img-popup-instruc{
+  min-width: 350px;
+}
+
+.btn-circle-modal {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.btn-circle-modal {
+  background-color: #767676; 
+  color: #FFF;
+  width: 30px;
+  height: 30px;
+  padding: 4px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.text-description {
+  position: absolute; 
+  bottom: 48px; 
+  left: 48px;
+}
+
+.icon-next {
+  position: absolute; 
+  /* top: 8px;  */
+  top: 48%;
+  right: -90px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  .text-description {
+    bottom: 24px; 
+    left: 24px;
+  }
+
+  .text-topic {
+    margin-left: 24px;
+    font-size: 1rem;
+  }
+  
+  .text-des {
+    font-size: .8rem;
+  }
+  
+  .icon-close {
+    position: absolute; 
+    top: 8px; 
+    right: 0px;
+  }
+
+  .icon-previous {
+    left: 10px;
+  }
+
+  .icon-next {
+    right: 0px;
+  }
+
+}
+/* Small devices (landscape phones, 576px and up) */

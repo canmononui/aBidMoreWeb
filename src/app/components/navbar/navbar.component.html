@@ -1,187 +1,229 @@
-<nav class="mb-1 navbar navbar-expand-lg navbar-light">
+<nav *ngIf="showContent" class="mb-1 navbar navbar-expand-lg navbar-light">
   <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      aBidMore
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
-      aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-      <!-- <span class="navbar-toggler-symbol"></span> -->
+    <div class="row" [class.disabled]="disabledNav" (click)="gotoHome()" style="cursor: pointer;">
+      <div class="col-auto pr-2">
+        <img src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg" width="40" height="40" class="rounded-circle d-inline-block align-top shadow">
+      </div>
+      <div class="col-auto align-self-center pl-0">
+        <p class="mb-0" style="font-size: 1.2rem;">A Bid More</p>
+      </div>
+    </div>
+    <button class="navbar-toggler" type="button" 
+      data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fa fa-bars" aria-hidden="true"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+
+    <div class="collapse navbar-collapse nav-mt-2-sm" id="navbarSupportedContent-7">
       <ul class="navbar-nav ml-auto mr-auto">
         <li class="nav-item d-flex">
-          <form class="d-flex dropdown input-width">
+          <form class="d-flex dropdown input-width" [class.disabled]="disabledNav">
             <!-- Search-Input -->
-            <input id="search-input" data-toggle="dropdown" class="form-control search-input" style="box-shadow: none;" type="text"
-              placeholder="ค้นหา...">
-            <div class="input-group-addon search-symbol">
-              <span class="fa fa-search search-symbol2"></span>
+            <input [hidden]="true" #searchInput [(ngModel)]="keySearchInput" [ngModelOptions]="{standalone: true}"
+              data-toggle="dropdown" class="form-control search-input" style="box-shadow: none;" type="text"
+              placeholder="ค้นหาสินค้า" (keyup.enter)="searchProductInput(searchInput.value, $event)">
+            <input #searchInput_ [(ngModel)]="keySearchInput" [ngModelOptions]="{standalone: true}"
+              data-toggle="dropdown" class="form-control search-input" style="box-shadow: none;" type="text" 
+              placeholder="ค้นหาสินค้า" (keyup.enter)="searchProductInput(searchInput_.value, $event)">
+              <!-- SEARCH SYMBOL ICON -->
+            <div class="input-group-addon search-symbol" (click)="searchProductInput(searchInput_.value, $event)">
+              <span class="fa fa-search search-symbol2" style="cursor: pointer;"></span>
             </div>
             <!-- Dropdown-Menu -->
-            <div class="dropdown-menu dropdown-menu-width p-3" style="border-radius: 15px;">
+            <div class="dropdown-menu dropdown-menu-width p-3" id="dropdownMenu" style="border-radius: 15px;">
               <div class="card border-0">
-                <div class="card-body p-0">
-
-                  <div class="row">
+                <!-- CATEGORY -->
+                <div *ngIf="showCategory" class="card-body p-0">
+                  <!-- TOP DES HISTORY SEARCH -->
+                  <div *ngIf="keySearchList.length != 0" class="row">
                     <div class="col">
                       <p class="mb-0" style="font-size: 0.8rem; color: #A4A4A4;">ประวัติ</p>
                     </div>
                     <div class="col">
-                      <a href="#" class="nav-link p-0" style="text-decoration: none; cursor: pointer;">
-                        <p class="mb-0 text-right" style="font-size: 0.8rem; color: #A4A4A4;">ลบ</p>
+                      <a class="nav-link p-0" style="text-decoration: none; cursor: pointer;">
+                        <p (click)="deleteKeySearch()" class="mb-0 text-right" style="font-size: 0.8rem; color: #A4A4A4;">ลบ</p>
                       </a>
                     </div>
                   </div>
-                  <div class="mt-2 ml-2">
-                    <p class="mb-0">กางเกงขาสั้น</p>
-                    <p class="mb-0">รองเท้าหนัง</p>
-                    <p class="mb-0">iPhone XS</p>
-                    <p class="mb-0">นาฬิกาข้อมือสายเหล็ก</p>
-                    <p class="mb-0">รองเท้าแตะสีสัน</p>
+                  <!-- END TOP DES HISTORY SEARCH -->
+                  <!-- HISTORY SEARCH -->
+                  <div *ngFor="let keySearch of keySearchList" class="mt-2 ml-2" style="cursor: pointer;">
+                    <p class="mb-0" (click)="searchProductSelectHis(keySearch.value.keySearch)">{{ keySearch.value.keySearch }}</p>
                   </div>
-
+                  <!-- HISTORY SEARCH -->
                   <p class="mt-2 mb-0" style="font-size: 0.8rem; color: #A4A4A4;">หมวดหมู่</p>
                   <!-- ROW 1 -->
                   <div class="row ml-0 mr-0">
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/men-shirt-icon.png">
+                      <a (click)="searchProductSelect('maleClothes', 'เสื้อผ้าชาย', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/men-shirt-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">เสื้อผ้าชาย</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/men-shoes-icon.png">
+                      <a (click)="searchProductSelect('maleShoes', 'รองเท้าชาย', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/men-shoes-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">รองเท้าชาย</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/dress-icon.png">
+                      <a (click)="searchProductSelect('femaleClothes', 'เสื้อผ้าหญิง', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/dress-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">เสื้อผ้าหญิง</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/high-heels-icon.png">
+                      <a (click)="searchProductSelect('femaleShoes', 'รองเท้าหญิง', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/high-heels-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">รองเท้าหญิง</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/cosmetics-icon.png">
+                      <a (click)="searchProductSelect('beauty', 'ความงาม', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/cosmetics-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">ความงาม</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/bag-icon.png">
+                      <a (click)="searchProductSelect('bag', 'กระเป๋า', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/bag-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">กระเป๋า</p>
                       </a>
                     </div>
                     <!-- ROW 1 -->
                     <!-- ROW 2 -->
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/accessories-icon.png">
+                      <a (click)="searchProductSelect('accessories', 'เครื่องประดับ', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/accessories-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">เครื่องประดับ</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/sofa-icon.png">
+                      <a (click)="searchProductSelect('homeAppliances', 'เครื่องใช้ในบ้าน', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/sofa-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">เครื่องใช้ในบ้าน</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/phone-icon.png">
+                      <a (click)="searchProductSelect('mobilePhone', 'มือถือ', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/phone-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">มือถือ</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/game-icon.png">
+                      <a (click)="searchProductSelect('game', 'เกม', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/game-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">เกม</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/camera-icon.png">
+                      <a (click)="searchProductSelect('camera', 'กล้อง', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/camera-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">กล้อง</p>
                       </a>
                     </div>
-                    <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/sport-icon.png">
+                    <div (click)="searchProductSelect('sport', 'กีฬา', $event)" class="col-3 col-md-2 col-lg-2 text-center p-1">
+                      <a class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/sport-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">กีฬา</p>
                       </a>
                     </div>
                     <!-- ROW 2 -->
                     <!-- ROW 3 -->
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/computer-icon.png">
+                      <a (click)="searchProductSelect('computer', 'คอมพิวเตอร์', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/computer-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">คอมพิวเตอร์</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/food-icon.png">
+                      <a (click)="searchProductSelect('food', 'อาหาร', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/food-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">อาหาร</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/Washing-machine-icon.png">
+                      <a (click)="searchProductSelect('electricalApp', 'เครื่องใช้ไฟฟ้า', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/Washing-machine-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">เครื่องใช้ไฟฟ้า</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/car-icon.png">
+                      <a (click)="searchProductSelect('motorVehicle', 'ยานยนต์', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/car-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">ยานยนต์</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/HandGroup-icon.png">
+                      <a (click)="searchProductSelect('donate', 'บริจาค', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/HandGroup-icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">บริจาค</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/voucher icon.png">
-                        <p class="mb-0" style="font-size: 0.8rem;">voucher</p>
+                      <a (click)="searchProductSelect('voucher', 'คูปอง', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/voucher icon.svg">
+                        <p class="mb-0" style="font-size: 0.8rem;">คูปอง</p>
                       </a>
                     </div>
                     <!-- ROW 2 -->
                     <!-- ROW 3 -->
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/fetish icon.png">
+                      <a (click)="searchProductSelect('fetish', 'เครื่องราง', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/fetish icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">เครื่องราง</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/collectibles icon.png">
+                      <a (click)="searchProductSelect('collectibles', 'ของสะสม', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/collectibles icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">ของสะสม</p>
                       </a>
                     </div>
                     <div class="col-3 col-md-2 col-lg-2 text-center p-1">
-                      <a href="#" class="text-dark" style="text-decoration: none; cursor: pointer;">
-                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/Other icon.png">
+                      <a (click)="searchProductSelect('other', 'อื่นๆ', $event)" class="text-dark" style="text-decoration: none; cursor: pointer;">
+                        <img class="img-border-radius" style="width: 50px;" src="./assets/img/search-icon/Other icon.svg">
                         <p class="mb-0" style="font-size: 0.8rem;">อื่นๆ</p>
                       </a>
                     </div>
                     <!-- ROW 3 -->
                     </div>
-
                 </div>
-                
+                <!-- END CATEGORY -->
+                <!-- SUB CATEGORY -->
+                <div *ngIf="showSubCategory" class="card-body p-0">
+                  <div class="row">
+                    <div class="col">
+                      <p class="mb-0" style="font-size: 1rem; color: #A4A4A4;">{{ selectTagTH }}</p>
+                    </div>
+                    <div class="col text-right">
+                      <p (click)="goBackToCategory($event)" class="mb-0" style="color: #A4A4A4; cursor: pointer;"><i class="fa fa-angle-left" aria-hidden="true"></i> ย้อนกลับ</p>
+                    </div>
+                  </div>
+                  <div class="sub-cat-item pl-3">
+                    <p (click)="selectSubCat('all')" class="mb-0" style="cursor: pointer;">ทั้งหมด</p>
+                  </div>
+                  <!-- SHOW SUB CATEGORY -->
+                  <div *ngFor="let data of subCatArr; let i = index;">
+                    <div class="sub-cat-item pl-3">
+                      <div class="row m-0">
+                        <div class="col-auto pl-0 pr-0">
+                          <div class="row m-0">
+                            <div class="col-auto p-0">
+                              <div class="m-0 p-0" [class.line-left-100]="i+1 != subCatArr.length" [class.line-left-50]="i+1 == subCatArr.length"></div>
+                            </div>
+                            <div class="col-auto p-0" style="color: #eaeaea; font-size: 1.2rem;">
+                              -
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col pl-0">
+                          <p (click)="selectSubCat(data)" class="mb-0 ml-1" style="cursor: pointer;">{{ data }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- END SUB CATEGORY -->
               </div>
             </div>
           </form>
@@ -192,154 +234,207 @@
           <!-- RIGHT -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item d-flex">
-              <a href="#" class="nav-link" style="text-decoration: none; cursor: pointer;">
-                <img style="width: 25px;" src="./assets/img/auction-black-icon.png">
-                <p class="nav-item-text mb-0 pl-2">ร่วมประมูล</p>
+              <a (click)="gotoAuctionList()" class="nav-link router" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                <div class="nav-icon">
+                  <img style="width: 30px;" src="./assets/img/auction-black-icon.svg">
+                </div>
+                <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                  <img style="width: 30px;" src="./assets/img/auction-black-icon.svg">
+                  <a class="mb-0 pl-2">ร่วมประมูล</a>
+                </div>
               </a>
             </li>
             <li class="nav-item d-flex">
-              <a href="#" class="nav-link" style="text-decoration: none; cursor: pointer;">
-                <img style="width: 25px;" src="./assets/img/noti-chat-icon-bg-gray.png">
-                <span class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: 1px 7px; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
-                  8
-                </span>
-                <p class="nav-item-text mb-0 pl-2">ข้อความ</p>
+              <a (click)="gotoChatList()" class="nav-link router" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                <div class="nav-icon">
+                  <img style="width: 30px;" src="./assets/img/noti-chat-icon-bg-gray.svg">
+                  <span *ngIf="chatCount != '0' && auth.authenticated" class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: .3em .5em; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                    {{ chatCount }}
+                  </span>
+                </div>
+                <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                  <img style="width: 30px;" src="./assets/img/noti-chat-icon-bg-gray.svg">
+                  <span *ngIf="chatCount != '0' && auth.authenticated" class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: .3em .5em; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                    {{ chatCount }}
+                  </span>
+                  <a class="mb-0 pl-2">ข้อความ</a>
+                </div>
               </a>
             </li>
             
             <li class="nav-item d-flex dropdown">
-              <a class="nav-link" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" style="text-decoration: none; cursor: pointer;">
-                <img style="width: 25px;" src="./assets/img/noti-icon.png">
-                <span class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: 1px 7px; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
-                  9
+              <a class="nav-link" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                <img style="width: 30px;" src="./assets/img/noti-noti-icon.svg">
+                <span *ngIf="notiCount != '0' && auth.authenticated" class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: .3em .5em; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                  {{ notiCount }}
                 </span>
-                <p class="nav-item-text mb-0 pl-2">การแจ้งเตือน</p>
+                <a class="nav-item-text mb-0 pl-2">การแจ้งเตือน</a>
               </a>
-              <div class="dropdown-menu p-3" style=" border-radius: 15px;">
-                <div class="row">
-                  <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/noti-noti-icon.png">
-                  </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="mb-0">การแจ้งเตือน</p>
-                  </div>
-                </div>
-                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;">
+              <div class="dropdown-menu pt-3 pl-2 pb-3" style=" border-radius: 15px;">
+                <a (click)="gotoNotificationList()" class="nav-icon text-dark router" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                  <img style="width: 30px;" src="./assets/img/noti-noti-icon.svg">
+                  <span *ngIf="notiCount != '0' && auth.authenticated" class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: .3em .5em; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                    {{ notiCount }}
+                  </span>
+                  <a class="mb-0 pl-2">การแจ้งเตือน</a>
+                </a>
+                <a (click)="gotoNotificationList()" class="nav-item-text text-dark router" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav"
+                  data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                  <img style="width: 30px;" src="./assets/img/noti-noti-icon.svg">
+                  <span *ngIf="notiCount != '0' && auth.authenticated" class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: .3em .5em; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                    {{ notiCount }}
+                  </span>
+                  <a class="mb-0 pl-2">การแจ้งเตือน</a>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
 
-                </div>
-                <div class="row">
-                  <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/noti-pro-icon.png">
-                  </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="mb-0">โปรโมชั่น</p>
-                  </div>
-                </div>
+                <a (click)="gotoPromotionList()" class="nav-icon text-dark disabled" style="text-decoration: none; cursor: pointer;">
+                  <img style="width: 30px;" src="./assets/img/noti-pro-icon.svg">
+                  <a class="mb-0 pl-2">โปรโมชั่น</a>
+                </a>
+                <a (click)="gotoPromotionList()" class="nav-item-text text-dark disabled" style="text-decoration: none; cursor: pointer;"
+                data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                  <img style="width: 30px;" src="./assets/img/noti-pro-icon.svg">
+                  <a class="mb-0 pl-2">โปรโมชั่น</a>
+                </a>
               </div>
             </li>
             <li class="nav-item d-flex">
-              <a href="#" class="nav-link" style="text-decoration: none; cursor: pointer;">
-                <img style="width: 25px;" src="./assets/img/Cart-icon.png">
-                <p class="nav-item-text mb-0 pl-2">รอยืนยันชำระเงิน</p>
+              <a (click)="gotoPaymentItems()" class="nav-link router" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                <div class="nav-icon">
+                  <img style="width: 30px;" src="./assets/img/Cart-icon.svg">
+                  <span *ngIf="cartCount != '0' && auth.authenticated" class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: .3em .5em; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                    {{ cartCount }}
+                  </span>
+                </div>
+                <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                  <img style="width: 30px;" src="./assets/img/Cart-icon.svg">
+                  <span *ngIf="cartCount != '0' && auth.authenticated" class="badge badge-pill" style="position: relative; top: -10px; right: -10px; padding: .3em .5em; margin-left: -23px; color: #FFF; background-color: #E54040; border: 1px solid #EEE;">
+                    {{ cartCount }}
+                  </span>
+                  <a class="mb-0 pl-2">ที่ต้องชำระ</a>
+                </div>
               </a>
             </li>
             <li class="nav-item d-flex">
-              <a href="#" class="nav-link" style="text-decoration: none; cursor: pointer;">
-                <img style="width: 25px;" src="./assets/img/wallet-icon.png">
-                <p class="nav-item-text mb-0 pl-2">การเงิน</p>
+              <a (click)="gotoWalletCredit()" class="nav-link router" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                <div class="nav-icon">
+                  <img style="width: 30px;" src="./assets/img/wallet-credit-abidmore-icon.svg">
+                </div>
+                <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                  <img style="width: 30px;" src="./assets/img/wallet-credit-abidmore-icon.svg">
+                  <a class="mb-0 pl-2">บริการ/ตัวช่วย</a>
+                </div>
               </a>
             </li>
-
             <li class="nav-item d-flex dropdown">
               <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none; cursor: pointer;">
-                <img class="rounded-circle" style="width: 25px;" src="./assets/img/business-man.png">
-                <p class="nav-item-text mb-0 pl-2">บัญชีผู้ใช้</p>
+                <img class="rounded-circle" style="width: 30px;" src="{{ profileImg }}">
+                <a class="nav-item-text mb-0 pl-2">บัญชีผู้ใช้</a>
               </a>
               <div class="dropdown-menu dropdown-menu-profile-width dropdown-menu-right p-3" style="border-radius: 15px;">
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
-                  <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/profile-dropdown/list-icon.png">
+                <a (click)="gotoBuyMenuList()" class="text-dark router" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                  <div class="nav-icon">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/list-icon.svg">
+                    <a class="mb-0 pl-2">การซื้อของฉัน</a>
                   </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="text-dark mb-0">การซื้อของฉัน</p>
-                  </div>
-                </a>
-                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
-                  <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/profile-dropdown/store-icon-color.png">
-                  </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="text-dark mb-0">กำลังติดตาม</p>
+                  <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/list-icon.svg">
+                    <a class="mb-0 pl-2">การซื้อของฉัน</a>
                   </div>
                 </a>
                 <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
-                  <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/profile-dropdown/heart_vector_color.png">
+                <a (click)="gotoFollowingList()" class="text-dark" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                  <div class="nav-icon">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/store-icon-color.png">
+                    <a class="mb-0 pl-2">กำลังติดตาม</a>
                   </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="text-dark mb-0">ที่ฉันถูกใจ</p>
+                  <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/store-icon-color.png">
+                    <a class="mb-0 pl-2">กำลังติดตาม</a>
                   </div>
                 </a>
                 <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                <a (click)="gotoLinkList()" class="text-dark" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                  <div class="nav-icon">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/heart_vector_color.svg">
+                    <a class="mb-0 pl-2">ที่ฉันถูกใจ</a>
+                  </div>
+                  <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/heart_vector_color.svg">
+                    <a class="mb-0 pl-2">ที่ฉันถูกใจ</a>
+                  </div>
+                </a>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <div data-toggle="modal" data-target="#modalInviteFriend" data-backdrop="static" data-keyboard="false" class="row" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
                   <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/profile-dropdown/Share-Friend-color-2-icon.png">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/Share-Friend.png">
                   </div>
                   <div class="col pl-0 align-self-center">
                     <p class="text-dark mb-0">ชวนเพื่อน</p>
                   </div>
-                </a>
+                </div>
                 <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                <div data-toggle="modal" data-target="#modalPopupAds" data-backdrop="static" data-keyboard="false" class="row disabled" style="text-decoration: none; cursor: pointer;">
                   <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/profile-dropdown/coins_color_2.png">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/bid.svg">
                   </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="text-dark mb-0">สะสมเหรียญ
-                      <i class="fa fa-play-circle" aria-hidden="true"></i>
-                    </p>
+                  <div class="col pl-0 pr-0 align-self-center">
+                    <a class="text-dark mb-0">สะสมเหรียญ <i class="fa fa-play-circle" aria-hidden="true"></i></a>
+                  </div>
+                </div>
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a (click)="gotoProfileSettings()" class="text-dark" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                  <div class="nav-icon">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/setting-icon.svg">
+                    <a class="mb-0 pl-2">ตั้งค่าบัญชี</a>
+                  </div>
+                  <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/setting-icon.svg">
+                    <a class="mb-0 pl-2">ตั้งค่าบัญชี</a>
                   </div>
                 </a>
                 <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
-                  <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/profile-dropdown/setting-icon.png">
+                <a [routerLink]="['/help-center-list']" class="text-dark router" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
+                  <div class="nav-icon">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/HelpCenter.svg">
+                    <a class="mb-0 pl-2">ศูนย์ช่วยเหลือ</a>
                   </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="text-dark mb-0">ตั้งค่าบัญชี</p>
-                  </div>
-                </a>
-                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
-                  <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/profile-dropdown/HelpCenter.png">
-                  </div>
-                  <div class="col pl-0 align-self-center">
-                    <p class="text-dark mb-0">ศูนย์ช่วยเหลือ</p>
+                  <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/HelpCenter.svg">
+                    <a class="mb-0 pl-2">ศูนย์ช่วยเหลือ</a>
                   </div>
                 </a>
                 <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
-
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                <div data-toggle="modal" data-target="#modalLanguageSettings" data-backdrop="static" data-keyboard="false"  class="row disabled" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
                   <div class="col-auto pr-2">
                     <img style="width: 25px; border-radius: 5px;" src="./assets/img/profile-dropdown/language-icon.png">
                   </div>
                   <div class="col pl-0 align-self-center">
                     <p class="text-dark mb-0">ภาษา</p>
                   </div>
-                </a>
+                </div>
                 <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
-                <a href="#" class="row" style="text-decoration: none; cursor: pointer;">
+                <!-- <a href="http://merchant.abidmore.com/" target="_blank" class="row disabled" style="text-decoration: none; cursor: pointer;"> -->
+                <a (click)="gotoMerchant()" class="row" style="text-decoration: none; cursor: pointer;" [class.disabled]="disabledNav">
                   <div class="col-auto pr-2">
-                    <img style="width: 25px;" src="./assets/img/profile-dropdown/seller-icon.png">
+                    <img style="width: 30px;" src="./assets/img/profile-dropdown/seller-icon.svg">
                   </div>
                   <div class="col pl-0 align-self-center">
                     <p class="text-dark mb-0">สนใจขายสินค้า</p>
                   </div>
                 </a>
-
+                <div class="mt-2 mb-2" style="border-bottom: 0.5px solid #E7EDF4;"></div>
+                <a class="text-dark" style="text-decoration: none; cursor: pointer;">
+                  <div class="nav-icon">
+                    <i class="fa fa-sign-out" style="margin-left: 2px; font-size: 1.5rem;"></i>
+                    <a class="mb-0 pl-2" (click)="signInsignOut()">{{ signinSignoutText }}</a>
+                  </div>
+                  <div class="nav-item-text" data-toggle="collapse" data-target="#navbarSupportedContent-7">
+                    <i class="fa fa-sign-out" style="margin-left: 2px; font-size: 1.5rem;"></i>
+                    <a class="mb-0 pl-2" (click)="signInsignOut()">{{ signinSignoutText }}</a>
+                  </div>
+                </a>
               </div>
             </li>
           </ul>
@@ -348,15 +443,3 @@
     </div>
   </div>
 </nav>
-
-
-
-
-<!-- <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="customSwitch1">
-  <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-</div>
-<div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
-  <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
-</div> -->

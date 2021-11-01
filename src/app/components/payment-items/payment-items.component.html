@@ -1,68 +1,84 @@
-<div class="container">
+<div *ngIf="showContent" class="container">
+  <!-- END CARD -->
   <div class="card card-radius">
-    <div class="card-tab card-tab-radius">
+    <div class="card-tab-top card-tab-radius">
       <p class="text-white text-center mb-0">ที่ต้องชำระ</p>
     </div>
-
     <div class="card-body">
-      <!-- Store Item 1 -->
-      <div class="card-store-p">
+      <!-- NO ITEMS FOR PAYMENT -->
+      <div *ngIf="items.length == 0" class="text-center text-white" style="padding-top: 48px; padding-bottom: 48px;">
+        <p class="mb-0" style="font-size: .8rem;">โปรดเพิ่มสินค้าที่ต้องการ</p>
+      </div>
+      <!-- STORE -->
+      <div *ngFor="let data of items" class="card-store-p mt-3">
         <div class="row mb-2">
           <div class="col align-self-center">
             <div class="row">
               <div class="col-auto">
                 <div class="checkbox checkbox-circle">
-                  <input id="checkbox7" class="styled" type="checkbox">
-                  <label for="checkbox7"></label>
+                  <input id="checkbox{{ data.sellerUID }}" class="styled" type="checkbox"
+                    (click)="selecrOrderShop(data)">
+                  <label for="checkbox{{ data.sellerUID }}"></label>
                 </div>
               </div>
               <div class="col pl-1">
-                <p class="text-white mb-0">STORE NAME 1</p>
+                <p class="text-white mb-0">{{ data.shopName }}</p>
               </div>
             </div>
           </div>
           <div class="col-auto align-self-center">
-            <button type="button" class="btn btn-circle">
+            <button type="button" class="btn btn-circle" data-toggle="modal" data-target="#modalDeleteShop"
+              (click)="selectShopItemForDelete(data)">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
           </div>
         </div>
-        <!-- Item 1 -->
-        <div class="row ml-2 mt-2">
+        <!-- ITEM -->
+        <div *ngFor="let order of data.order" class="row ml-2 mt-2">
           <div class="col-auto item-checkbox align-self-center">
             <div class="checkbox checkbox-circle">
-              <input id="checkbox7" class="styled" type="checkbox">
-              <label for="checkbox7"></label>
+              <input id="checkbox{{ order.key }}" class="styled" type="checkbox" (click)="selecrOrderItem(data, order)">
+              <label for="checkbox{{ order.key }}"></label>
             </div>
           </div>
           <div class="col align-self-center">
             <div class="card-list card-padding">
               <div class="row">
-                <div class="col align-self-center">
-                  <p class="mb-0 font-weight-bold">คำสั่งซื้อ #002135111</p>
+                <div class="col-lg col-md-12 col-sm-12 align-self-center">
+                  <p class="mb-0 font-weight-bold">คำสั่งซื้อ #{{ order.value.orderNo }}</p>
                 </div>
-                <div class="col-auto align-self-center">
-                  <a class="mr-2 font-sm-7">23:59 ชม.</a>
-                  <button type="button" class="btn btn-circle">
+                <div class="col-lg-auto col-md-12 col-sm-12 align-self-center time-expired">
+                  <a *ngIf="order.value.orderExpired != undefined" class="mr-2 font-time-expired"
+                    style="color: #FE5721;">ชำระเงินภายใน {{ order.value.orderExpired.hoursToDday }} ชั่วโมง {{
+                    order.value.orderExpired.minutesToDday }} นาที</a>
+                  <button type="button" class="btn btn-circle" data-toggle="modal" data-target="#modalDeleteItem"
+                    (click)="selectItemForDelete(order)">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>
               <div class="row mt-2">
                 <div class="col-auto col-product">
-                  <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
-                    src="./assets/img/bag.png">
+                  <img (click)="gotoProductDes(order.value.productKey)" class="img-fluid align-self-center img-product"
+                    style="border-radius: 10px; cursor: pointer;" src="{{ order.value.imgProduct[0].imgUrl }}">
                 </div>
                 <div class="col pl-0">
-                  <h5 class="mb-0 font-topic">Adidas NMD</h5>
-                  <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
-                  <button type="button" class="btn btn-light mt-2"
-                  style="cursor: pointer;" data-toggle="modal" data-target="#modalSelectAddress">
+                  <h5 (click)="gotoProductDes(order.value.productKey)" class="mb-0 font-topic productName"
+                    style=" cursor: pointer;">{{ order.value.productName | slice:0:30 }}<a
+                      *ngIf="order.value.productName.length > 30">...</a></h5>
+                  <button type="button" class="btn btn-light mt-2" style="cursor: pointer;" data-toggle="modal"
+                    data-target="#modalSelectAddress" (click)="getBuyerAddressMore(order)">
                     <div class="row">
                       <div class="col">
-                        <p class="mb-0 text-left font-sm-7">ที่อยู่ : (บ้าน) 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา...</p>
+                        <p *ngIf="userBuyer != undefined && userBuyer.mainAddress == null"
+                          class="mb-0 text-left font-sm-7">ที่อยู่ :
+                          โปรดเพิ่มที่อยู่เริ่มต้นสำหรับจัดส่งสินค้า</p>
+                        <p *ngIf="userBuyer != undefined && userBuyer.mainAddress != null && order.value.delivery != null"
+                          class="mb-0 text-left font-sm-7">ที่อยู่ : ({{
+                          order.value.delivery.buyyerAddress.dataAddress.namePlace }}) {{
+                          order.value.delivery.buyyerAddress.addressString | slice:0:40 }}...</p>
                       </div>
-                      <div class="col-auto">
+                      <div class="col-auto col-sm-pl align-self-center">
                         <p class="mb-0 font-sm-7" style="color: #FE5721;">แก้ไข</p>
                       </div>
                     </div>
@@ -71,192 +87,51 @@
               </div>
               <div class="row mt-3">
                 <div class="col col-md-6 col-xl-6 align-self-center">
-                  <button type="button" class="btn btn-light"
-                  style="cursor: pointer;" data-toggle="modal" data-target="#modalSelectTran">
+                  <button type="button" class="btn btn-light" style="cursor: pointer;" data-toggle="modal"
+                    data-target="#modalSelectDelivery" (click)="getProductDelivery(order)">
                     <div class="row">
                       <div class="col">
-                        <p class="mb-0 font-sm-7">ตัวเลือกขนส่ง : Kerry Express</p>
+                        <p *ngIf="order.value.delivery != null && order.value.delivery.priceDelivery == null"
+                          class="mb-0 font-sm-7 align-self-center">ตัวเลือกขนส่ง
+                          : โปรดเลือกตัวเลือกขนส่ง</p>
+                        <p *ngIf="order.value.delivery != null && order.value.delivery.priceDelivery != null"
+                          class="mb-0 font-sm-7 align-self-center">ตัวเลือกขนส่ง
+                          : {{ order.value.delivery.priceDelivery.deliveryName }}</p>
                       </div>
-                      <div class="col-auto col-sm-pl">
-                        <p class="mb-0 font-sm-7" style="color: #FE5721;">฿100</p>
+                      <div *ngIf="order.value.delivery != null && order.value.delivery.priceDelivery != null"
+                        class="col-auto col-sm-pl align-self-center">
+                        <p class="mb-0 font-sm-7" style="color: #FE5721;">฿{{
+                          order.value.delivery.priceDelivery.priceDeliveryInput | currency: 'THB' : '' : '0.0' }}</p>
                       </div>
                     </div>
                   </button>
                 </div>
                 <div class="col-auto col-md-6 col-xl-6 text-right align-self-center" style="color: #FE5721;">
                   <a class="font-sm-1 font-sm-show">ราคา </a>
-                  <a class="font-sm-1">฿15,000</a>
+                  <a class="font-sm-1">฿{{ order.value.priceOfProduct | currency: 'THB' : '' : '0.0' }}</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- End Item 1 -->
-        <!-- Item 2 -->
-        <div class="row ml-2 mt-2">
-          <div class="col-auto item-checkbox align-self-center">
-            <div class="checkbox checkbox-circle">
-              <input id="checkbox7" class="styled" type="checkbox">
-              <label for="checkbox7"></label>
-            </div>
-          </div>
-          <div class="col align-self-center">
-            <div class="card-list card-padding">
-              <div class="row">
-                <div class="col align-self-center">
-                  <p class="mb-0 font-weight-bold">คำสั่งซื้อ #002135222</p>
-                </div>
-                <div class="col-auto align-self-center">
-                  <a class="mr-2 font-sm-7">23:59 ชม.</a>
-                  <button type="button" class="btn btn-circle">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col-auto col-product">
-                  <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
-                    src="./assets/img/bag.png">
-                </div>
-                <div class="col pl-0">
-                  <h5 class="mb-0 font-topic">Adidas NMD</h5>
-                  <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
-                  <button type="button" class="btn btn-light mt-2">
-                    <div class="row">
-                      <div class="col">
-                        <p class="mb-0 text-left font-sm-7">ที่อยู่ : (บ้าน) 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา...</p>
-                      </div>
-                      <div class="col-auto">
-                        <p class="mb-0 font-sm-7" style="color: #FE5721;">แก้ไข</p>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col col-md-6 col-xl-6 align-self-center">
-                  <button type="button" class="btn btn-light">
-                    <div class="row">
-                      <div class="col">
-                        <p class="mb-0 font-sm-7">ตัวเลือกขนส่ง : Kerry Express</p>
-                      </div>
-                      <div class="col-auto col-sm-pl">
-                        <p class="mb-0 font-sm-7" style="color: #FE5721;">฿100</p>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-                <div class="col-auto col-md-6 col-xl-6 text-right align-self-center" style="color: #FE5721;">
-                  <a class="font-sm-1 font-sm-show">ราคา </a>
-                  <a class="font-sm-1">฿7,000</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Item 2 -->
-        <h5 class="mt-3 mb-1 text-right font-store-price">ราคารวม ฿15,000</h5>
+        <!-- END ITEM -->
+        <!-- SHOP SUMMARY -->
+        <h5 class="mt-3 mb-1 text-right font-store-price">ราคารวม ฿{{ data.paymentShopSum | currency: 'THB' : '' : '0.0'
+          }}</h5>
+        <!-- END SHOP SUMMARY -->
       </div>
-      <!-- End Store Item 1 -->
-
-      <!-- Store Item 2 -->
-      <div class="card-store-p mt-3">
-        <div class="row mb-2">
-          <div class="col align-self-center">
-            <div class="row">
-              <div class="col-auto">
-                <div class="checkbox checkbox-circle">
-                  <input id="checkbox7" class="styled" type="checkbox">
-                  <label for="checkbox7"></label>
-                </div>
-              </div>
-              <div class="col pl-1">
-                <p class="text-white mb-0">STORE NAME 2</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto align-self-center">
-            <button type="button" class="btn btn-circle">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-        <!-- Item 1 -->
-        <div class="row ml-2 mt-2">
-          <div class="col-auto item-checkbox align-self-center">
-            <div class="checkbox checkbox-circle">
-              <input id="checkbox7" class="styled" type="checkbox">
-              <label for="checkbox7"></label>
-            </div>
-          </div>
-          <div class="col align-self-center">
-            <div class="card-list card-padding">
-              <div class="row">
-                <div class="col align-self-center">
-                  <p class="mb-0 font-weight-bold">คำสั่งซื้อ #00213533</p>
-                </div>
-                <div class="col-auto align-self-center">
-                  <a class="mr-2 font-sm-7">23:59 ชม.</a>
-                  <button type="button" class="btn btn-circle">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col-auto col-product">
-                  <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
-                    src="./assets/img/bag.png">
-                </div>
-                <div class="col pl-0">
-                  <h5 class="mb-0 font-topic">Adidas NMD</h5>
-                  <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
-                  <button type="button" class="btn btn-light mt-2">
-                    <div class="row">
-                      <div class="col">
-                        <p class="mb-0 text-left font-sm-7">ที่อยู่ : (บ้าน) 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา...</p>
-                      </div>
-                      <div class="col-auto">
-                        <p class="mb-0 font-sm-7" style="color: #FE5721;">แก้ไข</p>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col col-md-6 col-xl-6 align-self-center">
-                  <button type="button" class="btn btn-light">
-                    <div class="row">
-                      <div class="col">
-                        <p class="mb-0 font-sm-7">ตัวเลือกขนส่ง : Kerry Express</p>
-                      </div>
-                      <div class="col-auto col-sm-pl">
-                        <p class="mb-0 font-sm-7" style="color: #FE5721;">฿100</p>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-                <div class="col-auto col-md-6 col-xl-6 text-right align-self-center" style="color: #FE5721;">
-                  <a class="font-sm-1 font-sm-show">ราคา </a>
-                  <a class="font-sm-1">฿1,000</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Item 1 -->
-        <h5 class="mt-3 mb-1 text-right font-store-price">ราคารวม ฿1,100</h5>
-      </div>
-      <!-- End Store Item 2 -->
+      <!-- END STORE -->
     </div>
-    <!-- End Card Body -->
+
+    <!-- ITEMS FOR PAYMENT SUMMARY -->
     <div class="card-tab card-tab-radius">
-      <div class="row mb-2">
+      <div class="row mb-2" [class.disabled]="items.length == 0">
         <div class="col">
           <div class="row">
             <div class="col-auto">
               <div class="checkbox checkbox-circle">
-                <input id="checkbox7" class="styled" type="checkbox">
-                <label for="checkbox7"></label>
+                <input id="checkboxSum" class="styled" type="checkbox" (click)="selectAllItems()">
+                <label for="checkboxSum"></label>
               </div>
             </div>
             <div class="col pl-1">
@@ -265,324 +140,408 @@
           </div>
         </div>
         <div class="col-auto text-right align-self-center">
-          <h3 class="mb-0 font-total-price">ราคารวม ฿15,000</h3>
+          <h3 class="mb-0 font-total-price">ราคารวม ฿{{ sumAllItems | currency: 'THB' : '' : '0.0' }}</h3>
           <p class="mb-0 text-white font-sm-7">ยอดรวมทั้งสิ้น</p>
         </div>
       </div>
-      <button type="button" class="btn mt-2"
+      <button type="button" class="btn mt-2" [class.disabled]="sumAllItems == 0"
         style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;"
         data-toggle="modal" data-target="#modalDepositCredit">
         ชำระเงิน
       </button>
-      
     </div>
+    <!-- END ITEMS FOR PAYMENT SUMMARY -->
   </div>
-  <!-- End Card -->
-
-  <!-- Modal Select Address -->
-  <div class="modal fade" id="modalSelectAddress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-  style="display: none;" aria-hidden="true">
-  <div class="modal-dialog modal-bottom">
-    <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-      <div class="row">
-        <div class="col text-center">
-          <p>ตัวเลือกที่อยู่</p>
-        </div>
-        <div class="col-auto">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-      </div>
-      <div class="modal-body p-0">
-        <!-- Row 1 -->
-        <div class="row">
-          <div class="col-12 col-md-6 col-xl-6 col-p-r mt-2">
-            <div class="col-address-active">
-              <a>1. บ้าน</a>
-              <a class="ml-2">(ค่าเริ่มต้น)</a>
-              <p class="mb-0">• นายสุทัศน์ สุขจิต</p>
-              <p class="mb-0">• 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา กรุงเทพ 10270</p>
-              <p class="mb-0">• 0649355415</p>
-            </div>
-          </div>
-          <div class="col-12 col-md-6 col-xl-6 col-p-l mt-2">
-            <div class="col-address">
-              <a>1. บ้าน</a>
-              <a class="ml-2">(ค่าเริ่มต้น)</a>
-              <p class="mb-0">• นายสุทัศน์ สุขจิต</p>
-              <p class="mb-0">• 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา กรุงเทพ 10270</p>
-              <p class="mb-0">• 0649355415</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal Select Address -->
-
-<!-- Modal Select Tran -->
-<div class="modal fade" id="modalSelectTran" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-style="display: none;" aria-hidden="true">
-<div class="modal-dialog modal-bottom">
-  <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-    <div class="row">
-      <div class="col text-center">
-        <p>ตัวเลือกขนส่ง</p>
-      </div>
-      <div class="col-auto">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-    </div>
-    <div class="modal-body p-0">
-      <!-- Row 1 -->
-      <div class="row">
-        <div class="col-12 col-md-6 col-xl-6 col-p-r mt-2">
-          <div class="col-address-active">
-            <div class="row">
-              <div class="col align-self-center">
-                <p class="mb-0">Kerry Express</p>
-                <p class="mb-0" style="font-size: 0.8rem;">รองรับการเก็บเงินปลายทาง</p>
-              </div>
-              <div class="col-auto align-self-center">
-                <p class="mb-0" style="color: #FE5721;">฿50</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-xl-6 col-p-l mt-2">
-          <div class="col-address">
-            <div class="row">
-              <div class="col align-self-center">
-                <p class="mb-0">SCG Express</p>
-                <p class="mb-0" style="font-size: 0.8rem;">รองรับการเก็บเงินปลายทาง</p>
-              </div>
-              <div class="col-auto align-self-center">
-                <p class="mb-0" style="color: #FE5721;">฿50</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Row 2 -->
-      <div class="row">
-        <div class="col-12 col-md-6 col-xl-6 col-p-r mt-2">
-          <div class="col-address">
-            <div class="row">
-              <div class="col align-self-center">
-                <p class="mb-0">Flash Express</p>
-                <p class="mb-0" style="font-size: 0.8rem;">รองรับการเก็บเงินปลายทาง</p>
-              </div>
-              <div class="col-auto align-self-center">
-                <p class="mb-0" style="color: #FE5721;">฿50</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-xl-6 col-p-l mt-2">
-          <div class="col-address">
-            <div class="row">
-              <div class="col align-self-center">
-                <p class="mb-0">ไปรษณีย์ไทย</p>
-                <p class="mb-0" style="font-size: 0.8rem;">รองรับการเก็บเงินปลายทาง</p>
-              </div>
-              <div class="col-auto align-self-center">
-                <p class="mb-0" style="color: #FE5721;">฿50</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<!-- Modal Select Tran -->
-
-<!-- Modal Deposit Credit -->
-<div class="modal fade" id="modalDepositCredit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-style="display: none;" aria-hidden="true">
-<div class="modal-dialog modal-bottom">
-  <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-    <div class="row">
-      <div class="col text-center">
-        <p *ngIf="PaymentMethod">ช่องทางการชำระเงิน</p>
-        <p *ngIf="SelectCard">กรุณาเลือกบัตร</p>
-      </div>
-      <div class="col-auto">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-    </div>
-    <div class="modal-body p-0">
-      <!-- Payment Method -->
-      <div *ngIf="PaymentMethod">
-        <div class="row m-0">
-          <div class="col-4 col-2 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;"
-            (click)="submitCard()">
-            <div class="col-icon" style="background-color: #20232A;">
-              <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/debit-credit-icon-noBG.png">
-              <p class="mt-3 mb-0 text-icon">Debit/Credit</p>
-            </div>
-          </div>
-          <div class="col-4 col-2 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;">
-            <div class="col-icon" style="background-color: #20232A;">
-              <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/qr-icon.png">
-              <p class="mt-3 mb-0 text-icon">Qr Payment</p>
-            </div>
-          </div>
-          <div class="col-4 col-2 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;">
-            <div class="col-icon" style="background-color: #20232A;">
-              <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/TrueMoney-Wallet-logo.png">
-              <p class="mt-3 mb-0 text-icon">TrueMoney</p>
-            </div>
-          </div>
-          <div class="col-4 col-2 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;">
-            <div class="col-icon" style="background-color: #20232A;">
-              <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/wechat-pay-logo-icon.png">
-              <p class="mt-3 mb-0 text-icon">WeChat Pay</p>
-            </div>
-          </div>
-          <div class="col-4 col-2 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;">
-            <div class="col-icon" style="background-color: #20232A;">
-              <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/alipay.png">
-              <p class="mt-3 mb-0 text-icon">ALIPAY</p>
-            </div>
-          </div>
-          <div class="col-4 col-2 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;">
-            <div class="col-icon" style="background-color: #20232A;">
-              <img class="img-fluid img-payment" style="border-radius: 8px;"
-                src="./assets/img/PaymentMethod/rabbit-line-pay.png">
-              <p class="mt-3 mb-0 text-icon">Line Pay</p>
-            </div>
-          </div>
-          <div class="col-4 col-2 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;">
-            <div class="col-icon" style="background-color: #20232A;">
-              <img class="img-fluid img-payment" style="border-radius: 8px;"
-                src="./assets/img/PaymentMethod/box-cash-icon-no-bg.png">
-              <p class="mt-3 mb-0 text-icon">เก็บเงินปลายทาง</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Payment Method -->
-      <!-- Select Card -->
-      <div *ngIf="SelectCard">
-        <div class="row m-0">
-          <!-- Card 1 -->
-          <div class="col-12 col-6 col-xl-3 col-card" style="cursor: pointer;" data-toggle="modal"
-            data-target="#ModalPopupWithdrawConclude">
-            <div class="card border-0 border-ra13">
-              <img class="card-img img-cover" src="./assets/img/card/KRUNGSRI-card.png">
-              <div class="card-img-overlay overlay-cover">
-                <div class="row m-0">
-                  <div class="col-auto col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 p-0 align-self-center">
-                    <div class="row m-0">
-                      <div class="col-auto-bank">
-                        <img class="img-fluid rounded-circle img-bank" src="./assets/img/card/logo-krungsri.png">
-                      </div>
-                      <div class="col-auto pl-0 align-self-center text-white text-bank">
-                        <h5 class="mb-0 text-bank text-left">KRUNGSRI</h5>
-                        <p class="mb-0">บัตรเดบิต</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                  <h4 class="mb-0 text-right text-white">**** **** **** 6666</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="col-12 col-6 col-xl-3 col-card">
-            <div class="card border-0 border-ra13">
-              <img class="card-img img-cover" src="./assets/img/card/KRUNGSRI-card.png">
-              <div class="card-img-overlay overlay-cover">
-                <div class="row m-0">
-                  <div class="col-auto col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 p-0 align-self-center">
-                    <div class="row m-0">
-                      <div class="col-auto-bank">
-                        <img class="img-fluid rounded-circle img-bank" src="./assets/img/card/logo-krungsri.png">
-                      </div>
-                      <div class="col-auto pl-0 align-self-center text-white text-bank">
-                        <h5 class="mb-0 text-bank text-left">KRUNGSRI</h5>
-                        <p class="mb-0">บัตรเดบิต</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                  <h4 class="mb-0 text-right text-white">**** **** **** 6666</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="col-12 col-6 col-xl-3 col-card">
-            <div class="card border-0 border-ra13">
-              <img class="card-img img-cover" src="./assets/img/card/kbank-card.png">
-              <div class="card-img-overlay overlay-cover">
-                <div class="row m-0">
-                  <div class="col-auto col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 p-0 align-self-center">
-                    <div class="row m-0">
-                      <div class="col-auto-bank">
-                        <img class="img-fluid rounded-circle img-bank" src="./assets/img/card/kbank-icon.png">
-                      </div>
-                      <div class="col-auto pl-0 align-self-center text-white text-bank">
-                        <h5 class="mb-0 text-bank text-left">KBANK</h5>
-                        <p class="mb-0">บัตรเดบิต</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                  <h4 class="mb-0 text-right text-white">**** **** **** 6666</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card 4 -->
-          <div class="col-12 col-6 col-xl-3 col-card">
-            <div class="card border-0 border-ra13">
-              <img class="card-img img-cover" src="./assets/img/card/KRUNGSRI-card.png">
-              <div class="card-img-overlay overlay-cover">
-                <div class="row m-0">
-                  <div class="col-auto col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 p-0 align-self-center">
-                    <div class="row m-0">
-                      <div class="col-auto-bank">
-                        <img class="img-fluid rounded-circle img-bank" src="./assets/img/card/logo-krungsri.png">
-                      </div>
-                      <div class="col-auto pl-0 align-self-center text-white text-bank">
-                        <h5 class="mb-0 text-bank text-left">KRUNGSRI</h5>
-                        <p class="mb-0">บัตรเดบิต</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                  <h4 class="mb-0 text-right text-white">**** **** **** 6666</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Select Card -->
-    </div>
-    <!-- End Modal Body -->
-  </div>
-</div>
-</div>
-<!-- Modal Deposit Credit -->
-
-
+  <!-- END CARD -->
 
 </div>
 <!-- End Container -->
 
+  <!-- MODAL SELECT ADDRESS -->
+  <div class="modal fade" id="modalSelectAddress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+        <div class="row">
+          <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <a style="color: #FE5721;" [routerLink]="['/settings-address-list']">เพิ่มที่อยู่</a>
+            <!-- <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button> -->
+          </div>
+          <div class="col text-center">
+            <p>ตัวเลือกที่อยู่</p>
+          </div>
+          <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body p-0">
+          <!-- NO ADDRESS GOTO ADD ADDRESS -->
+          <div *ngIf="userBuyer != undefined && userBuyer.mainAddress == null" class="text-center text-dark"
+            style="padding-top: 48px; padding-bottom: 48px;">
+            <p class="mb-0" style="font-size: 1rem;">ไม่พบที่อยู่ในการจัดส่งสินค้า</p>
+            <p class="mb-0" style="font-size: 1rem; cursor: pointer;"
+              data-dismiss="modal" aria-label="Close">เพิ่มที่อยู่การจัดส่งสินค้าง่าย
+              ๆ เพียงกด <a [routerLink]="['/settings-address-list']" style="color: #FE5721;">เพิ่มที่อยู่</a></p>
+          </div>
+          <!-- ADDRESS LIST -->
+          <div *ngIf="userBuyer != undefined && userBuyer.mainAddress != null && userBuyerAddressList.length != 0">
+            <div class="row">
+              <div *ngFor="let data of userBuyerAddressList; let i = index;" class="col-12 mt-2">
+                <div [class.col-address-active]="data.key == modalOrderAddress.docID"
+                  [class.col-address]="data.key != modalOrderAddress.docID" (click)="selectAddressForOrder(data)"
+                  data-dismiss="modal" aria-label="Close">
+                  <a>{{ i+1 }}. {{ data.value.namePlace }}</a><a *ngIf="i == 0" class="ml-2">(ค่าเริ่มต้น)</a>
+                  <p class="mb-0">• {{ data.value.name }} {{ data.value.lastName }}</p>
+                  <p class="mb-0">• {{ data.value.number }} {{ data.value.moo }} {{ data.value.village }} {{
+                    data.value.lane }} {{ data.value.road }} {{ data.value.subDistrict }} {{ data.value.district }} {{
+                    data.value.province }} {{ data.value.postalCode }}</p>
+                  <p class="mb-0">• {{ data.value.phone }}</p>
+                  <p *ngIf="data.value.note != ''" class="mb-0">• ({{ data.value.note }})</p>
+                  <p *ngIf="data.value.note == ''" class="mb-0">• (ไม่มีรายละเอียดขนส่ง)</p>
+                </div>
+              </div>
+              <!-- <div class="col-12 col-md-6 col-xl-6 col-p-l mt-2">
+              <div class="col-address">
+                <a>1. บ้าน</a><a class="ml-2">(ค่าเริ่มต้น)</a>
+                <p class="mb-0">• นายสุทัศน์ สุขจิต</p>
+                <p class="mb-0">• 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา กรุงเทพ 10270</p>
+                <p class="mb-0">• 0649355415</p>
+              </div>
+            </div> -->
+            </div>
+          </div>
+          <!-- END ADDRESS LIST -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL SELECT ADDRESS -->
 
+  <!-- MODAL SELECT DELIVERY -->
+  <div class="modal fade" id="modalSelectDelivery" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+        <div class="row">
+          <div class="col text-center">
+            <p>ตัวเลือกขนส่ง</p>
+          </div>
+          <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body p-0">
+          <!-- DELIVERY LIST -->
+          <div class="row">
+            <div *ngFor="let data of productDelivery" class="col-12 col-md-6 col-xl-6 mt-2">
+              <div class="col-address"
+                [class.col-address-active]="modalOrderDeli.value.delivery.priceDelivery != undefined && modalOrderDeli.value.delivery.priceDelivery.deliveryName == data.deliveryName"
+                (click)="selectDeliveryForOrder(data)" data-dismiss="modal" aria-label="Close">
+                <div class="row">
+                  <div class="col-auto align-self-center">
+                    <img *ngIf="data.deliveryName == 'Kerry Express'" class="img-fluid" style="width: 70px; border-radius: 10px;"
+                      src="../../assets/img/delivery-icon/bg-color/kerry-bg-color.png">
+                    <img *ngIf="data.deliveryName == 'Thailand Post'" class="img-fluid" style="width: 70px; border-radius: 10px;"
+                      src="../../assets/img/delivery-icon/bg-color/thailandPost-bg-color.png">
+                    <img *ngIf="data.deliveryName == 'SCG Express'" class="img-fluid" style="width: 70px; border-radius: 10px;"
+                      src="../../assets/img/delivery-icon/bg-color/scg-bg-color.png">
+                    <img *ngIf="data.deliveryName == 'Flash Express'" class="img-fluid" style="width: 70px; border-radius: 10px;"
+                      src="../../assets/img/delivery-icon/bg-color/flash-bg-color.png">
+                    <img *ngIf="data.deliveryName == 'handPickUp'" class="img-fluid" style="width: 70px; border-radius: 10px;" 
+                      src="../../assets/img/delivery-icon/bg-color/box.png">
+                  </div>
+                  <div class="col align-self-center">
+                    <div *ngIf="data.deliveryName != 'handPickUp'">
+                      <p class="mb-0">{{ data.deliveryName }}</p>
+                      <!-- <p class="mb-0" style="font-size: 0.8rem;">รองรับการเก็บเงินปลายทาง</p> -->
+                    </div>
+                    <div *ngIf="data.deliveryName == 'handPickUp'">
+                      <p class="mb-0">รายละเอียด: {{ data.country }}/{{ data.province }}/{{ data.description }}</p>
+                    </div>
+                  </div>
+                  <div *ngIf="data.deliveryName != 'handPickUp'" class="col-auto align-self-center">
+                    <p class="mb-0" style="color: #FE5721;">฿{{ data.priceDeliveryInput | currency: 'THB' : '' : '0.0'
+                      }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL SELECT DELIVERY -->
+
+  <!-- Modal Deposit Credit -->
+  <div class="modal fade" id="modalDepositCredit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-bottom">
+      <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+        <div class="row">
+          <div class="col text-center">
+            <!-- <p *ngIf="PaymentMethod">ช่องทางการชำระเงิน</p> -->
+            <!-- <p *ngIf="SelectCard">กรุณาเลือกบัตร</p> -->
+            <p class="mb-0">ช่องทางการชำระเงิน</p>
+          </div>
+          <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <button type="button" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body p-0">
+          <!-- Payment Method -->
+          <!-- <div *ngIf="PaymentMethod"> -->
+          <div class="row m-0">
+            <div class="col-6 col-md-3 col-xl-2 text-center text-white mt-2 pl-1 pr-1 disabled" style="cursor: pointer;" data-dismiss="modal" aria-label="Close"
+              (click)="payment('debitCredit')">
+              <div class="col-icon" style="background-color: #20232A;">
+                <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/svg/debit-credit-icon-noBG.svg">
+                <p class="mt-3 mb-0 text-icon">Debit/Credit</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;" data-dismiss="modal" aria-label="Close"
+              (click)="payment('promptpay')">
+              <div class="col-icon" style="background-color: #20232A;">
+                <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/qr-icon.png">
+                <p class="mt-3 mb-0 text-icon">Qr Payment</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;" data-dismiss="modal" aria-label="Close"
+              (click)="payment('truemoney')">
+              <div class="col-icon" style="background-color: #20232A;">
+                <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/svg/TrueMoney-Wallet-vector.svg">
+                <p class="mt-3 mb-0 text-icon">TrueMoney</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;" data-dismiss="modal" aria-label="Close"
+              (click)="payment('wechat')">
+              <div class="col-icon" style="background-color: #20232A;">
+                <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/svg/wechat-pay-logo-icon.svg">
+                <p class="mt-3 mb-0 text-icon">WeChat Pay</p>
+              </div>
+            </div>
+            <!-- <div class="col-6 col-md-3 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;" data-dismiss="modal" aria-label="Close"
+              (click)="payment('alipay')">
+              <div class="col-icon" style="background-color: #20232A;">
+                <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/svg/alipay.svg">
+                <p class="mt-3 mb-0 text-icon">Alipay</p>
+              </div>
+            </div> -->
+            <!-- <div class="col-6 col-md-3 col-xl-2 text-center text-white mt-2 pl-1 pr-1" style="cursor: pointer;" data-dismiss="modal" aria-label="Close"
+              (click)="payment('airpay')">
+              <div class="col-icon" style="background-color: #20232A;">
+                <img class="img-fluid img-payment" src="./assets/img/PaymentMethod/ShopeePay.png">
+                <p class="mt-3 mb-0 text-icon">ShopeePay</p>
+              </div>
+            </div> -->
+            <div class="col-6 col-md-3 col-xl-2 text-center text-white mt-2 pl-1 pr-1 disabled" style="cursor: pointer;" data-dismiss="modal" aria-label="Close"
+              (click)="payment('cashOnDelivery')">
+              <div class="col-icon" style="background-color: #20232A;">
+                <img class="img-fluid img-payment" style="border-radius: 8px;"
+                  src="./assets/img/PaymentMethod/box-cash-icon-no-bg.png">
+                <p class="mt-3 mb-0 text-icon">เก็บเงินปลายทาง</p>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+          <!-- End Payment Method -->
+        </div>
+        <!-- End Modal Body -->
+      </div>
+    </div>
+  </div>
+  <!-- Modal Deposit Credit -->
+
+  <!-- MODAL POPUP FAIL -->
+  <div class="modal fade" [class.show]="addItemsForPayment" [class.modalShow]="addItemsForPayment"
+    id="ModalPopupAddItemFail" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">โปรดเพิ่มที่อยู่/ตัวเลือกขนส่งสำหรับสินค้านี้</p>
+
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;" data-dismiss="modal"
+              (click)="closeModalPopupAddItemFail()">ตกลง</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP FAIL -->
+
+  <!-- MODAL POPUP FAIL -->
+  <div class="modal fade" id="modalDeleteItem" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">ต้องการลบคำสั่งซื้อ ?</p>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;" data-dismiss="modal"
+              (click)="deleteItem()">ตกลง</button>
+          </div>
+        </div>
+        <div class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP FAIL -->
+
+  <!-- MODAL POPUP FAIL -->
+  <div class="modal fade" id="modalDeleteShop" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">ต้องการลบคำสั่งซื้อทั้งหมดของร้านค้า ?</p>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;" data-dismiss="modal"
+              (click)="deleteShopItem()">ตกลง</button>
+          </div>
+        </div>
+        <div class="mt-2">
+          <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+            <p class="text-center">ยกเลิก</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP FAIL -->
+
+  <!-- MODAL POPUP QR PAYMENT -->
+  <div class="modal fade" [class.show]="qrPayment" [class.modalShow]="qrPayment" id="ModalPopupQrPayment" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <h5 class="font-weight-bold text-center">การชำระเงิน</h5>
+        <!-- CHANNEL -->
+        <div class="row">
+          <div class="col align-self-center">
+            <div *ngIf="paymentChannel == 'promptpay'" class="text-center"
+              style="background-color: #20232A; padding-top: 15px; padding-bottom: 15px; border-radius: 13px 13px 13px 13px;">
+              <img class="img-fluid" style="max-height: 30px;" src="./assets/img/PaymentMethod/qr-icon.png">
+              <p class="mt-1 mb-0 text-white" style="font-size: 1rem;">Qr Payment</p>
+            </div>
+            <div *ngIf="paymentChannel == 'truemoney'" class="text-center"
+              style="background-color: #20232A; padding-top: 15px; padding-bottom: 15px; border-radius: 13px 13px 13px 13px;">
+              <img class="img-fluid" style="max-height: 30px;"
+                src="./assets/img/PaymentMethod/svg/TrueMoney-Wallet-vector.svg">
+              <p class="mt-1 mb-0 text-white" style="font-size: 1rem;">TrueMoney</p>
+            </div>
+            <div *ngIf="paymentChannel == 'wechat'" class="text-center"
+              style="background-color: #20232A; padding-top: 15px; padding-bottom: 15px; border-radius: 13px 13px 13px 13px;">
+              <img class="img-fluid" style="max-height: 30px;"
+                src="./assets/img/PaymentMethod/svg/wechat-pay-logo-icon.svg">
+              <p class="mt-1 mb-0 text-white" style="font-size: 1rem;">WeChat Pay</p>
+            </div>
+            <div *ngIf="paymentChannel == 'alipay'" class="text-center"
+              style="background-color: #20232A; padding-top: 15px; padding-bottom: 15px; border-radius: 13px 13px 13px 13px;">
+              <img class="img-fluid" style="max-height: 30px;" src="./assets/img/PaymentMethod/svg/alipay.svg">
+              <p class="mt-1 mb-0 text-white" style="font-size: 1rem;">ALIPAY</p>
+            </div>
+            <div *ngIf="paymentChannel == 'airpay'" class="text-center"
+              style="background-color: #20232A; padding-top: 15px; padding-bottom: 15px; border-radius: 13px 13px 13px 13px;">
+              <img class="img-fluid" style="max-height: 30px;" src="./assets/img/PaymentMethod/ShopeePay.png">
+              <p class="mt-1 mb-0 text-white" style="font-size: 1rem;">ShopeePay</p>
+            </div>
+          </div>
+          <div class="col-auto align-self-center sm-p-0">
+            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+          </div>
+          <div class="col align-self-center">
+            <div class="text-center"
+              style="background-color: #20232A; padding-top: 15px; padding-bottom: 15px; border-radius: 13px 13px 13px 13px;">
+              <img class="img-fluid" style="max-height: 30px;" src="./assets/img/seller-profile/store-icon-color.svg">
+              <p class="mt-1 mb-0 text-white" style="font-size: 1rem;">เคเชอร์เพย์</p>
+            </div>
+          </div>
+        </div>
+        <!-- END CHANNEL -->
+        <!-- SUM PRICE -->
+        <div class="text-center mt-2 mb-2">
+          <p class="mb-0" style="font-size: 1.4rem; line-height: 1; color: #FE5721;">฿{{ sumAllItems | currency: 'THB' : '' : '0.0' }}</p>
+          <p class="mb-0" style="font-size: 1rem;">จำนวนเงิน</p>
+        </div>
+        <!-- END SUM PRICE -->
+        <!-- RENDER QR PAYMENT -->
+        <div *ngIf="transaction != null && transaction.response == undefined" class="text-center mt-2 mb-2">
+          <img class="rounded mx-auto d-block" style="width: 80px;" src="../../assets/img/loadingpage-final.png">
+          <p class="text-center mb-0">Loading...</p>
+        </div>
+        <div *ngIf="transaction != null && transaction.response != undefined">
+          <div *ngIf="transaction.channel_list == 'promptpay'" class="ref-code mb-1">
+            <p class="mb-0">หมายเลขอ้างอิง1:
+              <a style="color: #FE5721;"> {{ transaction.response.stalls_name }} </a>
+              <button (click)="copyRef1()" type="button" class="btn btn-primary" style="border: none; border-radius: 1.5rem; background-color: #FE5721;">คัดลอก</button></p>
+            <p class="mb-0">หมายเลขอ้างอิง2:
+              <a style="color: #FE5721;"> {{ transaction.response.ksher_order_no }} </a>
+              <button (click)="copyRef2()" type="button" class="btn btn-primary" style="border: none; border-radius: 1.5rem; background-color: #FE5721;">คัดลอก</button>
+            </p>
+          </div>
+          <div class="text-center mb-1">
+            <p *ngIf="minutesToDday == 10 && secondsToDday == 00" class="mb-0">(ชำระเงินภายใน Loading...)</p>
+            <p *ngIf="minutesToDday != 10 && secondsToDday != 00" class="mb-0">(ชำระเงินภายใน {{ minutesToDday }}:{{ secondsToDday }})</p>
+            <img class="img-fluid" style="max-width: 250px;" src="{{ transaction.response.imgdat }}">
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button [class.disabled]="transaction != null && transaction.response == undefined" type="button"
+              class="btn btn-primary" style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal" (click)="editOrderPayment()">แก้ไขข้อมูล</button>
+          </div>
+          <div class="mt-2">
+            <a (click)="hideModalQrPayment()" style="cursor: pointer;">
+              <p class="text-center mb-0">ชำระเงินภายหลัง</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP QR PAYMENT -->
+
+  <!-- MODAL POPUP QR PAYMENT -->
+  <div class="modal fade" [class.show]="modalTransactionShow" [class.modalShow]="modalTransactionShow"
+    id="ModalPopupPaymentStauts" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">การชำระเงิน{{ modalTransacStatus }}</p>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;" data-dismiss="modal"
+              (click)="modalPaymentStauts()">ตกลง</button>
+          </div>
+        </div>
+        <!-- <div class="mt-2">
+        <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+          <p class="text-center">ยกเลิก</p>
+        </a>
+      </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL POPUP QR PAYMENT -->

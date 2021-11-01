@@ -1,14 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Router, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { firebaseConfig } from './../environments/firebase.config';
+// FIRE BASE AUTH
+import { AngularFireAuthModule } from '@angular/fire/auth';
+// FIREBASE 
+import { AngularFireModule } from '@angular/fire';
+// FIREBASE FIRESTORE
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+// FIREBASE STORAGE
+import { AngularFireStorageModule } from '@angular/fire/storage';
+// IMAGE CROPPER
+import { ImageCropperModule } from 'ngx-image-cropper';
+// TEXT EDITOR
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+// CLIPBOARD
+import { ClipboardModule } from 'ngx-clipboard';
+// SERVICE
+import { AuthService } from './services/auth.service';
+// CAPTCHA
+import { RecaptchaModule } from 'ng-recaptcha';
+// GUARD
+import { AuthGuard } from './guards/auth.guard';
+// CIRCLE GRAPH PROGRESS
+import { NgCircleProgressModule } from 'ng-circle-progress';
+// COMPONENT
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { TestComponent } from './components/test/test.component';
 import { ProductDescriptionComponent } from './components/product-description/product-description.component';
-// Import ng-circle-progress
-import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchComponent } from './components/search/search.component';
 import { AuctionListComponent } from './components/auction-list/auction-list.component';
@@ -43,6 +66,82 @@ import { OrderConfirmComponent } from './components/order-confirm/order-confirm.
 import { OrderReturnComponent } from './components/order-return/order-return.component';
 import { OrderCancelComponent } from './components/order-cancel/order-cancel.component';
 import { OrderCancelDescriptionComponent } from './components/order-cancel-description/order-cancel-description.component';
+import { ModalInviteFriendComponent } from './components/modal-invite-friend/modal-invite-friend.component';
+import { ModalLanguageSettingsComponent } from './components/modal-language-settings/modal-language-settings.component';
+import { ModalPopupAdsComponent } from './components/modal-popup-ads/modal-popup-ads.component';
+import { HomeComponent } from './components/home/home.component';
+import { HelpCenterListComponent } from './components/help-center-list/help-center-list.component';
+import { HelpCenterDetailComponent } from './components/help-center-detail/help-center-detail.component';
+import { ModalPopupInstructionComponent } from './components/modal-popup-instruction/modal-popup-instruction.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { ProfileimgSettingsComponent } from './components/profileimg-settings/profileimg-settings.component';
+import { ProfileSettingsProfileimgComponent } from './components/profile-settings-profileimg/profile-settings-profileimg.component';
+import { ProductReviewComponent } from './components/product-review/product-review.component';
+import { CheckEmailVerifyComponent } from './components/check-email-verify/check-email-verify.component';
+import { UpdateUserBuyerComponent } from './components/update-user-buyer/update-user-buyer.component';
+import { MerchantComingSoonComponent } from './components/merchant-coming-soon/merchant-coming-soon.component';
+import { OrderWaitingConfirmComponent } from './components/order-waiting-confirm/order-waiting-confirm.component';
+import { OrderWaitingConfirmListComponent } from './components/order-waiting-confirm-list/order-waiting-confirm-list.component';
+import { OrderWaitingConfirmDescriptionComponent } from './components/order-waiting-confirm-description/order-waiting-confirm-description.component';
+import { SettingsRefcodeComponent } from './components/settings-refcode/settings-refcode.component';
+import { ModalPrivacyPolicyComponent } from './components/modal-privacy-policy/modal-privacy-policy.component';
+import { PrivacyPolicyDescriptionComponent } from './components/privacy-policy-description/privacy-policy-description.component';
+
+// ROUTES
+export const router: Routes = [
+  { path: '', component: HomeComponent },
+  // { path: 'auction-list', component: AuctionListComponent, canActivate: [AuthGuard] },
+  { path: 'auction-list', component: AuctionListComponent, canActivate: [AuthGuard] },
+  { path: 'chat-list', component: ChatListComponent, canActivate: [AuthGuard] },
+  { path: 'chat-message', component: ChatMessageComponent, canActivate: [AuthGuard] },
+  { path: 'chat-message/:id', component: ChatMessageComponent, canActivate: [AuthGuard] },
+  { path: 'notification-list', component: NotificationListComponent, canActivate: [AuthGuard] },
+  { path: 'promotion-list', component: PromotionListComponent, canActivate: [AuthGuard] },
+  { path: 'payment-items', component: PaymentItemsComponent, canActivate: [AuthGuard] },
+  { path: 'payment-total', component: PaymentTotalComponent },
+  { path: 'payment-confirm-list', component: PaymentConfirmListComponent },
+  { path: 'payment-confirm-description/:id', component: PaymentConfirmDescriptionComponent },
+  { path: 'wallet-credit', component: WalletCreditComponent },
+  { path: 'buyMenu-list', component: BuyMenuListComponent },
+  { path: 'following-list', component: FollowingListComponent, canActivate: [AuthGuard] },
+  { path: 'like-list', component: LikeListComponent },
+  { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard]},
+  { path: 'profile-settings-list', component: ProfileSettingsListComponent, canActivate: [AuthGuard] },
+  { path: 'profile-settings-username', component: SettingsUsernameComponent, canActivate: [AuthGuard] },
+  { path: 'profile-settings-name', component: SettingsNameComponent, canActivate: [AuthGuard] },
+  { path: 'profile-settings-lastname', component: SettingsLastnameComponent, canActivate: [AuthGuard] },
+  { path: 'profile-settings-phonenumber/:id', component: SettingsPhonenumberComponent, canActivate: [AuthGuard] },
+  { path: 'profile-settings-refcode', component: SettingsRefcodeComponent, canActivate: [AuthGuard] },
+  { path: 'settings-address-list', component: AddressSettingsListComponent, canActivate: [AuthGuard] },
+  { path: 'settings-card-list', component: CardSettingsListComponent, canActivate: [AuthGuard] },
+  { path: 'transport-prepare-list', component: TransportPrepareListComponent },
+  { path: 'transport-list', component: TransportListComponent },
+  { path: 'transport-description/:id', component: TransportDescriptionComponent },
+  { path: 'transport-success-list', component: TransportSuccessListComponent },
+  { path: 'transport-success-description/:id', component: TransportSuccessDescriptionComponent },
+  { path: 'order-confirm/:id', component: OrderConfirmComponent },
+  { path: 'order-return/:id', component: OrderReturnComponent },
+  { path: 'order-cancel', component: OrderCancelComponent },
+  { path: 'order-cancel-description/:id', component: OrderCancelDescriptionComponent },
+  { path: 'shop-description/:id', component: ShopDescriptionComponent },
+  { path: 'help-center-list', component: HelpCenterListComponent },
+  { path: 'help-center-detail/:id', component: HelpCenterDetailComponent },
+  { path: 'search/:id', component: SearchComponent },
+  { path: 'product-description/:id', component: ProductDescriptionComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'signin/:id', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'signup/:id', component: SignupComponent },
+  { path: 'profile-settings-profileimg', component: ProfileSettingsProfileimgComponent, canActivate: [AuthGuard] },
+  { path: 'product-review/:id', component: ProductReviewComponent, canActivate: [AuthGuard] },
+  { path: 'check-email-verify', component: CheckEmailVerifyComponent },
+  { path: 'update-user-buyer', component: UpdateUserBuyerComponent },
+  { path: 'merchant-coming-soon', component: MerchantComingSoonComponent },
+  { path: 'order-waiting-confirm-list', component: OrderWaitingConfirmListComponent },
+  { path: 'order-waiting-confirm-description/:id', component: OrderWaitingConfirmDescriptionComponent },
+  { path: 'privacy-policy-description', component: PrivacyPolicyDescriptionComponent },
+]
 
 @NgModule({
   declarations: [
@@ -84,38 +183,44 @@ import { OrderCancelDescriptionComponent } from './components/order-cancel-descr
     OrderConfirmComponent,
     OrderReturnComponent,
     OrderCancelComponent,
-    OrderCancelDescriptionComponent
+    OrderCancelDescriptionComponent,
+    ModalInviteFriendComponent,
+    ModalLanguageSettingsComponent,
+    ModalPopupAdsComponent,
+    HomeComponent,
+    HelpCenterListComponent,
+    HelpCenterDetailComponent,
+    ModalPopupInstructionComponent,
+    SigninComponent,
+    SignupComponent,
+    ProfileimgSettingsComponent,
+    ProfileSettingsProfileimgComponent,
+    ProductReviewComponent,
+    CheckEmailVerifyComponent,
+    UpdateUserBuyerComponent,
+    MerchantComingSoonComponent,
+    OrderWaitingConfirmComponent,
+    OrderWaitingConfirmListComponent,
+    OrderWaitingConfirmDescriptionComponent,
+    SettingsRefcodeComponent,
+    ModalPrivacyPolicyComponent,
+    PrivacyPolicyDescriptionComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
+    ImageCropperModule,
+    RouterModule.forRoot(router),
     AppRoutingModule,
-     // Specify ng-circle-progress as an import
-     // set defaults here
-     NgCircleProgressModule.forRoot({
-     "backgroundPadding": 7,
-     "radius": 60,
-     "space": -2,
-     "outerStrokeWidth": 2,
-     "outerStrokeColor": "#808080",
-     "innerStrokeColor": "#e7e8ea",
-     "innerStrokeWidth": 2,
-     "title": [
-               "working",
-               "in",
-               "progress"
-     ],
-     "animateTitle": false,
-     "animationDuration": 1000,
-     "showTitle": true,
-     "showUnits": false,
-     "showSubtitle": false,
-     "showInnerStroke": false,
-     "responsive": true,
-     "startFromZero": false,
-     "showZeroOuterStroke": false
-    })
+    RichTextEditorAllModule,
+    ClipboardModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    RecaptchaModule,
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1, .cls-4 {
+        fill: #367df6;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-3, .cls-4 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="500" cy="500" r="500"/>
+  <ellipse class="cls-2" cx="508" cy="479.5" rx="275" ry="256.5"/>
+  <path class="cls-3" d="M336,672l1,105,98-55Z"/>
+  <path class="cls-4" d="M331,567L480,408l71,76,133-75L536,570l-70-76Z"/>
+</svg>

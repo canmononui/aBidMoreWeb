@@ -1,295 +1,300 @@
-<div class="row">
-  <div class="col-12 col-md col-lg">
-    <p class="mb-0">#เสื้อผ้าผู้ชาย</p>
+<div class="container">
+  <div *ngIf="showContent" class="row">
+    <div class="col-12 col-md col-lg align-self-start">
+      <p class="mb-0">#{{ textKeySearch }}</p>
+    </div>
+    <!-- BUTTON SET PRICE RANGE [LOW-HIGHT] -->
+    <div class="col-12 col-md-auto col-lg-auto col-btn-pr-1" [class.disabled]="productList.length == 0">
+      <button type="button" class="btn btn-smp btn-outline-gray" [class.btn-color]="textSetPriceRange != 'เลือกช่วงราคา'" data-toggle="modal"
+        data-target="#modalSearchSetPrice" (click)="clearTextSetPriceRange()">{{ textSetPriceRange }}</button>
+    </div>
+    <!-- BUTTON SET PRODUCT TYPE -->
+    <div class="col-12 col-md-auto col-lg-auto col-btn-pl-1 col-btn-pr-1" >
+      <button type="button" class="btn btn-smp btn-color" data-toggle="modal"
+        data-target="#modalSearchSetProductType">{{ textProductType }}</button>
+    </div>
+    <!-- BUTTON SET SORT PRODUCT SEARCH LIST -->
+    <div class="col-12 col-md-auto col-lg-auto col-btn-pl-1" [class.disabled]="productList.length == 0">
+      <button type="button" class="btn btn-smp" [class.btn-outline-gray]="productList.length == 0" [class.btn-color]="productList.length != 0"
+       data-toggle="modal" data-target="#modalSearchSetSort">การจัดเรียง : {{ textSort }}</button>
+    </div>
   </div>
-  <div class="col-12 col-md-auto col-lg-auto col-btn-pr-1">
-    <button type="button" class="btn btn-smp btn-outline-gray" data-toggle="modal"
-    data-target="#modalSearchSetPrice">เลือกช่วงราคา</button>
-  </div>
-  <div class="col-12 col-md-auto col-lg-auto col-btn-pl-1">
-    <button type="button" class="btn btn-smp btn-outline-gray" data-toggle="modal"
-    data-target="#modalSearchSetSort">การจัดเรียง : เวลาเริ่มประมูลน้อยไปมาก</button>
-  </div>
-</div>
 
-<!-- Product Search -->
-<div class="row">
-  <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-1">
-    <div class="card card-border-3">
-      <div class="card" style="border: none;">
-        <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <div class="row">
-            <div class="col-6 pr-1">
-              <div class="img-card-auto-win">
-                <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                  src="./assets/img/auto-win-text-icon.png">
-                <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-              </div>
-            </div>
-            <div class="col-6 pl-1">
-              <div class="img-card-time text-right">
-                <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                  src="./assets/img/Clock.png">
-              </div>
-            </div>
+  <!-- PRODUCT SEARCH -->
+  <div *ngIf="showContent">
+    <div *ngIf="productList.length == 0">
+      <div style="height: 80vh;">
+        <div class="container h-100 d-flex justify-content-center">
+          <div class="my-auto text-center">
+            <p>พบสินค้า #{{ textKeySearch }} ใหม่เร็ว ๆ นี้</p>
           </div>
         </div>
-      </div>
-
-      <div class="card-body card-body-padding">
-        <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-        <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-        <ul class="rating-stars">
-          <li>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-          </li>
-        </ul>
-        <var class="float-right">
-          <i class="fa fa-heart" style="color: #FE5721"></i>
-        </var>
       </div>
     </div>
   </div>
-  <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-2">
-    <div class="card card-border-3">
-      <div class="card" style="border: none;">
-        <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <div class="row">
-            <div class="col-6 pr-1">
-              <div class="img-card-auto-win">
-                <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                  src="./assets/img/auto-win-text-icon.png">
-                <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-              </div>
+  <div *ngIf="showContent" class="row m-row-card-product">
+    <div *ngFor="let productDes of productList" class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-col-card-product">
+      <div class="card-border-3 bg-white">
+        <div (click)="gotoProductDes(productDes.key)" class="posi-card" style="cursor: pointer;">
+          <img class="product-img-card img-cover" src="{{ productDes.value.imgProduct[0].imgUrl }}">
+          <!-- TEXT BAR FOR STATUS BIDDING -->
+          <div *ngIf="productDes.value.productStatus == 'bidding'" class="card-img-overlay overlay-cover">
+            <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+              <!-- TIME COUNTING DOWN -->
+              <p *ngIf="productDes.value.dateTime.count.hoursToDday + productDes.value.dateTime.count.minutesToDday + productDes.value.dateTime.count.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ productDes.value.dateTime.count.hoursToDday }}:{{ productDes.value.dateTime.count.minutesToDday }}:{{ productDes.value.dateTime.count.secondsToDday }}</p>
+              <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+              <p *ngIf="productDes.value.dateTime.count.hoursToDday == '00' && productDes.value.dateTime.count.minutesToDday == '00' && productDes.value.dateTime.count.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
             </div>
-            <div class="col-6 pl-1">
-              <div class="img-card-time text-right">
-                <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                  src="./assets/img/Clock.png">
+          </div>
+          <!-- TEXT BAR FOR STATUS WAITAUCTION -->
+          <div *ngIf="productDes.value.productStatus == 'waitAuction'" class="card-img-overlay overlay-cover">
+            <div class="text-center p-1 w-auto" style="background-color: rgba(99, 99, 99, 0.7); backdrop-filter: blur(5px); border-radius: 5px;">
+              <p class="text-white text-date-time mb-0 w-auto">{{ productDes.value.dateTime.dateTime.seconds*1000 | date: 'd/M/yyyy' }} | {{ productDes.value.dateTime.dateTime.seconds*1000 | date: "HH:mm" }}</p>
+            </div>
+          </div>
+          <div class="bg-left-auto">
+            <a class="img-card-auto-win p-text-other">
+              <!-- IMG ICON AUTO WIN -->
+              <!-- IMG ICON FOR STATUS BIDDING -->
+              <img *ngIf="productDes.value.productStatus == 'bidding'" class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+              <!-- IMG ICON FOR STATUS NOT BIDDING -->
+              <img *ngIf="productDes.value.productStatus != 'bidding'" class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon.svg">
+              <!-- TEXT AUTO WIN -->
+              <!-- TEXT FOR STATUS FOR SALE -->
+              <a *ngIf="productDes.value.productStatus == 'forSale'" class="mb-0">฿{{ productDes.value.priceData.priceProduct | currency: 'THB' : '' : '0.0'  }}</a>
+              <!-- TEXT FOR STATUS BIDDING || WAITAUCTION & SET PRICE AUTO WIN -->
+              <a *ngIf="( productDes.value.productStatus == 'bidding' || productDes.value.productStatus == 'waitAuction' ) && productDes.value.priceData.priceAutoWin != 0" class="mb-0" [class.text-disabled]="productDes.value.productStatus == 'bidding'">฿{{ productDes.value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+              <!-- TEXT FOR STATUS BIDDING || WAITAUCTION & NOT SET PRICE AUTO WIN -->
+              <a *ngIf="( productDes.value.productStatus == 'bidding' || productDes.value.productStatus == 'waitAuction' ) && productDes.value.priceData.priceAutoWin == 0" class="mb-0" [class.text-disabled]="productDes.value.productStatus == 'bidding'">ประมูล</a>
+            </a>
+          </div>
+          <div *ngIf="productDes.value.productStatus == 'bidding' || productDes.value.productStatus == 'waitAuction'" class="bg-right-time-a">
+            <div class="row m-0">
+              <div class="col-auto p-0 time-position">
+                <a [class.text-disabled]="productDes.value.productStatus == 'waitAuction'" class="img-card-time p-text-other">
+                  ฿{{ productDes.value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0' }}
+                </a>
+              </div>
+              <div class="col-auto p-0">
+                <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                <img *ngIf="productDes.value.productStatus == 'bidding' && (productDes.value.dateTime.count.hoursToDday == '00' && productDes.value.dateTime.count.minutesToDday == '00' && productDes.value.dateTime.count.secondsToDday == '00')" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                <img *ngIf="productDes.value.productStatus == 'bidding' && productDes.value.dateTime.count.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                <img *ngIf="productDes.value.productStatus == 'bidding' && (productDes.value.dateTime.count.hoursToDday == '00' && productDes.value.dateTime.count.minutesToDday != '00')" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                <img *ngIf="productDes.value.productStatus == 'bidding' && (productDes.value.dateTime.count.hoursToDday == '00' && productDes.value.dateTime.count.minutesToDday == '00' && productDes.value.dateTime.count.secondsToDday != '00')" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                <!-- ICON WAITAUCTION -->
+                <img *ngIf="productDes.value.productStatus == 'waitAuction'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg-b.svg">
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="card-body card-body-padding">
-        <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-        <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-        <ul class="rating-stars">
-          <li>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-          </li>
-        </ul>
-        <var class="float-right">
-          <i class="fa fa-heart" style="color: #FE5721"></i>
-        </var>
+        <div class="card-body-padding">
+          <div (click)="gotoProductDes(productDes.key)" style="cursor: pointer;">
+            <h5 class="card-title productName">{{ productDes.value.name | slice:0:18 }}<a *ngIf="productDes.value.name.length > 18">...</a></h5>
+            <a *ngIf="productDes.value.productStatus == 'waitAuction'" class="text-left pt-1 pb-1 pl-2 pr-2 time-bid-max" style="background-color: rgba(99, 99, 99, 0.7); backdrop-filter: blur(5px); border-radius: 5px;">
+              <a class="text-white text-date-time mb-0">{{ productDes.value.dateTime.timeCountMax.value }} {{ productDes.value.dateTime.timeCountMax.typeTH }}</a>
+            </a>
+            <a *ngIf="productDes.value.productStatus != 'waitAuction'" class="text-left pt-1 pb-1 pl-2 pr-2 time-bid-max" style="background-color: #FFF; backdrop-filter: blur(5px); border-radius: 5px;">
+              <a class="text-white text-date-time mb-0"></a>
+            </a>
+          </div>
+          <div class="mt-1">
+            <ul class="rating-stars">
+              <li>
+                <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 0.5"
+                  [class.fa-star-o]="productDes.value.ratingStars < 0.5"></i>
+                <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 1.5"
+                  [class.fa-star-o]="productDes.value.ratingStars < 1.5"></i>
+                <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 2.5"
+                  [class.fa-star-o]="productDes.value.ratingStars < 2.5"></i>
+                <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 3.5"
+                  [class.fa-star-o]="productDes.value.ratingStars < 3.5"></i>
+                <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 4.5"
+                  [class.fa-star-o]="productDes.value.ratingStars < 4.5"></i>
+              </li>
+            </ul>
+            <var (click)="likeThisProduct(productDes.key, productDes.value)" class="float-right heart" style="cursor: pointer;">
+              <i class="fa fa-heart" [class.heart-color]="productDes.value.likeStatus"
+                [class.heart-grey]="!productDes.value.likeStatus"></i>
+            </var>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-1">
-    <div class="card card-border-3">
-      <div class="card" style="border: none;">
-        <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <div class="row">
-            <div class="col-6 pr-1">
-              <div class="img-card-auto-win">
-                <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                  src="./assets/img/auto-win-text-icon.png">
-                <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-              </div>
-            </div>
-            <div class="col-6 pl-1">
-              <div class="img-card-time text-right">
-                <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                  src="./assets/img/Clock.png">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- END PRODUCT SEARCH -->
 
-      <div class="card-body card-body-padding">
-        <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-        <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-        <ul class="rating-stars">
-          <li>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-          </li>
-        </ul>
-        <var class="float-right">
-          <i class="fa fa-heart" style="color: #FE5721"></i>
-        </var>
-      </div>
+  <!-- BACKWARD - FORWARD -->
+  <div class="row mt-3 mb-3 card-padding-sm">
+    <div class="col">
+      <a class="text-dark" style="text-decoration: none; cursor: pointer;" (click)="previous()" [class.disabled]="pageNumber == 1">
+        <i class="fa fa-angle-left font-weight-bold" aria-hidden="true"></i>
+        ก่อนหน้า
+      </a>
     </div>
-  </div>
-  <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-2">
-    <div class="card card-border-3">
-      <div class="card" style="border: none;">
-        <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <div class="row">
-            <div class="col-6 pr-1">
-              <div class="img-card-auto-win">
-                <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                  src="./assets/img/auto-win-text-icon.png">
-                <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-              </div>
-            </div>
-            <div class="col-6 pl-1">
-              <div class="img-card-time text-right">
-                <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                  src="./assets/img/Clock.png">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card-body card-body-padding">
-        <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-        <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-        <ul class="rating-stars">
-          <li>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-          </li>
-        </ul>
-        <var class="float-right">
-          <i class="fa fa-heart" style="color: #FE5721"></i>
-        </var>
-      </div>
+    <div class="col text-center">
+      <p class="mb-0">หน้า {{ pageNumber }}</p>
+    </div>
+    <div class="col text-right">
+      <a class="text-dark" style="text-decoration: none; cursor: pointer;" (click)="next()" [class.disabled]="productList.length != 20">
+        ถัดไป
+        <i class="fa fa-angle-right font-weight-bold" aria-hidden="true"></i>
+      </a>
     </div>
   </div>
 </div>
-<!-- Product Search -->
+<!-- END BACKWARD - FORWARD -->
 
-<!-- Backward - Forward -->
-<div class="row mt-3 mb-3">
-  <div class="col">
-    <a style="text-decoration: none; cursor: pointer;">
-      <i class="fa fa-angle-left font-weight-bold" aria-hidden="true"></i>
-      ก่อนหน้า
-    </a>
-  </div>
-  <div class="col text-right">
-    <a style="text-decoration: none; cursor: pointer;">
-      ถัดไป
-      <i class="fa fa-angle-right font-weight-bold" aria-hidden="true"></i>
-    </a>
-  </div>
-</div>
-<!-- Backward - Forward -->
-
-<!-- Modal Search Set Price -->
+<!-- MODAL SEARCH SET PRICE -->
 <div class="modal fade" id="modalSearchSetPrice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-style="display: none;" aria-hidden="true">
-<div class="modal-dialog modal-bottom">
-  <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-
-    <div class="row">
-      <div class="col-auto">
-        <a href="#" class="" style="text-decoration: none; cursor: pointer; color: #FE5721;">
-          ตกลง
-        </a>
-      </div>
-      <div class="col text-center">
-        <p>เลือกช่วงราคา</p>
-      </div>
-      <div class="col-auto">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-    </div>
-
-    <p class="mt-3">ตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้</p>
-    <div class="modal-body p-0 align-self-center modal-input-width">
+  style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-bottom">
+    <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
       <div class="row">
-        <div class="col-12 col-md-6 col-lg-6 mt-2">
-          <div class="input-style">
-            <p class="mb-0" style="font-size: 17px;">ต่ำสุด</p>
-            <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;"
-              id="search-set-price-low" placeholder="500">
-          </div>
+        <div class="col-auto">
+          <a (click)="setPriceRange(priceLow.value, priceHigh.value)" data-dismiss="modal" aria-label="Close" class="" style="text-decoration: none; cursor: pointer; color: #FE5721;">
+            ตกลง
+          </a>
         </div>
-        <div class="col-12 col-md-6 col-lg-6 mt-2">
-          <div class="input-style">
-            <p class="mb-0" style="font-size: 17px;">สูงสุด</p>
-            <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;"
-              id="search-set-price-high" placeholder="10,000">
+        <div class="col text-center">
+          <p>เลือกช่วงราคา</p>
+        </div>
+        <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+          <button type="button" class="close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+      <p class="mt-3">ตั้งราคาต่ำสุด-สูงสุดสำหรับการค้นหาสินค้า</p>
+      <div class="modal-body p-0 align-self-center modal-input-width">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-6 mt-2">
+            <div class="input-style">
+              <p class="mb-0" style="font-size: 17px;">ต่ำสุด <a *ngIf="priceLowFail" class="text-danger">(ต้องมีค่าน้อยกว่าค่าสูงสุด)</a></p>
+              <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;" [value]="priceLowInput"
+                maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'');" (keyup)="keyUpPriceLowInput($event)" #priceLow placeholder="ต่ำสุด (ตัวเลข)">
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6 mt-2">
+            <div class="input-style">
+              <p class="mb-0" style="font-size: 17px;">สูงสุด <a *ngIf="priceHighFail" class="text-danger">(ต้องมีค่ามากกว่าค่าต่ำสุด)</a></p>
+              <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;" [value]="priceHighInput"
+                maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'');" (keyup)="keyUpPriceHighInput($event)" #priceHigh placeholder="สูงสุด (ตัวเลข)">
+            </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
-</div>
-<!-- Modal Modal Search Set Price -->
+<!-- END MODAL SEARCH SET PRICE -->
 
-<!-- Modal Search Set Sort -->
+<!-- MODAL POPUP SET PRICE FIAL -->
+<div class="modal fade" [class.show]="setPriceRangeFail" [class.modalShow]="setPriceRangeFail" id="ModalPopupSetPriceFail" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+      <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+      <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+      <p class="text-center">การกำหนดราคาต่ำสุด-สูงสุดไม่ถูกต้อง</p>
+      <div class="mt-4">
+        <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+          <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+            style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;" data-dismiss="modal"
+            (click)="hideModalSetPriceFail()">ตกลง</button>
+        </div>
+      </div>
+      <!-- <div class="mt-2">
+        <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+          <p class="text-center">ยกเลิก</p>
+        </a>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- END MODAL POPUP SET PRICE FIAL -->
+
+<!-- MODAL SEARCH SET SORT -->
 <div class="modal fade" id="modalSearchSetSort" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-style="display: none;" aria-hidden="true">
-<div class="modal-dialog modal-bottom">
-  <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
-
-    <div class="row">
-      <div class="col-auto">
-        <a href="#" class="" style="text-decoration: none; cursor: pointer; color: #FE5721;">
-          ตกลง
-        </a>
-      </div>
-      <div class="col text-center">
-        <p>เลือกช่วงราคา</p>
-      </div>
-      <div class="col-auto">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-    </div>
-
-    <p class="mt-3">ตั้งราคาสูงสุดสำหรับการประมูลสินค้าชิ้นนี้</p>
-    <div class="modal-body p-0 align-self-center modal-input-width">
+  style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-bottom">
+    <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
       <div class="row">
-        <div class="col-12 col-md-6 col-lg-3 mt-2">
-          <button type="button" class="btn btn-color" style="width: 100%;">เวลาเริ่มประมูลน้อยไปมาก</button>
+        <div class="col-auto">
+          <a (click)="setTextSort()" data-dismiss="modal" aria-label="Close" style="text-decoration: none; cursor: pointer; color: #FE5721;">
+            ตกลง
+          </a>
         </div>
-        <div class="col-12 col-md-6 col-lg-3 mt-2">
-          <button type="button" class="btn btn-outline-color" style="width: 100%;">เวลาเริ่มประมูลมากไปน้อย</button>
+        <div class="col text-center">
+          <p>การจัดเรียง</p>
         </div>
-        <div class="col-12 col-md-6 col-lg-3 mt-2">
-          <button type="button" class="btn btn-outline-color" style="width: 100%;">ราคาต่ำไปสูง</button>
+        <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+          <button type="button" class="close">
+            <span aria-hidden="true">×</span>
+          </button>
         </div>
-        <div class="col-12 col-md-6 col-lg-3 mt-2">
-          <button type="button" class="btn btn-outline-color" style="width: 100%;">ราคาสูงไปต่ำ</button>
+      </div>
+      <p class="mt-3">เลือกรูปแบบการจัดเรียงสินค้า</p>
+      <div class="modal-body p-0 align-self-center modal-input-width">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3 mt-2" [class.disabled]="textProductType == 'สินค้าวางขาย'">
+            <button type="button" class="btn btn-outline-gray w-100" 
+            [class.btn-color]="selectSortType == 'เวลาเริ่มประมูลน้อยไปมาก'" (click)="selectSortTypeProdut('เวลาเริ่มประมูลน้อยไปมาก')">เวลาเริ่มประมูลน้อยไปมาก</button>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 mt-2" [class.disabled]="textProductType == 'สินค้าวางขาย'">
+            <button type="button" class="btn btn-outline-gray w-100" 
+            [class.btn-color]="selectSortType == 'เวลาเริ่มประมูลมากไปน้อย'" (click)="selectSortTypeProdut('เวลาเริ่มประมูลมากไปน้อย')">เวลาเริ่มประมูลมากไปน้อย</button>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 mt-2">
+            <button type="button" class="btn btn-outline-gray w-100" 
+            [class.btn-color]="selectSortType == 'ราคาต่ำไปสูง'" (click)="selectSortTypeProdut('ราคาต่ำไปสูง')">ราคาต่ำไปสูง</button>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 mt-2">
+            <button type="button" class="btn btn-outline-gray w-100" 
+            [class.btn-color]="selectSortType == 'ราคาสูงไปต่ำ'" (click)="selectSortTypeProdut('ราคาสูงไปต่ำ')">ราคาสูงไปต่ำ</button>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
+<!-- END MODAL SEARCH SET SORT -->
+
+<!-- MODAL SET PRODUCT TYPE -->
+<div class="modal fade" id="modalSearchSetProductType" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-bottom">
+    <div class="modal-content p-3" style="border-radius: 20px 20px 0px 0px;">
+      <div class="row">
+        <div class="col-auto">
+          <a (click)="setTextProductType()" data-dismiss="modal" aria-label="Close" style="text-decoration: none; cursor: pointer; color: #FE5721;">
+            ตกลง
+          </a>
+        </div>
+        <div class="col text-center">
+          <p>ประเภทสินค้า</p>
+        </div>
+        <div class="col-auto" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+          <button type="button" class="close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+      <p class="mt-3">เลือกประเภทสินค้า</p>
+      <div class="modal-body p-0 align-self-center modal-input-width">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-6 mt-2">
+            <button type="button" class="btn btn-outline-gray w-100" 
+            [class.btn-color]="selecProType == 'สินค้าประมูล'" (click)="selectProdutType('สินค้าประมูล')">สินค้าประมูล</button>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6 mt-2">
+            <button type="button" class="btn btn-outline-gray w-100" 
+            [class.btn-color]="selecProType == 'สินค้าวางขาย'" (click)="selectProdutType('สินค้าวางขาย')">สินค้าวางขาย</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- Modal Modal Search Set Sort -->
+<!-- END MODAL SET PRODUCT TYPE -->

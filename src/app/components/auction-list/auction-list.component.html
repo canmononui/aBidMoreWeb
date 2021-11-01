@@ -1,391 +1,204 @@
-<div class="container">
-<div class="card card-radius">
-  <div class="pt-3 pb-3 card-tab-radius">
-    <p class="text-white text-center mb-0">ร่วมประมูล</p>
-  </div>
-
-  <div class="card-body">
-    <div class="row ml-0 mr-0 mb-3 p-1" style="border-radius: 25px; background-color: #FFF;">
-      <div class="col btn text-center p-1 auction-type-active">
-        กำลังประมูล
-      </div>
-      <div class="col btn text-center p-1">
-        ชนะประมูล
-      </div>
-      <div class="col btn text-center p-1">
-        แพ้ประมูล
-      </div>
+<div class="container con-out mb-4">
+  <div class="card card-radius mb-0">
+    <div class="pt-3 pb-3 card-tab-radius">
+      <p class="text-white text-center mb-0">ร่วมประมูล</p>
     </div>
 
-
-  <!-- Product List Row 1 -->
-<div class="row" style="margin-left: -5px; margin-right: -5px;">
-  <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-1">
-    <div class="card card-border-3">
-      <div class="card" style="border: none;">
-        <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <div class="row">
-            <div class="col-6 pr-1">
-              <div class="img-card-auto-win">
-                <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                  src="./assets/img/auto-win-text-icon.png">
-                <p class="p-text-other mb-0 pl-1" style="display:inline;">฿15,000</p>
+    <div class="container pt-3 pb-2">
+      <div class="row ml-0 mr-0 mb-3 p-1" style="border-radius: 25px; background-color: #FFF;">
+        <div (click)="selectButtonBidding()" class="col btn text-center p-1" [class.auction-type-active]="selectBidding">
+          กำลังประมูล
+        </div>
+        <div (click)="selectButtonWin()" class="col btn text-center p-1" [class.auction-type-active]="selectWin">
+          ชนะประมูล
+        </div>
+        <div (click)="selectButtonLose()" class="col btn text-center p-1" [class.auction-type-active]="selectLose">
+          แพ้ประมูล
+        </div>
+      </div>
+      <!-- Product List Row 1 -->
+      <div *ngIf="showNoHistoryText" class="text-white text-center" style="margin-top: 48px; margin-bottom: 48px;">
+        <p class="mb-0" style="font-size: .8rem;">ไม่พบสินค้าที่ร่วมประมูล</p>
+        <p class="mb-0" style="font-size: .8rem;">เริ่มต้นประมูลสินค้าง่าย ๆ เพียงค้นหาและกดร่วมประมูล</p>
+      </div>
+      <div *ngIf="selectBidding && productBiddingList.length == 0" class="text-white text-center" style="margin-top: 48px; margin-bottom: 48px;">
+        <p class="mb-0" style="font-size: .8rem;">ไม่พบสินค้าที่ร่วมประมูลและกำลังทำการประมูลอยู่</p>
+        <p class="mb-0" style="font-size: .8rem;">เริ่มต้นประมูลสินค้าง่าย ๆ เพียงค้นหาและกดร่วมประมูล</p>
+      </div>
+      <div *ngIf="selectWin && productWinList.length == 0" class="text-white text-center" style="margin-top: 48px; margin-bottom: 48px;">
+        <p class="mb-0" style="font-size: .8rem;">ไม่พบสินค้าที่ร่วมประมูลและเป็นผู้ชนะการประมูล</p>
+        <p class="mb-0" style="font-size: .8rem;">เริ่มต้นประมูลสินค้าง่าย ๆ เพียงค้นหาและกดร่วมประมูล</p>
+      </div>
+      <div *ngIf="selectLose && productLoseList.length == 0" class="text-white text-center" style="margin-top: 48px; margin-bottom: 48px;">
+        <p class="mb-0" style="font-size: .8rem;">ไม่พบสินค้าที่ร่วมประมูลและไม่เป็นผู้ชนะการประมูล</p>
+        <p class="mb-0" style="font-size: .8rem;">เริ่มต้นประมูลสินค้าง่าย ๆ เพียงค้นหาและกดร่วมประมูล</p>
+      </div>
+      <!-- PRODUCT BIDDING LIST -->
+      <div *ngIf="selectBidding && productBiddingList.length != 0" class="row m-row-card-product">
+        <div *ngFor="let productDes of productBiddingList" class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-col-card-product">
+          <div class="card-border-3 bg-white">
+            <div style="cursor: pointer;" (click)='gotoProductDes(productDes.key)' class="posi-card">
+              <!-- <img src="{{ productDes.value.imgProduct[0].imgUrl }}" class="product-img-card"> -->
+              <img class="product-img-card img-cover" src="{{ productDes.value.imgProduct[0].imgUrl }}">
+            <div class="card-img-overlay overlay-cover">
+              <div class="text-center p-1 w-auto" style="background-color: rgba(254, 87, 33, 0.5); backdrop-filter: blur(5px); border-radius: 5px;">
+                <!-- TIME COUNTING DOWN -->
+                <p *ngIf="productDes.value.dateTime.count.hoursToDday + productDes.value.dateTime.count.minutesToDday + productDes.value.dateTime.count.secondsToDday != '000000'" class="text-white text-date-time mb-0 w-auto">{{ productDes.value.dateTime.count.hoursToDday }}:{{ productDes.value.dateTime.count.minutesToDday }}:{{ productDes.value.dateTime.count.secondsToDday }}</p>
+                <!-- TIME 00:00:00 SET TEXT LOADING (FOR LATENCY) -->
+                <p *ngIf="productDes.value.dateTime.count.hoursToDday == '00' && productDes.value.dateTime.count.minutesToDday == '00' && productDes.value.dateTime.count.secondsToDday == '00'" class="text-white text-date-time mb-0 w-auto">LOADING</p>
               </div>
             </div>
-            <div class="col-6 pl-1">
-              <div class="img-card-time text-right">
-                <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                  src="./assets/img/Clock.png">
+              <div class="bg-left-auto">
+                <a class="img-card-auto-win p-text-other">
+                  <img class="img-fluid img-auto-win-other" src="./assets/img/auto-win-text-icon-gray.svg">
+                  <a *ngIf="productDes.value.priceData.priceAutoWin != 0" class="mb-0 last-price">฿{{ productDes.value.priceData.priceAutoWin | currency: 'THB' : '' : '0.0' }}</a>
+                  <a *ngIf="productDes.value.priceData.priceAutoWin == 0" class="mb-0 last-price">ประมูล</a>
+                </a>
               </div>
+              <div class="bg-right-time-a">
+                <div class="row m-0">
+                  <div class="col-auto p-0 time-position">
+                    <a class="img-card-time p-text-other">
+                      <!-- ฿{{ productDes.value.priceData.priceStart | currency: 'THB' : '' : '0.0'}} -->
+                      ฿{{ productDes.value.priceData.lastPriceBidding | currency: 'THB' : '' : '0.0'}}
+                    </a>
+                  </div>
+                  <!-- <div class="col-auto p-0">
+                    <div class="text-center text-date-position-bid">
+                      <p class="text-date-bid mb-0">{{ productDes.value.dateTime.dateTime.seconds*1000 | date: "ss"  }}s</p>
+                    </div>
+                    <img class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/_click.png">
+                  </div> -->
+                  <div class="col-auto p-0">
+                    <!-- ICON BIDDING WAITING SET PRODUCT DATA && TIME 00:00:00 SET STOP SPIN & BLACK COLOR -->
+                    <img *ngIf="productDes.value.dateTime.count.hoursToDday == '00' && productDes.value.dateTime.count.minutesToDday == '00' && productDes.value.dateTime.count.secondsToDday == '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/waitAuction-border-bg.svg">
+                    <!-- ICON BIDDING TIME Hr:--:-- SET SPIN 100 -->
+                    <img *ngIf="productDes.value.dateTime.count.hoursToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-100.gif">
+                    <!-- ICON BIDDING TIME --:Min:-- SET SPIN 75 -->
+                    <img *ngIf="productDes.value.dateTime.count.hoursToDday == '00' && productDes.value.dateTime.count.minutesToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-75.gif">
+                    <!-- ICON BIDDING TIME --:--:Sec SET SPIN 50 -->
+                    <img *ngIf="productDes.value.dateTime.count.hoursToDday == '00' && productDes.value.dateTime.count.minutesToDday == '00' && productDes.value.dateTime.count.secondsToDday != '00'" class="img-fluid rounded-circle img-time-other-set-price" src="./assets/img/bidding-border-50.gif">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body-padding">
+              <div style="cursor: pointer;" (click)='gotoProductDes(productDes.key)'>
+                <h5 class="card-title productName">{{ productDes.value.name | slice:0:18 }}</h5>
+              </div>
+              <ul class="rating-stars">
+                <li>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 0.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 0.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 1.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 1.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 2.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 2.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 3.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 3.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 4.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 4.5"></i>
+                </li>
+              </ul>
+              <var (click)="likeThisProduct(productDes.key, productDes.value)" class="float-right heart" style="cursor: pointer;">
+                <i class="fa fa-heart" [class.heart-color]="productDes.value.likeStatus"
+                  [class.heart-grey]="!productDes.value.likeStatus"></i>
+              </var>
             </div>
           </div>
         </div>
       </div>
+      <!-- END PRODUCT BIDDING LIST -->
 
-      <div class="card-body card-body-padding">
-        <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-        <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-        <ul class="rating-stars">
-          <li>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-          </li>
-        </ul>
-        <var class="float-right">
-          <i class="fa fa-heart" style="color: #FE5721"></i>
-        </var>
-      </div>
-    </div>
-  </div>
-  <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-2">
-    <div class="card card-border-3">
-      <div class="card" style="border: none;">
-        <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <div class="row">
-            <div class="col-6 pr-1">
-              <div class="img-card-auto-win">
-                <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                  src="./assets/img/auto-win-text-icon.png">
-                <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-              </div>
+      <!-- PRODUCT WIN LIST -->
+      <div *ngIf="selectWin && productWinList.length != 0" class="row m-row-card-product">
+        <div *ngFor="let productDes of productWinList" class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-col-card-product">
+          <div class="card-border-3 bg-white">
+            <div style="cursor: pointer;" (click)='gotoProductDes(productDes.key)' class="posi-card">
+              <img src="{{ productDes.value.imgProduct[0].imgUrl }}" class="product-img-card">
             </div>
-            <div class="col-6 pl-1">
-              <div class="img-card-time text-right">
-                <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                  src="./assets/img/Clock.png">
+            <div class="card-body-padding">
+              <div style="cursor: pointer;" (click)='gotoProductDes(productDes.key)'>
+                <h5 class="card-title productName">{{ productDes.value.name | slice:0:18 }}</h5>
               </div>
+              <ul class="rating-stars">
+                <li>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 0.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 0.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 1.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 1.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 2.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 2.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 3.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 3.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 4.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 4.5"></i>
+                </li>
+              </ul>
+              <var (click)="likeThisProduct(productDes.key, productDes.value)" class="float-right heart" style="cursor: pointer;">
+                <i class="fa fa-heart" [class.heart-color]="productDes.value.likeStatus"
+                  [class.heart-grey]="!productDes.value.likeStatus"></i>
+              </var>
             </div>
           </div>
         </div>
       </div>
+      <!-- END PRODUCT WIN LIST -->
 
-      <div class="card-body card-body-padding">
-        <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-        <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-        <ul class="rating-stars">
-          <li>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-          </li>
-        </ul>
-        <var class="float-right">
-          <i class="fa fa-heart" style="color: #FE5721"></i>
-        </var>
-      </div>
-    </div>
-  </div>
-  <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-1">
-    <div class="card card-border-3">
-      <div class="card" style="border: none;">
-        <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <div class="row">
-            <div class="col-6 pr-1">
-              <div class="img-card-auto-win">
-                <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                  src="./assets/img/auto-win-text-icon.png">
-                <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-              </div>
+      <!-- PRODUCT LOST LIST -->
+      <div *ngIf="selectLose && productLoseList.length != 0" class="row m-row-card-product">
+        <div *ngFor="let productDes of productLoseList" class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-col-card-product">
+          <div class="card-border-3 bg-white">
+            <div style="cursor: pointer;" (click)='gotoProductDes(productDes.key)' class="posi-card">
+              <img src="{{ productDes.value.imgProduct[0].imgUrl }}" class="product-img-card">
             </div>
-            <div class="col-6 pl-1">
-              <div class="img-card-time text-right">
-                <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                  src="./assets/img/Clock.png">
+            <div class="card-body-padding">
+              <div style="cursor: pointer;" (click)='gotoProductDes(productDes.key)'>
+                <h5 class="card-title productName">{{ productDes.value.name | slice:0:18 }}</h5>
               </div>
+              <ul class="rating-stars">
+                <li>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 0.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 0.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 1.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 1.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 2.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 2.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 3.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 3.5"></i>
+                  <i class="fa star-color" [class.fa-star]="productDes.value.ratingStars >= 4.5"
+                    [class.fa-star-o]="productDes.value.ratingStars < 4.5"></i>
+                </li>
+              </ul>
+              <var (click)="likeThisProduct(productDes.key, productDes.value)" class="float-right heart" style="cursor: pointer;">
+                <i class="fa fa-heart" [class.heart-color]="productDes.value.likeStatus"
+                  [class.heart-grey]="!productDes.value.likeStatus"></i>
+              </var>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="card-body card-body-padding">
-        <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-        <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-        <ul class="rating-stars">
-          <li>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-          </li>
-        </ul>
-        <var class="float-right">
-          <i class="fa fa-heart" style="color: #FE5721"></i>
-        </var>
-      </div>
+      <!-- END PRODUCT LOST LIST -->
     </div>
+    <!-- Card Body -->
   </div>
-  <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-2">
-    <div class="card card-border-3">
-      <div class="card" style="border: none;">
-        <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <div class="row">
-            <div class="col-6 pr-1">
-              <div class="img-card-auto-win">
-                <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                  src="./assets/img/auto-win-text-icon.png">
-                <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-              </div>
-            </div>
-            <div class="col-6 pl-1">
-              <div class="img-card-time text-right">
-                <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                  src="./assets/img/Clock.png">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="card-body card-body-padding">
-        <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-        <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-        <ul class="rating-stars">
-          <li>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            <i class="fa fa-star-o" style="color: #FFA101;"></i>
-          </li>
-        </ul>
-        <var class="float-right">
-          <i class="fa fa-heart" style="color: #FE5721"></i>
-        </var>
-      </div>
+  <!-- Backward - Forward -->
+  <!-- <div class="row pt-3 pb-3 FB-ml-mr">
+    <div class="col">
+      <a style="text-decoration: none; cursor: pointer;">
+        <i class="fa fa-angle-left font-weight-bold" aria-hidden="true"></i>
+        ก่อนหน้า
+      </a>
     </div>
-  </div>
-</div>
-<!-- End Product List Row 1 -->
-  
-
-  <!-- Product List Row 2 -->
-  <div class="row mt-1" style="margin-left: -5px; margin-right: -5px;">
-    <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-1">
-      <div class="card card-border-3">
-        <div class="card" style="border: none;">
-          <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-          <div class="card-img-overlay d-flex flex-column justify-content-end">
-            <div class="row">
-              <div class="col-6 pr-1">
-                <div class="img-card-auto-win">
-                  <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                    src="./assets/img/auto-win-text-icon.png">
-                  <p class="p-text-other mb-0 pl-1" style="display:inline;">฿15,000</p>
-                </div>
-              </div>
-              <div class="col-6 pl-1">
-                <div class="img-card-time text-right">
-                  <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                  <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                    src="./assets/img/Clock.png">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="card-body card-body-padding">
-          <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-          <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-          <ul class="rating-stars">
-            <li>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star-o" style="color: #FFA101;"></i>
-              <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            </li>
-          </ul>
-          <var class="float-right">
-            <i class="fa fa-heart" style="color: #FE5721"></i>
-          </var>
-        </div>
-      </div>
+    <div class="col text-right">
+      <a style="text-decoration: none; cursor: pointer;">
+        ถัดไป
+        <i class="fa fa-angle-right font-weight-bold" aria-hidden="true"></i>
+      </a>
     </div>
-    <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-1-2">
-      <div class="card card-border-3">
-        <div class="card" style="border: none;">
-          <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-          <div class="card-img-overlay d-flex flex-column justify-content-end">
-            <div class="row">
-              <div class="col-6 pr-1">
-                <div class="img-card-auto-win">
-                  <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                    src="./assets/img/auto-win-text-icon.png">
-                  <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-                </div>
-              </div>
-              <div class="col-6 pl-1">
-                <div class="img-card-time text-right">
-                  <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                  <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                    src="./assets/img/Clock.png">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="card-body card-body-padding">
-          <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-          <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-          <ul class="rating-stars">
-            <li>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star-o" style="color: #FFA101;"></i>
-              <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            </li>
-          </ul>
-          <var class="float-right">
-            <i class="fa fa-heart" style="color: #FE5721"></i>
-          </var>
-        </div>
-      </div>
-    </div>
-    <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-1">
-      <div class="card card-border-3">
-        <div class="card" style="border: none;">
-          <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-          <div class="card-img-overlay d-flex flex-column justify-content-end">
-            <div class="row">
-              <div class="col-6 pr-1">
-                <div class="img-card-auto-win">
-                  <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                    src="./assets/img/auto-win-text-icon.png">
-                  <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-                </div>
-              </div>
-              <div class="col-6 pl-1">
-                <div class="img-card-time text-right">
-                  <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                  <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                    src="./assets/img/Clock.png">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="card-body card-body-padding">
-          <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-          <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-          <ul class="rating-stars">
-            <li>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star-o" style="color: #FFA101;"></i>
-              <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            </li>
-          </ul>
-          <var class="float-right">
-            <i class="fa fa-heart" style="color: #FE5721"></i>
-          </var>
-        </div>
-      </div>
-    </div>
-    <div class="col-6 col-sm-3 col-md-6 col-lg-3 col-xl-3 mt-2 p-2-2">
-      <div class="card card-border-3">
-        <div class="card" style="border: none;">
-          <img class="card-img" src="./assets/img/bag.png" style="border-radius: 13px 13px 0px 0px;">
-          <div class="card-img-overlay d-flex flex-column justify-content-end">
-            <div class="row">
-              <div class="col-6 pr-1">
-                <div class="img-card-auto-win">
-                  <img class="img-fluid img-auto-win-other" style="margin: -25px 0px -20px -17px;"
-                    src="./assets/img/auto-win-text-icon.png">
-                  <p class="p-text-other mb-0 pl-1" style="display:inline">฿15,000</p>
-                </div>
-              </div>
-              <div class="col-6 pl-1">
-                <div class="img-card-time text-right">
-                  <p class="p-text-other mb-0 pr-1" style="display:inline">฿10,500</p>
-                  <img class="img-fluid img-time-other" style="display: inline; margin: -25px -17px -20px 0px;"
-                    src="./assets/img/Clock.png">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="card-body card-body-padding">
-          <h5 class="card-title">Herschel Supply Retreat Backpack...</h5>
-          <p class="card-text">กระเป๋ารุ่นยอดนิยมของ...</p>
-          <ul class="rating-stars">
-            <li>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star" style="color: #FFA101;"></i>
-              <i class="fa fa-star-o" style="color: #FFA101;"></i>
-              <i class="fa fa-star-o" style="color: #FFA101;"></i>
-            </li>
-          </ul>
-          <var class="float-right">
-            <i class="fa fa-heart" style="color: #FE5721"></i>
-          </var>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Product List Row 2 -->
-
-
-</div>
-<!-- Card Body -->
-</div>
-
-<!-- Backward - Forward -->
-<div class="row mt-3 mb-3">
-  <div class="col">
-    <a style="text-decoration: none; cursor: pointer;">
-      <i class="fa fa-angle-left font-weight-bold" aria-hidden="true"></i>
-      ก่อนหน้า
-    </a>
-  </div>
-  <div class="col text-right">
-    <a style="text-decoration: none; cursor: pointer;">
-      ถัดไป
-      <i class="fa fa-angle-right font-weight-bold" aria-hidden="true"></i>
-    </a>
-  </div>
-</div>
-<!-- Backward - Forward -->
+  </div> -->
+  <!-- Backward - Forward -->
 
 </div>
 <!-- End Container -->

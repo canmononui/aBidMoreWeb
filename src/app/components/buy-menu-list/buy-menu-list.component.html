@@ -5,92 +5,99 @@
     </div>
   
     <div class="card-body">
-      <!-- List 1 -->
-      <div class="card-list card-padding">
+      <!-- WAITING PAYMENT LIST -->
+      <div (click)="goto('payment-items')" class="router card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
             <p class="mb-0 font-store">ที่ต้องชำระ</p>
           </div>
           <div class="col-auto align-self-center">
-            <span class="badge badge-pill" 
-            style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
-              9
+            <span *ngIf="orderWaitingPaymentList != '0'" class="badge badge-pill" style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
+              {{ orderWaitingPaymentList }}
             </span>
           </div>
         </div>
       </div>
-      <!-- List 2 -->
-      <div class="card-list card-padding">
+      <!-- WAITING PAYMENT CONFIRMATION LIST -->
+      <div (click)="goto('payment-confirm-list')" class="router card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
             <p class="mb-0 font-store">รอยืนยันชำระเงิน</p>
           </div>
           <div class="col-auto align-self-center">
-            <span class="badge badge-pill" 
-            style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
-              9
+            <span *ngIf="orderWaitingPaymentConfirmList != '0'" class="badge badge-pill" style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
+              {{ orderWaitingPaymentConfirmList }}
             </span>
           </div>
         </div>
       </div>
-      <!-- List 3 -->
-      <div class="card-list card-padding">
+      <!-- WAITING DELIVERY LIST -->
+      <div (click)="goto('transport-prepare-list')" class="router card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
             <p class="mb-0 font-store">เตรียมจัดส่ง</p>
           </div>
           <div class="col-auto align-self-center">
-            <span class="badge badge-pill" 
-            style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
-              9
+            <span *ngIf="waitingForDelivery != '0'" class="badge badge-pill" style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
+              {{ waitingForDelivery }}
             </span>
           </div>
         </div>
       </div>
-      <!-- List 4 -->
-      <div class="card-list card-padding">
+      <!-- WAITING DELIVERY LIST -->
+      <div (click)="goto('transport-list')" class="router card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
             <p class="mb-0 font-store">ระหว่างขนส่ง</p>
           </div>
           <div class="col-auto align-self-center">
-            <span class="badge badge-pill" 
-            style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
-              9
+            <span *ngIf="orderShippingList != '0'" class="badge badge-pill" style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
+              {{ orderShippingList }}
             </span>
           </div>
         </div>
       </div>
-      <!-- List 5 -->
-      <div class="card-list card-padding">
+      <!-- SHIPPED -->
+      <div (click)="goto('order-waiting-confirm-list')" class="router card-list card-padding">
+        <div class="row mt-set ml-0 mr-0 chat-list">
+          <div class="col align-self-center">
+            <p class="mb-0 font-store">รอการยืนยันสินค้า</p>
+          </div>
+          <div class="col-auto align-self-center">
+            <span *ngIf="orderShippedList != '0'" class="badge badge-pill" style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
+              {{ orderShippedList }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- SALE SUCCESS -->
+      <div (click)="goto('transport-success-list')" class="router card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
             <p class="mb-0 font-store">สำเร็จ</p>
           </div>
           <div class="col-auto align-self-center">
-            <span class="badge badge-pill" 
-            style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
-              9
+            <span *ngIf="orderSaleSuccessList != '0'" class="badge badge-pill" style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
+              {{ orderSaleSuccessList }}
             </span>
           </div>
         </div>
       </div>
-      <!-- List 6 -->
-      <div class="card-list card-padding">
+      <!-- CANCEL ORDER -->
+      <div (click)="goto('order-cancel')" class="router card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
-            <p class="mb-0 font-store">สินค้าที่ยกเลิก</p>
+            <p class="mb-0 font-store">สินค้าที่ยกเลิก/คืนสินค้า</p>
           </div>
           <div class="col-auto align-self-center">
-            <span class="badge badge-pill" 
-            style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
-              9
+            <span *ngIf="orderCancelList != '0'" class="badge badge-pill" style="position: relative; padding: 5px 7px; color: #FFF; background-color: #E54040;">
+              {{ orderCancelList }}
             </span>
           </div>
         </div>
       </div>      
       <!-- List 7 -->
-      <div class="card-list card-padding">
+      <!-- <div class="card-list card-padding">
         <div class="row mt-set ml-0 mr-0 chat-list">
           <div class="col align-self-center">
             <p class="mb-0 font-store">การคืนเงินคืนสินค้า</p>
@@ -102,7 +109,7 @@
             </span>
           </div>
         </div>
-      </div>
+      </div> -->
       
   </div>
   <!-- Card Body -->

@@ -1,13 +1,22 @@
+.btn-op {
+  width: 100%;
+  color: #FE5721;
+  border-color: #FE5721;
+}
+
 .btn-color {
+  width: 100%;
   color: #fff; 
   background-color: #FE5721;
   border-color: #FE5721;
 }
 
 .btn-outline-color {
-  color: #585858;
-  background-color: transparent;
-  background-image: none;
+  width: 100%;
+  /* color: #585858; */
+  /* background-color: transparent; */
+  /* background-image: none; */
+  color: #FE5721;
   border-color: #FE5721;
 }
 
@@ -95,23 +104,41 @@
 }
 
 .button-store-color {
+  width: 100%;
+  color: #FFF; 
   border-radius: 1.5rem; 
   background-color: #FE5721;
 }
+
+/* .button-following {
+  width: 100%;
+  border-radius: 1.5rem;
+  color: #FFF; 
+  background-color: #FE5721;
+} */
+
+/* .button-follow {
+  width: 100%;
+  border-radius: 1.5rem;
+  color: #373E48; 
+  background-color: #FE5721;
+} */
 
 .button-border-radius {
   width: 100%; 
   border-radius: 1.5rem; 
   background-color: #FE5721;
 }
-
+/* Card Product */
 .img-card-auto-win {
+  padding: 0px 4px 0px 0px;
   background-color: #fff;
   border: 3px solid #F0F0F0; 
   border-radius: 0px 15px 15px 0px; 
 }
 
 .img-card-time {
+  padding: 0px 0px 0px 4px;
   background-color: #fff;
   border: 3px solid #F0F0F0; 
   border-radius: 15px 0px 0px 15px; 
@@ -131,29 +158,23 @@
   z-index: 1;
 }
 
-.p-1-1 {
-  padding-right: 5px;
+.m-row-card-product {
+  margin-left: -4px; 
+  margin-right: -4px;
 }
 
-.p-1-2 {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.p-2-1 {
-  padding-left: 5px;
-  padding-right: 5px;
-} 
-
-.p-2-2 {
-  padding-left: 5px;
+.p-col-card-product {
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .img-auto-win-other {
+  margin: -5px 1px 0px -12px;
   max-width: 40px;
 }
 
 .img-time-other {
+  margin: -5px -12px 0px 1px;
   max-width: 40px;
 }
 
@@ -162,16 +183,43 @@
   border-radius: 15px;
 }
 
-.img-sm {
-  width: 80px;
+.posi-card {
+  position: relative;
+}
+
+.product-img-card {
+  width: 100%; 
+  border-radius: 13px 13px 0px 0px;
+}
+
+.bg-left-auto {
+  position: absolute; 
+  bottom: 6px; 
+  left: 16px;
+}
+
+.bg-right-time {
+  position: absolute; 
+  bottom: 6px; 
+  right: 16px;
 }
 
 .p-text-other {
   font-size: 1rem;
 }
 
+.card-body-padding {
+  padding: 20px;
+}
+/* End Card Product */
+
+.img-sm {
+  width: 80px;
+  height: 80px;
+}
+
 .p-text-des {
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .mt-set-price {
@@ -228,7 +276,8 @@
   top:auto;
   left:auto;
   right:0;
-  height:calc(55% + 160px); /* default height:45% its just for demo*/
+  /* height:calc(55% + 160px); */ /* default height:45% its just for demo */
+  height:calc(20% + 160px); /* default height:45% its just for demo */
 }
 .modal .modal-bottom>.modal-content{
   height:100%;
@@ -405,17 +454,110 @@ input[type="radio"] .styled:checked + label::after {
   color: #9FA0A1;
 }
 
+.shared-text {
+  margin-top: 8px;
+  /* align-self: center; */
+}
 
+/* .time-text-now {
+  font-size: 1.4rem;
+  color: #FE5721;
+  top: 56px; 
+  position: relative; 
+  z-index: 99 ;
+} */
 
+.time-text-now {
+  font-size: 1.4rem;
+  color: #FE5721;
+}
 
+/* .time-text-waitAuction {
+  font-size: 1.4rem;
+  color: #FE5721;
+} */
 
+.img-cover {
+  /* opacity: 30%; */
+  border-radius: 13px 13px 13px 13px;
+}
 
+.col-coin-l {
+  padding-left: 0px;
+  padding-right: 4px;
+}
 
+.list {
+  padding: 15px;
+  border: 3px solid #E7EDF4; 
+  border-radius: 15px; 
+}
 
+.img-wallet {
+  max-width: 40px;
+  max-height: 40px;
+}
 
+.img-border-color {
+  border: 1px solid #FE5721; 
+}
 
+.star-color {
+  color: #FFA101;
+}
 
+.heart-color {
+  color: #FE5721
+}
 
+.heart-grey {
+  color: #FFF;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.modalShow {
+  display: block;
+  overflow-y: auto;
+  padding-right: 15px;
+  background: rgba(0,0,0,0.5);
+}
+
+.col-price {
+  padding-top: 40px; 
+  border-bottom: 0.5px solid #E7EDF4;
+}
+
+.time-bid-size {
+  font-size: 1.6rem;
+  color: #F35F30;
+}
+
+.time-bid-size-loading {
+  font-size: 1.6rem;
+  color: #F35F30;
+}
+
+.product-name-size {
+  font-size: 1.6rem;
+}
+
+/* .modal-content {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+} */
+
+.productName:hover {
+  color: #a9a9a9;
+}
+
+.heart:hover {
+  /* color: #a9a9a9; */
+  opacity: 0.6;
+}
 
 /* Medium devices (tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
@@ -425,6 +567,39 @@ input[type="radio"] .styled:checked + label::after {
   
   .col-right-des {
     margin-top: 1rem!important;
+  }
+
+  .col-shared-text-sm {
+    padding-left: 0px;
+    align-self: center;
+  }
+
+
+  .col-icon-mt {
+    margin-top: 8px;
+  }
+
+  .col-coin-l {
+    padding-left: 0px;
+    padding-right: 4px;
+  }
+
+  .list {
+    padding: 10px;
+    border: 2px solid #E7EDF4; 
+  }
+
+  .text-price {
+    font-size: 1.3rem;
+  }
+
+  .col-price {
+    padding-top: 40px; 
+
+  }
+
+  .modal .modal-bottom {
+    height:calc(30% + 160px); /* default height:45% its just for demo */
   }
 
 }
@@ -438,6 +613,12 @@ input[type="radio"] .styled:checked + label::after {
     padding-left: 0; 
     margin-right: auto;
     margin-left: auto;
+  }
+
+  .container-sm-banner-top {
+    width: auto;
+    margin-right: 16px;
+    margin-left: 16px;
   }
   
   .card-collection-show {
@@ -469,9 +650,9 @@ input[type="radio"] .styled:checked + label::after {
   }
 
   .card-collection-other {
-    padding-left: 1rem!important;
+    /* padding-left: 1rem!important;
     padding-right: 1rem!important;
-    padding-bottom: 1rem!important;
+    padding-bottom: 1rem!important; */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -503,24 +684,15 @@ input[type="radio"] .styled:checked + label::after {
     margin-top: -2px;
   }
 
-  .p-1-1 {
-    padding-left: 3px;
-    padding-right: 3px;
-  }
-  
-  .p-1-2 {
-    padding-left: 3px;
-    padding-right: 3px;
+  /* Card Product */
+  .m-row-card-product {
+    margin-left: -4px; 
+    margin-right: -4px;
   }
 
-  .p-2-1 {
-    padding-left: 3px;
-    padding-right: 3px;
-  } 
-
-  .p-2-2 {
-    padding-left: 3px;
-    padding-right: 3px;
+  .p-col-card-product {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   .img-auto-win-other {
@@ -535,21 +707,15 @@ input[type="radio"] .styled:checked + label::after {
     font-size: 0.5rem;
   }
 
-  .p-text-des {
-    font-size: 0.5rem;
-  }
-
-  .p-text-set-price {
-    font-size: 0.8rem;
-  }
-
   .img-card-auto-win {
+    padding: 2px 4px 2px 0px;
     background-color: #fff;
     border: 0.5px solid #F0F0F0; 
     border-radius: 0px 15px 15px 0px; 
   }
 
   .img-card-time {
+    padding: 2px 0px 2px 4px;
     background-color: #fff;
     border: 0.5px solid #F0F0F0; 
     border-radius: 15px 0px 0px 15px; 
@@ -564,8 +730,28 @@ input[type="radio"] .styled:checked + label::after {
     padding: 10px;
   }
 
+  .card-title {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .card-text {
+    font-size: .8rem;
+    margin-bottom: 5px;
+  }
+  /* End Card Product */
+
+  .p-text-des {
+    font-size: 0.8rem;
+  }
+
+  .p-text-set-price {
+    font-size: 0.8rem;
+  }
+
   .img-sm {
     width: 50px;
+    height: 50px;
   }
 
   .mt-set-price {
@@ -624,6 +810,99 @@ input[type="radio"] .styled:checked + label::after {
     bottom: 8px;
   }
 
+
+
+  .col-shared-text-sm {
+    padding-left: 0px;
+    align-self: center;
+  }
+
+  .shared-text {
+    margin-top: 0px;
+    font-size: .8rem;
+  }
+
+  .col-icon-mt {
+    margin-top: 8px;
+  }
+
+  .time-text-now {
+    font-size: .8rem;
+    top: 34px;
+  }
+
+  /* .time-text-waitAuction {
+    font-size: 1rem;
+    top: 34px;
+  } */
+
+  .row-mlr {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  
+  .col-plr {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .modal-col {
+    padding: 0px;
+  }
+
+  .overlay-cover {
+    padding: 15px;
+  }
+
+  .col-coin-l {
+    padding-left: 0px;
+    padding-right: 4px;
+  }
+
+  .list {
+    border: 2px solid #E7EDF4; 
+  }
+
+  .text-price {
+    font-size: 1.5rem;
+  }
+
+  .img-wallet {
+    max-width: 40px;
+    max-height: 40px;
+  }
+
+  .text-coin {
+    font-size: 0.8rem;
+  }
+
+  .col-price {
+    padding-top: 25px; 
+  }
+
+  .time-bid-size {
+    font-size: 1.4rem;
+  }
+
+  .time-bid-size-loading {
+    font-size: 1.2rem;
+  }
+
+  .time-waitAuction-size {
+    font-size: 1rem;
+  }
+
+  .bidding-size {
+    font-size: 1rem;
+  }
+
+  .product-name-size {
+    font-size: 1.4rem;
+  }
+
+  .modal .modal-bottom {
+    height:calc(55% + 160px); /* default height:45% its just for demo */
+  }
 
 }
 /* Small devices (landscape phones, 576px and up) */

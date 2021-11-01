@@ -3,89 +3,34 @@
     <div class="pt-3 pb-3 card-tab-radius">
       <p class="text-white text-center mb-0">การแจ้งเตือน</p>
     </div>
-  
-    <div class="card-body">
-      <!-- List 1 -->
-      <div class="card-list card-padding">
+
+    <div *ngIf="notiList.length != 0" class="card-body">
+      <!-- NOTIFICATION LIST -->
+      <div (click)="gotoNotiDes(noti.key, noti.value)" *ngFor="let noti of notiList" class="card-list card-padding"
+        style="cursor: pointer;">
         <div class="row">
           <div class="col-auto sm-pr">
-            <img class="img-fluid rounded-circle img-store" src="./assets/img/noti-noti-icon.png">
-            <span class="badge badge-pill" style="position: relative; top: -19px; right: -7px; padding: 2px 8px; margin-left: -23px; color: #E54040; background-color: #E54040; border: 1px solid #EEE;">
-              .
-            </span>
+            <img class="img-fluid rounded-circle img-store" src="./assets/img/noti-noti-icon.svg">
+            <span *ngIf="!noti.value.readed" class="dot-unread"></span>
           </div>
           <div class="col pl-0 align-self-center">
-            <h5 class="mb-0 font-topic">ขอบคุณสำหรับการรีวิว</h5>
-            <p class="mb-0 font-date">20/03/2020</p>
+            <h5 class="mb-0 font-topic">{{ noti.value.topic }}</h5>
+            <p class="mb-0">{{ noti.value.description }}</p>
+            <p class="mb-0 font-date">{{ noti.value.createAt.seconds*1000 | date: 'd/M/yyyy' }} {{
+              noti.value.createAt.seconds*1000 | date: "HH:mm:ss" }}</p>
           </div>
         </div>
-        <div class="row p-des">
+        <div *ngIf="noti.value.type == 'order' || noti.value.type == 'review'" class="row p-des">
           <div class="col-auto sm-pr">
-            <img class="img-fluid img-store" style="border-radius: 10px;" src="./assets/img/bag.png">
+            <img class="img-fluid img-store" style="border-radius: 10px;"
+              src="{{ noti.value.product.imgProduct1.imgUrl }}">
           </div>
           <div class="col pl-0 align-self-center">
-            <h5 class="mb-0 font-topic">คำสั่งซื้อ #002135698</h5>
-            <p class="mb-0 font-des">Adidas NMD</p>
-            <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
+            <h5 class="mb-0 font-topic">คำสั่งซื้อ #{{ noti.value.product.orderNo }}</h5>
+            <p class="mb-0 font-des">{{ noti.value.product.productName | slice:0:30 }}<a *ngIf="noti.value.product.productName.length > 30">...</a>{{ noti.value.product.productName.length }}</p>
           </div>
         </div>
       </div>
-      <!-- List 2 -->
-      <div class="card-list card-padding">
-        <div class="row">
-          <div class="col-auto sm-pr">
-            <img class="img-fluid rounded-circle img-store" src="./assets/img/noti-noti-icon.png">
-            <span class="badge badge-pill" style="position: relative; top: -19px; right: -7px; padding: 2px 8px; margin-left: -23px; color: #E54040; background-color: #E54040; border: 1px solid #EEE;">
-              .
-            </span>
-          </div>
-          <div class="col pl-0 align-self-center">
-            <h5 class="mb-0 font-topic">ขอบคุณสำหรับการรีวิว</h5>
-            <p class="mb-0 font-date">20/03/2020</p>
-          </div>
-        </div>
-        <div class="row p-des">
-          <div class="col-auto sm-pr">
-            <img class="img-fluid img-store" style="border-radius: 10px;" src="./assets/img/bag.png">
-          </div>
-          <div class="col pl-0 align-self-center">
-            <h5 class="mb-0 font-topic">คำสั่งซื้อ #002135698</h5>
-            <p class="mb-0 font-des">Adidas NMD</p>
-            <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
-          </div>
-        </div>
-      </div>
-      <!-- List 3 -->
-      <div class="card-list card-padding">
-        <div class="row">
-          <div class="col-auto sm-pr">
-            <img class="img-fluid rounded-circle img-store" src="./assets/img/noti-noti-icon.png">
-            <span class="badge badge-pill" style="position: relative; top: -19px; right: -7px; padding: 2px 8px; margin-left: -23px; color: #E54040; background-color: #E54040; border: 1px solid #EEE;">
-              .
-            </span>
-          </div>
-          <div class="col pl-0 align-self-center">
-            <h5 class="mb-0 font-topic">ขอบคุณสำหรับการรีวิว</h5>
-            <p class="mb-0 font-date">20/03/2020</p>
-          </div>
-        </div>
-        <div class="row p-des">
-          <div class="col-auto sm-pr">
-            <img class="img-fluid img-store" style="border-radius: 10px;" src="./assets/img/bag.png">
-          </div>
-          <div class="col pl-0 align-self-center">
-            <h5 class="mb-0 font-topic">คำสั่งซื้อ #002135698</h5>
-            <p class="mb-0 font-des">Adidas NMD</p>
-            <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
-          </div>
-        </div>
-      </div>
-
-  
+    </div>
   </div>
-  <!-- Card Body -->
-  </div>
-
-
-  </div>
-  <!-- End Container -->
+</div>

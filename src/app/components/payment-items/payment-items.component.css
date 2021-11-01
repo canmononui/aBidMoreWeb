@@ -149,8 +149,15 @@ input[type="radio"] .styled:checked + label::after {
   background-color: #202229;
 }
 
-.card-body {
+.card-tab-top {
   padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+}
+
+.card-body {
+  padding-top: 0px;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 15px;
@@ -205,6 +212,7 @@ input[type="radio"] .styled:checked + label::after {
   padding: 32px; 
   border-radius: 13px; 
   border: 3px solid #E7EDF4;
+  cursor: pointer;
 }
 
 .col-address-active {
@@ -212,6 +220,7 @@ input[type="radio"] .styled:checked + label::after {
   border-radius: 13px; 
   border: 3px solid #F2F6FA;
   background-color: #F2F6FA;
+  cursor: pointer;
 }
 
 .col-p-r {
@@ -229,7 +238,7 @@ input[type="radio"] .styled:checked + label::after {
 }
 
 .img-payment {
-  max-width: 60px;
+  /* min-width: 60px; */
   max-height: 60px; 
 }
 
@@ -253,9 +262,39 @@ input[type="radio"] .styled:checked + label::after {
   /* border: 2.5px solid #E7EDF4;  */
 }
 
+.modalShow {
+  display: block; 
+  overflow-y: auto;
+  padding-right: 15px;
+  background: rgba(0,0,0,0.5);
+}
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
 
+.font-time-expired {
+  font-size: 1.2rem;
+}
 
+.time-expired {
+  align-items: right;
+}
+
+.productName:hover {
+  color: #a9a9a9;
+}
+
+.ref-code {
+  align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .time-expired {
+    align-items: left;
+  }
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (max-width: 480px) {
@@ -274,12 +313,19 @@ input[type="radio"] .styled:checked + label::after {
     padding-top: 8px;
     padding-left: 8px;
     padding-right: 8px;
-    padding-bottom: 8px;
+    padding-bottom: 32px;
   }
 
   .card-tab-radius {
     border-radius: 0px; 
     background-color: #202229;
+  }
+
+  .card-tab-top {
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
   }
 
   .card-body {
@@ -403,6 +449,23 @@ input[type="radio"] .styled:checked + label::after {
 
   .text-bank {
     font-size: 0.8rem;
+  }
+
+  .font-time-expired {
+    font-size: 1rem;
+  }
+
+  .time-expired {
+    align-items: left;
+  }
+
+  .ref-code {
+    align-items: left;
+  }
+
+  .sm-p-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
 

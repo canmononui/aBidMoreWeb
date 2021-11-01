@@ -1,16 +1,17 @@
-<div class="container">
+<div *ngIf="showContent" class="container">
   <div class="card card-radius">
     <div class="card-tab card-tab-radius">
       <p class="text-white text-center mb-0">แก้ไขชื่อโปรไฟล์</p>
     </div>
-
     <div class="card-body">
       <div class="input-style">
-        <p class="mb-0" style="font-size: 17px;">ชื่อโปรไฟล์</p>
-        <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;" id="username"
-          placeholder="canmononui">
+        <p class="mb-0" style="font-size: 17px;">ชื่อโปรไฟล์ (6-10 ตัวอักษรภาษาอังกฤษ)</p>
+        <input class="form-control border-0 p-0" style="box-shadow: none; background-color: #F2F6FA;"
+        maxlength="10" #displayName_ [value]="userBuyer.displayName" placeholder="ชื่อโปรไฟล์" (keyup)='usernameInput($event)'
+        onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
+        <p *ngIf="displayNameErr" class="mb-0 text-danger" style="font-size: .8rem;">มีผู้ใช้งานชื่อโปรไฟล์นี้แล้ว</p>
       </div>
-      <button type="button" class="btn btn-mt"
+      <button (click)="submitUsername(displayName_.value)" type="button" class="btn btn-mt" [class.disabled]="userNameLength < 6 || displayNameErr"
         style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
         บันทึก
       </button>

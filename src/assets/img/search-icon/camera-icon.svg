@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f4f4f4;
+      }
+
+      .cls-2 {
+        fill: #293b44;
+      }
+
+      .cls-3 {
+        fill: #344d5b;
+      }
+
+      .cls-4 {
+        fill: #feda6f;
+      }
+
+      .cls-5 {
+        fill: #cd5248;
+      }
+
+      .cls-6 {
+        fill: #467082;
+      }
+
+      .cls-7 {
+        fill: #4da0dc;
+      }
+
+      .cls-8 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="500" cy="500" r="500"/>
+  <rect class="cls-2" x="440" y="347" width="124" height="57"/>
+  <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-3" x="193" y="395" width="621" height="419" rx="30" ry="30"/>
+  <rect id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-4" x="193" y="590" width="621" height="224" rx="30" ry="30"/>
+  <rect class="cls-3" x="193" y="519" width="621" height="124"/>
+  <circle class="cls-5" cx="741.5" cy="455.5" r="20.5"/>
+  <circle class="cls-6" cx="494" cy="606" r="157"/>
+  <circle class="cls-3" cx="493.5" cy="606.5" r="115.5"/>
+  <circle class="cls-7" cx="495" cy="606" r="66"/>
+  <circle class="cls-8" cx="444" cy="558" r="20"/>
+  <circle class="cls-8" cx="473" cy="590" r="12"/>
+  <rect id="Rounded_Rectangle_2" data-name="Rounded Rectangle 2" class="cls-3" x="364" y="197" width="275" height="155" rx="25" ry="25"/>
+  <rect class="cls-8" x="400" y="233" width="204" height="83"/>
+</svg>

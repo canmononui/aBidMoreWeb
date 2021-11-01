@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="card card-radius">
+    <div class="card-tab card-tab-radius">
+      <div class="row">
+        <div (click)="gotoBuyMenuList()" class="col-auto pr-0 text-white" style="cursor: pointer;">
+          <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> ย้อนกลับ
+        </div>
+        <div class="col pl-0">
+          <p class="text-white text-center mb-0" style="margin-left: -15px;">รอการยืนยันสินค้า</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <!-- Order Item 1 -->
+      <div *ngIf="shippedList.length == 0" class="text-center text-white" style="padding-top: 48px; padding-bottom: 48px;">
+        <p class="mb-0" style="font-size: .9rem;">ไม่มีคำสั่งซื้อระหว่างขนส่ง</p>
+      </div>
+      <div *ngFor="let data of shippedList" class="router card-list card-padding mt-3">
+        <div (click)="gotoItem(data.key)">
+          <div class="row row-mlr mt-2">
+            <div class="col-auto col-product col-plr">
+              <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
+                src="{{ data.value.imgProduct[0].imgUrl }}">
+            </div>
+            <div class="col col-plr pl-0">
+              <div class="row row-mlr">
+                <div class="col col-plr align-self-center">
+                  <h5 class="mb-0 font-topic">คำสั่งซื้อ #{{ data.value.orderNo }}</h5>
+                </div>
+                <div class="col-auto col-plr align-self-center text-right">
+                  <p class="mb-0 font-des">{{ data.value.createAt.seconds*1000 | date: 'd/M/yyyy' }}</p>
+                </div>
+              </div>
+              <h5 class="mb-0 font-topic">{{ data.value.productName | slice:0:30 }}...</h5>
+              <p class="mb-0 text-left font-sm-7">ที่อยู่ : {{ data.value.delivery.buyyerAddress.addressString }}</p>
+            </div>
+          </div>
+          <div class="row row-mlr mt-3">
+            <div class="col col-md-6 col-xl-6 col-plr align-self-center">
+              <div class="row row-mlr">
+                <div class="col-auto col-plr">
+                  <p class="mb-0 font-sm-7">ขนส่ง : {{ data.value.delivery.priceDelivery.deliveryName }}</p>
+                </div>
+                <div class="col-auto col-sm-pl col-plr">
+                  <p class="mb-0 font-sm-7" style="color: #FE5721;">฿{{ data.value.delivery.priceDelivery.priceDeliveryInput | currency: 'THB' : '' : '0.0' }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto col-md-6 col-xl-6 col-plr text-right align-self-center" style="color: #FE5721;">
+              <a class="font-sm-1">ราคาสินค้า </a>
+              <a class="font-sm-1">฿{{ data.value.priceOfProduct | currency: 'THB' : '' : '0.0' }}</a>
+            </div>
+          </div>
+          <div class="row row-mlr">
+            <div class="col-12 col-plr text-right align-self-center" style="color: #FE5721;">
+              <a class="font-sm-1">ราคารวม </a>
+              <a class="font-sm-1">฿{{ (data.value.priceOfProduct + data.value.delivery.priceDelivery.priceDeliveryInput) | currency: 'THB' : '' : '0.0' }}</a>
+            </div>
+          </div>
+
+          <div style="background-color: #373E48; border-radius: 5px; padding: 15px;">
+            <p class="text-white mb-0">การขนส่ง</p>
+            <p *ngIf="data.value.transport == undefined" class="text-white mb-0" style="font-size: .8rem;">รายละเอียด...</p>
+            <div *ngIf="data.value.transport != undefined" class="row row-mlr mt10">
+              <div class="col-auto col-plr pr-0 align-self-center">
+                <div class="dot-now-opa"></div>
+                <div class="dot-now"></div>
+              </div>
+              <div class="col col-plr">
+                <p class="mb-0 text-white font-sm-1">{{ data.value.transport.stateTextTH }}</p>
+                <p class="mb-0 font-sm-7" style="color: #A2A2A2;">{{ data.value.transport.updateAt.seconds*1000 | date: 'd/M/yyyy' }} {{ data.value.transport.updateAt.seconds*1000 | date: "HH:mm" }}</p>
+              </div>
+            </div>
+          </div>
+        <!-- DESCRIPTION -->
+        <button type="button" class="btn mt-2 btn-primary" style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;">รายละเอียดคำสั่งซื้อ</button>
+      </div>
+      <!-- End Order Item 1 -->
+      </div>
+    </div>
+    <!-- End Card Body -->
+  </div>
+  <!-- End Card -->
+</div>
+<!-- End Container -->

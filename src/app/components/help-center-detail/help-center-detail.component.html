@@ -1,0 +1,136 @@
+<div *ngIf="showContent">
+  <!-- CONTENT CREDIT BID -->
+  <div *ngIf="id == 'creditBid'" style="height: 100vh;">
+    <div class="container h-100 d-flex justify-content-center">
+      <div class="my-auto text-center">
+        <img class="rounded-circle shadow" style="width: 60px; height: 60px;" src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg">
+        <p class="mt-3">เร็ว ๆ นี้</p>
+      </div>
+    </div>
+  </div>
+  <!-- END CONTENT CREDIT BID -->
+
+  <!-- CONTENT BIDDING -->
+  <div *ngIf="id == 'bidding'" class="container">
+    <img class="img-fluid" src="./assets/img/help-center/bidding/bidding-2.png">
+    <p class="mb-0">หน้าแสดงรายละเอียดสินค้าสำหรับสินค้าประมูล จะพบรายละเอียดราคาประมูลและชื่อผู้ประมูลล่าสุด</p>
+    <img class="img-fluid" src="./assets/img/help-center/bidding/bidding-3.png">
+    <p class="mb-0">สามารถกดเพิ่มหรือลดราคาที่ต้องการประมูลได้จากปุ่มเครื่องหมายลบและบวก</p>
+    <img class="img-fluid" src="./assets/img/help-center/bidding/bidding-4.png">
+    <p class="mb-0">สามารถตั้งราคาสำหรับ Auto Bid* ได้เพื่อเป็นตัวช่วยในการประมูล</p>
+    <img class="img-fluid" src="./assets/img/help-center/bidding/bidding-6.png">
+    <p class="mb-0">ประวัติการประมูลจะแสดงรายชื่อผู้ใช้ ราคา วันที่และเวลาในประมูลของแต่ละรายการ</p>
+    <img class="img-fluid" src="./assets/img/help-center/bidding/bidding-7.png">
+    <p class="mb-0">โดยสามารถปกปิดชื่อประมูลได้ในเมนูตั้งค่าบัญชี > หน้าโปรไฟล์ > เปิด-ปิดชื่อในการประมูล</p>
+    <img class="img-fluid" src="./assets/img/help-center/bidding/bidding-5.png">
+    <p class="mb-4">"ร่วมปุ่มประมูล" เมื่อมั่นใจราคาที่ต้องการประมูลแล้วหลังจากเพิ่มหรือลดราคาแล้ว กรุณากดปุ่มร่วมปุ่มประมูลเพื่อเพิ่มราคา</p>
+  </div>
+  <!-- END CONTENT BIDDING -->
+
+  <!-- CONTENT AUTO WIN -->
+  <div *ngIf="id == 'autoWin'" class="container">
+    <img class="img-fluid" src="./assets/img/help-center/autoWin/autoWin-1.png">
+    <p class="mb-4">สำหรัับสินค้าประเภทประมูลและอยู่ในสถานะเริ่มประมูลเร็ว ๆ นี้ จะสามารถกดเพิ่มสินค้าลงรถเข็นได้ด้วยเมนู Auto Win โดยราคาในเมนู Auto Win จะเป็นราคาที่ร้านค้าตั้งเพื่อสามารถซื้อได้เลยโดยไม่ต้องรอการประมูล</p>
+  </div>
+  <!-- END CONTENT AUTO WIN -->
+
+  <!-- CONTENT AUTO BID -->
+  <div *ngIf="id == 'autoBid'" style="height: 100vh;">
+    <div class="container h-100 d-flex justify-content-center">
+      <div class="my-auto text-center">
+        <img class="rounded-circle shadow" style="width: 60px; height: 60px;" src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg">
+        <p class="mt-3">เร็ว ๆ นี้</p>
+      </div>
+    </div>
+  </div>
+  <!-- END CONTENT AUTO BID -->
+
+  <!-- CONTENT DEPOSIT CREDIT -->
+  <div *ngIf="id == 'depositCredit'" style="height: 100vh;">
+    <div class="container h-100 d-flex justify-content-center">
+      <div class="my-auto text-center">
+        <img class="rounded-circle shadow" style="width: 60px; height: 60px;" src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg">
+        <p class="mt-3">เร็ว ๆ นี้</p>
+      </div>
+    </div>
+  </div>
+  <!-- END CONTENT DEPOSIT CREDIT -->
+
+  <!-- CONTENT REFUND -->
+  <div *ngIf="id == 'refund'" class="container">
+    <img class="img-fluid" src="./assets/img/help-center/refund/refund-1.png">
+    <p class="mb-0">เมื่อสินค้าที่ถูกแจ้งขอคืนสินค้าและทำการส่งคืนสินค้าเสร็จเรียบร้อย เมื่อ A Bid More ตรวจสอบสินค้าที่ส่งคืนและได้รับการอนุมัติการคืนเงินจาก A Bid More</p>
+    <img class="img-fluid" src="./assets/img/help-center/refund/refund-2.png">
+    <p class="mb-4">แจ้งทางข้อความกับทาง A Bid More และดำเนินตามคำแนะนำเพื่อดำเนินเรื่องขอคืนเงินโดยจะใช้เวลาในการดำเนินการ 10-30 วัน</p>
+  </div>
+  <!-- END CONTENT REFUND -->
+
+  <!-- CONTENT TRANSPORT DAY -->
+  <div *ngIf="id == 'transportDay'" class="container">
+    <p>ผู้ให้บริการขนส่งมีระยะเวลาขนส่งกี่วัน?</p>
+    <p class="mb-0">• ผู้ให้บริการขนส่งแต่ละผู้ให้บริการจะมีเงื่อนไขเรื่องเวลาในการจัดส่งตามระเบียบและเงื่อนไขแต่ละผู้ให้บริการ</p>
+    <p class="mb-0">• โดยระยะเวลาในการจัดส่งนั้นอาจขึ้นอยู่กับหลายปัจจัยเช่น วันหยุดประจำปีของบริษัทผู้ให้บริการขนส่ง จำนวนพัสดุที่จะต้องนำจ่ายในแต่ละวันที่มากเกินจนเป็นเหตุให้ต้องนำจ่ายในวันทำการถัดไปหรือเขตพื้นที่ห่างไกลทั้งต้นทางและปลายทาง</p>
+    <p class="mb-4">• ผู้ซื้อสินค้าควรศึกษารายละเอียดระยะเวลาการจัดส่งพัสดุของผู้ให้บริการขนส่งที่ต้องการเลือก เพื่อให้สอดคล้องกับความต้องการของผู้ซื้อเอง</p>
+  </div>
+  <!-- END CONTENT TRANSPORT DAY -->
+
+  <!-- CONTENT TRANSPORT TRACKING -->
+  <div *ngIf="id == 'transportTracking'" class="container">
+    <img class="img-fluid" src="./assets/img/help-center/transportTracking/transportTracking-1.png">
+    <p class="mb-0">ในหน้าเมนูการซื้อของฉันหรือจากแจ้งเตือนจะมีรายการ "ระหว่างขนส่ง" จะพบการแจ้งสินค้าที่อยู่ระหว่างการจัดส่ง</p>
+    <img class="img-fluid" src="./assets/img/help-center/transportTracking/transportTracking-2.png">
+    <p class="mb-0">เมื่อกดเข้ามาในเมนู "ระหว่างขนส่ง" จะพบกับรายการสินค้าที่สามารถดูรายละเอียดสินค้าได้</p>
+    <img class="img-fluid" src="./assets/img/help-center/transportTracking/transportTracking-3.png">
+    <p class="mb-4">หน้ารายละเอียดจะแสดงรายละเอียดของสินค้านั้น ๆ และจะพบกับปุ่มคัดลอกรหัสติดตามและปุ่ม "ติดตามสินค้าผ่านเว็บไซต์"</p>
+  </div>
+  <!-- END CONTENT TRANSPORT TRACKING -->
+
+  <!-- CONTENT GUARANTEE -->
+  <div *ngIf="id == 'guarantee'" class="container">
+    <p>เงื่อนไขการการันตีสินค้าโดย A Bid More</p>
+    <p class="mb-0">• การรับประกันสินค้า 7 วัน</p>
+    <p class="mb-0">• หากเกิดปัญหากับสินค้าคุณสามารถติดต่อและแจ้งเหตุผลการคืนสินค้าผ่านช่องทางการแชท</p>
+    <p class="mb-0">• เมื่อได้รับการยืนยันการคืนสินค้า</p>
+    <p class="mb-0">• คุณต้องส่งสินค้าคืนไปยังผู้ขายเพื่อการตรวจสอบและพิจารณาการคืนเงิน</p>
+    <p class="mb-4">• โดยรายละเอียดนี้จะแสดงในหน้ารายละเอียดสินค้าเพิ่มเติมด้วย</p>
+  </div>
+  <!-- END CONTENT GUARANTEE -->
+
+  <!-- CONTENT COIN -->
+  <div *ngIf="id == 'coin'" style="height: 100vh;">
+    <div class="container h-100 d-flex justify-content-center">
+      <div class="my-auto text-center">
+        <img class="rounded-circle shadow" style="width: 60px; height: 60px;" src="./assets/img/WebsiteLogo-hourglass-B-Edit2_MoreBubble_shadow.svg">
+        <p class="mt-3">เร็ว ๆ นี้</p>
+      </div>
+    </div>
+  </div>
+  <!-- END CONTENT COIN -->
+
+  <!-- CONTENT REJECT PRODUCT -->
+  <div *ngIf="id == 'rejectProduct'" class="container">
+    <img class="img-fluid" src="./assets/img/help-center/rejectProduct/rejectProduct-1.png">
+    <p class="mb-0">ในหน้าเมนูการซื้อของฉันหรือจากแจ้งเตือนจะมีรายการ "รอการยืนยันสินค้า" จะพบการแจ้งการกดยืนยันสินค้าหรือคืนสินค้า</p>
+    <img class="img-fluid" src="./assets/img/help-center/rejectProduct/rejectProduct-2.png">
+    <p class="mb-0">เมื่อกดเข้ามาในเมนู "รอการยืนยันสินค้า" จะพบกับรายการสินค้าที่ต้องดำเนินการ</p>
+    <img class="img-fluid" src="./assets/img/help-center/rejectProduct/rejectProduct-3.png">
+    <p class="mb-0">หน้ารายละเอียดจะแสดงรายละเอียดของสินค้านั้น ๆ และจะพบกับปุ่ม "คืนสินค้า"</p>
+    <img class="img-fluid" src="./assets/img/help-center/rejectProduct/rejectProduct-4.png">
+    <p class="mb-4">เมื่อกดเข้ามาในเมนู "คืนสินค้า" จะต้องเพิ่มเหตุผลในการคืนสินค้า รูปภาพสินค้าและความคิดเห็น เพื่อดำเนินการขอคืนสินค้าโดยจะใช้เวลาในการดำเนินการ 10-30 วัน</p>
+  </div>
+  <!-- END CONTENT REJECT PRODUCT -->
+
+  <!-- CONTENT REGISTER MERCHANT -->
+  <div *ngIf="id == 'registerMerchant'" class="container">
+    <img class="img-fluid" src="./assets/img/help-center/registerMerchant/registerMerchant-1.png">
+    <p class="mb-0">กดเมนูสนใจขายสิดค้าจากเมนูด้านบนหรือกดจาก <a href="http://merchant.abidmore.com/">merchant.abidmore.com</a></p>
+    <img class="img-fluid" src="./assets/img/help-center/registerMerchant/registerMerchant-2.png">
+    <p class="mb-0">กดเข้าสู่ระบบหากมีสมาชิกบน abidmore.com อยู่แล้ว</p>
+    <img class="img-fluid" src="./assets/img/help-center/registerMerchant/registerMerchant-3.png">
+    <p class="mb-0">หรือสมัครสมาชิกเพื่อใช้งานบน A Bid More</p>
+    <img class="img-fluid" src="./assets/img/help-center/registerMerchant/registerMerchant-4.png">
+    <p class="mb-4">และสามารถลงสินค้าเพื่อเริ่มต้นขายสินค้าบน A Bid More ได้เลย</p>
+  </div>
+  <!-- END CONTENT REGISTER MERCHANT -->
+
+</div>

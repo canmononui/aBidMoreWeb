@@ -18,6 +18,10 @@
   background-color: #FFF;
 }
 
+.card-list:hover {
+  background-color: #ecebeb;
+}
+
 .card-padding {
   padding: 15px;
 }
@@ -238,6 +242,16 @@ input[type="radio"] .styled:checked + label::after {
 
 .modal-p {
   padding: 48px;
+}
+
+.dropdown-item:active {
+  color: #FFF; 
+  background-color: #FE5721;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
 }
 
 /* Small devices (landscape phones, 576px and up) */

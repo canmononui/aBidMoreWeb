@@ -1,0 +1,78 @@
+<!-- MODAL POPUP INSTRUCTION -->
+<div class="modal fade bd-example-modal-sm" [class.show]="showPopupInstruction" [class.modalShow]="showPopupInstruction" id="modalPopupInstructionHome" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content" style="border-radius: 10px;">
+      <!-- IMG BACKGROUD MODAL -->
+      <img class="img-fluid img-popup-instruc" src="{{ imgSrc }}" style="border-radius: 10px;">
+      <!-- BUTTON CHANGE LANGUAGE -->
+      <div class="icon-language">
+        <div class="row" style="margin-left: -2px; margin-right: -2px;">
+          <div class="col-auto" style="padding-left: 2px; padding-right: 2px;">
+            <button type="button" class="btn btn-language"
+              style="background-color: #FE5721; color: #FFF;">
+              <p class="mb-0">ก</p>
+            </button>
+          </div>
+          <div class="col-auto disabled" style="padding-left: 2px; padding-right: 2px;">
+            <button type="button" class="btn btn-language"
+              style="background-color: #FFF; color: #000; border: 2px solid #E7EDF4;">
+              <p class="mb-0">A</p>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- BUTTON CLOSE MODAL -->
+      <div class="icon-close">
+        <button type="button" class="btn btn-circle-modal" data-dismiss="modal" aria-label="Close"
+          style="background-color: #767676; color: #FFF;" (click)="closeModalInstruction()">
+          <p class="mb-0">x</p>
+        </button>
+      </div>
+      <!-- TEXT CONTEXT AUCTION -->
+      <div *ngIf="textDesAuction_1" class="text-description text-white">
+        <p class="font-weight-bold mb-0 text-topic">การประมูล</p>
+        <p class="mb-0 text-des">เติมเงินเริ่มต้นเพียง 10 บาท</p>
+        <p class="mb-0 text-des">สำหรับเครดิตการประมูล 10 เท่า</p>
+        <p class="mb-0 text-des">ใส่ราคาสินค้าเพื่อเริ่มการประมูลสินค้า</p>
+        <p class="mb-0 text-des">และเพิ่มราคาเพื่อจะเป็นผู้ชนะการประมูล</p>
+      </div>
+      <!-- TEXT CONTEXT AUTO WIN -->
+      <div *ngIf="textDesAutoWin_2" class="text-description text-white">
+        <p class="font-weight-bold mb-0 text-topic">Auto Win</p>
+        <p class="mb-0 text-des">คุณสามารถกดเพิ่มสินค้าลงรถเข็นได้อัตโนมัติ</p>
+        <p class="mb-0 text-des">จากเมนู Auto win โดยคุณจะได้สินค้า</p>
+        <p class="mb-0 text-des">ในราคาที่ถูกกำหนดจากทางร้านค้า</p>
+        <p class="mb-0 text-des">โดยคุณจะเป็นผู้ชนะการประมูลในทันที</p>
+      </div>
+      <!-- TEXT CONTEXT AUTO BID -->
+      <div *ngIf="textDesAutoBid_3" class="text-description text-white">
+        <p class="font-weight-bold mb-0 text-topic">Auto Bid</p>
+        <p class="mb-0 text-des">คุณสามารถใช้ Auto Bid เพื่อเป็นตัวช่วย</p>
+        <p class="mb-0 text-des">ในการใส่ราคาการประมูลสินค้าอัตโนมัติ</p>
+        <p class="mb-0 text-des">โดยคุณสามารถเลือกราคาสูงสุด</p>
+        <p class="mb-0 text-des">ในการประมูลแข่งขันและสามารถยกเลิกได้ทุกเมื่อ</p>
+      </div>
+      <!-- TEXT CONTEXT SELLER -->
+      <div *ngIf="textDesSeller_4" class="text-description text-white">
+        <p class="font-weight-bold mb-0 text-topic">ลงขายสินค้ากับเรา</p>
+        <p class="mb-0 text-des">เรารองรับสินค้ามากมาย หลากหลายประเภท</p>
+        <p class="mb-0 text-des">หากสนใจสามารถสมัครสมาชิก Seller</p>
+        <p class="mb-0 text-des">กับทางเราได้เพียงขั้นตอนง่าย ๆ และเราหวังว่า</p>
+        <p class="mb-0 text-des">จะมีสินค้าดี ๆ ของคุณบน A Bid More</p>
+      </div>
+      <!-- MODAL PREVIOUS -->
+      <div [hidden]="textDesAuction_1" class="icon-previous">
+        <button (click)="modalPrevious()" type="button" class="btn btn-circle-modal auctioning-icon" style="background-color: #767676; color: #FFF; cursor: pointer;">
+          <img style="width: 20px;" src="./assets/img/arrow/white-l.png">
+        </button>
+      </div>
+      <!-- MODAL NEXT -->
+      <div [hidden]="textDesSeller_4" class="icon-next">
+        <button (click)="modalNext()" type="button" class="btn btn-circle-modal auctioning-icon" style="background-color: #767676; color: #FFF; cursor: pointer;">
+          <img style="width: 20px;" src="./assets/img/arrow/white-r.png">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL POPUP INSTRUCTION -->

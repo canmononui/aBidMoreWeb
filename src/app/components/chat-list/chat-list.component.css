@@ -81,6 +81,17 @@
 }
 /* End input */
 
+.dot-notiChat {
+  height: 10px;
+  width: 10px;
+  background-color: #E54040;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.readed-msg-color {
+  color: #9f9f9f;
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (max-width: 480px) {
@@ -103,6 +114,7 @@
     border-radius: 0px; */
     border: 0px;
     border-radius: 0px;
+    height: 100vh;
   }
 
   .card-tab-radius {

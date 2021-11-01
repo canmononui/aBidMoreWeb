@@ -1,0 +1,21 @@
+.input-style {
+  padding: 16px 16px 16px 24px; 
+  border-radius: 13px; 
+  border: 3px solid #E7EDF4; 
+  background-color: #F2F6FA;
+}
+
+/* .contract {
+  height: 500px; 
+  width: 100%; 
+  overflow-y: auto;
+} */
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 480px) {
+  .input-style {
+    padding: 10px 10px 10px 15px; 
+    border-radius: 5px;
+  }
+
+}

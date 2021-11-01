@@ -4,48 +4,47 @@
       <p class="text-white text-center mb-0">ยืนยันสินค้า</p>
     </div>
 
-    <div class="card-body">
+    <div *ngIf="item != null" class="card-body">
       <!-- Order Item 1 -->
       <div class="card-list card-padding">
         <div class="row mt-2">
           <div class="col-auto col-product">
             <img class="img-fluid align-self-center img-product" style="border-radius: 10px;"
-              src="./assets/img/bag.png">
+              src="{{ item.imgProduct[0].imgUrl }}">
           </div>
           <div class="col pl-0">
             <div class="row">
               <div class="col align-self-center">
-                <h5 class="mb-0 font-topic">คำสั่งซื้อ #002135111</h5>
+                <h5 class="mb-0 font-topic">คำสั่งซื้อ #{{ item.orderNo }}</h5>
               </div>
               <div class="col-auto align-self-center text-right">
-                <p class="mb-0 font-des">17/03/2020</p>
+                <p class="mb-0 font-des">{{ item.createAt.seconds*1000 | date: 'd/M/yyyy' }}</p>
               </div>
             </div>
-            <h5 class="mb-0 font-topic">Adidas NMD</h5>
-            <p class="mb-0 font-des">Adidas NMD R1 เป็นรองเท้าสำหรับใส่วิ่งมากพอๆ กับที่มันเป็นรอง...</p>
-            <p class="mb-0 text-left font-sm-7">ที่อยู่ : (บ้าน) 167 ซอยสุขุมวิท 107 (แบรริ่ง 16) เขตบางนา...</p>
+            <h5 class="mb-0 font-topic">{{ item.productName | slice:0:30 }}...</h5>
+            <p class="mb-0 text-left font-sm-7">ที่อยู่ : {{ item.delivery.buyyerAddress.addressString }}</p>
           </div>
         </div>
         <div class="row mt-3">
           <div class="col col-md-6 col-xl-6 align-self-center">
             <div class="row">
               <div class="col-auto">
-                <p class="mb-0 font-sm-7">ขนส่ง : Kerry Express</p>
+                <p class="mb-0 font-sm-7">ขนส่ง : {{ item.delivery.priceDelivery.deliveryName }}</p>
               </div>
               <div class="col-auto col-sm-pl">
-                <p class="mb-0 font-sm-7" style="color: #FE5721;">฿100</p>
+                <p class="mb-0 font-sm-7" style="color: #FE5721;">฿{{ item.delivery.priceDelivery.priceDeliveryInput | currency: 'THB' : '' : '0.0' }}</p>
               </div>
             </div>
           </div>
           <div class="col-auto col-md-6 col-xl-6 text-right align-self-center" style="color: #FE5721;">
             <a class="font-sm-1">ราคาสินค้า </a>
-            <a class="font-sm-1">฿15,000</a>
+            <a class="font-sm-1">฿{{ item.priceOfProduct | currency: 'THB' : '' : '0.0' }}</a>
           </div>
         </div>
         <div class="row">
           <div class="col-12 text-right align-self-center" style="color: #FE5721;">
             <a class="font-sm-1">ราคารวม </a>
-            <a class="font-sm-1">฿15,100</a>
+            <a class="font-sm-1">฿{{ (item.priceOfProduct + item.delivery.priceDelivery.priceDeliveryInput) | currency: 'THB' : '' : '0.0' }}</a>
           </div>
         </div>
       </div>
@@ -58,31 +57,32 @@
           <p class="mb-0 text-input">กรุณาเลือกความพึงพอใจ</p>
           <ul class="rating-stars">
             <li>
-              <i class="fa fa-lg fa-star-o" style="cursor: pointer; color: #FFA101;"></i>
-              <i class="ml-1 fa fa-lg fa-star-o" style="cursor: pointer; color: #FFA101;"></i>
-              <i class="ml-1 fa fa-lg fa-star-o" style="cursor: pointer; color: #FFA101;"></i>
-              <i class="ml-1 fa fa-lg fa-star-o" style="cursor: pointer; color: #FFA101;"></i>
-              <i class="ml-1 fa fa-lg fa-star-o" style="cursor: pointer; color: #FFA101;"></i>
+              <i class="fa fa-lg star-color" [class.fa-star]="rateStar >= 1" [class.fa-star-o]="rateStar < 1" (click)="selectStar(1)"></i>
+              <i class="ml-1 fa fa-lg star-color" [class.fa-star]="rateStar >= 2" [class.fa-star-o]="rateStar < 2" (click)="selectStar(2)"></i>
+              <i class="ml-1 fa fa-lg star-color" [class.fa-star]="rateStar >= 3" [class.fa-star-o]="rateStar < 3" (click)="selectStar(3)"></i>
+              <i class="ml-1 fa fa-lg star-color" [class.fa-star]="rateStar >= 4" [class.fa-star-o]="rateStar < 4" (click)="selectStar(4)"></i>
+              <i class="ml-1 fa fa-lg star-color" [class.fa-star]="rateStar >= 5" [class.fa-star-o]="rateStar < 5" (click)="selectStar(5)"></i>
             </li>
           </ul>
         </div>
         
         <div class="input-style mt-3">
           <p class="mb-0 text-input">ความคิดเห็น</p>
-          <textarea class="form-control border-0 p-0 text-placeholder"
-            style="box-shadow: none; background-color: #F2F6FA;" rows="3" placeholder="ข้อความ"></textarea>
+          <textarea class="form-control border-0 p-0 text-placeholder" (keyup)='commentInput($event)'
+            style="box-shadow: none; background-color: #F2F6FA;" rows="3" placeholder="ข้อความ" #_comment [value]="comment"></textarea>
         </div>
         <p class="mb-0 mt-2">สามารถเลือกความคิดเห็นจากตัวอย่างด้านล่าง</p>
         
-        <button type="button" class="btn mt-2 mr-2 button-word">สินค้าคุณภาพ</button>
-        <button type="button" class="btn mt-2 mr-2 button-word">สินค้าตรงตามรายละเอียด</button>
-        <button type="button" class="btn mt-2 mr-2 button-word">ร้านค้าตอบคำถามดีมาก</button>
-        <button type="button" class="btn mt-2 mr-2 button-word">ส่งสินค้าไว ไม่เสียหาย</button>
-        <button type="button" class="btn mt-2 mr-2 button-word">ดีมาก</button>
-        <button type="button" class="btn mt-2 mr-2 button-word">จะกลับมาอุดหนุนอีกครั้ง</button>
+        <button type="button" class="btn mt-2 mr-2 button-word" (click)="selectComment('สินค้าคุณภาพ')">สินค้าคุณภาพ</button>
+        <button type="button" class="btn mt-2 mr-2 button-word" (click)="selectComment('สินค้าตรงตามรายละเอียด')">สินค้าตรงตามรายละเอียด</button>
+        <button type="button" class="btn mt-2 mr-2 button-word" (click)="selectComment('ร้านค้าตอบคำถามดีมาก')">ร้านค้าตอบคำถามดีมาก</button>
+        <button type="button" class="btn mt-2 mr-2 button-word" (click)="selectComment('ส่งสินค้าไว ไม่เสียหาย')">ส่งสินค้าไว ไม่เสียหาย</button>
+        <button type="button" class="btn mt-2 mr-2 button-word" (click)="selectComment('ดีมาก')">ดีมาก</button>
+        <button type="button" class="btn mt-2 mr-2 button-word" (click)="selectComment('จะกลับมาอุดหนุนอีกครั้ง')">จะกลับมาอุดหนุนอีกครั้ง</button>
 
-        <button type="button" class="btn mt-4" disabled
-          style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;">
+        <button type="button" class="btn mt-4" [class.disabled]="comment == ''"
+          style="border: none; border-radius: 1.5rem; width: 100%; color: #fff; background-color: #FE5721;"
+          (click)="selectConfirm()">
           ตกลง
         </button>
 
@@ -92,5 +92,28 @@
     <!-- End Card Body -->
   </div>
   <!-- End Card -->
+
+  <!-- MODAL POPUP -->
+  <div class="modal fade" [class.show]="showModal" [class.modalShow]="showModal" id="ModalConfirmCenter" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content pt-5 pr-5 pb-5 pl-5" style="border-radius: 1rem;">
+        <img class="rounded mx-auto d-block" style="width: 120px;" src="../../assets/img/loadingpage-final.png">
+        <h5 class="font-weight-bold text-center mt-5">แจ้งเตือน</h5>
+        <p class="text-center">{{ errorText }}</p>
+        <div class="mt-4">
+          <div class="form-group col-12 col-sm-9 col-lg-7 text-center" style="margin: 0 auto;">
+            <button id="Confirm-Singup-btn" type="button" class="btn btn-primary"
+              style="border: none; border-radius: 1.5rem; width: 100%; background-color: #FE5721;"
+              data-dismiss="modal" (click)="confirm()">ยืนยันคำสั่งซื้อ</button>
+          </div>
+          <div class="mt-2">
+            <a data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+              <p class="text-center">ยกเลิก</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- End Container -->
